@@ -1,0 +1,161 @@
+{% load i18n staticfiles thumbnail filename %}
+
+<input type="hidden" value="{{ form.is_visible.value }}" name="{{ form.is_visible.html_name }}">
+
+<div class="col-md-6 col-lg-5">
+    <div class="form-group {% if form.picture.errors %}has-error{% endif %}">
+        <label class="control-label" for="id_contact_name">{% trans 'Profile picture' %}</label>
+        {% for error in form.picture.errors %}
+            <label class="control-label"> - {{ error }}</label>
+        {% endfor %}
+
+        {% if cc3_profile.get_picture %}
+            <img class="" alt="{% trans 'Profile picture' %}" src="{{ cc3_profile.picture|thumbnail_url:'profilepicture' }}">
+        {% else %}
+            <img class="" alt="{% trans 'Profile picture' %}" src="{% static 'images/backgrounds/avatar-placeholder.png' %}">
+        {% endif %}
+
+        <br><br>
+        <input type="file" id="id_picture" name="picture" class="form-control">
+    </div>
+
+    {% trans 'Charity name' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.business_name placeholder=label label=label only %}
+
+    {% trans 'Description' context 'charity' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.company_description placeholder=label label=label only %}
+
+    <div class="form-group">
+        <label class="control-label" for="id_community">{% trans 'Community' %}</label>
+        <input type="text" id="id_community" placeholder="{{ cc3_profile.community }}" name="community" value="{{ cc3_profile.community }}" class="form-control" disabled="disabled">
+    </div>
+
+    <h3>{% trans 'Address details' %}</h3>
+
+    {% trans 'Address' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.address placeholder=label label=label only %}
+
+    {% trans 'House Number' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.num_street placeholder=label label=label only %}
+
+    {% trans 'Toevoeging' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.extra_address placeholder=label label=label only %}
+
+    {% trans 'Postal code' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.postal_code placeholder=label label=label only %}
+
+    {% trans 'City' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.city placeholder=label label=label only %}
+
+    {% trans 'Telephone Number' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.phone_number placeholder=label label=label only %}
+
+    {% trans 'KVK Number' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.registration_number placeholder=label label=label only %}
+    
+    <div class="form-group {% if form.email.errors or form.email.errors %}has-error{% endif %}">
+        <label class="control-label" for="id_email">{% trans 'Company e-mail' %}</label>
+        {% for error in form.email.errors %}
+            <label class="control-label"> - {{ error }}</label>
+        {% endfor %}
+        <input type="text" id="id_email" placeholder="{{ form.email.value }}" name="email" value="{{ form.email.value }}" class="form-control">
+    </div>
+
+    {% trans 'Website' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.company_website placeholder=label label=label only %}
+
+    <hr />
+
+</div>
+
+<div class="col-md-6 col-lg-5">
+    <br>
+    <h3>{% trans 'Bank Details' %}</h3>
+    {% trans 'IBAN' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.iban placeholder=label label=label only %}
+
+    {% trans 'BIC' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.bic_code placeholder=label label=label only %}
+
+    {% trans 'Account holder' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.account_holder placeholder=label label=label only %}
+
+    {% trans 'SEPA machtiging kenmerk' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.mandate_id placeholder=label label=label only %}
+
+    {% trans 'SEPA machtiging datum' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.signature_date placeholder=label label=label only %}
+
+    <hr />
+
+    <h3>{% trans 'Contact person' %}</h3>
+
+    <div class="form-group {% if form.first_name.errors or form.last_name.errors %}has-error{% endif %}">
+        <label class="control-label" for="id_first_name">{% trans 'Name contact person' %}</label>
+        {% for error in form.first_name.errors %}
+            <label class="control-label"> - {{ error }}</label>
+        {% endfor %}
+        {% for error in form.tussenvoegsel.errors %}
+            <label class="control-label"> - {{ error }}</label>
+        {% endfor %}
+        {% for error in form.last_name.errors %}
+            <label class="control-label"> - {{ error }}</label>
+        {% endfor %}
+        <input type="text" id="id_first_name" disabled="disabled" placeholder="{% trans 'first name' %}" name="first_name"{% if form.first_name.value %} value="{{ form.first_name.value }}"{% endif %} class="form-control">
+        <input type="text" id="id_tussenvoegsel" disabled="disabled" placeholder="{% trans 'tussenvoegsel' %}" name="tussenvoegsel" maxlength="255"{% if form.tussenvoegsel.value %} value="{{ form.tussenvoegsel.value }}"{% endif %} class="form-control" />
+        <input type="text" id="id_last_name" disabled="disabled" placeholder="{% trans 'last name' %}" name="last_name"{% if form.last_name.value %} value="{{ form.last_name.value }}"{% endif %} class="form-control">
+    </div>
+
+    {% comment %}
+
+        <select name="{{ form.gender.html_name }}"{% if disabled == "true" %} class="form-control" disabled{% else %} class="form-control s-selecter"{% endif %}>
+    {% endcomment %}
+
+
+    <div class="form-group {% if form.gender.errors %}has-error{% endif %}">
+        <label class="control-label" for="id_gender">{% trans "Gender" %}</label>
+        {% for error in form.gender.errors %}
+            <label class="control-label"> - {{ error }}</label>
+        {% endfor %}
+        <br />
+        <div class="radio">
+            {% if stadlander_sso_user %}{{form.gender.value}}
+            {% else %}
+            <ul>
+                {% for value, text in form.gender.field.choices %}
+                <li><label for="id_gender_{{ forloop.counter0 }}">
+                        <input {% if form.gender.value == value %}checked="checked"{% else %} disabled="disabled"{% endif %} id="id_gender_{{ forloop.counter0 }}" name="gender" type="radio" value="{{ value }}" /> {{ text }}
+                    </label></li>
+                {% endfor %}
+            </ul>
+
+            {% endif %}
+        </div>
+    </div>
+
+    {% trans 'Date of birth' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.date_of_birth placeholder=label datepicker='true' label=label only %}
+
+    {% trans 'Type of ID' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.id_type placeholder=label label=label only %}
+
+    {% trans 'Document Number' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.document_number placeholder=label label=label only %}
+
+    {% trans 'Expiration Date' as label %}
+    {% include "accounts/profile_form_include_field.html" with field=form.expiration_date placeholder=label datepicker='true' label=label only %}
+
+    <hr>
+
+    {# FIXME: DISABLED UNDER REQUIREMENT FROM POSITOOS - See Trac ticket #1856 #}
+    {#    <hr>#}
+    {##}
+    {#    <div class="form-group {% if form.categories.errors %}has-error{% endif %}">#}
+    {#        <label class="control-label" for="id_categories">{% trans "Help categories" %}</label>#}
+    {#        {% for error in form.categories.errors %}#}
+    {#            <label class="control-label"> - {{ error }}</label>#}
+    {#        {% endfor %}#}
+    {#        <br />#}
+    {#        {{ form.categories }}#}
+    {#    </div>#}
+</div>

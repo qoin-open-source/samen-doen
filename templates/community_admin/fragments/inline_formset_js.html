@@ -1,0 +1,9 @@
+$(".deletelink").on("click", function(e){
+                del_aform($(this));
+});
+
+{% for key, values in inline_formsets.items %}
+$("#{{ values.formset_element_id }} .addlink").on("click", function(e){
+    add_aform("{{ values.formset_element_id }}", "{{ values.prefix }}", "no_cards_msg");
+});
+{% endfor %}

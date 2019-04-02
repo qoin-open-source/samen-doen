@@ -1,0 +1,4361 @@
+# Positoos Dutch language translations.
+# Copyright (C) 2015 Samen Doen
+# This file is distributed under the same license as the Positoos package.
+# Jose L. Patino <jose@maykinmedia.nl>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-06 13:58+0200\n"
+"PO-Revision-Date: 2015-12-14 23:56+0100\n"
+"Last-Translator: GM - Qoin ops <gert.meeder@qoin.org>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: icare4u_front/admin/admin.py:17
+msgid "User activation/deactivation history"
+msgstr "Gebruiker activering/deactivering geschiedenis"
+
+#: icare4u_front/admin/admin.py:24
+msgid "Change author"
+msgstr "Wijziger"
+
+#: icare4u_front/admin/admin.py:25
+msgid "Timestamp"
+msgstr "Tijdsaanduiding"
+
+#: icare4u_front/admin/admin.py:26
+msgid "Activate"
+msgstr "Activering"
+
+#: icare4u_front/community_admin/admin.py:220
+#: icare4u_front/community_admin/admin.py:1170
+#: icare4u_front/community_admin/admin.py:1532
+#: icare4u_front/community_admin/admin.py:1612
+#: icare4u_front/templates/accounts/profile_form_business.html:105
+#: icare4u_front/templates/accounts/profile_form_individual.html:40
+#: icare4u_front/templates/cards/business_terminals.html:57
+#: icare4u_front/templates/cards/operator_form.html:37
+#: icare4u_front/templates/community_admin/change_business_user.html:243
+#: icare4u_front/templates/communityadmin/create_member.html:75
+#: icare4u_front/templates/communityadmin/edit_member.html:148
+#: icare4u_front/templates/marketplace/enquire.html:40
+msgid "Name"
+msgstr "Naam"
+
+#: icare4u_front/community_admin/admin.py:224
+#: icare4u_front/community_admin/admin.py:1167
+#: icare4u_front/community_admin/admin.py:1537
+#: icare4u_front/community_admin/admin.py:1599
+msgid "Email address"
+msgstr "E-mailadres"
+
+#: icare4u_front/community_admin/admin.py:229
+#: icare4u_front/community_admin/forms.py:97
+#: icare4u_front/templates/accounts/profile_form_business.html:37
+#: icare4u_front/templates/accounts/profile_form_charity.html:29
+#: icare4u_front/templates/accounts/profile_form_individual.html:26
+#: icare4u_front/templates/marketplace/marketplace_sidemenu.html:18
+msgid "Community"
+msgstr "Gemeente"
+
+#: icare4u_front/community_admin/admin.py:234
+msgid "Cyclos Group?"
+msgstr "Type Gebruiker"
+
+#: icare4u_front/community_admin/admin.py:238
+msgid "Active?"
+msgstr "Actief"
+
+#: icare4u_front/community_admin/admin.py:249
+msgid "Current Balance"
+msgstr "Saldo"
+
+#: icare4u_front/community_admin/admin.py:253
+msgid "Wants Newsletter?"
+msgstr "NB"
+
+#: icare4u_front/community_admin/admin.py:275
+msgid "User Profiles"
+msgstr "Gebruikersprofielen"
+
+#: icare4u_front/community_admin/admin.py:283
+#: icare4u_front/community_admin/admin.py:362
+#: icare4u_front/templates/community_admin/add_user.html:22
+msgid "Add new user"
+msgstr "Nieuwe gebruiker toevoegen"
+
+#: icare4u_front/community_admin/admin.py:302
+#, python-brace-format
+msgid ""
+"Base user profile created for {0} user. Please, fill up the specific profile "
+"data."
+msgstr ""
+"Het {0} gebruikersprofiel is toegevoegd. Vul nu het gebruikersprofiel verder "
+"aan"
+
+#: icare4u_front/community_admin/admin.py:364
+#: icare4u_front/community_admin/admin.py:471
+#: icare4u_front/community_admin/admin.py:618
+#: icare4u_front/community_admin/admin.py:748
+#: icare4u_front/community_admin/admin.py:892
+#: icare4u_front/community_admin/admin.py:1030
+#: icare4u_front/community_admin/models.py:82
+#: icare4u_front/templates/community_admin/add_user.html:20
+#: icare4u_front/templates/community_admin/change_business_user.html:8
+#: icare4u_front/templates/community_admin/change_individual_user.html:8
+#: icare4u_front/templates/community_admin/change_user.html:21
+#: icare4u_front/templates/community_admin/change_userprofile_user.html:8
+#: icare4u_front/templates/community_admin/index.html:19
+msgid "Users"
+msgstr "Gebruikers"
+
+#: icare4u_front/community_admin/admin.py:390
+msgid "User profile edited."
+msgstr "Gebruikersprofiel bewerkt"
+
+#: icare4u_front/community_admin/admin.py:439
+msgid ""
+"This profile is incomplete. Please, relate it to a Cyclos group to complete "
+"edition."
+msgstr ""
+"Dit profiel is nog niet compleet. Koppel a.u.b. aan een cyclos groep om het "
+"registreren te voltooien."
+
+#: icare4u_front/community_admin/admin.py:469
+#, python-brace-format
+msgid "Edit Profile {0}"
+msgstr "Bewerk profiel {0}"
+
+#: icare4u_front/community_admin/admin.py:551
+msgid "Business profile edited."
+msgstr "Winkelier gebruikersprofiel bewaard"
+
+#: icare4u_front/community_admin/admin.py:553
+#: icare4u_front/community_admin/admin.py:685
+#: icare4u_front/community_admin/admin.py:828
+#: icare4u_front/community_admin/admin.py:943
+msgid "A database error occurred."
+msgstr ""
+
+#: icare4u_front/community_admin/admin.py:616
+#, python-brace-format
+msgid "Edit business user {0}"
+msgstr "Bewerk organisatieprofiel van {0}"
+
+#: icare4u_front/community_admin/admin.py:683
+msgid "Institution profile edited."
+msgstr "Instelling gebruikersprofiel bewaard"
+
+#: icare4u_front/community_admin/admin.py:745
+#, python-brace-format
+msgid "Edit institution user {0}"
+msgstr "Bewerk instelling profiel {0}"
+
+#: icare4u_front/community_admin/admin.py:826
+msgid "Charity profile edited."
+msgstr "Spaardoel gebruikersprofiel bewaard."
+
+#: icare4u_front/community_admin/admin.py:890
+#, python-brace-format
+msgid "Edit charity user {0}"
+msgstr "Bewerk Spaardoelen profiel {0}"
+
+#: icare4u_front/community_admin/admin.py:941
+msgid "Individual profile edited."
+msgstr "Spaarder gebruikersprofiel bewaard. "
+
+#: icare4u_front/community_admin/admin.py:1028
+#, python-brace-format
+msgid "Edit individual user {0}"
+msgstr "Bewerk spaardersprofiel van {0}"
+
+#: icare4u_front/community_admin/admin.py:1099
+msgid "Date of first activation"
+msgstr "1e activeringsdatum"
+
+#: icare4u_front/community_admin/admin.py:1104
+#: icare4u_front/templates/community_admin/fragments/_card_info.html:10
+#: icare4u_front/templates/communityadmin/memberoffers_wants.html:40
+#: icare4u_front/templates/communityadmin/offers_wants.html:45
+msgid "Status"
+msgstr "Status"
+
+#: icare4u_front/community_admin/admin.py:1108
+#: icare4u_front/community_admin/admin.py:1315
+#: icare4u_front/community_admin/admin.py:1375
+#: icare4u_front/community_admin/admin.py:1455
+#: icare4u_front/community_admin/admin.py:1520
+#: icare4u_front/community_admin/admin.py:1617
+#: icare4u_front/community_admin/admin.py:1903
+#: icare4u_front/templates/community_admin/change_business_user.html:49
+#: icare4u_front/templates/community_admin/change_individual_user.html:139
+#, fuzzy
+#| msgid "Users"
+msgid "User ID"
+msgstr "Gebruikers"
+
+#: icare4u_front/community_admin/admin.py:1114
+#: icare4u_front/templates/community_admin/fragments/_card_info.html:9
+msgid "Card number"
+msgstr "Pasnummer"
+
+#: icare4u_front/community_admin/admin.py:1119
+msgid "Card UID"
+msgstr "Pas UID"
+
+#: icare4u_front/community_admin/admin.py:1189
+msgid "Linked cards"
+msgstr "Passen gekoppeld"
+
+#: icare4u_front/community_admin/admin.py:1197
+#: icare4u_front/templates/community_admin/add_card.html:21
+#: icare4u_front/templates/community_admin/cards/card/change_list.html:58
+msgid "Connect card"
+msgstr "Pas koppelen"
+
+#: icare4u_front/community_admin/admin.py:1230
+msgid "Card successfully connected"
+msgstr "Pas succesvol gekoppeld"
+
+#: icare4u_front/community_admin/admin.py:1267
+msgid "Card Terminals"
+msgstr "Terminals"
+
+#: icare4u_front/community_admin/admin.py:1324
+#: icare4u_front/community_admin/admin.py:1368
+#: icare4u_front/community_admin/admin.py:1465
+#: icare4u_front/community_admin/admin.py:1545
+#: icare4u_front/community_admin/admin.py:1594
+#: icare4u_front/community_admin/forms.py:103
+#: icare4u_front/templates/communityadmin/create_member.html:188
+#: icare4u_front/templates/communityadmin/create_member.html:190
+#: icare4u_front/templates/communityadmin/edit_member.html:62
+#: icare4u_front/templates/communityadmin/edit_member.html:64
+msgid "Business name"
+msgstr "Naam organisatie"
+
+#: icare4u_front/community_admin/admin.py:1332
+#, fuzzy
+#| msgid "Last seen"
+msgid "Date last seen"
+msgstr "Voor het laatst gezien"
+
+#: icare4u_front/community_admin/admin.py:1381
+#: icare4u_front/templates/community_admin/change_business_user.html:238
+#: icare4u_front/templates/community_admin/index.html:56
+msgid "Operators"
+msgstr "Operators"
+
+#: icare4u_front/community_admin/admin.py:1473
+msgid "Optie"
+msgstr ""
+
+#: icare4u_front/community_admin/admin.py:1479
+#: icare4u_front/templates/community_admin/change_business_user.html:274
+#: icare4u_front/templates/community_admin/rewards/change_form.html:8
+#: icare4u_front/templates/community_admin/rewards/change_list.html:41
+msgid "Business Cause Settings"
+msgstr "Terminal opties"
+
+#: icare4u_front/community_admin/admin.py:1488
+#: icare4u_front/templates/community_admin/rewards/change_form.html:9
+#: icare4u_front/templates/community_admin/rewards/change_list.html:57
+msgid "Add Business Cause Settings"
+msgstr "Terminal optie toevoegen"
+
+#: icare4u_front/community_admin/admin.py:1551
+#: icare4u_front/community_admin/admin.py:1626
+#: icare4u_front/community_admin/admin.py:1640
+msgid "Select a user"
+msgstr "Selecteer een gebruiker"
+
+#: icare4u_front/community_admin/admin.py:1856
+msgid "--------------"
+msgstr ""
+
+#: icare4u_front/community_admin/admin.py:1857
+#: icare4u_front/templates/community_admin/fragments/_card_info.html:11
+msgid "Connect Card"
+msgstr "Pas koppelen"
+
+#: icare4u_front/community_admin/admin.py:1858
+msgid "Reject Request"
+msgstr ""
+
+#: icare4u_front/community_admin/admin.py:1942
+#: icare4u_front/templates/cards/operator_form.html:41
+#: icare4u_front/templates/marketplace/enquire.html:45
+#: icare4u_front/templates/marketplace/enquire.html:47
+msgid "name"
+msgstr "naam"
+
+#: icare4u_front/community_admin/admin.py:1943
+msgid "email"
+msgstr "e-mailadres"
+
+#: icare4u_front/community_admin/admin.py:1944
+#, fuzzy
+#| msgid "Address"
+msgid "address"
+msgstr "Straatnaam"
+
+#: icare4u_front/community_admin/admin.py:1945
+#: icare4u_front/templates/cards/owner_manage_card_form.html:63
+msgid "request date"
+msgstr "Datum"
+
+#: icare4u_front/community_admin/admin.py:1946
+msgid "#"
+msgstr ""
+
+#: icare4u_front/community_admin/admin.py:1947
+msgid "options"
+msgstr "opties"
+
+#: icare4u_front/community_admin/admin.py:1968
+msgid "Fulfillments"
+msgstr "Pasaanvragen"
+
+#: icare4u_front/community_admin/admin_views.py:30
+#: icare4u_front/profile/views.py:383
+#, python-brace-format
+msgid "{0} account successfully closed"
+msgstr "Het account van {0} is gesloten"
+
+#: icare4u_front/community_admin/admin_views.py:54
+#, python-brace-format
+msgid "{0} cannot resend activation, user has no Registration Profile"
+msgstr ""
+
+#: icare4u_front/community_admin/admin_views.py:81
+#, python-brace-format
+msgid ""
+"{0} cannot resend activation, user already has active Registration Profile"
+msgstr ""
+
+#: icare4u_front/community_admin/admin_views.py:85
+#, python-brace-format
+msgid "{0} cannot resend activation, unknown error"
+msgstr ""
+
+#: icare4u_front/community_admin/admin_views.py:92
+#, fuzzy, python-brace-format
+#| msgid "{0} account successfully closed"
+msgid "{0} activation successfully resent"
+msgstr "{0} Account opheffen gelukt"
+
+#: icare4u_front/community_admin/admin_views.py:112
+msgid "Reset password email sent to {}"
+msgstr ""
+"E-mail met instructies voor vernieuwen van het wachtwoord verzonden naar {}"
+
+#: icare4u_front/community_admin/admin_views.py:116
+#: icare4u_front/community_admin/admin_views.py:119
+msgid "Failed to send password reset email"
+msgstr ""
+"Het versturen van een e-mail met instructie voor vernieuwen van het "
+"wachtwoord is mislukt"
+
+#: icare4u_front/community_admin/forms.py:58
+msgid "User enters points amount on terminal"
+msgstr "Spaarders ontvangen een absoluut aantal punten"
+
+#: icare4u_front/community_admin/forms.py:59
+msgid "User enters euro amount spent by customer on terminal"
+msgstr "Spaarders ontvangen punten als percentage van het aankoopbedrag"
+
+#: icare4u_front/community_admin/forms.py:75
+#: icare4u_front/community_admin/forms.py:1038
+#: icare4u_front/templates/community_admin/change_business_user.html:201
+msgid "Terminal number (IMEI)"
+msgstr "Terminal nummer (IMEI)"
+
+#: icare4u_front/community_admin/forms.py:85
+#: icare4u_front/templates/cards/operator_form.html:51
+#: icare4u_front/templates/community_admin/change_business_user.html:244
+msgid "PIN"
+msgstr "PIN code"
+
+#: icare4u_front/community_admin/forms.py:93
+msgid "Cyclos group"
+msgstr "Type Gebruiker"
+
+#: icare4u_front/community_admin/forms.py:95
+msgid "Select the user group for this profile"
+msgstr "Selecteer de gebruikersgroep voor dit profiel"
+
+#: icare4u_front/community_admin/forms.py:100 icare4u_front/profile/forms.py:52
+#: icare4u_front/profile/forms.py:84 icare4u_front/profile/forms.py:427
+#: icare4u_front/profile/models.py:79
+#: icare4u_front/profile_registration/forms.py:58
+#: icare4u_front/templates/accounts/profile_form_business.html:128
+#: icare4u_front/templates/accounts/profile_form_charity.html:117
+#: icare4u_front/templates/accounts/profile_form_individual.html:74
+#: icare4u_front/templates/communityadmin/create_member.html:91
+#: icare4u_front/templates/communityadmin/edit_member.html:164
+msgid "Gender"
+msgstr "Geslacht"
+
+#: icare4u_front/community_admin/forms.py:101
+#: icare4u_front/templates/accounts/profile_form_business.html:149
+#: icare4u_front/templates/accounts/profile_form_charity.html:137
+#: icare4u_front/templates/communityadmin/create_member.html:104
+#: icare4u_front/templates/communityadmin/edit_member.html:176
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:67
+#: icare4u_front/templates/registration/registration_form.html:68
+msgid "Date of birth"
+msgstr "Geboortedatum"
+
+#: icare4u_front/community_admin/forms.py:105
+#: icare4u_front/profile_registration/forms.py:32
+#: icare4u_front/templates/accounts/profile_form_business.html:55
+#: icare4u_front/templates/accounts/profile_form_charity.html:47
+#: icare4u_front/templates/accounts/profile_form_individual.html:157
+#: icare4u_front/templates/accounts/profile_form_individual.html:187
+#: icare4u_front/templates/communityadmin/create_member.html:149
+#: icare4u_front/templates/communityadmin/edit_member.html:223
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:85
+msgid "City"
+msgstr "Plaatsnaam"
+
+#: icare4u_front/community_admin/forms.py:106
+msgid "Street address"
+msgstr "Straatnaam"
+
+#: icare4u_front/community_admin/forms.py:107
+#: icare4u_front/templates/accounts/profile_form_business.html:52
+#: icare4u_front/templates/accounts/profile_form_charity.html:44
+#: icare4u_front/templates/accounts/profile_form_individual.html:154
+#: icare4u_front/templates/accounts/profile_form_individual.html:182
+#: icare4u_front/templates/communityadmin/create_member.html:141
+#: icare4u_front/templates/communityadmin/edit_member.html:215
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:82
+msgid "Postal code"
+msgstr "Postcode"
+
+#: icare4u_front/community_admin/forms.py:108
+#: icare4u_front/templates/communityadmin/create_member.html:157
+#: icare4u_front/templates/communityadmin/edit_member.html:231
+msgid "Country"
+msgstr "Land"
+
+#: icare4u_front/community_admin/forms.py:109
+#: icare4u_front/profile_registration/forms.py:46
+#: icare4u_front/templates/accounts/profile_form_individual.html:160
+#: icare4u_front/templates/communityadmin/create_member.html:169
+#: icare4u_front/templates/communityadmin/edit_member.html:243
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:88
+msgid "Phone number"
+msgstr "Telefoonnummer"
+
+#: icare4u_front/community_admin/forms.py:110
+#: icare4u_front/profile_registration/forms.py:49
+#: icare4u_front/templates/accounts/profile_form_individual.html:163
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:91
+msgid "Mobile number"
+msgstr "Mobiele telefoonnummer"
+
+#: icare4u_front/community_admin/forms.py:119
+msgid "Picture"
+msgstr "Profielafbeelding"
+
+#: icare4u_front/community_admin/forms.py:125
+msgid "Surname prefix"
+msgstr "Tussenvoegsel"
+
+#: icare4u_front/community_admin/forms.py:126
+#: icare4u_front/profile_registration/forms.py:52
+#: icare4u_front/templates/communityadmin/create_member.html:133
+#: icare4u_front/templates/communityadmin/edit_member.html:207
+msgid "Extra address"
+msgstr "Huisnummer toevoeging"
+
+#: icare4u_front/community_admin/forms.py:128
+msgid "Street number"
+msgstr "Huisnummer"
+
+#: icare4u_front/community_admin/forms.py:129 icare4u_front/profile/forms.py:81
+#: icare4u_front/profile/forms.py:424
+msgid "Please enter a valid house number"
+msgstr "Vul een geldig huisnummer in"
+
+#: icare4u_front/community_admin/forms.py:132
+msgid "Groupset"
+msgstr "Groepset"
+
+#: icare4u_front/community_admin/forms.py:134
+#: icare4u_front/profile/forms.py:431
+#: icare4u_front/templates/accounts/profile_form_business.html:152
+#: icare4u_front/templates/accounts/profile_form_charity.html:140
+msgid "Type of ID"
+msgstr "Identiteitsbewijs"
+
+#: icare4u_front/community_admin/forms.py:137
+msgid "Document number"
+msgstr "Documentnummer"
+
+#: icare4u_front/community_admin/forms.py:140
+msgid "Expiration date"
+msgstr "Vervaldatum identiteitsbewijs"
+
+#: icare4u_front/community_admin/forms.py:144
+msgid "Date First Activated"
+msgstr "Datum geopend"
+
+#: icare4u_front/community_admin/forms.py:147
+msgid "Date Last Deactivated"
+msgstr "Datum gesloten"
+
+#: icare4u_front/community_admin/forms.py:150
+msgid "Date Last Login"
+msgstr "Laatste inlog"
+
+#: icare4u_front/community_admin/forms.py:170
+#: icare4u_front/settings/base.py:716
+msgid "E-mail address"
+msgstr "E-mailadres"
+
+#: icare4u_front/community_admin/forms.py:177
+msgid "Cyclos groups"
+msgstr ""
+
+#: icare4u_front/community_admin/forms.py:205
+#: icare4u_front/profile/forms.py:205 icare4u_front/profile/forms.py:475
+msgid "This email has already been registered"
+msgstr "Dit e-mailadres is al geregistreerd"
+
+#: icare4u_front/community_admin/forms.py:219
+#: icare4u_front/profile/forms.py:239
+#: icare4u_front/profile_registration/forms.py:88
+msgid "Please enter a valid Phone Number"
+msgstr "Vul a.u.b. een geldig telefoonnummer in"
+
+#: icare4u_front/community_admin/forms.py:234
+#: icare4u_front/profile/forms.py:254 icare4u_front/profile/forms.py:500
+#: icare4u_front/profile_registration/forms.py:103
+msgid "Please enter your Mobile Number"
+msgstr "Vul a.u.b. uw mobiele nummer in"
+
+#: icare4u_front/community_admin/forms.py:239
+#: icare4u_front/profile/forms.py:259 icare4u_front/profile/forms.py:505
+#: icare4u_front/profile_registration/forms.py:108
+#, python-brace-format
+msgid "Please enter a mobile number of at least {0} digits"
+msgstr "Vul a.u.b. een mobiel nummer in van tenminste {0} cijfers"
+
+#: icare4u_front/community_admin/forms.py:245
+#: icare4u_front/profile/forms.py:265 icare4u_front/profile/forms.py:511
+#: icare4u_front/profile_registration/forms.py:114
+#, python-brace-format
+msgid "Please enter a mobile number of at most {0} digits"
+msgstr "Vul a.u.b. een mobiel nummer in van maximaal {0} cijfers"
+
+#: icare4u_front/community_admin/forms.py:253
+#: icare4u_front/profile/forms.py:273 icare4u_front/profile/forms.py:519
+#: icare4u_front/profile_registration/forms.py:122
+msgid "Please enter a valid Mobile Number"
+msgstr "Vul a.u.b. een geldig mobiel nummer in"
+
+#: icare4u_front/community_admin/forms.py:267
+#: icare4u_front/profile/forms.py:533
+msgid "Please enter a valid date"
+msgstr "Geef een geldige datum op"
+
+#: icare4u_front/community_admin/forms.py:274
+#: icare4u_front/profile/forms.py:540
+msgid "Please enter a valid Document Number"
+msgstr "Vul a.u.b. een geldig document nummer in"
+
+#: icare4u_front/community_admin/forms.py:282
+#: icare4u_front/profile/forms.py:548
+msgid "The date cannot be in the past!"
+msgstr "De datum kan niet in het verleden liggen"
+
+#: icare4u_front/community_admin/forms.py:437
+msgid "Group changed by community admin user."
+msgstr ""
+
+#: icare4u_front/community_admin/forms.py:447
+#: icare4u_front/templates/communityadmin/create_member.html:210
+#: icare4u_front/templates/communityadmin/edit_member.html:84
+msgid "Company website"
+msgstr "Website adres"
+
+#: icare4u_front/community_admin/forms.py:449
+#: icare4u_front/templates/communityadmin/create_member.html:202
+#: icare4u_front/templates/communityadmin/edit_member.html:76
+msgid "Company description"
+msgstr "Omschrijving organisatie"
+
+#: icare4u_front/community_admin/forms.py:450
+msgid "Is visible"
+msgstr "Profiel getoond op de website"
+
+#: icare4u_front/community_admin/forms.py:478
+msgid "Please enter a valid website address."
+msgstr "Vul een geldig website-adres in."
+
+#: icare4u_front/community_admin/forms.py:483
+#: icare4u_front/community_admin/forms.py:599
+#: icare4u_front/community_admin/forms.py:671
+#: icare4u_front/community_admin/forms.py:737
+#: icare4u_front/profile/forms.py:643 icare4u_front/profile/forms.py:713
+#: icare4u_front/profile/forms.py:785 icare4u_front/profile/models.py:288
+#: icare4u_front/profile/models.py:378 icare4u_front/profile/models.py:674
+#: icare4u_front/profile/models.py:855 icare4u_front/settings/base.py:713
+#: icare4u_front/templates/communityadmin/create_member.html:218
+#: icare4u_front/templates/communityadmin/edit_member.html:105
+msgid "IBAN number"
+msgstr "IBAN nummer"
+
+#: icare4u_front/community_admin/forms.py:485
+#: icare4u_front/community_admin/forms.py:601
+#: icare4u_front/community_admin/forms.py:673
+#: icare4u_front/community_admin/forms.py:739
+#: icare4u_front/profile/forms.py:645 icare4u_front/profile/forms.py:715
+#: icare4u_front/profile/forms.py:787 icare4u_front/profile/models.py:290
+#: icare4u_front/profile/models.py:380 icare4u_front/profile/models.py:676
+#: icare4u_front/profile/models.py:857
+#: icare4u_front/templates/communityadmin/create_member.html:226
+#: icare4u_front/templates/communityadmin/edit_member.html:113
+msgid "BIC code"
+msgstr "BIC code"
+
+#: icare4u_front/community_admin/forms.py:487
+#: icare4u_front/templates/accounts/profile_form_business.html:85
+#: icare4u_front/templates/accounts/profile_form_charity.html:80
+#: icare4u_front/templates/communityadmin/create_member.html:242
+#: icare4u_front/templates/communityadmin/edit_member.html:129
+msgid "Account holder"
+msgstr "Naam rekeninghouder"
+
+#: icare4u_front/community_admin/forms.py:487
+#: icare4u_front/community_admin/forms.py:603
+#: icare4u_front/community_admin/forms.py:675
+#: icare4u_front/community_admin/forms.py:741
+#: icare4u_front/profile/forms.py:647 icare4u_front/profile/forms.py:717
+#: icare4u_front/profile/forms.py:789
+msgid "Account holder name"
+msgstr "Naam rekeninghouder"
+
+#: icare4u_front/community_admin/forms.py:488
+#: icare4u_front/community_admin/forms.py:604
+#: icare4u_front/community_admin/forms.py:676
+#: icare4u_front/profile/forms.py:648 icare4u_front/profile/forms.py:718
+#: icare4u_front/profile/forms.py:790 icare4u_front/profile/models.py:383
+#: icare4u_front/profile/models.py:679 icare4u_front/profile/models.py:860
+msgid "mandate ID"
+msgstr "SEPA machtigingskenmerk"
+
+#: icare4u_front/community_admin/forms.py:492
+#: icare4u_front/templates/communityadmin/create_member.html:263
+#: icare4u_front/templates/communityadmin/edit_member.html:251
+msgid "Signature date"
+msgstr "SEPA machtigingsdatum"
+
+#: icare4u_front/community_admin/forms.py:493
+#: icare4u_front/community_admin/forms.py:609
+#: icare4u_front/community_admin/forms.py:681
+#: icare4u_front/profile/models.py:390 icare4u_front/profile/models.py:686
+#: icare4u_front/profile/models.py:867
+msgid "KvK number"
+msgstr "KvK nummer"
+
+#: icare4u_front/community_admin/forms.py:495
+#: icare4u_front/community_admin/forms.py:611
+#: icare4u_front/profile/forms.py:651 icare4u_front/profile/forms.py:652
+#: icare4u_front/profile/forms.py:721 icare4u_front/profile/forms.py:722
+#: icare4u_front/profile/forms.py:793 icare4u_front/profile/models.py:392
+#: icare4u_front/profile/models.py:688
+#: icare4u_front/templates/accounts/profile_form_business.html:97
+msgid "VAT Number"
+msgstr "BTW Nummer"
+
+#: icare4u_front/community_admin/forms.py:498
+msgid "reward percentage"
+msgstr "beloning percentage"
+
+#: icare4u_front/community_admin/forms.py:499
+msgid ""
+"The reward is either entered on the terminal as an absolute amount of points "
+"or as a percentage of the transaction."
+msgstr ""
+"Middels een terminal kan de operator punten verstrekken aan spaarders. Kies "
+"één van onderstaande opties:"
+
+#: icare4u_front/community_admin/forms.py:502
+msgid "transaction percentage"
+msgstr "percentage (%)"
+
+#: icare4u_front/community_admin/forms.py:503
+msgid "Percentage of each transaction to be rewarded in points."
+msgstr "Percentage van elke transactie dat in punten wordt beloond."
+
+#: icare4u_front/community_admin/forms.py:529
+#: icare4u_front/community_admin/forms.py:628
+#: icare4u_front/profile/forms.py:678 icare4u_front/profile/forms.py:748
+msgid "Please enter a valid VAT Number"
+msgstr "Vul a.u.b. een geldig BTW nummer in"
+
+#: icare4u_front/community_admin/forms.py:539
+#: icare4u_front/community_admin/forms.py:543
+msgid "Enter a number between 0 and 100"
+msgstr "Vul een getal tussen 0 en 100 in"
+
+#: icare4u_front/community_admin/forms.py:554
+#: icare4u_front/community_admin/forms.py:639
+#: icare4u_front/community_admin/forms.py:699
+msgid "KvK number should be 8 digits"
+msgstr "Het KvK nummer moet uit 8 cijfers bestaan"
+
+#: icare4u_front/community_admin/forms.py:743
+msgid "Selected Good cause"
+msgstr "Spaardoel"
+
+#: icare4u_front/community_admin/forms.py:750
+msgid "Donation percentage"
+msgstr "Percentage naar spaardoel"
+
+#: icare4u_front/community_admin/forms.py:753
+msgid "Stadlander rel number"
+msgstr "Stadlander persoonsnummer"
+
+#: icare4u_front/community_admin/forms.py:754
+msgid "Stadlander groupset only"
+msgstr "Alleen Stadlander groupset"
+
+#: icare4u_front/community_admin/forms.py:757
+#: icare4u_front/profile/forms.py:852
+msgid "Newsletter"
+msgstr "Nieuwsbrief"
+
+#: icare4u_front/community_admin/forms.py:758
+msgid "Wants to receive newsletter"
+msgstr "Wil de nieuwsbrief ontvangen"
+
+#: icare4u_front/community_admin/forms.py:785
+#: icare4u_front/profile/middleware.py:56 icare4u_front/profile/models.py:360
+#, python-brace-format
+msgid "No default good cause exists for {0} community"
+msgstr "Voor de community {0} is geen standaard (default) spaardoel ingesteld"
+
+#: icare4u_front/community_admin/forms.py:810
+msgid "You must supply a rel_number for Stadlander groupset"
+msgstr ""
+"U moet een persoonsnummer invoeren voordat u de gebruiker in de Stadlander "
+"groupset kunt plaatsen"
+
+#: icare4u_front/community_admin/forms.py:818
+msgid "rel_number is already in use"
+msgstr "Dit persoonsnummer is reeds in gebruik"
+
+#: icare4u_front/community_admin/forms.py:823
+msgid "rel_number should be empty for non-Stadlander groupset"
+msgstr ""
+"persoonsnummer moet leeg zijn al u iemand uit de Stadlander groupset plaatst"
+
+#: icare4u_front/community_admin/forms.py:830
+#, python-brace-format
+msgid "Donation percentage must not exceed {0}%"
+msgstr "Spaardoeldonatie mag niet meer dan {0}% zijn"
+
+#: icare4u_front/community_admin/forms.py:835
+#, python-brace-format
+msgid "Donation percentage must be at least {0}%"
+msgstr "Spaardoeldonatie dient tenminste {0}% te zijn"
+
+#: icare4u_front/community_admin/forms.py:922
+#: icare4u_front/community_admin/forms.py:931
+#: icare4u_front/profile/models.py:111
+msgid "User profile"
+msgstr "Gebruikersprofiel"
+
+#: icare4u_front/community_admin/forms.py:954
+msgid "This card is already connected to another user"
+msgstr "Deze pas is al gekoppeld aan een andere gebruiker"
+
+#: icare4u_front/community_admin/forms.py:957
+msgid "This card number does not exist"
+msgstr "Dit pasnummer bestaat niet"
+
+#: icare4u_front/community_admin/forms.py:968
+#, fuzzy
+#| msgid "Fulfillments"
+msgid "Fulfillment must be new."
+msgstr "Pasaanvragen"
+
+#: icare4u_front/community_admin/forms.py:970
+#, fuzzy
+#| msgid "Card fulfillment"
+msgid "Invalid fulfillment id."
+msgstr "Spaarpassen"
+
+#: icare4u_front/community_admin/forms.py:977
+#: icare4u_front/community_admin/forms.py:979
+msgid "Fulfillment and owner fields do not pertain to the same user."
+msgstr ""
+
+#: icare4u_front/community_admin/forms.py:990
+msgid "User not in card user member group."
+msgstr ""
+
+#: icare4u_front/community_admin/forms.py:1021
+#: icare4u_front/community_admin/forms.py:1022
+msgid "Cannot connect a new Card based on a non-new Fulfillment."
+msgstr ""
+
+#: icare4u_front/community_admin/forms.py:1025
+msgid "More than one default card type returned."
+msgstr ""
+
+#: icare4u_front/community_admin/forms.py:1027
+msgid " Fulfillment with id: {} does not exist."
+msgstr ""
+
+#: icare4u_front/community_admin/forms.py:1041
+#: icare4u_front/templates/community_admin/change_business_user.html:202
+msgid "SIM card number (ICCID)"
+msgstr "SIM-kaart nummer (ICCID)"
+
+#: icare4u_front/community_admin/forms.py:1077
+msgid "This terminal is already assigned to this user"
+msgstr "Deze terminal is al in gebruik"
+
+#: icare4u_front/community_admin/forms.py:1081
+msgid "This terminal is assigned to another user"
+msgstr "Deze terminal is al in gebruik door een andere gebruiker"
+
+#: icare4u_front/community_admin/forms.py:1085
+#, fuzzy
+#| msgid "This email has already been registered"
+msgid "This terminal has been removed"
+msgstr "Dit e-mailadres is al geregistreerd"
+
+#: icare4u_front/community_admin/forms.py:1088
+#: icare4u_front/community_admin/forms.py:1204
+#, fuzzy
+#| msgid "Invalid form submitted."
+msgid "Invalid form submitted"
+msgstr "Ongeldige gegevens."
+
+#: icare4u_front/community_admin/forms.py:1091
+msgid "This terminal does not exist"
+msgstr "Deze terminal bestaat niet"
+
+#: icare4u_front/community_admin/forms.py:1193
+#, fuzzy
+#| msgid "Card number is incorrect."
+msgid "Name is incorrect"
+msgstr "Pasnummer is onjuist."
+
+#: icare4u_front/community_admin/forms.py:1201
+msgid "Name already exists"
+msgstr "Naam is al in gebruik"
+
+#: icare4u_front/community_admin/forms.py:1307
+msgid "Card number is incorrect"
+msgstr "Naam is al in gebruik"
+
+#: icare4u_front/community_admin/forms.py:1318
+msgid "This card is already added"
+msgstr "Dit pasnummer is al in gebruik"
+
+#: icare4u_front/community_admin/forms.py:1322
+msgid "This card is owned by another user"
+msgstr "Deze pas is in gebruik door iemand anders"
+
+#: icare4u_front/community_admin/forms.py:1328
+msgid "Card status is incorrect"
+msgstr "De status van de pas is niet correct"
+
+#: icare4u_front/community_admin/forms.py:1369
+#, fuzzy
+#| msgid "This user does not exist"
+msgid "Card number does not exist."
+msgstr "Deze gebruiker bestaat niet"
+
+#: icare4u_front/community_admin/models.py:21
+msgid "User (Card Machine)"
+msgstr ""
+
+#: icare4u_front/community_admin/models.py:22
+msgid "Users (Card Machine)"
+msgstr ""
+
+#: icare4u_front/community_admin/models.py:42
+#, fuzzy
+msgid "User (Card)"
+msgstr "Passen"
+
+#: icare4u_front/community_admin/models.py:43
+#, fuzzy
+msgid "Users (Card)"
+msgstr "Passen"
+
+#: icare4u_front/community_admin/models.py:54
+#, fuzzy
+#| msgid "Fulfillment"
+msgid "Profile (Fulfillment)"
+msgstr "Pasaanvraag"
+
+#: icare4u_front/community_admin/models.py:55
+#, fuzzy
+#| msgid "Fulfillment"
+msgid "Profiles (Fulfillment)"
+msgstr "Pasaanvraag"
+
+#: icare4u_front/community_admin/models.py:81
+#, fuzzy
+#| msgid "Users"
+msgid "User"
+msgstr "Gebruikers"
+
+#: icare4u_front/custom/views.py:166 icare4u_front/custom/views.py:294
+msgid "This is only available to web pages"
+msgstr ""
+
+#: icare4u_front/profile/admin.py:16
+msgid "Close selected accounts"
+msgstr "Sluit geselecteerde accounts"
+
+#: icare4u_front/profile/forms.py:40 icare4u_front/profile/forms.py:41
+msgid "Email Address"
+msgstr "E-mailadres"
+
+#: icare4u_front/profile/forms.py:42
+msgid "Please enter your Email address"
+msgstr "Voer a.u.b. uw e-mailadres in"
+
+#: icare4u_front/profile/forms.py:46
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:97
+msgid "Confirm Email"
+msgstr "Bevestig E-mail"
+
+#: icare4u_front/profile/forms.py:47
+msgid "Email Address (again)"
+msgstr "E-mailadres (nogmaals)"
+
+#: icare4u_front/profile/forms.py:48
+msgid "Please confirm your Email address"
+msgstr "Herhaal uw e-mailadres a.u.b."
+
+#: icare4u_front/profile/forms.py:57 icare4u_front/profile/forms.py:58
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:105
+#: icare4u_front/templates/registration/login.html:43
+#: icare4u_front/templates/registration/registration_form.html:112
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: icare4u_front/profile/forms.py:59
+msgid "Please enter your chosen password"
+msgstr "Voer a.u.b. uw gekozen wachtwoord in"
+
+#: icare4u_front/profile/forms.py:63
+msgid "Confirm Password"
+msgstr "Bevestig wachtwoord"
+
+#: icare4u_front/profile/forms.py:64
+msgid "Password (again)"
+msgstr "Wachtwoord (nogmaals)"
+
+#: icare4u_front/profile/forms.py:65
+msgid "Please confirm your chosen password"
+msgstr "Herhaal het gekozen wachtwoord a.u.b."
+
+#: icare4u_front/profile/forms.py:68
+#: icare4u_front/profile_registration/forms.py:63
+msgid "Please enter your date of birth"
+msgstr "Vul a.u.b. uw geboortedatum in"
+
+#: icare4u_front/profile/forms.py:160
+msgid "Please change the generated first name to your own"
+msgstr "Vervang de tijdelijke voornaam door uw eigen voornaam"
+
+#: icare4u_front/profile/forms.py:164
+#: icare4u_front/profile_registration/forms.py:20
+msgid "Please enter your first name"
+msgstr "Vul a.u.b. uw voornaam in"
+
+#: icare4u_front/profile/forms.py:178
+msgid "Please change the generated last name to your own"
+msgstr "Vervang de tijdelijke achternaam door uw eigen achternaam"
+
+#: icare4u_front/profile/forms.py:182
+#: icare4u_front/profile_registration/forms.py:23
+msgid "Please enter your last name"
+msgstr "Vul a.u.b uw achternaam in"
+
+#: icare4u_front/profile/forms.py:211
+msgid "Please change the generated email address to one where we can reach you"
+msgstr "Vervang het tijdelijke e-mailadres door uw eigen e-mailadres"
+
+#: icare4u_front/profile/forms.py:226
+#: icare4u_front/profile_registration/forms.py:75
+msgid "Please enter a password that is at least 8 characters long."
+msgstr "Voer a.u.b. een wachtwoord in dat uit tenminste 8 karakters bestaat."
+
+#: icare4u_front/profile/forms.py:288 icare4u_front/profile/forms.py:333
+msgid ""
+"You must agree to the terms and conditions to be able to use the website"
+msgstr "U moet de algemene voorwaarden accepteren"
+
+#: icare4u_front/profile/forms.py:301
+msgid "Please enter the same email for both email and email confirmation."
+msgstr ""
+
+#: icare4u_front/profile/forms.py:312
+msgid ""
+"Please enter the same password for both password and password confirmation."
+msgstr "De ingevoerde wachtwoorden zijn niet gelijk"
+
+#: icare4u_front/profile/forms.py:341
+msgid "From date"
+msgstr "Vanaf datum"
+
+#: icare4u_front/profile/forms.py:343
+msgid "To date"
+msgstr "Tot datum"
+
+#: icare4u_front/profile/forms.py:353
+#: icare4u_front/profile/tests/test_forms.py:40
+msgid "Selected date must be in the past"
+msgstr "Geselecteerde datum moet in het verleden liggen"
+
+#: icare4u_front/profile/forms.py:365
+#: icare4u_front/profile/tests/test_forms.py:54
+msgid "Selected date must be in the past or today, as much"
+msgstr "Geselecteerde datum moet in het verleden of vandaag zijn"
+
+#: icare4u_front/profile/forms.py:380
+#: icare4u_front/profile/tests/test_forms.py:68
+msgid "Initial date must be in past of final date"
+msgstr "De begindatum moet voor de einddatum liggen"
+
+#: icare4u_front/profile/forms.py:401
+#: icare4u_front/profile_registration/forms.py:25
+msgid "Communities"
+msgstr "Communities"
+
+#: icare4u_front/profile/forms.py:405
+#: icare4u_front/templates/accounts/place_ad.html:156
+#: icare4u_front/templates/communityadmin/offers_wants.html:91
+msgid "Categories"
+msgstr "Categorie"
+
+#: icare4u_front/profile/forms.py:434 icare4u_front/profile/models.py:86
+#: icare4u_front/templates/accounts/profile_form_business.html:155
+#: icare4u_front/templates/accounts/profile_form_charity.html:143
+msgid "Document Number"
+msgstr "Documentnummer"
+
+#: icare4u_front/profile/forms.py:485
+msgid "A Dutch phone number always has exactly 10 digits."
+msgstr "Voer uw 10-cijferige (Nederlandse) telefoonnummer in"
+
+#: icare4u_front/profile/forms.py:489
+msgid "A phone number must consist of numbers only."
+msgstr "Een telefoonnummer kan alleen uit cijfers bestaan"
+
+#: icare4u_front/profile/forms.py:741
+msgid "Institution name"
+msgstr "Naam instelling"
+
+#: icare4u_front/profile/forms.py:811
+#: icare4u_front/templates/accounts/profile_form_charity.html:22
+msgid "Charity name"
+msgstr "Naam Spaardoel"
+
+#: icare4u_front/profile/forms.py:847
+msgid "Zichtbaar voor anderen"
+msgstr "Zichtbaar voor anderen"
+
+#: icare4u_front/profile/forms.py:848
+msgid "Maak mij zichtbaar op de marktplaats"
+msgstr "Maak mijn profiel zichtbaar voor anderen"
+
+#: icare4u_front/profile/forms.py:853
+#: icare4u_front/templates/profile/stadlander_terms_and_conditions_form.html:29
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:143
+#: icare4u_front/templates/registration/registration_form.html:144
+msgid "I would like to receive the newsletter"
+msgstr "Ik wil de nieuwsbrief ontvangen"
+
+#: icare4u_front/profile/forms.py:880
+msgid "Enter your email address"
+msgstr "Vul uw e-mailadres in."
+
+#: icare4u_front/profile/forms.py:889
+msgid "Enter your first name"
+msgstr "Vul uw voornaam in."
+
+#: icare4u_front/profile/forms.py:898
+msgid "Enter your last name"
+msgstr "Vul uw achternaam in."
+
+#: icare4u_front/profile/invoice_pdf.py:48
+#, python-brace-format
+msgid "{0}"
+msgstr "{0}"
+
+#: icare4u_front/profile/invoice_pdf.py:49
+msgid "Postbus 178"
+msgstr "Postbus 178"
+
+#: icare4u_front/profile/invoice_pdf.py:50
+msgid "5060AD Oisterwijk"
+msgstr "5060AD Oisterwijk"
+
+#: icare4u_front/profile/invoice_pdf.py:51
+msgid "info@positoos.nl"
+msgstr "info@positoos.nl"
+
+#: icare4u_front/profile/invoice_pdf.py:52
+msgid "KvK:17229441 - BTW:81966.105.B.01 - Rabo: NL15RABO0154443476"
+msgstr "KvK:17229441 - BTW:81966.105.B.01 - Rabo: NL15RABO0154443476"
+
+#: icare4u_front/profile/invoice_pdf.py:65
+msgid "Gelieve dit bedrag binnen 14 dagen over te maken op rekening"
+msgstr "Gelieve dit bedrag binnen 14 dagen over te maken op rekening"
+
+#: icare4u_front/profile/invoice_pdf.py:66
+msgid "NL15 RABO 0154443476 t.n.v. Stichting Derdengelden Positoos"
+msgstr "NL15 RABO 0154443476 t.n.v. Stichting Derdengelden Positoos"
+
+#: icare4u_front/profile/invoice_pdf.py:70
+msgid ""
+"Wij zullen dit bedrag binnenkort overmaken naar de bij ons bekende "
+"bankrekening van uw bedrijf."
+msgstr ""
+"Wij zullen dit bedrag binnenkort overmaken naar de bij ons bekende "
+"bankrekening van uw bedrijf."
+
+#: icare4u_front/profile/invoice_pdf.py:102
+msgid "Afrekening"
+msgstr "Afrekening"
+
+#: icare4u_front/profile/invoice_pdf.py:106
+msgid "t.a.v. de Crediteurenadministratie"
+msgstr "t.a.v. de Crediteurenadministratie"
+
+#: icare4u_front/profile/invoice_pdf.py:114
+#, python-brace-format
+msgid "Invoice no: {0}"
+msgstr "Factuurnummer.: {0}"
+
+#: icare4u_front/profile/invoice_pdf.py:115
+#, python-brace-format
+msgid "Invoice Date: {0}"
+msgstr "Factuurdatum: {0}"
+
+#: icare4u_front/profile/invoice_pdf.py:121
+#: icare4u_front/templates/accounts/pay_direct.html:66
+#: icare4u_front/templates/accounts/place_ad.html:106
+#: icare4u_front/templates/invoices/invoice_list.html:18
+msgid "Description"
+msgstr "Beschrijving"
+
+#: icare4u_front/profile/invoice_pdf.py:121
+msgid "Total"
+msgstr "Totaal"
+
+#: icare4u_front/profile/invoice_pdf.py:134
+msgid "Total:"
+msgstr "Totaal:"
+
+#: icare4u_front/profile/middleware.py:38
+msgid ""
+"Save for yourself and for a savings goal of your choice. Do you want to save "
+"for another savings goal? Then select one of the following savings goals"
+msgstr ""
+"U spaart voor uzelf en voor een spaardoel van uw keuze. Wilt u sparen voor "
+"een ander spaardoel? Selecteer dan één van onderstaande spaardoelen"
+
+#: icare4u_front/profile/middleware.py:43
+msgid "You must agree to the terms and conditions to start using the site."
+msgstr "U moet de algemene voorwaarden accepteren"
+
+#: icare4u_front/profile/models.py:45
+msgid "Man"
+msgstr "Man"
+
+#: icare4u_front/profile/models.py:46
+msgid "Female"
+msgstr "Vrouw"
+
+#: icare4u_front/profile/models.py:50
+msgid "Credit"
+msgstr ""
+
+#: icare4u_front/profile/models.py:51
+msgid "Debit"
+msgstr ""
+
+#: icare4u_front/profile/models.py:62
+msgid "paspoort"
+msgstr ""
+
+#: icare4u_front/profile/models.py:63
+msgid "rijbewijs"
+msgstr ""
+
+#: icare4u_front/profile/models.py:64
+msgid "identiteitskaart"
+msgstr ""
+
+#: icare4u_front/profile/models.py:65
+msgid "vreemdelingendocument"
+msgstr ""
+
+#: icare4u_front/profile/models.py:72
+msgid "Do you agree to the terms and conditions?"
+msgstr "Bent u het eens met de voorwaarden?"
+
+#: icare4u_front/profile/models.py:75
+msgid "Extra Address"
+msgstr "Huisnummer toevoeging"
+
+#: icare4u_front/profile/models.py:77
+#: icare4u_front/profile_registration/forms.py:55
+msgid "Street Number"
+msgstr "Huisnummer"
+
+#: icare4u_front/profile/models.py:82
+#: icare4u_front/templates/accounts/profile_form_individual.html:121
+msgid "Date of Birth"
+msgstr "Geboortedatum"
+
+#: icare4u_front/profile/models.py:84
+msgid "ID Types"
+msgstr "Identiteitsbewijs"
+
+#: icare4u_front/profile/models.py:88
+#: icare4u_front/templates/accounts/profile_form_business.html:158
+#: icare4u_front/templates/accounts/profile_form_charity.html:146
+msgid "Expiration Date"
+msgstr "vervaldatum identiteitsbewijs"
+
+#: icare4u_front/profile/models.py:90
+msgid "Wants Newsletter"
+msgstr "Nieuwsbrief"
+
+#: icare4u_front/profile/models.py:112
+#: icare4u_front/templates/community_admin/add_user.html:21
+#: icare4u_front/templates/community_admin/change_business_user.html:9
+#: icare4u_front/templates/community_admin/change_individual_user.html:9
+#: icare4u_front/templates/community_admin/change_user.html:22
+#: icare4u_front/templates/community_admin/change_userprofile_user.html:9
+#: icare4u_front/templates/community_admin/index.html:23
+msgid "User profiles"
+msgstr "Gebruikersprofielen"
+
+#: icare4u_front/profile/models.py:294
+msgid "individual profile"
+msgstr "Spaardersprofiel"
+
+#: icare4u_front/profile/models.py:295
+msgid "individual profiles"
+msgstr "Spaardersprofielen"
+
+#: icare4u_front/profile/models.py:385 icare4u_front/profile/models.py:681
+#: icare4u_front/profile/models.py:862
+msgid "date of signature"
+msgstr "Datum handtekening"
+
+#: icare4u_front/profile/models.py:388 icare4u_front/profile/models.py:684
+#: icare4u_front/profile/models.py:865
+msgid "Time of the latest SEPA debit processing time."
+msgstr "Tijd van de laatste SEPA debit verwerking time."
+
+#: icare4u_front/profile/models.py:395
+msgid "business profile"
+msgstr "Winkeliersprofiel"
+
+#: icare4u_front/profile/models.py:396
+msgid "business profiles"
+msgstr "Winkeliersprofielen"
+
+#: icare4u_front/profile/models.py:534
+msgid "Afschrijving"
+msgstr "Afschrijving"
+
+#: icare4u_front/profile/models.py:535
+msgid "betalen"
+msgstr "betalen"
+
+#: icare4u_front/profile/models.py:537
+msgid "Bijschrijving"
+msgstr "Bijschrijving"
+
+#: icare4u_front/profile/models.py:538
+msgid "ontvangen"
+msgstr "ontvangen"
+
+#: icare4u_front/profile/models.py:540
+#, python-brace-format
+msgid ""
+"{af_bijschrijving} maandelijkse verrekening {from_date} tot {to_date}.\n"
+"\n"
+" Uitgegeven Positoos: {spent} Positoos (€ {spent_eur})\n"
+"Ingenomen Positoos: {received} Positoos (€ {received_eur})\n"
+"Saldoverrekening: {plus}{total} Positoos te {receive_or_pay}, € {total_eur}"
+msgstr ""
+
+#: icare4u_front/profile/models.py:620 icare4u_front/profile/models.py:782
+#, python-brace-format
+msgid ""
+"Monthly balance for business {0} reconciled. {1} Positoos recovered by "
+"Cyclos system"
+msgstr ""
+
+#: icare4u_front/profile/models.py:637 icare4u_front/profile/models.py:836
+#, python-brace-format
+msgid ""
+"Monthly balance for business {0} reconciled. {1} Positoos paid by Cyclos "
+"system"
+msgstr ""
+
+#: icare4u_front/profile/models.py:691
+msgid "institution profile"
+msgstr "instelling profiel"
+
+#: icare4u_front/profile/models.py:692
+msgid "institution profiles"
+msgstr "instelling profielen"
+
+#: icare4u_front/profile/models.py:870
+msgid "charity profile"
+msgstr "spaardoel profiel"
+
+#: icare4u_front/profile/models.py:871
+msgid "charity profiles"
+msgstr "spaardoel profielen"
+
+#: icare4u_front/profile/models.py:926
+msgid "SEPA XML file"
+msgstr "SEPA XML export"
+
+#: icare4u_front/profile/models.py:927
+msgid "SEPA XML files"
+msgstr "SEPA XML bestand"
+
+#: icare4u_front/profile/templates/admin/profile/individualprofile/change_form.html:7
+#: icare4u_front/profile/templates/admin/profile/userprofile/change_form.html:7
+msgid "Manage Cards"
+msgstr "Beheer passen"
+
+#: icare4u_front/profile/templates/admin/profile/individualprofile/change_form.html:18
+#: icare4u_front/templates/community_admin/change_individual_user.html:434
+msgid "Close The Account"
+msgstr "Sluit account"
+
+#: icare4u_front/profile/tests/test_forms.py:173
+msgid "There is already an account with this e-mail address in our system."
+msgstr "Er is reeds een account met dit e-mailadres in ons systeem"
+
+#: icare4u_front/profile/tests/test_validators.py:22
+#: icare4u_front/profile/validators.py:28
+msgid "A SWIFT-BIC is either 8 or 11 characters long."
+msgstr "Een SWIFT-BIC is tussen de 8 en 11 karakters lang."
+
+#: icare4u_front/profile/tests/test_validators.py:34
+msgid "1234 is not a valid SWIFT-BIC Institution Code."
+msgstr "XX is geen geldige SWIFT-BIC instelling code"
+
+#: icare4u_front/profile/tests/test_validators.py:46
+msgid "XX is not a valid SWIFT-BIC Country Code."
+msgstr "XX is geen geldige SWIFT-BIC land code"
+
+#: icare4u_front/profile/validators.py:35
+#, python-brace-format
+msgid "{0} is not a valid SWIFT-BIC Institution Code."
+msgstr "{0} is geen geldige SWIFT-BIC instelling code"
+
+#: icare4u_front/profile/validators.py:42
+#, python-brace-format
+msgid "{0} is not a valid SWIFT-BIC Country Code."
+msgstr "{0} is geen geldige SWIFT-BIC land code"
+
+#: icare4u_front/profile/validators.py:48
+msgid "Please enter a valid city"
+msgstr "Vul een geldige stad in"
+
+#: icare4u_front/profile/views.py:180
+msgid "You must complete your profile"
+msgstr "Vul uw profiel in, en wijzig uw wachtwoord"
+
+#: icare4u_front/profile/views.py:289
+msgid "Individual Profile successfully created"
+msgstr "Spaardersprofiel succesvol geactiveerd!"
+
+#: icare4u_front/profile/views.py:314
+msgid "Business Profile successfully created"
+msgstr "Winkeliersprofiel succesvol geactiveerd!"
+
+#: icare4u_front/profile/views.py:332
+msgid "Institution Profile successfully created"
+msgstr "Instellingenprofiel succesvol geactiveerd!"
+
+#: icare4u_front/profile/views.py:349
+msgid "Charity Profile successfully created"
+msgstr "Spaardoelenprofiel succesvol geactiveerd!"
+
+#: icare4u_front/profile_registration/forms.py:19
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:38
+#: icare4u_front/templates/registration/registration_form.html:43
+msgid "First name"
+msgstr "Voornaam"
+
+#: icare4u_front/profile_registration/forms.py:22
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:40
+#: icare4u_front/templates/registration/registration_form.html:45
+msgid "Last name"
+msgstr "Achternaam"
+
+#: icare4u_front/profile_registration/forms.py:29
+msgid "Please choose the community where you want to save Positoos."
+msgstr "Kies a.u.b. de gemeente waarin u punten wilt sparen"
+
+#: icare4u_front/profile_registration/forms.py:33
+msgid "Please enter your city"
+msgstr "Vul a.u.b. uw plaatsnaam in"
+
+#: icare4u_front/profile_registration/forms.py:35
+#: icare4u_front/templates/accounts/profile_form_business.html:43
+#: icare4u_front/templates/accounts/profile_form_charity.html:35
+#: icare4u_front/templates/accounts/profile_form_individual.html:145
+#: icare4u_front/templates/accounts/profile_form_individual.html:167
+#: icare4u_front/templates/communityadmin/create_member.html:117
+#: icare4u_front/templates/communityadmin/edit_member.html:188
+#: icare4u_front/templates/communityadmin/edit_member.html:191
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:73
+msgid "Address"
+msgstr "Straatnaam"
+
+#: icare4u_front/profile_registration/forms.py:36
+msgid "Please enter your address"
+msgstr "Vul a.u.b. uw straatnaam in"
+
+#: icare4u_front/profile_registration/forms.py:38
+msgid "Postal Code"
+msgstr "Postcode"
+
+#: icare4u_front/profile_registration/forms.py:39
+msgid "Please enter your postal code"
+msgstr "Vul a.u.b. uw postcode in"
+
+#: icare4u_front/profile_registration/forms.py:43
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:39
+#: icare4u_front/templates/registration/registration_form.html:44
+msgid "Tussenvoegsel"
+msgstr "Tussenvoegsel"
+
+#: icare4u_front/profile_registration/forms.py:56
+msgid "Please enter your street number"
+msgstr "Vul a.u.b. uw huisnummer in"
+
+#: icare4u_front/settings/base.py:65
+msgid "Dutch"
+msgstr "Nederlands"
+
+#: icare4u_front/settings/base.py:433
+msgid "General - Full page content with side menu"
+msgstr "Algemeen - Volledige pagina inhoud met zij-menu"
+
+#: icare4u_front/settings/base.py:435
+msgid "General - 2 columns content with side menu"
+msgstr "Algemeen - 2 kolommen geen zijmenu"
+
+#: icare4u_front/settings/base.py:436
+msgid "Home Page Template"
+msgstr "Home pagina sjabloon"
+
+#: icare4u_front/settings/base.py:437
+msgid "Social Media Page"
+msgstr ""
+
+#: icare4u_front/settings/base.py:448
+msgid "Top section"
+msgstr "Top section"
+
+#: icare4u_front/settings/base.py:456
+msgid "Center section"
+msgstr "Center section"
+
+#: icare4u_front/settings/base.py:460
+msgid "Social Media links"
+msgstr ""
+
+#: icare4u_front/settings/base.py:643
+msgid "10 digits starting with the area code, without punctuation"
+msgstr "startend met het kengetal, zonder leestekens"
+
+#: icare4u_front/settings/base.py:646
+msgid "10 digits starting with 06, without punctuation"
+msgstr "10 nummers startend met 06, zonder leestekens"
+
+#: icare4u_front/settings/base.py:714
+msgid "NL postcode"
+msgstr "NL Postcode"
+
+#: icare4u_front/settings/base.py:715
+msgid "Text"
+msgstr ""
+
+#: icare4u_front/settings/base.py:717
+msgid "Web address"
+msgstr "Websiteadres"
+
+#: icare4u_front/settings/base.py:718
+msgid "Number"
+msgstr "Nummer"
+
+#: icare4u_front/settings/base.py:719
+msgid "Decimal number"
+msgstr "Decimaal getal"
+
+#: icare4u_front/settings/base.py:720
+msgid "Yes/No"
+msgstr "Ja/Nee"
+
+#: icare4u_front/settings/base.py:721
+#: icare4u_front/templates/invoices/invoice_list.html:17
+msgid "Date"
+msgstr "Datum"
+
+#: icare4u_front/settings/base.py:722
+msgid "Date & time"
+msgstr "Datum & tijd"
+
+#: icare4u_front/settings/base.py:723
+msgid "Time"
+msgstr "Tijd"
+
+#: icare4u_front/settings/base.py:724
+msgid "Choice"
+msgstr ""
+
+#: icare4u_front/settings/base.py:725
+msgid "Multiple Choice"
+msgstr ""
+
+#: icare4u_front/settings/base.py:726
+msgid "Model Choice"
+msgstr ""
+
+#: icare4u_front/settings/base.py:727
+msgid "Model Multiple Choice"
+msgstr ""
+
+#: icare4u_front/settings/base.py:728
+msgid "Regex"
+msgstr ""
+
+#: icare4u_front/settings/base.py:729
+msgid "File"
+msgstr ""
+
+#: icare4u_front/stadlander/backends.py:38
+msgid "Your Stadlander session may have timed out"
+msgstr "Uw Stadlander sessie kan zijn verlopen"
+
+#: icare4u_front/stadlander/backends.py:55
+#: icare4u_front/stadlander/backends.py:104
+#: icare4u_front/stadlander/forms.py:52
+msgid "Sorry, your account details do not match those we have on file"
+msgstr ""
+"Sorry, uw account komt niet overeen met degen die wij in ons bestand hebben"
+
+#: icare4u_front/stadlander/backends.py:69
+#: icare4u_front/stadlander/backends.py:95
+#: icare4u_front/stadlander/tests/test_backends.py:96
+#: icare4u_front/stadlander/tests/test_backends.py:152
+msgid ""
+"You are not able to log into the Samen-Doen site because your e-mailadres "
+"isn't unique"
+msgstr ""
+"U kunt met momenteel niet inloggen bij Samen-Doen omdat het E-mail adres "
+"waarmee u een profiel wilt aanmaken niet uniek is"
+
+#: icare4u_front/stadlander/forms.py:199
+msgid "Contact Name <br />(business)"
+msgstr ""
+
+#: icare4u_front/stadlander/forms.py:200
+msgid "Person to contact"
+msgstr "Contactpersoon"
+
+#: icare4u_front/stadlander/forms.py:202
+msgid "Please enter the Contact Name at the company you wish to pay"
+msgstr ""
+
+#: icare4u_front/stadlander/forms.py:208
+#: icare4u_front/templates/accounts/pay_direct.html:33
+msgid "Amount"
+msgstr "Aantal punten"
+
+#: icare4u_front/stadlander/forms.py:209
+msgid "Amount to pay"
+msgstr "Bedrag te betalen"
+
+#: icare4u_front/stadlander/forms.py:210
+msgid "Please enter an amount to pay"
+msgstr "Vul een bedrag in"
+
+#: icare4u_front/stadlander/forms.py:240
+msgid "Please select a reward category and/or enter other activity."
+msgstr "Geef a.u.b. een waarderingscategorie op en/of een overige activiteit"
+
+#: icare4u_front/stadlander/forms.py:250
+msgid "Please enter a quantity next to the reward category"
+msgstr ""
+"Voer a.u.b. een hoeveelheid (bestede tijdseenheden) in naast de "
+"waarderingscategorie"
+
+#: icare4u_front/stadlander/forms.py:255
+msgid "Please select a reward when entering a quantity"
+msgstr ""
+"Selecteer a.u.b. een waarderingscategorie naast het opgeven van een "
+"hoeveelheid"
+
+#: icare4u_front/stadlander/forms.py:260
+msgid "Please enter a quantity next to the other activity"
+msgstr ""
+"Voer a.u.b. een hoeveelheid (bestede tijdseenheden) in naast de overige "
+"activiteit waarvoor u gaat waarderen"
+
+#: icare4u_front/stadlander/forms.py:266
+msgid "Please enter an other activity when entering a quantity"
+msgstr "Geef a.u.b. kort aan welke overige activiteit u wilt waarderen"
+
+#: icare4u_front/stadlander/forms.py:287
+msgid ""
+"The amount entered on the form has been tampered with, please use the "
+"calculated values"
+msgstr ""
+"Het bedrag dat is ingevuld op het formulier is mogelijk gecompromitteerd. "
+"Gebruik a.u.b. de automatisch berekende waarden"
+
+#: icare4u_front/stadlander/forms.py:297 icare4u_front/stadlander/forms.py:308
+msgid "Reward Categories"
+msgstr "Waaderingscategorieën"
+
+#: icare4u_front/stadlander/models.py:75
+msgid "Woonplaat (residence) received in the Stadlander SSO info"
+msgstr "Woonplaats (residence) ontvangen in de Stadlander SSO info"
+
+#: icare4u_front/stadlander/models.py:89
+msgid "Reward Category title"
+msgstr "Categorie titel"
+
+#: icare4u_front/stadlander/models.py:91
+msgid "Reward Category description"
+msgstr "Beloningscategorie omschrijving"
+
+#: icare4u_front/stadlander/models.py:93
+msgid "If True, user gets a reward for their first advert in this category"
+msgstr ""
+"Als ‘True’ ontvangt de spaarder een beloning voor het plaatsen van zijn "
+"eerste advertentie"
+
+#: icare4u_front/stadlander/models.py:96
+msgid "Marks this Reward Category as active"
+msgstr ""
+
+#: icare4u_front/stadlander/models.py:99
+msgid "Stadlander specifieke categorieën"
+msgstr ""
+
+#: icare4u_front/stadlander/models.py:100
+msgid "stadlander specifieke categorieën"
+msgstr ""
+
+#: icare4u_front/stadlander/views.py:281
+msgid "Payment made successfully."
+msgstr "Waardering gelukt!"
+
+#: icare4u_front/stadlander/views.py:283
+msgid "Could not make payment at this time."
+msgstr ""
+
+#: icare4u_front/stadlander/views.py:286
+msgid ""
+"You do not have sufficient credit to complete the payment plus the "
+"transaction fee."
+msgstr ""
+
+#: icare4u_front/stadlander/views.py:401
+#, python-brace-format
+msgid ""
+"U heeft van Stadlander {0} Positoos waardering gekregen omdat u een "
+"advertentie in de Stadlander categorie '{1}' heeft geplaatst"
+msgstr ""
+
+#: icare4u_front/templates/404.html:4 icare4u_front/templates/404.html.py:13
+msgid "404 Not Found"
+msgstr "404 niet gevonden"
+
+#: icare4u_front/templates/404.html:16
+msgid "The page you requested was not found."
+msgstr ""
+
+#: icare4u_front/templates/500.html:40 icare4u_front/templates/base.html:67
+#: icare4u_front/templates/base.html:111
+msgid "Welcome"
+msgstr "Welkom"
+
+#: icare4u_front/templates/500.html:44 icare4u_front/templates/base.html:89
+#: icare4u_front/templates/base.html:126
+msgid "logout"
+msgstr "uitloggen"
+
+#: icare4u_front/templates/500.html:46 icare4u_front/templates/base.html:79
+#: icare4u_front/templates/base.html:128
+msgid "login"
+msgstr "inloggen"
+
+#: icare4u_front/templates/500.html:47
+msgid "registreren"
+msgstr "registreren"
+
+#: icare4u_front/templates/500.html:65
+msgid "My Positoos"
+msgstr "Mijn punten"
+
+#: icare4u_front/templates/500.html:68 icare4u_front/templates/base.html:98
+#: icare4u_front/templates/includes/accounts_sidemenu.html:180
+msgid "Community admin"
+msgstr "Community admin"
+
+#: icare4u_front/templates/500.html:91
+msgid "Something went wrong"
+msgstr "Oeps! Er ging iets fout"
+
+#: icare4u_front/templates/500.html:94
+msgid "A server error occurred. We are currently working to solve it."
+msgstr ""
+"Er heeft zich een technische fout voorgedaan. We werken er aan om deze "
+"spoedig te verhelpen."
+
+#: icare4u_front/templates/500.html:116
+msgid "Follow us"
+msgstr "Volg ons"
+
+#: icare4u_front/templates/500.html:148 icare4u_front/templates/base.html:198
+msgid ""
+"We use cookies, just to track visits to our website, we store no personal "
+"details"
+msgstr ""
+"We gebruiken cookies om bezoeken aan onze website te volgen. We slaan geen "
+"persoonlijke gegevens op."
+
+#: icare4u_front/templates/500.html:149 icare4u_front/templates/base.html:199
+msgid "I understand"
+msgstr "Dat is prima"
+
+#: icare4u_front/templates/accounts/account_stats_summary.html:4
+#: icare4u_front/templates/accounts/account_stats_summary.html:14
+msgid "Account Statistics"
+msgstr "Transactie Statistieken"
+
+#: icare4u_front/templates/accounts/accounts_home.html:4
+#: icare4u_front/templates/cmscontent/news_detail.html:4
+#: icare4u_front/templates/cmscontent/news_page.html:4
+msgid "Accounts"
+msgstr "Rekening"
+
+#: icare4u_front/templates/accounts/accounts_home.html:11
+#: icare4u_front/templates/includes/accounts_sidemenu.html:14
+#: icare4u_front/templates/includes/accounts_sidemenu.html:23
+msgid "Transaction history"
+msgstr "Transactie overzicht"
+
+#: icare4u_front/templates/accounts/accounts_home.html:19
+msgid "Total savers"
+msgstr "Aantal Spaarders"
+
+#: icare4u_front/templates/accounts/accounts_home.html:22
+msgid "Total saved so far"
+msgstr "Bijgedragen door Spaarders"
+
+#: icare4u_front/templates/accounts/accounts_home.html:35
+msgid "Saved"
+msgstr "Gespaard"
+
+#: icare4u_front/templates/accounts/accounts_home.html:39
+msgid "Donated"
+msgstr "Gedoneerd"
+
+#: icare4u_front/templates/accounts/accounts_home.html:43
+msgid "Redeemed"
+msgstr "Gespendeerd"
+
+#: icare4u_front/templates/accounts/accounts_home.html:47
+msgid "Balance"
+msgstr "Saldo"
+
+#: icare4u_front/templates/accounts/accounts_home.html:58
+msgid "X Rapport"
+msgstr "X rapport"
+
+#: icare4u_front/templates/accounts/accounts_home.html:59
+msgid "Z Rapport"
+msgstr "Z rapport"
+
+#: icare4u_front/templates/accounts/accounts_home.html:64
+msgid "transactions made"
+msgstr "transacties"
+
+#: icare4u_front/templates/accounts/accounts_home.html:77
+#: icare4u_front/templates/accounts/accounts_home.html:100
+#: icare4u_front/templates/communityadmin/membertransactions.html:30
+#: icare4u_front/templates/communityadmin/transactions.html:19
+msgid "date"
+msgstr "datum"
+
+#: icare4u_front/templates/accounts/accounts_home.html:78
+#: icare4u_front/templates/accounts/accounts_home.html:96
+#: icare4u_front/templates/communityadmin/membertransactions.html:31
+msgid "from/to"
+msgstr "van/naar"
+
+#: icare4u_front/templates/accounts/accounts_home.html:79
+#: icare4u_front/templates/communityadmin/membertransactions.html:32
+#: icare4u_front/templates/communityadmin/transactions.html:22
+msgid "description"
+msgstr "beschrijving"
+
+#: icare4u_front/templates/accounts/accounts_home.html:80
+msgctxt "currency"
+msgid "points"
+msgstr "punten"
+
+#: icare4u_front/templates/accounts/accounts_home.html:131
+#: icare4u_front/templates/communityadmin/membertransactions.html:54
+#: icare4u_front/templates/communityadmin/transactions.html:42
+msgid "No matching transactions were found"
+msgstr "Geen overeenkomstige transacties gevonden"
+
+#: icare4u_front/templates/accounts/disable_ad.html:4
+#: icare4u_front/templates/accounts/disable_ad.html:13
+#: icare4u_front/templates/accounts/disable_ad.html:38
+msgid "Enable / Disable Ad"
+msgstr "Inschakelen / uitschakelen advertentie"
+
+#: icare4u_front/templates/accounts/disable_ad.html:19
+#: icare4u_front/templates/accounts/place_ad.html:86
+#: icare4u_front/templates/communityadmin/memberoffers_wants.html:36
+#: icare4u_front/templates/communityadmin/offers_wants.html:41
+msgid "Title"
+msgstr "Titel"
+
+#: icare4u_front/templates/accounts/disable_ad.html:24
+#: icare4u_front/templates/accounts/place_ad.html:141
+#: icare4u_front/templates/cards/owner_manage_card_form.html:64
+#: icare4u_front/templates/communityadmin/member_list.html:62
+msgid "status"
+msgstr "Status"
+
+#: icare4u_front/templates/accounts/my_ads.html:4
+#: icare4u_front/templates/accounts/my_ads.html:14
+msgid "My Ads"
+msgstr "Mijn advertenties"
+
+#: icare4u_front/templates/accounts/my_ads.html:42
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+#: icare4u_front/templates/accounts/my_ads.html:44
+msgid "Disabled"
+msgstr "Uitgeschakeld"
+
+#: icare4u_front/templates/accounts/my_ads.html:61
+msgid "You don't have any registered Ads yet."
+msgstr "U heeft nog geen advertenties aangemaakt."
+
+#: icare4u_front/templates/accounts/pay_direct.html:4
+msgid "Pay Direct"
+msgstr "Betaal direct"
+
+#: icare4u_front/templates/accounts/pay_direct.html:14
+msgid "Make A Payment"
+msgstr "Voer een betaling uit"
+
+#: icare4u_front/templates/accounts/pay_direct.html:42
+msgid "Total value"
+msgstr "Totale waarde"
+
+#: icare4u_front/templates/accounts/pay_direct.html:46
+msgid "total punten"
+msgstr "totaal punten"
+
+#: icare4u_front/templates/accounts/pay_direct.html:52
+#: icare4u_front/templates/stadlander/pay_direct.html:26
+msgid "Contact name"
+msgstr "Contact naam"
+
+#: icare4u_front/templates/accounts/pay_direct.html:57
+#: icare4u_front/templates/stadlander/pay_direct.html:31
+msgid "Please select a valid business to pay"
+msgstr "U moet een geldige ontvanger selecteren voor deze betaling"
+
+#: icare4u_front/templates/accounts/pay_direct.html:66
+#: icare4u_front/templates/accounts/pay_direct.html:158
+#: icare4u_front/templates/accounts/place_ad.html:106
+#: icare4u_front/templates/accounts/place_ad.html:218
+msgid "Number of characters left"
+msgstr "Aantal resterende karakters"
+
+#: icare4u_front/templates/accounts/pay_direct.html:75
+msgid "Process Payment"
+msgstr "Betaling verwerken"
+
+#: icare4u_front/templates/accounts/pay_direct.html:83
+#: icare4u_front/templates/accounts/really_close_account.html:48
+#: icare4u_front/templates/cards/owner_manage_card_form.html:120
+#: icare4u_front/templates/cards/owner_manage_card_form.html:141
+#: icare4u_front/templates/stadlander/pay_direct.html:101
+msgid "Close"
+msgstr "Sluiten"
+
+#: icare4u_front/templates/accounts/pay_direct.html:84
+msgid "Complete payment"
+msgstr "Bevestig betaling"
+
+#: icare4u_front/templates/accounts/pay_direct.html:89
+msgid ""
+"\n"
+"                                        <p>Pay <span id=\"pay_receiver\"></"
+"span> an amount of <span class=\"samendoen\"><i class=\"icon-samendoen\"></"
+"i></span><span id=\"pay_amount\"></span> <b>?</b></p>\n"
+"                                    "
+msgstr ""
+"\n"
+"                                        <p>Waardeer <span id=\"pay_receiver"
+"\"></span> met <span class=\"samendoen\"><i class=\"icon-samendoen\"></i></"
+"span><span id=\"pay_amount\"></span> <b>?</b></p>\n"
+"                                    "
+
+#: icare4u_front/templates/accounts/pay_direct.html:96
+#: icare4u_front/templates/accounts/really_close_account.html:59
+#: icare4u_front/templates/cards/owner_manage_card_form.html:131
+#: icare4u_front/templates/cards/owner_manage_card_form.html:152
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:75
+#: icare4u_front/templates/rewards/causes_list.html:130
+#: icare4u_front/templates/stadlander/pay_direct.html:112
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: icare4u_front/templates/accounts/pay_direct.html:97
+#: icare4u_front/templates/accounts/really_close_account.html:60
+#: icare4u_front/templates/rewards/causes_list.html:133
+#: icare4u_front/templates/stadlander/pay_direct.html:113
+msgid "Confirm"
+msgstr "Bevestig"
+
+#: icare4u_front/templates/accounts/pay_direct.html:104
+#: icare4u_front/templates/stadlander/pay_direct.html:120
+msgid "Payments are not enabled for this account."
+msgstr "Betalingen worden niet ingeschakeld voor deze account."
+
+#: icare4u_front/templates/accounts/pay_direct.html:133
+#: icare4u_front/templates/stadlander/pay_direct.html:151
+msgid "This user does not exist"
+msgstr "Deze gebruiker bestaat niet"
+
+#: icare4u_front/templates/accounts/pay_direct.html:153
+msgid "Only 75 characters allowed"
+msgstr "Maximaal 75 karakters toegestaan"
+
+#: icare4u_front/templates/accounts/pay_direct.html:178
+#: icare4u_front/templates/accounts/place_ad.html:235
+msgid "Must be an integer number"
+msgstr "Geen decimalen toegestaan"
+
+#: icare4u_front/templates/accounts/pay_direct.html:184
+#: icare4u_front/templates/stadlander/pay_direct.html:336
+#: icare4u_front/templates/stadlander/pay_direct.html:365
+#: icare4u_front/templates/stadlander/pay_direct.html:395
+msgid "Must be greater than zero"
+msgstr "Moet goter zijn dan 0"
+
+#: icare4u_front/templates/accounts/place_ad.html:4
+#: icare4u_front/templates/accounts/place_ad.html:16
+#: icare4u_front/templates/accounts/place_ad.html:182
+#: icare4u_front/templates/communityadmin/sidemenu.html:68
+msgid "Place Ad"
+msgstr "Plaats advertentie"
+
+#: icare4u_front/templates/accounts/place_ad.html:14
+#: icare4u_front/templates/accounts/place_ad.html:182
+#: icare4u_front/templates/marketplace/edit_ad.html:4
+msgid "Edit Ad"
+msgstr "Bewerken advertentie"
+
+#: icare4u_front/templates/accounts/place_ad.html:33
+msgid "Images"
+msgstr "Afbeeldingen"
+
+#: icare4u_front/templates/accounts/place_ad.html:40
+msgid "Add image..."
+msgstr "Voeg afbeelding toe"
+
+#: icare4u_front/templates/accounts/place_ad.html:45
+msgid "Remove image..."
+msgstr "Afbeelding verwijderen"
+
+#: icare4u_front/templates/accounts/place_ad.html:90
+msgid "Title of the Ad"
+msgstr "Titel van de advertentie"
+
+#: icare4u_front/templates/accounts/place_ad.html:94
+#: icare4u_front/templates/communityadmin/memberoffers_wants.html:38
+#: icare4u_front/templates/communityadmin/offers_wants.html:43
+#: icare4u_front/templates/communityadmin/offers_wants.html:82
+#: icare4u_front/templates/marketplace/marketplace_sidemenu.html:37
+msgid "Type"
+msgstr "Type"
+
+#: icare4u_front/templates/accounts/place_ad.html:114
+#: icare4u_front/templates/accounts/place_ad.html:122
+msgid "Amount of Positoos"
+msgstr "Aantal punten"
+
+#: icare4u_front/templates/accounts/place_ad.html:187
+msgid "Placing an advertisement will make your profile visible to others"
+msgstr ""
+"Door een advertentie te plaatsen wordt uw profiel zichtbaar voor anderen"
+
+#: icare4u_front/templates/accounts/place_ad.html:213
+msgid "Only 900 characters allowed"
+msgstr "Maximaal 900 karakters toegestaan"
+
+#: icare4u_front/templates/accounts/place_ad.html:245
+msgid "Specifying a price is required, although you can also enter 0"
+msgstr ""
+"het opgeven van een aantal points is verplicht, al kunt u ook 0 invoeren"
+
+#: icare4u_front/templates/accounts/products.html:4
+#: icare4u_front/templates/accounts/products_invoice.html:4
+msgid "My Products"
+msgstr "Rekeningen"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:7
+#: icare4u_front/templates/accounts/profile_form_business.html:13
+#: icare4u_front/templates/accounts/profile_form_business.html:15
+#: icare4u_front/templates/accounts/profile_form_charity.html:7
+#: icare4u_front/templates/accounts/profile_form_charity.html:13
+#: icare4u_front/templates/accounts/profile_form_charity.html:15
+#: icare4u_front/templates/accounts/profile_form_individual.html:5
+#: icare4u_front/templates/accounts/profile_form_individual.html:12
+#: icare4u_front/templates/communityadmin/create_member.html:50
+#: icare4u_front/templates/communityadmin/create_member.html:57
+#: icare4u_front/templates/communityadmin/edit_member.html:35
+#: icare4u_front/templates/communityadmin/edit_member.html:42
+msgid "Profile picture"
+msgstr "Profielafbeelding"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:23
+msgid "Institution Name"
+msgstr "Naam Instelling"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:26
+msgid "Institution Description"
+msgstr "Omschrijving instelling"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:29
+msgid "Business Name"
+msgstr "Bedrijfsnaam"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:32
+msgid "Company Description"
+msgstr "Omschrijving organisatie"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:41
+#: icare4u_front/templates/accounts/profile_form_charity.html:33
+#: icare4u_front/templates/accounts/profile_form_individual.html:142
+msgid "Address details"
+msgstr "Adres"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:46
+#: icare4u_front/templates/accounts/profile_form_charity.html:38
+#: icare4u_front/templates/accounts/profile_form_individual.html:148
+#: icare4u_front/templates/accounts/profile_form_individual.html:172
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:76
+msgid "House Number"
+msgstr "Huisnummer"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:49
+#: icare4u_front/templates/accounts/profile_form_charity.html:41
+#: icare4u_front/templates/accounts/profile_form_individual.html:151
+#: icare4u_front/templates/accounts/profile_form_individual.html:177
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:79
+msgid "Toevoeging"
+msgstr "Huisnummer toevoeging"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:58
+#: icare4u_front/templates/accounts/profile_form_charity.html:50
+msgid "Telephone Number"
+msgstr "Telefoonnummer"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:62
+#: icare4u_front/templates/accounts/profile_form_individual.html:31
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:94
+#: icare4u_front/templates/registration/login.html:31
+#: icare4u_front/templates/registration/password_reset_form.html:29
+msgid "Email"
+msgstr "E-mailadres"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:69
+#: icare4u_front/templates/accounts/profile_form_charity.html:64
+msgid "Website"
+msgstr "Website adres"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:78
+#: icare4u_front/templates/accounts/profile_form_charity.html:73
+msgid "Bank Details"
+msgstr "Bankgegevens"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:79
+#: icare4u_front/templates/accounts/profile_form_charity.html:74
+msgid "IBAN"
+msgstr "IBAN nummer"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:82
+#: icare4u_front/templates/accounts/profile_form_charity.html:77
+msgid "BIC"
+msgstr "BIC code"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:88
+#: icare4u_front/templates/accounts/profile_form_charity.html:83
+msgid "SEPA machtiging kenmerk"
+msgstr "SEPA machtigingskenmerk"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:91
+#: icare4u_front/templates/accounts/profile_form_charity.html:86
+msgid "SEPA machtiging datum"
+msgstr "SEPA machtigingsdatum"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:94
+#: icare4u_front/templates/accounts/profile_form_charity.html:53
+msgid "KVK Number"
+msgstr "KVK Nummer"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:102
+#: icare4u_front/templates/accounts/profile_form_charity.html:91
+#: icare4u_front/templates/communityadmin/edit_member.html:137
+msgid "Contact person"
+msgstr "Contactpersoon"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:115
+#: icare4u_front/templates/accounts/profile_form_charity.html:104
+#: icare4u_front/templates/accounts/profile_form_individual.html:44
+#: icare4u_front/templates/communityadmin/create_member.html:85
+#: icare4u_front/templates/communityadmin/edit_member.html:158
+msgid "first name"
+msgstr "Voornaam"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:116
+#: icare4u_front/templates/accounts/profile_form_charity.html:105
+#: icare4u_front/templates/accounts/profile_form_individual.html:50
+#: icare4u_front/templates/communityadmin/create_member.html:86
+#: icare4u_front/templates/communityadmin/edit_member.html:159
+msgid "tussenvoegsel"
+msgstr "Tussenvoegsel"
+
+#: icare4u_front/templates/accounts/profile_form_business.html:117
+#: icare4u_front/templates/accounts/profile_form_charity.html:106
+#: icare4u_front/templates/accounts/profile_form_individual.html:56
+#: icare4u_front/templates/communityadmin/create_member.html:87
+#: icare4u_front/templates/communityadmin/edit_member.html:160
+msgid "last name"
+msgstr "Achternaam"
+
+#: icare4u_front/templates/accounts/profile_form_charity.html:25
+msgctxt "charity"
+msgid "Description"
+msgstr "Beschrijving"
+
+#: icare4u_front/templates/accounts/profile_form_charity.html:57
+msgid "Company e-mail"
+msgstr "E-mailadres"
+
+#: icare4u_front/templates/accounts/profile_form_charity.html:94
+msgid "Name contact person"
+msgstr "Naam contactpersoon"
+
+#: icare4u_front/templates/accounts/profile_form_include.html:8
+#: icare4u_front/templates/communityadmin/create_member.html:42
+#: icare4u_front/templates/communityadmin/edit_member.html:27
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:21
+#: icare4u_front/templates/registration/registration_form.html:25
+msgid "Please, correct the errors below."
+msgstr "Niet alle verplichte velden zijn (juist) ingevuld"
+
+#: icare4u_front/templates/accounts/profile_form_include.html:13
+#: icare4u_front/templates/fragments/forms/_geo.html:7
+msgid ""
+"We could not locate your address automatically. Please click on the map to "
+"denote your location"
+msgstr ""
+"Uw adres wordt niet herkend. Klik op de kaart om een speld te plaatsen die "
+"uw adres aanduidt"
+
+#: icare4u_front/templates/accounts/profile_form_include.html:50
+#: icare4u_front/templates/registration/registration_form.html:153
+msgid "Fields marked with a * are required."
+msgstr "Met een * gemarkeerde velden zijn verplicht"
+
+#: icare4u_front/templates/accounts/profile_form_include.html:54
+msgid "Save profile changes"
+msgstr "Wijzigingen opslaan"
+
+#: icare4u_front/templates/accounts/profile_form_include.html:60
+msgid ""
+"Profile type to be implemented, only individual and business profiles can be "
+"edited at present"
+msgstr ""
+"Profiel type om te implementeren, alleen spaarders en winkeliersprofielen "
+"kunnen momenteel bewerkt worden"
+
+#: icare4u_front/templates/accounts/profile_form_individual.html:127
+#: icare4u_front/templates/communityadmin/create_member.html:110
+#: icare4u_front/templates/communityadmin/create_member.html:269
+#: icare4u_front/templates/communityadmin/edit_member.html:182
+#: icare4u_front/templates/communityadmin/edit_member.html:257
+msgid "dd-mm-YYYY"
+msgstr "dd-mm-jjjj"
+
+#: icare4u_front/templates/accounts/really_close_account.html:4
+#: icare4u_front/templates/accounts/really_close_account_done.html:4
+msgid "Close Account"
+msgstr "Sluit mijn account"
+
+#: icare4u_front/templates/accounts/really_close_account.html:13
+#: icare4u_front/templates/accounts/really_close_account.html:40
+#: icare4u_front/templates/includes/accounts_sidemenu.html:334
+msgid "Close My Account"
+msgstr "Sluit mijn account"
+
+#: icare4u_front/templates/accounts/really_close_account.html:24
+msgid ""
+"If you no longer wish to use your account, you can close it by clicking the "
+"button below. Please note that once your account is closed:"
+msgstr ""
+"Klik op onderstaande knop om uw account te sluiten. Met het sluiten van uw "
+"account:"
+
+#: icare4u_front/templates/accounts/really_close_account.html:27
+msgid ""
+"\n"
+"                <li>You will not be able to log in or make any more "
+"transactions;</li>\n"
+"                <li>Any positive balance you have remaining will be reset to "
+"zero;</li>\n"
+"                <li>You can no longer earn or redeem Positoos;</li>\n"
+"                <li>Any cards associated with this account will "
+"automatically be cancelled;</li>\n"
+"                <li>Any adverts will be removed.</li>\n"
+"                "
+msgstr ""
+"\n"
+"                <li>Kunt u niet meer inloggen;</li>\n"
+"                <li>Vervalt uw saldo;</li>\n"
+"                <li>Kunt u niet meer sparen of verzilveren;</li>\n"
+"                <li>Worden uw passen geblokkeerd en uw pasaanvragen "
+"geannuleerd;</li>\n"
+"                <li>Worden uw advertenties verwijderd.</li>\n"
+"                "
+
+#: icare4u_front/templates/accounts/really_close_account.html:49
+msgid "Close my account"
+msgstr "Sluit mijn account"
+
+#: icare4u_front/templates/accounts/really_close_account.html:54
+msgid ""
+"Are you sure you want to close your account? This action can not be undone."
+msgstr ""
+"Weet u zeker dat u uw account wilt sluiten? Deze handeling kan niet ongedaan "
+"worden gemaakt"
+
+#: icare4u_front/templates/accounts/really_close_account_done.html:13
+msgid "Account Closed"
+msgstr "Uw account is gesloten"
+
+#: icare4u_front/templates/accounts/really_close_account_done.html:18
+msgid "Thank you. We have now closed your account and logged you out."
+msgstr "We hebben uw account gesloten en u uitgelogd."
+
+#: icare4u_front/templates/accounts/really_close_account_done.html:20
+msgid "Thank you for using"
+msgstr "Bedankt voor het gebruiken van"
+
+#: icare4u_front/templates/accounts/really_close_account_done.html:20
+msgid "We hope to see you again in the future."
+msgstr "We hopen u in de toekomst terug te zien."
+
+#: icare4u_front/templates/accounts/update_my_profile.html:4
+msgid "Edit My Details"
+msgstr "Bewerk mijn profiel"
+
+#: icare4u_front/templates/accounts/update_my_profile.html:17
+msgid "Business Profile"
+msgstr "Winkeliersprofiel"
+
+#: icare4u_front/templates/accounts/update_my_profile.html:17
+msgid "My Profile"
+msgstr "Mijn Profiel"
+
+#: icare4u_front/templates/accounts/update_my_profile.html:22
+msgid "Super users cannot have profiles"
+msgstr "Administrators kunnen geen profiel hebben"
+
+#: icare4u_front/templates/accounts/update_my_profile.html:29
+msgid ""
+"Cannot find a profile for the logged in user, please contact the site "
+"administrators"
+msgstr ""
+"Kan geen profiel vinden voor de gelogde gebruiker, neem a.u.b. contact op "
+"met de site administratie"
+
+#: icare4u_front/templates/accounts/update_my_profile.html:40
+msgid "Change your user profile password"
+msgstr "Verander het wachtwoord van uw profiel"
+
+#: icare4u_front/templates/accounts/update_my_profile.html:41
+#: icare4u_front/templates/admin/inc/branding.html:22
+msgid "Change password"
+msgstr "Wijzig wachtwoord"
+
+#: icare4u_front/templates/admin/cards/card/change_form.html:6
+#: icare4u_front/templates/community_admin/cards/card/change_form.html:6
+msgid "Related User Profile"
+msgstr "Geassocieerd profiel"
+
+#: icare4u_front/templates/admin/edit_inline/tabular.html:17
+msgid "Delete?"
+msgstr ""
+
+#: icare4u_front/templates/admin/edit_inline/tabular.html:30
+msgid "Change"
+msgstr "Veranderen"
+
+#: icare4u_front/templates/admin/edit_inline/tabular.html:32
+#: icare4u_front/templates/community_admin/add_card.html:35
+#: icare4u_front/templates/community_admin/add_fulfillment.html:35
+#: icare4u_front/templates/community_admin/cards/fulfillment/change_form.html:34
+msgid "View on site"
+msgstr "Bekijk op de site"
+
+#: icare4u_front/templates/admin/edit_inline/tabular.html:79
+#, python-format
+msgid "Add another %(verbose_name)s"
+msgstr ""
+
+#: icare4u_front/templates/admin/edit_inline/tabular.html:80
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: icare4u_front/templates/admin/inc/branding.html:6
+msgid "Qoinware Administration"
+msgstr "QoinWare team"
+
+#: icare4u_front/templates/admin/inc/branding.html:9
+msgid "Django Administration"
+msgstr "QoinWare team"
+
+#: icare4u_front/templates/admin/inc/branding.html:15
+msgid "Documentation"
+msgstr ""
+
+#: icare4u_front/templates/admin/inc/branding.html:28
+msgid "Log out"
+msgstr "Uitloggen"
+
+#: icare4u_front/templates/admin/inc/branding.html:36
+msgid "Open"
+msgstr ""
+
+#: icare4u_front/templates/admin/inc/branding.html:36
+msgid "my site"
+msgstr "website"
+
+#: icare4u_front/templates/admin/inc/title.html:2
+msgid "QoinWare"
+msgstr "QoinWare"
+
+#: icare4u_front/templates/auth/login.html:4
+#: icare4u_front/templates/registration/login.html:4
+#: icare4u_front/templates/stadlander/confirm_link.html:4
+#: icare4u_front/templates/stadlander/confirm_link_done.html:4
+#: icare4u_front/templates/stadlander/confirm_link_refused.html:4
+#: icare4u_front/templates/stadlander/login.html:4
+msgid "Login"
+msgstr "Inloggen"
+
+#: icare4u_front/templates/auth/login.html:9
+#, python-format
+msgid ""
+"\n"
+"Please login on the <a href=\"%(stadlander_url)s\">Stadlander</a> site, and "
+"return by clicking the Positoos link in the menu.\n"
+"    "
+msgstr ""
+"\n"
+"Log a.u.b. in op de <a href=\"%(stadlander_url)s\">Stadlander</a> site, en "
+"keer terug door op de Positoos link te klikken in het menu.\n"
+"    "
+
+#: icare4u_front/templates/auth/login.html:14
+msgid "You have been authenticated"
+msgstr "U bent geverifieerd"
+
+#: icare4u_front/templates/auth/login.html:16
+msgid "You are not authenticated"
+msgstr "U bent niet geverifieerd"
+
+#: icare4u_front/templates/base.html:68 icare4u_front/templates/base.html:112
+msgid "profile"
+msgstr "profiel"
+
+#: icare4u_front/templates/base.html:95
+msgid "My SamenDoen"
+msgstr "Mijn SamenDoen"
+
+#: icare4u_front/templates/base.html:172
+msgid ""
+"\n"
+"                    <small>This project is supported by the European Union "
+"Programme <br/>for Employment and Social Solidarity - PROGRESS (2007-2013)</"
+"small>\n"
+"                "
+msgstr ""
+
+#: icare4u_front/templates/cards/business_terminals.html:4
+#: icare4u_front/templates/cards/business_terminals.html:13
+msgid "NFC Terminals"
+msgstr "NFC Terminals"
+
+#: icare4u_front/templates/cards/business_terminals.html:19
+msgid "IMEI number"
+msgstr "IMEI nummer"
+
+#: icare4u_front/templates/cards/business_terminals.html:20
+#: icare4u_front/templates/cards/business_terminals.html:58
+msgid "Creation date"
+msgstr "Aanmaakdatum"
+
+#: icare4u_front/templates/cards/business_terminals.html:21
+msgid "Last seen"
+msgstr "Voor het laatst gezien"
+
+#: icare4u_front/templates/cards/business_terminals.html:39
+msgid "No terminals registered"
+msgstr "Geen terminals geregistreerd"
+
+#: icare4u_front/templates/cards/business_terminals.html:45
+#, python-format
+msgid ""
+"Consumers receive %(transaction_percentage)s%% of the transaction in points"
+msgstr ""
+"Spaarders ontvangen %(transaction_percentage)s%% van het aankoopbedrag in "
+"punten. <br />Deze instelling geldt voor alle hierboven geregistreerde "
+"terminals"
+
+#: icare4u_front/templates/cards/business_terminals.html:49
+msgid "NFC Terminal Operators"
+msgstr "Terminal Operators"
+
+#: icare4u_front/templates/cards/business_terminals.html:51
+msgid "Terminal operators can use all above NFC terminals"
+msgstr ""
+"Terminal operators kunnen gebruik maken van alle hierboven geregistreerde "
+"NFC terminals"
+
+#: icare4u_front/templates/cards/business_terminals.html:59
+msgid "Last login"
+msgstr "Laatste keer ingelogd"
+
+#: icare4u_front/templates/cards/business_terminals.html:78
+msgid "No operators registered"
+msgstr "Geen operators geregistreerd"
+
+#: icare4u_front/templates/cards/business_terminals.html:84
+msgid "Add new Operator"
+msgstr "Voeg operator toe"
+
+#: icare4u_front/templates/cards/operator_confirm_delete.html:4
+msgid "Delete Operator"
+msgstr "Verwijder operator"
+
+#: icare4u_front/templates/cards/operator_confirm_delete.html:13
+msgid "Delete Terminal Operator"
+msgstr "Verwijder terminal operator"
+
+#: icare4u_front/templates/cards/operator_confirm_delete.html:18
+#, python-format
+msgid ""
+"\n"
+"                    <p>Are you sure you want to delete \"%(object)s\"?</p>\n"
+"                "
+msgstr ""
+"\n"
+"                    <p>Weet u zeker dat u \"%(object)s\" wilt verwijderen?</"
+"p>\n"
+"                "
+
+#: icare4u_front/templates/cards/operator_confirm_delete.html:21
+msgid "Delete operator"
+msgstr "Operator verwijderen"
+
+#: icare4u_front/templates/cards/operator_form.html:4
+msgid "New Operator"
+msgstr "Nieuwe Operator"
+
+#: icare4u_front/templates/cards/operator_form.html:16
+msgid "Create a new Terminal Operator"
+msgstr "Nieuwe terminal operator aanmaken"
+
+#: icare4u_front/templates/cards/operator_form.html:18
+msgid "Terminal Operator"
+msgstr "Terminal Operator"
+
+#: icare4u_front/templates/cards/operator_form.html:55
+msgid "PIN number"
+msgstr "PIN nummer"
+
+#: icare4u_front/templates/cards/operator_form.html:58
+msgid "Save operator"
+msgstr "Operator opslaan"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:4
+#: icare4u_front/templates/profile/manage_card.html:4
+msgid "Manage card"
+msgstr "Spaarpas"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:13
+#: icare4u_front/templates/includes/accounts_sidemenu.html:300
+msgid "Cards"
+msgstr "Spaarpassen"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:26
+msgid "card number"
+msgstr "pasnummer"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:27
+msgid "activation date"
+msgstr "1e activeringsdatum"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:28
+msgid "card status"
+msgstr "pas status"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:29
+msgid "action"
+msgstr "opties"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:50
+msgid "You do not have any cards yet."
+msgstr "U heeft nog geen spaarpas"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:54
+msgid ""
+"Is one of your cards lost, stolen, or damaged? Block it and request a new "
+"one here!"
+msgstr "Is een pas defect of kwijt? Blokkeer de pas en vraag een nieuwe aan!"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:56
+msgid "Card Requests"
+msgstr "Pasaanvragen"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:71
+msgid "ordered"
+msgstr "in behandeling"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:71
+msgid "cancelled"
+msgstr "geannuleerd"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:79
+msgid "You do not have any card requests yet."
+msgstr "U heeft geen pasaanvragen lopen"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:83
+msgid "Request card"
+msgstr "Pas aanvragen"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:90
+#, python-format
+msgid ""
+"You cannot order a card.\n"
+"                        Please check you have completed your address in "
+"your\n"
+"                        <a href=\"%(update_profile_url)s\">profile</a>"
+msgstr ""
+"U kunt geen pas aanvragen.\n"
+"                        Verifieer a.u.b. of u uw adres heeft ingevuld in "
+"uw \n"
+"                        <a href=\"%(update_profile_url)s\">profiel</a>"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:102
+msgid "Registration choice"
+msgstr "Kies wat van toepassing is:"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:121
+#: icare4u_front/templates/cards/owner_manage_card_form.html:142
+msgid "Order card"
+msgstr "Pas aanvragen"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:126
+msgid ""
+"Door op 'Bestellen' te klikken gaat u ermee akkoord dat Samen-Doen eenmalig "
+"€5,95 van uw rekening afschrijft."
+msgstr ""
+"Klik op 'Pas Aanvragen' om een spaarpas te bestellen. Deze wordt naar het "
+"adres verzonden dat in uw profiel is opgeslagen"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:132
+#: icare4u_front/templates/cards/owner_manage_card_form.html:153
+msgid "Order"
+msgstr "Aanvragen"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:147
+#, python-format
+msgid ""
+"You are about to request a new card. The administrators will deal with your "
+"request as soon as possible and send the card to the address in your "
+"profile: %(address)s %(num_street)s %(extra_address)s %(postal_code)s "
+"%(city)s"
+msgstr ""
+"U staat op het punt een nieuwe pas aan te vragen. De administratie zal uw "
+"aanvraag behandelen en zo spoedig mogelijk een pas naar uw bij ons bekende "
+"adres verzenden: %(address)s %(num_street)s %(extra_address)s "
+"%(postal_code)s %(city)s"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:162
+msgid "You have registered your card already"
+msgstr "Uw pas is reeds geregistreerd"
+
+#: icare4u_front/templates/cards/owner_manage_card_form.html:169
+msgid "Only Individuals can register cards"
+msgstr "Alleen spaarders kunnen een pas registreren"
+
+#: icare4u_front/templates/cmscontent/news_detail.html:15
+#: icare4u_front/templates/cmscontent/news_page.html:17
+msgid "By"
+msgstr "Door"
+
+#: icare4u_front/templates/cmscontent/news_detail.html:15
+#: icare4u_front/templates/cmscontent/news_page.html:17
+msgid "at"
+msgstr "op"
+
+#: icare4u_front/templates/cmscontent/news_page.html:7
+msgid "News"
+msgstr "Nieuws"
+
+#: icare4u_front/templates/cmscontent/news_page.html:24
+msgid "No news to be shown."
+msgstr "Geen nieuws weer te geven"
+
+#: icare4u_front/templates/community_admin/add_card.html:18
+#: icare4u_front/templates/community_admin/add_fulfillment.html:18
+#: icare4u_front/templates/community_admin/add_user.html:19
+#: icare4u_front/templates/community_admin/cards/card/change_list.html:40
+#: icare4u_front/templates/community_admin/cards/fulfillment/change_form.html:18
+#: icare4u_front/templates/community_admin/cards/fulfillment/change_list.html:64
+#: icare4u_front/templates/community_admin/change_business_user.html:7
+#: icare4u_front/templates/community_admin/change_individual_user.html:7
+#: icare4u_front/templates/community_admin/change_user.html:20
+#: icare4u_front/templates/community_admin/change_userprofile_user.html:7
+#: icare4u_front/templates/community_admin/rewards/change_form.html:7
+#: icare4u_front/templates/community_admin/rewards/change_list.html:40
+msgid "Home"
+msgstr "Thuis"
+
+#: icare4u_front/templates/community_admin/add_card.html:33
+#: icare4u_front/templates/community_admin/add_fulfillment.html:33
+#: icare4u_front/templates/community_admin/cards/fulfillment/change_form.html:32
+msgid "History"
+msgstr "Geschiedenis"
+
+#: icare4u_front/templates/community_admin/add_card.html:47
+#: icare4u_front/templates/community_admin/add_fulfillment.html:47
+#: icare4u_front/templates/community_admin/add_user.html:37
+#: icare4u_front/templates/community_admin/cards/card/change_list.html:67
+#: icare4u_front/templates/community_admin/cards/fulfillment/change_form.html:46
+#: icare4u_front/templates/community_admin/cards/fulfillment/change_list.html:91
+#: icare4u_front/templates/community_admin/change_user.html:48
+#: icare4u_front/templates/community_admin/rewards/change_list.html:66
+msgid "Please correct the error below."
+msgstr "Corrigeer a.u.b. de volgende fout"
+
+#: icare4u_front/templates/community_admin/add_card.html:47
+#: icare4u_front/templates/community_admin/add_fulfillment.html:47
+#: icare4u_front/templates/community_admin/cards/card/change_list.html:67
+#: icare4u_front/templates/community_admin/cards/fulfillment/change_form.html:46
+#: icare4u_front/templates/community_admin/cards/fulfillment/change_list.html:91
+#: icare4u_front/templates/community_admin/rewards/change_list.html:66
+msgid "Please correct the errors below."
+msgstr "Corrigeer a.u.b. de volgende fout"
+
+#: icare4u_front/templates/community_admin/add_fulfillment.html:21
+#: icare4u_front/templates/community_admin/cards/fulfillment/change_form.html:21
+#: icare4u_front/templates/community_admin/change_business_user.html:190
+#: icare4u_front/templates/community_admin/index.html:24
+#: icare4u_front/templates/community_admin/index.html:38
+#: icare4u_front/templates/community_admin/index.html:42
+#: icare4u_front/templates/community_admin/index.html:57
+#: icare4u_front/templates/community_admin/index.html:61
+#: icare4u_front/templates/community_admin/index.html:65
+msgid "Add"
+msgstr "Toevoegen"
+
+#: icare4u_front/templates/community_admin/add_user.html:45
+#: icare4u_front/templates/community_admin/change_business_user.html:45
+#: icare4u_front/templates/community_admin/change_individual_user.html:135
+#: icare4u_front/templates/community_admin/change_userprofile_user.html:16
+msgid "Key user information"
+msgstr "Basale gebruikersgegevens"
+
+#: icare4u_front/templates/community_admin/add_user.html:118
+#: icare4u_front/templates/community_admin/cards/terminal/change_form.html:12
+#: icare4u_front/templates/community_admin/change_user.html:65
+msgid "Save"
+msgstr "Bewaar"
+
+#: icare4u_front/templates/community_admin/cards/card/change_list.html:78
+#: icare4u_front/templates/community_admin/cards/fulfillment/change_list.html:102
+#: icare4u_front/templates/community_admin/dashboard_change_list.html:17
+#: icare4u_front/templates/community_admin/rewards/change_list.html:77
+#: icare4u_front/templates/communityadmin/offers_wants.html:99
+msgid "Filter"
+msgstr "Filter"
+
+#: icare4u_front/templates/community_admin/cards/fulfillment/change_list.html:82
+#, python-format
+msgid "Add %(name)s"
+msgstr ""
+
+#: icare4u_front/templates/community_admin/cards/terminal/change_form.html:11
+msgid "Unlink Terminal"
+msgstr "Ontkoppel terminal"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:10
+#: icare4u_front/templates/community_admin/change_individual_user.html:10
+#: icare4u_front/templates/community_admin/change_user.html:23
+#: icare4u_front/templates/community_admin/change_userprofile_user.html:10
+msgid "Edit profile"
+msgstr "Bewerk profiel"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:56
+#: icare4u_front/templates/community_admin/change_individual_user.html:146
+msgid "User type"
+msgstr "Type gebruiker"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:125
+msgid "Product Assignments"
+msgstr ""
+
+#: icare4u_front/templates/community_admin/change_business_user.html:127
+msgid "Auto-assigned"
+msgstr ""
+
+#: icare4u_front/templates/community_admin/change_business_user.html:132
+#: icare4u_front/templates/community_admin/change_business_user.html:164
+msgid "Product"
+msgstr "Product"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:133
+#: icare4u_front/templates/community_admin/change_business_user.html:165
+msgid "Quantity"
+msgstr "Aantal"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:134
+#: icare4u_front/templates/community_admin/change_business_user.html:166
+#, python-format
+msgid "Discount (%%)"
+msgstr "Korting (%%)"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:135
+#: icare4u_front/templates/community_admin/change_business_user.html:167
+msgid "Payment type"
+msgstr "Type betaling"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:136
+#: icare4u_front/templates/community_admin/change_business_user.html:168
+#, fuzzy
+#| msgid "total payments made"
+msgid "Next payment date"
+msgstr "Totaal Uitgevoerde Betalingen"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:139
+#: icare4u_front/templates/community_admin/change_business_user.html:171
+#, fuzzy
+#| msgid "to date"
+msgid "Start date"
+msgstr "tot datum"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:140
+#: icare4u_front/templates/community_admin/change_business_user.html:172
+#, fuzzy
+#| msgid "To date"
+msgid "End date"
+msgstr "Tot datum"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:160
+msgid "Manually-assigned"
+msgstr ""
+
+#: icare4u_front/templates/community_admin/change_business_user.html:195
+msgid "Terminals and operators"
+msgstr "Terminals en Operators"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:196
+#: icare4u_front/templates/community_admin/index.html:52
+msgid "Terminals"
+msgstr "Terminals"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:203
+#: icare4u_front/templates/communityadmin/change_group.html:30
+msgid "Comments"
+msgstr "Opmerkingen"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:204
+msgid "Connect terminal"
+msgstr "Terminal koppelen"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:234
+msgid "No terminals assigned to this profile"
+msgstr "Deze gebruiker heeft geen terminal"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:245
+msgid "Add a new operator"
+msgstr "Voeg operator toe"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:269
+msgid "No operator assigned to this profile"
+msgstr "Deze gebruiker heeft geen operator"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:305
+msgid "Invoices and account status"
+msgstr "Punten"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:307
+msgid "Current balance (this month)"
+msgstr "Saldo"
+
+#: icare4u_front/templates/community_admin/change_business_user.html:354
+#: icare4u_front/templates/community_admin/change_individual_user.html:205
+#: icare4u_front/templates/community_admin/change_userprofile_user.html:72
+msgid "Additional user information"
+msgstr "Aanvullende gebruikersgegevens"
+
+#: icare4u_front/templates/community_admin/change_individual_user.html:116
+msgid ""
+"Moving user out of the Stadlander groupset will delete their Stadlander "
+"profile. Are you sure you want to proceed?"
+msgstr ""
+"De gebruiker uit de Stadlander groupset halen, zal het Stadlander profiel "
+"(persoonsnummer) verwijderen. Weet u zeker dat u hiermee door wilt gaan?"
+
+#: icare4u_front/templates/community_admin/change_individual_user.html:352
+#, python-format
+msgid "%(min_donation_percent)s%%, min"
+msgstr ""
+
+#: icare4u_front/templates/community_admin/change_individual_user.html:353
+#, python-format
+msgid "%(max_donation_percent)s%%, max"
+msgstr ""
+
+#: icare4u_front/templates/community_admin/change_individual_user.html:433
+#, fuzzy
+#| msgid "Recent Actions"
+msgid "Resend Activation"
+msgstr "Recentie acties"
+
+#: icare4u_front/templates/community_admin/change_user.html:64
+msgid "Reset password"
+msgstr "Reset wachtwoord"
+
+#: icare4u_front/templates/community_admin/fragments/_card_info.html:6
+msgid "Card and account information"
+msgstr "Spaarpas"
+
+#: icare4u_front/templates/community_admin/fragments/_card_info.html:35
+msgid "This user does not have any related cards."
+msgstr "Deze gebruiker heeft geen pas"
+
+#: icare4u_front/templates/community_admin/fragments/_card_info.html:39
+msgid "Current balance"
+msgstr "Saldo"
+
+#: icare4u_front/templates/community_admin/fragments/billing_index.html:6
+msgid "Manage products and invoices"
+msgstr "Beheer producten en facturen"
+
+#: icare4u_front/templates/community_admin/fragments/billing_index.html:7
+msgid "Products / Invoicing"
+msgstr "Producten / Facturen"
+
+#: icare4u_front/templates/community_admin/fragments/billing_index.html:11
+msgid "Assigned Products"
+msgstr "Toegewezen producten"
+
+#: icare4u_front/templates/community_admin/fragments/billing_index.html:15
+#, fuzzy
+#| msgid "Invoices and account status"
+msgid "Invoice Files and Exports"
+msgstr "Facturen en betaalstatus"
+
+#: icare4u_front/templates/community_admin/index.html:18
+msgid "Manage users"
+msgstr "Gebruikers beheren"
+
+#: icare4u_front/templates/community_admin/index.html:32
+#: icare4u_front/templates/community_admin/index.html:33
+msgid "Card fulfillment"
+msgstr "Spaarpassen"
+
+#: icare4u_front/templates/community_admin/index.html:37
+msgid "User cards"
+msgstr "Passen gekoppeld aan een account"
+
+#: icare4u_front/templates/community_admin/index.html:41
+msgid "Card applications and statuses"
+msgstr "Pasaanvragen"
+
+#: icare4u_front/templates/community_admin/index.html:51
+msgid "Manage terminals"
+msgstr "Terminals beheren"
+
+#: icare4u_front/templates/community_admin/index.html:60
+msgid "All terminals by number (IMEI)"
+msgstr "Terminals"
+
+#: icare4u_front/templates/community_admin/index.html:64
+msgid "Business user reward settings"
+msgstr "Terminal opties"
+
+#: icare4u_front/templates/community_admin/index.html:76
+msgid "Recent Actions"
+msgstr "Recentie acties"
+
+#: icare4u_front/templates/community_admin/index.html:77
+msgid "My Actions"
+msgstr "Mijn acties"
+
+#: icare4u_front/templates/community_admin/index.html:81
+msgid "None available"
+msgstr "Geen beschikbaar"
+
+#: icare4u_front/templates/community_admin/index.html:95
+msgid "Unknown content"
+msgstr "Onbekende inhoud"
+
+#: icare4u_front/templates/communityadmin/change_group.html:4
+#: icare4u_front/templates/communityadmin/change_group.html:13
+msgid "Change group"
+msgstr "Groep wijzigen"
+
+#: icare4u_front/templates/communityadmin/change_group.html:19
+msgid "Groups"
+msgstr "Groepen"
+
+#: icare4u_front/templates/communityadmin/change_group.html:37
+msgid "Change Group"
+msgstr "Wijzig Groep"
+
+#: icare4u_front/templates/communityadmin/change_password.html:4
+#: icare4u_front/templates/communityadmin/change_password.html:13
+msgid "Change member password"
+msgstr "Wijzig wachtwoord"
+
+#: icare4u_front/templates/communityadmin/change_password.html:16
+msgid ""
+"Clicking the button below will generate a new random password for this user "
+"and sends it to them in an email."
+msgstr ""
+"Door op onderstaande knop te klikken wordt een nieuw, willekeurig wachtwoord "
+"per e-mail aan de gebruiker gestuurd"
+
+#: icare4u_front/templates/communityadmin/change_password.html:21
+msgid "Send new password"
+msgstr "Verstuur nieuw wachtwoord"
+
+#: icare4u_front/templates/communityadmin/content_list.html:4
+msgid "Content List"
+msgstr "Inhoud lijst"
+
+#: icare4u_front/templates/communityadmin/content_list.html:11
+#: icare4u_front/templates/communityadmin/sidemenu.html:31
+msgid "Content"
+msgstr "Inhoud"
+
+#: icare4u_front/templates/communityadmin/content_list.html:19
+msgid "page URL"
+msgstr "websiteadres (URL)"
+
+#: icare4u_front/templates/communityadmin/content_list.html:20
+msgid "placeholder"
+msgstr "Placeholder"
+
+#: icare4u_front/templates/communityadmin/content_list.html:21
+msgid "language"
+msgstr "Taal"
+
+#: icare4u_front/templates/communityadmin/content_list.html:22
+msgid "content"
+msgstr "inhoud"
+
+#: icare4u_front/templates/communityadmin/content_list.html:44
+msgid "No content found"
+msgstr "Geen inhoud gevonden"
+
+#: icare4u_front/templates/communityadmin/create_member.html:7
+#: icare4u_front/templates/communityadmin/create_member.html:23
+msgid "Create business member"
+msgstr "Nieuwe winkelier"
+
+#: icare4u_front/templates/communityadmin/create_member.html:9
+#: icare4u_front/templates/communityadmin/create_member.html:25
+msgid "Create good cause member"
+msgstr "Nieuw spaardoel"
+
+#: icare4u_front/templates/communityadmin/create_member.html:11
+#: icare4u_front/templates/communityadmin/create_member.html:27
+msgid "Create individual member"
+msgstr "Nieuwe spaarder"
+
+#: icare4u_front/templates/communityadmin/create_member.html:125
+#: icare4u_front/templates/communityadmin/edit_member.html:199
+msgid "House number"
+msgstr "Huisnummer"
+
+#: icare4u_front/templates/communityadmin/create_member.html:177
+#: icare4u_front/templates/communityadmin/edit_member.html:140
+msgid "E-mail"
+msgstr "E-mailadres"
+
+#: icare4u_front/templates/communityadmin/create_member.html:192
+#: icare4u_front/templates/communityadmin/edit_member.html:66
+msgid "Cause name"
+msgstr "Spaardoelen naam"
+
+#: icare4u_front/templates/communityadmin/create_member.html:234
+#: icare4u_front/templates/communityadmin/edit_member.html:121
+msgid "Mandate"
+msgstr "Mandaat"
+
+#: icare4u_front/templates/communityadmin/create_member.html:252
+#: icare4u_front/templates/communityadmin/edit_member.html:92
+msgid "Web payments enabled"
+msgstr ""
+"Web betalingen ingeschakeld (zonder deze settings kan de gebruiker niet "
+"betalen!)"
+
+#: icare4u_front/templates/communityadmin/create_member.html:286
+#: icare4u_front/templates/communityadmin/edit_member.html:274
+msgid "Help categories"
+msgstr "Advertentiecategorieën"
+
+#: icare4u_front/templates/communityadmin/create_member.html:295
+#: icare4u_front/templates/communityadmin/edit_member.html:283
+msgid "Save new profile"
+msgstr "Wijzigingen opslaan"
+
+#: icare4u_front/templates/communityadmin/create_profile_select.html:4
+#: icare4u_front/templates/communityadmin/create_profile_select.html:13
+msgid "Create member profile"
+msgstr "Maak profiel aan"
+
+#: icare4u_front/templates/communityadmin/create_profile_select.html:15
+msgid "Business profile"
+msgstr "Winkeliersprofiel"
+
+#: icare4u_front/templates/communityadmin/create_profile_select.html:16
+msgid "Individual profile"
+msgstr "Spaardersprofiel"
+
+#: icare4u_front/templates/communityadmin/create_profile_select.html:17
+msgid "Good Cause profile"
+msgstr "Spaardoelprofiel"
+
+#: icare4u_front/templates/communityadmin/create_profile_select.html:18
+msgid "Institution profile"
+msgstr "Instellingprofiel"
+
+#: icare4u_front/templates/communityadmin/edit_member.html:4
+#: icare4u_front/templates/communityadmin/edit_member.html:13
+msgid "Edit Member"
+msgstr "Gebruiker bewerken"
+
+#: icare4u_front/templates/communityadmin/edit_member.html:102
+msgid "Bank details"
+msgstr "Bankgegevens"
+
+#: icare4u_front/templates/communityadmin/edit_member.html:292
+msgid "Account Type"
+msgstr "Rekening Type"
+
+#: icare4u_front/templates/communityadmin/edit_member.html:294
+#: icare4u_front/templates/communityadmin/membertransactions.html:11
+msgid "transactions"
+msgstr "transacties"
+
+#: icare4u_front/templates/communityadmin/edit_member.html:295
+msgid "reset password"
+msgstr "Vernieuw uw wachtwoord"
+
+#: icare4u_front/templates/communityadmin/edit_member.html:296
+msgid "wants &amp; offers"
+msgstr "vraag &amp; aanbod"
+
+#: icare4u_front/templates/communityadmin/edit_member.html:297
+msgid "change group"
+msgstr "Groep wijzigen"
+
+#: icare4u_front/templates/communityadmin/edit_member.html:300
+msgid "Advanced backoffice functions"
+msgstr "Geavanceerde back-office functies"
+
+#: icare4u_front/templates/communityadmin/edit_member.html:302
+msgid "communications log"
+msgstr "Communicatielogbestand"
+
+#: icare4u_front/templates/communityadmin/edit_member.html:304
+msgid "debit/credit limit"
+msgstr "Kredietlimiet"
+
+#: icare4u_front/templates/communityadmin/member_list.html:3
+msgid "Member List"
+msgstr "Gebruikers lijst"
+
+#: icare4u_front/templates/communityadmin/member_list.html:12
+#: icare4u_front/templates/communityadmin/sidemenu.html:11
+msgid "Members"
+msgstr "Gebruikers"
+
+#: icare4u_front/templates/communityadmin/member_list.html:18
+msgid "Add new member"
+msgstr "Nieuwe gebruiker toevoegen"
+
+#: icare4u_front/templates/communityadmin/member_list.html:24
+msgid "Search contact or business name"
+msgstr "Zoek op bedrijfsnaam of contactpersoon"
+
+#: icare4u_front/templates/communityadmin/member_list.html:26
+msgid "Reset"
+msgstr "Reset"
+
+#: icare4u_front/templates/communityadmin/member_list.html:42
+msgid "contact"
+msgstr "contact"
+
+#: icare4u_front/templates/communityadmin/member_list.html:42
+msgid "job title"
+msgstr "functie"
+
+#: icare4u_front/templates/communityadmin/member_list.html:46
+msgid "business name"
+msgstr "bedrijfsnaam"
+
+#: icare4u_front/templates/communityadmin/member_list.html:50
+msgid "website"
+msgstr "website"
+
+#: icare4u_front/templates/communityadmin/member_list.html:54
+msgid "offers"
+msgstr "aangeboden"
+
+#: icare4u_front/templates/communityadmin/member_list.html:58
+msgid "wants"
+msgstr "gevraagd"
+
+#: icare4u_front/templates/communityadmin/member_list.html:65
+msgid "active ads"
+msgstr "Actieve advertenties"
+
+#: icare4u_front/templates/communityadmin/member_list.html:69
+msgid "m2m transactions"
+msgstr "Transacties van spaarder naar spaarder"
+
+#: icare4u_front/templates/communityadmin/member_list.html:72
+msgid "account balance"
+msgstr "rekeningsaldo"
+
+#: icare4u_front/templates/communityadmin/member_list.html:75
+msgid "registration date"
+msgstr "Registratie datum"
+
+#: icare4u_front/templates/communityadmin/member_list.html:90
+#: icare4u_front/templates/communityadmin/member_list.html:102
+msgid "UNCOMPLETED REGISTRATION"
+msgstr "ONVOLTOOIDE REGISTRATIE"
+
+#: icare4u_front/templates/communityadmin/member_list.html:92
+#: icare4u_front/templates/communityadmin/member_list.html:104
+msgid "no email given, could be comm admin"
+msgstr "Geen e-mail gegeven, kan een community admin zijn"
+
+#: icare4u_front/templates/communityadmin/member_list.html:124
+msgid "Full"
+msgstr "Vol"
+
+#: icare4u_front/templates/communityadmin/member_list.html:126
+msgid "New"
+msgstr "Nieuwe"
+
+#: icare4u_front/templates/communityadmin/member_list.html:153
+msgid "No members were found for this community."
+msgstr "Geen gebruikers gevonden in deze community"
+
+#: icare4u_front/templates/communityadmin/memberoffers_wants.html:4
+msgid "Member Wants and offers"
+msgstr "Vraag en aanbod"
+
+#: icare4u_front/templates/communityadmin/memberoffers_wants.html:13
+msgid "wants and offers"
+msgstr "Vraag en aanbod"
+
+#: icare4u_front/templates/communityadmin/memberoffers_wants.html:19
+msgid "Search"
+msgstr "Zoeken"
+
+#: icare4u_front/templates/communityadmin/memberoffers_wants.html:20
+#: icare4u_front/templates/communityadmin/offers_wants.html:23
+msgid "reset"
+msgstr "Reset"
+
+#: icare4u_front/templates/communityadmin/memberoffers_wants.html:34
+#: icare4u_front/templates/communityadmin/offers_wants.html:39
+msgid "Image"
+msgstr "Afbeelding"
+
+#: icare4u_front/templates/communityadmin/memberoffers_wants.html:35
+#: icare4u_front/templates/communityadmin/offers_wants.html:40
+msgid "Contact"
+msgstr "Contact"
+
+#: icare4u_front/templates/communityadmin/memberoffers_wants.html:37
+#: icare4u_front/templates/communityadmin/offers_wants.html:42
+msgid "Price"
+msgstr "Prijs"
+
+#: icare4u_front/templates/communityadmin/memberoffers_wants.html:39
+#: icare4u_front/templates/communityadmin/offers_wants.html:44
+msgid "Views"
+msgstr "Bekeken"
+
+#: icare4u_front/templates/communityadmin/memberoffers_wants.html:54
+msgid "No ads were found for"
+msgstr "Geen advertenties gevonden voor"
+
+#: icare4u_front/templates/communityadmin/membertransactions.html:4
+msgid "Member Transactions"
+msgstr "Gebruikerstransacties"
+
+#: icare4u_front/templates/communityadmin/membertransactions.html:15
+msgid "total payments made"
+msgstr "Totaal Uitgevoerde Betalingen"
+
+#: icare4u_front/templates/communityadmin/membertransactions.html:18
+msgid "total payments received"
+msgstr "Totaal Ontvangen Betalingen"
+
+#: icare4u_front/templates/communityadmin/offers_wants.html:4
+#: icare4u_front/templates/communityadmin/sidemenu.html:55
+msgid "Wants and offers"
+msgstr "Vraag en aanbod"
+
+#: icare4u_front/templates/communityadmin/offers_wants.html:13
+msgid "Community Wants and Offers"
+msgstr "Vraag en aanbod"
+
+#: icare4u_front/templates/communityadmin/offers_wants.html:21
+#: icare4u_front/templates/includes/accounts_sidemenu.html:93
+msgid "search"
+msgstr "zoeken"
+
+#: icare4u_front/templates/communityadmin/offers_wants.html:22
+msgid "submit"
+msgstr "Verzend"
+
+#: icare4u_front/templates/communityadmin/offers_wants.html:59
+msgid "No ads were found"
+msgstr "Geen advertenties gevonden"
+
+#: icare4u_front/templates/communityadmin/place_ad.html:59
+msgid "Community member"
+msgstr "Gebruikers"
+
+#: icare4u_front/templates/communityadmin/sidemenu.html:21
+#: icare4u_front/templates/communityadmin/transactions.html:4
+#: icare4u_front/templates/communityadmin/transactions.html:11
+msgid "Transactions"
+msgstr "Transacties"
+
+#: icare4u_front/templates/communityadmin/sidemenu.html:41
+msgid "Fulfillment"
+msgstr "Pasaanvraag"
+
+#: icare4u_front/templates/communityadmin/sidemenu.html:81
+msgid "Community admin has no Groupset"
+msgstr "Community admin heeft geen 'groupset'"
+
+#: icare4u_front/templates/communityadmin/transactions.html:20
+msgid "from"
+msgstr "van"
+
+#: icare4u_front/templates/communityadmin/transactions.html:21
+msgid "to"
+msgstr "naar"
+
+#: icare4u_front/templates/communityadmin/transactions.html:49
+msgid "Export"
+msgstr "Exporteer"
+
+#: icare4u_front/templates/fragments/forms/_geo.html:4
+msgid "Set your location by clicking on the map"
+msgstr ""
+"Klik op de kaart als de speld ontbreekt of niet correct de lokatie van uw "
+"adres aangeeft"
+
+#: icare4u_front/templates/html/formdefinition/forms/includes/submit.html:2
+#: icare4u_front/templates/registration/password_change_form.html:64
+#: icare4u_front/templates/registration/password_reset_confirm.html:43
+#: icare4u_front/templates/registration/password_reset_form.html:36
+msgid "Submit"
+msgstr "Verzend"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:47
+msgid "from date"
+msgstr "vanaf datum"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:57
+msgid "to date"
+msgstr "tot datum"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:66
+msgid "paid and received"
+msgstr "betaald en ontvangen"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:76
+msgid "received"
+msgstr "ontvangen"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:86
+msgid "paid"
+msgstr "betaald"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:110
+msgid "Profile"
+msgstr "Profiel"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:124
+#: icare4u_front/templates/includes/accounts_sidemenu.html:155
+msgid "My products"
+msgstr "Rekeningen"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:131
+msgid "Current products"
+msgstr "Huidige producten"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:138
+msgid "Previous invoices"
+msgstr "Oudere rekeningen"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:141
+msgid "Please choose an invoice"
+msgstr "Kies een rekening"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:168
+msgid "Account statistics"
+msgstr "Transactie Statistieken"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:196
+msgid "Upload bulk rewards"
+msgstr "Bulk Waardering"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:207
+msgid "Pay direct"
+msgstr "Waarderen"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:231
+msgid "Business Terminals"
+msgstr "Terminals"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:245
+msgid "Place ad"
+msgstr "Plaats advertentie"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:255
+msgid "Manage ads"
+msgstr "Beheer advertenties"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:267
+msgid "My activities"
+msgstr "Mijn activiteiten"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:280
+msgid "Activities summary"
+msgstr "Overzicht activiteiten"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:288
+msgid "New activity"
+msgstr "Nieuwe activiteit"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:313
+msgid "Good causes"
+msgstr "Spaardoelen"
+
+#: icare4u_front/templates/includes/accounts_sidemenu.html:321
+msgid "search good causes"
+msgstr "Zoek spaardoelen"
+
+#: icare4u_front/templates/includes/filefield_dropzone.html:40
+msgid "Images uploaded successfully"
+msgstr "Afbeeldingen uploaden gelukt"
+
+#: icare4u_front/templates/includes/filefield_dropzone.html:48
+msgid "Drop files here to upload"
+msgstr "Sleep bestanden hier naartoe om te uploaden"
+
+#: icare4u_front/templates/includes/filefield_dropzone.html:49
+msgid "Your browser does not support drag'n'drop file uploads."
+msgstr "Uw browser ondersteunt geen ‘drag and drop’ uploaden van bestanden"
+
+#: icare4u_front/templates/includes/filefield_dropzone.html:50
+msgid ""
+"Please use the fallback form below to upload your files like in the olden "
+"days."
+msgstr "Gebruik het terugvalformulier om uw bestand te uploaden"
+
+#: icare4u_front/templates/includes/filefield_dropzone.html:51
+msgid "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB."
+msgstr ""
+"Het bestand is te groot: ({{filesize}}MiB). Maximale bestandsgrootte is: "
+"{{maxFilesize}}MiB."
+
+#: icare4u_front/templates/includes/filefield_dropzone.html:52
+msgid "You can't upload files of this type."
+msgstr "Dit type bestand kunt u niet uploaden"
+
+#: icare4u_front/templates/includes/filefield_dropzone.html:53
+msgid "Server responded with {{statusCode}} code."
+msgstr "De server reageerde met code {{statusCode}} "
+
+#: icare4u_front/templates/includes/filefield_dropzone.html:54
+msgid "Cancel upload"
+msgstr "Uploaden annuleren"
+
+#: icare4u_front/templates/includes/filefield_dropzone.html:55
+msgid "Are you sure you want to cancel this upload?"
+msgstr "Weet u zeker dat u het uploaden wilt annuleren?"
+
+#: icare4u_front/templates/includes/filefield_dropzone.html:56
+#: icare4u_front/templates/includes/place_ad_dropzone.html:46
+msgid "Remove file"
+msgstr "Bestand verwijderen"
+
+#: icare4u_front/templates/includes/filefield_dropzone.html:58
+msgid "You can not upload any more files."
+msgstr "U kunt niet meer bestanden uploaden"
+
+#: icare4u_front/templates/includes/paginator.html:7
+msgid "first"
+msgstr "eerste"
+
+#: icare4u_front/templates/includes/paginator.html:9
+msgid "previous"
+msgstr "vorige"
+
+#: icare4u_front/templates/includes/paginator.html:27
+msgid "next"
+msgstr "volgende"
+
+#: icare4u_front/templates/includes/paginator.html:29
+msgid "last"
+msgstr "laatste"
+
+#: icare4u_front/templates/invoices/invoice_list.html:11
+msgid "Your Invoices"
+msgstr "Uw Facturen"
+
+#: icare4u_front/templates/invoices/invoice_list.html:19
+msgid "Sum settlement"
+msgstr "Bedrag afrekening"
+
+#: icare4u_front/templates/invoices/invoice_list.html:20
+msgid "Paid?"
+msgstr "Betaald?"
+
+#: icare4u_front/templates/invoices/invoice_list.html:36
+#: icare4u_front/templates/stadlander/confirm_link.html:19
+msgid "Yes"
+msgstr "Ja"
+
+#: icare4u_front/templates/invoices/invoice_list.html:38
+#: icare4u_front/templates/stadlander/confirm_link.html:20
+msgid "No"
+msgstr "Nee"
+
+#: icare4u_front/templates/invoices/invoice_list.html:50
+msgid "No invoices found for this profile."
+msgstr "U heeft nog geen facturen ontvangen"
+
+#: icare4u_front/templates/marketplace/ad_list.html:80
+msgid "Telephone"
+msgstr "Telefoonnummer"
+
+#: icare4u_front/templates/marketplace/ad_list.html:86
+msgid "View"
+msgstr "Bekijken"
+
+#: icare4u_front/templates/marketplace/business_profile.html:13
+msgid "go to all profiles"
+msgstr "terug naar alle profielen"
+
+#: icare4u_front/templates/marketplace/business_profile.html:47
+#, python-format
+msgid ""
+"On every euro spent at %(business_name)s, you'll receive "
+"%(transaction_percentage)s points"
+msgstr ""
+"Bij %(business_name)s spaar je %(transaction_percentage)s punten over de "
+"besteding van elke euro"
+
+#: icare4u_front/templates/marketplace/business_profile.html:71
+msgid "Ads published"
+msgstr "Gepubliceerde advertenties"
+
+#: icare4u_front/templates/marketplace/businesses_page.html:35
+#: icare4u_front/templates/marketplace/top_page_buttons.html:20
+msgid "ads"
+msgstr "advertenties"
+
+#: icare4u_front/templates/marketplace/detail.html:18
+msgid "go to my ads"
+msgstr "terug naar mijn advertenties"
+
+#: icare4u_front/templates/marketplace/detail.html:20
+msgid "go to all ads"
+msgstr "terug naar alle advertenties"
+
+#: icare4u_front/templates/marketplace/detail.html:70
+msgid "enquire"
+msgstr "reageren"
+
+#: icare4u_front/templates/marketplace/detail.html:72
+msgid ""
+"You can't sign up for an advert posted by a spaarder from a different "
+"community"
+msgstr ""
+"U kunt niet reageren op een advertentie van een spaarder buiten uw gemeente"
+
+#: icare4u_front/templates/marketplace/detail.html:75
+msgid "You need to login to enquire for this activity"
+msgstr "Log in om te reageren"
+
+#: icare4u_front/templates/marketplace/enquire.html:4
+#: icare4u_front/templates/marketplace/enquire.html:13
+msgid "Enquire"
+msgstr "Reageren"
+
+#: icare4u_front/templates/marketplace/enquire.html:18
+msgid "go back to Ad"
+msgstr "terug naar de advertentie"
+
+#: icare4u_front/templates/marketplace/enquire.html:55
+msgid "Enquiry"
+msgstr "Reactie"
+
+#: icare4u_front/templates/marketplace/enquire.html:66
+msgid "Invalid Form Data"
+msgstr "Ongeldige Gegevens"
+
+#: icare4u_front/templates/marketplace/enquire.html:69
+msgid "You must provide a message."
+msgstr "U moet een bericht invoeren."
+
+#: icare4u_front/templates/marketplace/enquire.html:72
+msgid "Ok"
+msgstr ""
+
+#: icare4u_front/templates/marketplace/enquire.html:78
+msgid "This field is required."
+msgstr "Dit veld is verplicht."
+
+#: icare4u_front/templates/marketplace/enquire.html:81
+msgid ""
+"The advertiser can following your response to contact you via your e-mail "
+"address"
+msgstr ""
+"De adverteerder kan naar aanleiding van uw reactie contact met u opnemen via "
+"uw e-mailadres"
+
+#: icare4u_front/templates/marketplace/enquire.html:83
+msgid "Send enquiry"
+msgstr "Reageren"
+
+#: icare4u_front/templates/marketplace/enquire_advertiser_email.txt:3
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Dear %(name)s,\n"
+"\n"
+"You have an enquiry from %(user)s about %(title)s.\n"
+"\n"
+"Please contact them at %(email)s\n"
+"\n"
+"Their additional comments: %(body)s\n"
+"\n"
+"Regards,\n"
+"\n"
+"%(cc3_system_name)s\n"
+msgstr ""
+"\n"
+"\n"
+"Beste %(name)s,\n"
+"\n"
+"U heeft een reactie van %(user)s op %(title)s.\n"
+"\n"
+"Neem contact op via %(email)s\n"
+"\n"
+"Bericht: %(body)s\n"
+"\n"
+"Met vriendelijke groeten,\n"
+"\n"
+"%(cc3_system_name)s\n"
+
+#: icare4u_front/templates/marketplace/enquire_advertiser_email_subject.txt:1
+#: icare4u_front/templates/marketplace/enquire_enquirer_email_subject.txt:1
+#, python-format
+msgid "Enquiry about %(title)s sent through %(site)s"
+msgstr "Reactie op ‘%(title)s’ verzonden via %(site)s"
+
+#: icare4u_front/templates/marketplace/enquire_enquirer_email.txt:3
+#, python-format
+msgid ""
+"\n"
+"Dear %(name)s,\n"
+"\n"
+"Thank you for your enquiry to %(title)s.\n"
+"\n"
+"Your comments: %(body)s\n"
+"\n"
+"Regards,\n"
+"\n"
+"%(cc3_system_name)s\n"
+msgstr ""
+"\n"
+"Beste %(name)s,\n"
+"\n"
+"Bedankt voor het versturen van uw reactie op %(title)s.\n"
+"\n"
+"Uw reactie: %(body)s\n"
+"\n"
+"Met vriendelijke groeten,\n"
+"\n"
+"%(cc3_system_name)s\n"
+
+#: icare4u_front/templates/marketplace/enquire_sent.html:5
+msgid "Thank You For Your Enquiry"
+msgstr "Bedankt voor uw reactie"
+
+#: icare4u_front/templates/marketplace/enquire_sent.html:8
+msgid "Thank You"
+msgstr "Bedankt"
+
+#: icare4u_front/templates/marketplace/enquire_sent.html:10
+msgid "Thank you for your enquiry. An email has been sent to the advertiser"
+msgstr ""
+"Bedankt voor uw reactie. Er is een e-mail verstuurd naar de adverteerder"
+
+#: icare4u_front/templates/marketplace/marketplace_sidemenu.html:7
+msgid "Filter options"
+msgstr "Filter opties"
+
+#: icare4u_front/templates/marketplace/marketplace_sidemenu.html:32
+#: icare4u_front/templates/marketplace/marketplace_sidemenu.html:47
+msgid "categories"
+msgstr "categorieën"
+
+#: icare4u_front/templates/marketplace/top_page_buttons.html:18
+msgid "map"
+msgstr "kaart"
+
+#: icare4u_front/templates/marketplace/top_page_buttons.html:19
+msgid "profiles"
+msgstr "profielen"
+
+#: icare4u_front/templates/marketplace/top_page_buttons.html:21
+msgid "activities"
+msgstr "activiteiten"
+
+#: icare4u_front/templates/profile/manage_card.html:13
+msgid "Manage Card"
+msgstr "Spaarpas"
+
+#: icare4u_front/templates/profile/stadlander_terms_and_conditions_form.html:4
+#: icare4u_front/templates/profile/stadlander_terms_and_conditions_form.html:9
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:4
+msgid "Terms and Conditions"
+msgstr "Algemene voorwaarden"
+
+#: icare4u_front/templates/profile/stadlander_terms_and_conditions_form.html:14
+msgid "The Samen Doen Terms and Conditions can be downloaded"
+msgstr "Voor de Algemene Voorwaarden van Samen Doen klik"
+
+#: icare4u_front/templates/profile/stadlander_terms_and_conditions_form.html:14
+msgid "here"
+msgstr "hier"
+
+#: icare4u_front/templates/profile/stadlander_terms_and_conditions_form.html:20
+msgid "I agree to the Terms and Conditions"
+msgstr "Ik ga akkoord met de algemene voorwaarden"
+
+#: icare4u_front/templates/profile/stadlander_terms_and_conditions_form.html:36
+msgid "Agree to Terms and Conditions"
+msgstr "Akkoord met Algemene voorwaarden"
+
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:113
+#: icare4u_front/templates/registration/registration_form.html:120
+msgid "Confirm password"
+msgstr "Bevestig wachtwoord"
+
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:129
+msgid "I agree to the "
+msgstr "Ik ga akkoord met de "
+
+#: icare4u_front/templates/profile/user_profile_terms_and_conditions_form.html:129
+#: icare4u_front/templates/registration/registration_form.html:130
+msgid "terms and conditions"
+msgstr "algemene voorwaarden"
+
+#: icare4u_front/templates/registration/activation_complete.html:4
+msgid "Account activation complete"
+msgstr "Account geactiveerd"
+
+#: icare4u_front/templates/registration/activation_complete.html:7
+msgid "Account successfully activated!"
+msgstr "Account geactiveerd en spaarpas aangevraagd!"
+
+#: icare4u_front/templates/registration/activation_complete.html:12
+msgid ""
+"\n"
+"                    <p>Your Samen Doen account has been successfully "
+"activated!</p>\n"
+"                    <p>You can now log in to enjoy together with your "
+"username and password.</p>\n"
+"                    <p>Have much fun with Samen Doen!</p>\n"
+"                "
+msgstr ""
+"\n"
+"                    <p>Uw account is succesvol geactiveerd en de pas "
+"aangevraagd!</p>\n"
+"                    <p>U kunt nu inloggen met uw gebruikersnaam en "
+"wachtwoord.</p>\n"
+"                    <p>De pas wordt binnen drie werkdagen verstuurd naar uw "
+"adres. U kunt de pas direct gebruiken.</p>\n"
+"                "
+
+#: icare4u_front/templates/registration/activation_complete.html:19
+#: icare4u_front/templates/registration/login.html:50
+#: icare4u_front/templates/registration/password_reset_complete.html:15
+msgid "Log in"
+msgstr "Inloggen"
+
+#: icare4u_front/templates/registration/activation_email.html:6
+#: icare4u_front/templates/registration/activation_email.html:11
+#: icare4u_front/templates/registration/activation_email.txt:2
+#: icare4u_front/templates/registration/activation_email_subject.txt:1
+msgid "Thank you for registering at Samen Doen"
+msgstr "Bedankt voor uw aanmelding op Samen Doen"
+
+#: icare4u_front/templates/registration/activation_email.html:14
+#: icare4u_front/templates/registration/activation_email.txt:4
+msgid "Activate your account by clicking on the link below:"
+msgstr ""
+"Klik op onderstaande link omt je account te activeren en de spaarpas aan te "
+"vragen:"
+
+#: icare4u_front/templates/registration/activation_email.html:22
+#: icare4u_front/templates/registration/activation_email.txt:7
+#, python-format
+msgid "Link is valid for %(expiration_days)s days."
+msgstr "De link is gedurende %(expiration_days)s dagen geldig."
+
+#: icare4u_front/templates/registration/activation_email.html:25
+msgid "Have much fun Doing Together!"
+msgstr "Veel plezier toegewenst op Samen Doen!"
+
+#: icare4u_front/templates/registration/activation_email.html:28
+msgid "Sincerely,"
+msgstr "Met vriendelijke groet,"
+
+#: icare4u_front/templates/registration/activation_email.html:29
+msgid "The Samen Doen team"
+msgstr "Het team van Samen Doen"
+
+#: icare4u_front/templates/registration/activation_email.txt:9
+msgid ""
+"\n"
+"Have much fun Doing Together!\n"
+"\n"
+"Sincerely,\n"
+"The Samen Doen team\n"
+msgstr ""
+"\n"
+"Veel plezier toegewenst op Samen Doen!\n"
+"\n"
+"Met vriendelijke groet,\n"
+"Het team van Samen Doen\n"
+
+#: icare4u_front/templates/registration/login.html:8
+msgid "You are already logged in"
+msgstr "U bent nu ingelogd"
+
+#: icare4u_front/templates/registration/login.html:13
+msgid "log in"
+msgstr "Inloggen"
+
+#: icare4u_front/templates/registration/login.html:35
+msgid "e-mail"
+msgstr "e-mailadres"
+
+#: icare4u_front/templates/registration/login.html:47
+msgid "password"
+msgstr "wachtwoord"
+
+#: icare4u_front/templates/registration/login.html:55
+msgid "register with Positoos"
+msgstr "registreren"
+
+#: icare4u_front/templates/registration/login.html:56
+msgid "Not a member yet?"
+msgstr "Nog niet geregistreerd?"
+
+#: icare4u_front/templates/registration/login.html:56
+#: icare4u_front/templates/registration/registration_form.html:4
+#: icare4u_front/templates/registration/registration_form.html:156
+msgid "Register"
+msgstr "Registreer"
+
+#: icare4u_front/templates/registration/login.html:56
+msgid "with Positoos to enjoy awesome deals in your community!"
+msgstr "nu om punten te sparen en te verzilveren in uw gemeente!"
+
+#: icare4u_front/templates/registration/login.html:58
+msgid "forgotten password"
+msgstr "wachtwoord vergeten"
+
+#: icare4u_front/templates/registration/login.html:59
+msgid "Forgot your Positoos member password? Let us help you to"
+msgstr "Wachtwoord vergeten? Stuur uzelf een"
+
+#: icare4u_front/templates/registration/login.html:59
+msgid "reset it"
+msgstr "nieuw wachtwoord"
+
+#: icare4u_front/templates/registration/logout.html:7
+msgid "Logged out"
+msgstr "U bent nu uitgelogd"
+
+#: icare4u_front/templates/registration/password_change_done.html:9
+#: icare4u_front/templates/registration/password_change_form.html:9
+msgid "Password change"
+msgstr "Wachtwoord wijzigen"
+
+#: icare4u_front/templates/registration/password_change_done.html:12
+msgid "Your password has been changed."
+msgstr "Uw wachtwoord is gewijzigd"
+
+#: icare4u_front/templates/registration/password_change_form.html:33
+msgid "Old password"
+msgstr "Oude wachtwoord"
+
+#: icare4u_front/templates/registration/password_change_form.html:45
+#: icare4u_front/templates/registration/password_reset_confirm.html:24
+msgid "New password"
+msgstr "Nieuwe wachtwoord"
+
+#: icare4u_front/templates/registration/password_change_form.html:57
+#: icare4u_front/templates/registration/password_reset_confirm.html:36
+msgid "Confirm new password"
+msgstr "Bevestig wachtwoord"
+
+#: icare4u_front/templates/registration/password_reset_complete.html:9
+#: icare4u_front/templates/registration/password_reset_done.html:11
+#: icare4u_front/templates/registration/password_reset_form.html:7
+#: icare4u_front/templates/registration/password_reset_form.html:13
+msgid "Password reset"
+msgstr "Wachtwoord vernieuwen"
+
+#: icare4u_front/templates/registration/password_reset_complete.html:12
+msgid "Password reset successfully."
+msgstr "Wachtwoord vernieuwen gelukt"
+
+#: icare4u_front/templates/registration/password_reset_confirm.html:7
+msgid "Reset your password"
+msgstr "Vernieuw uw wachtwoord"
+
+#: icare4u_front/templates/registration/password_reset_confirm.html:47
+msgid "Password reset failed"
+msgstr "Wachtwoord vernieuwen e-mail mislukt"
+
+#: icare4u_front/templates/registration/password_reset_done.html:5
+msgid "Password reset - email sent"
+msgstr "Wachtwoord vernieuwen e-mail verstuurd"
+
+#: icare4u_front/templates/registration/password_reset_done.html:14
+msgid "Email with password reset instructions has been sent."
+msgstr "E-mail met instructies voor vernieuwen van het wachtwoord verzonden"
+
+#: icare4u_front/templates/registration/password_reset_email.html:2
+#, python-format
+msgid ""
+"Dear %(full_name)s, You can reset your %(site_name)s password by following "
+"this link"
+msgstr ""
+
+#: icare4u_front/templates/registration/password_reset_email.html:6
+msgid "If you did not reset your password, you can ignore this message"
+msgstr ""
+
+#: icare4u_front/templates/registration/registration_complete.html:4
+msgid "Registration complete"
+msgstr "Registratie voltooid"
+
+#: icare4u_front/templates/registration/registration_complete.html:7
+msgid "You are now registered"
+msgstr "U bent nu geregistreerd"
+
+#: icare4u_front/templates/registration/registration_complete.html:12
+msgid ""
+"\n"
+"                    <p>Within several minutes, you will receive an "
+"activation e-mail at the e-mail address you provided.</p>\n"
+"                    <p>By clicking on the link in the e-mail, you confirm "
+"your registration. This will complete the registration process and you will "
+"be able to login to SamenDoen using your user name and password.</p>\n"
+"                    <p>If you haven't received the activation e-mail, please "
+"check your Spambox!</p>\n"
+"                "
+msgstr ""
+"\n"
+"<p>Binnen enkele minuten ontvangt u een activatie e-mail. Door op de link in "
+"de e-mail te klikken bevestigt u de registratie.</p>\n"
+"<p>De pasaanvraag is dan voltooid en u kunt daarna inloggen met uw e-"
+"mailadres en wachtwoord.</p>\n"
+"<p>Heeft u de activatie e-mail niet ontvangen? Controleer uw spambox!</p>\n"
+"                "
+
+#: icare4u_front/templates/registration/registration_form.html:9
+msgid "Register to join today!"
+msgstr "Registreer en ontvang de spaarpas thuis"
+
+#: icare4u_front/templates/registration/registration_form.html:13
+#, python-format
+msgid ""
+"If you already have a card, please proceed to the <a href=\"%(loin_url)s"
+"\">log in page</a>"
+msgstr "Heeft u al een pas, klik dan op <a href=\"%(loin_url)s\">inloggen</a>!"
+
+#: icare4u_front/templates/registration/registration_form.html:14
+#, python-format
+msgid ""
+"Are you a Stadlander tenant? Register via %(a_open)sMy Stadlander%(a_close)s."
+msgstr ""
+"Bent u een huurder van Stadlander? Registreer dan via %(a_open)sMijn "
+"Stadlander%(a_close)s."
+
+#: icare4u_front/templates/registration/registration_form.html:95
+msgid ""
+"Choose the municipality in which you reside. Choosing a municipality, "
+"Positoos will only earn and redeem in that municipality."
+msgstr ""
+"Kies de gemeente waarin u woonachtig bent. Met het kiezen van een gemeente "
+"kunt u alleen sparen en verzilveren in die gemeente."
+
+#: icare4u_front/templates/registration/registration_form.html:130
+msgid "I have read and accept the"
+msgstr "Ja, ik ga akkoord met de"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_1.html:11
+msgid ""
+"Please show which headers or columns of your .CSV file correspond to the "
+"Samen-Doen fields"
+msgstr ""
+"Geef aan met welke velden de headers in het .csv bestand corresponderen"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_1.html:17
+msgid "Samen-Doen fields"
+msgstr "Velden"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_1.html:20
+msgid "Headers or columns in .CSV file"
+msgstr "Headers of kolommen in uw CSV bestand"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_1.html:135
+msgid ""
+"A percentage of the points you give to  an individual will go to their "
+"chosen Good Cause. By default this percentage is chosen by the individual, "
+"but you can override that with a fixed percentage if you wish"
+msgstr ""
+"Elke keer dat spaarders punten sparen, gaat een door hen gekozen percentage "
+"van de punten naar het spaardoel van hun keuze. Indien u wilt afwijken van "
+"het door de spaarders gekozen percentage, kunt u dat hier instellen."
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:11
+msgid "Confirm bulk rewards upload"
+msgstr "Bevestig uitvoeren bulk waardering"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:11
+msgid "Bulk rewards upload"
+msgstr "Bulk Waardering"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:16
+msgid "Select file"
+msgstr "Selecteer bestand"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:17
+msgid "Configure"
+msgstr "Controleer data"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:18
+msgid "Confirm upload"
+msgstr "Waardeer"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:23
+#, python-format
+msgid ""
+"\n"
+"                <p>Found %(num_rows)s rows in the .CSV file. Click \"Make "
+"transactions\" to pay the rewards.</p>\n"
+"                <br/>\n"
+"                <strong>\n"
+"                <p style=\"color: green\">%(num_valid_rows)s of these rows "
+"can be actioned.</p>\n"
+"                <p>Total unique users to be rewarded: %(num_unique_users)s</"
+"p>\n"
+"                <p>Total amount to be paid: %(total_amount)s"
+msgstr ""
+"\n"
+"                <p>Er werden %(num_rows)s rijen aangetroffen in het .CSV-"
+"bestand. Klik op \"verwerk transacties\" om de gebruikers te waarderen.</p>\n"
+"                <br/>\n"
+"                <strong>\n"
+"                <p style=\"color: green\">%(num_valid_rows)s rijen kunnen "
+"worden verwerkt.</p>\n"
+"                <p>Aantal unieke spaarders te waarderen: "
+"%(num_unique_users)s</p>\n"
+"                <p>Totaal bedrag om over te boeken: %(total_amount)s"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:31
+msgid "Number of transactions where amount"
+msgstr "Aantal transacties met waarde"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:38
+msgid "rows could not be processed because the user could not be found."
+msgstr ""
+"rijen kunnen niet worden verwerkt omdat spaardersaccounts niet werden "
+"gevonden."
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:39
+msgid "Affected row(s):"
+msgstr "Het betreft:"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:44
+msgid "If you continue to make transactions these rows will be ignored."
+msgstr ""
+"Als u doorgaat met het verwerken van de transacties zullen deze rijen worden "
+"genegeerd"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:69
+msgid "denotes a required field"
+msgstr "Verplichte velden"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:78
+msgid "Previous"
+msgstr "Terug"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:81
+msgid "Make transactions"
+msgstr "Verwerk transacties"
+
+#: icare4u_front/templates/rewards/bulk_upload_form_base.html:83
+msgid "Next"
+msgstr "Volgende"
+
+#: icare4u_front/templates/rewards/causes_list.html:15
+msgid "Good Causes"
+msgstr "Spaardoelen"
+
+#: icare4u_front/templates/rewards/causes_list.html:25
+msgid "Current good cause:"
+msgstr "Huidig Spaardoel:"
+
+#: icare4u_front/templates/rewards/causes_list.html:25
+msgid "Your current donations are for this cause"
+msgstr "U spaart voor één spaardoel tegelijk"
+
+#: icare4u_front/templates/rewards/causes_list.html:38
+#: icare4u_front/templates/rewards/good_cause_block.html:6
+msgid "Inactive"
+msgstr "Inactief"
+
+#: icare4u_front/templates/rewards/causes_list.html:40
+#: icare4u_front/templates/rewards/good_cause_block.html:8
+msgid "Default<br>Charity"
+msgstr "Algemeen<br>Spaardoel"
+
+#: icare4u_front/templates/rewards/causes_list.html:49
+msgid "Contributed to current Spaardoel to date:"
+msgstr "Bijgedragen aan dit spaardoel"
+
+#: icare4u_front/templates/rewards/causes_list.html:50
+#: icare4u_front/templates/rewards/causes_list.html:92
+#: icare4u_front/templates/rewards/good_cause_block.html:27
+msgid "Self"
+msgstr "Ik"
+
+#: icare4u_front/templates/rewards/causes_list.html:51
+#: icare4u_front/templates/rewards/causes_list.html:97
+#: icare4u_front/templates/rewards/good_cause_block.html:34
+msgid "All users"
+msgstr "Samen"
+
+#: icare4u_front/templates/rewards/causes_list.html:58
+msgid "Good Causes donation percentage"
+msgstr "Percentage spaardoeldonatie"
+
+#: icare4u_front/templates/rewards/causes_list.html:60
+msgid ""
+"Some of your points go to the Good Cause you choose. You can choose how much "
+"here. The change will take effect the next time you earn points."
+msgstr ""
+"Een deel van je punten gaan naar het Spaardoel dat jij kiest. Kies hier "
+"hoeveel. De wijziging is de eerst volgende keer dat je punten spaart van "
+"kracht."
+
+#: icare4u_front/templates/rewards/causes_list.html:77
+msgid "Save change"
+msgstr "Wijziging opslaan"
+
+#: icare4u_front/templates/rewards/causes_list.html:88
+msgid "Donated to savings goal:"
+msgstr "Gedoneerd aan spaardoelen:"
+
+#: icare4u_front/templates/rewards/causes_list.html:115
+msgid "Confirm change of good cause"
+msgstr "Spaardoel wijzigen"
+
+#: icare4u_front/templates/rewards/causes_list.html:118
+msgid ""
+"\n"
+"                            <p>\n"
+"                                You are attempting to select a new good "
+"cause.\n"
+"                                Confirm this change and you will start "
+"saving Positoos for this new cause.\n"
+"                            </p>\n"
+"                            <p>\n"
+"                                Because you can only save Positoos for one "
+"good cause at once this means you will no longer be saving for your current "
+"good cause. You can switch good causes at any time.\n"
+"                            </p>\n"
+"                        "
+msgstr ""
+"\n"
+"<p>U staat op het punt om een nieuwe spaardoel te kiezen. Bevestig deze "
+"wijziging om vanaf nu voor dit nieuwe spaardoel te gaan sparen</p><p>Omdat u "
+"maar voor één spaardoel tegelijk kunt sparen zult u na het wijzigen niet "
+"meer voor uw oude spaardoel sparen. U kunt op elk gewenst moment weer "
+"wijzigen van spaardoel."
+
+#: icare4u_front/templates/rewards/good_cause_block.html:26
+msgid "Donated to this savings goal:"
+msgstr "Gedoneerd aan dit spaardoel:"
+
+#: icare4u_front/templates/rewards/good_cause_block.html:42
+msgid "Select this cause"
+msgstr "Selecteer als spaardoel"
+
+#: icare4u_front/templates/rewards/good_cause_block.html:43
+msgid "Cause Inactive"
+msgstr "Spaardoel inactief"
+
+#: icare4u_front/templates/rewards/search_cause.html:4
+msgid "Search results for"
+msgstr "Zoekresultaten voor"
+
+#: icare4u_front/templates/rewards/search_cause.html:8
+msgid "causes found for query"
+msgstr "zoekresultaten voor"
+
+#: icare4u_front/templates/rewards/select_cause.html:4
+msgid "Select good cause"
+msgstr "Spaardoelen"
+
+#: icare4u_front/templates/rewards/select_cause.html:10
+#: icare4u_front/templates/rewards/select_cause.html:12
+msgid "good causes to choose from"
+msgstr "spaardoelen om uit te kiezen"
+
+#: icare4u_front/templates/stadlander/confirm_link.html:10
+#, python-format
+msgid ""
+"\n"
+"            <h2>You still have a SamenDoen account</h2>\n"
+"            <p>We have found an existing account in the Samen Doen system "
+"with your registered email address %(email)s.<br/>\n"
+"            Would you like to link your Stadlander account with this account?"
+"<br/>\n"
+"            After linking the accounts (by clicking 'Yes'), you will be able "
+"to get through to your Positoos data in one click from your Mijn Stadlander "
+"login.</p>\n"
+"            "
+msgstr ""
+"\n"
+"            <h2>U heeft reeds een SamenDoen account</h2>\n"
+"            <p>Er is al een SamenDoen account met het e-mailadres: %(email)s."
+"<br/>\n"
+"            Wilt u de Stadlander klantwaardering ontvangen op dit account?"
+"<br/>\n"
+"            "
+
+#: icare4u_front/templates/stadlander/confirm_link_done.html:9
+msgid ""
+"\n"
+"            <h2>Thank you</h2>\n"
+"            <p>\n"
+"            Your Stadlander unique reference number has been linked with "
+"your existing Samen Doen account.<br/>\n"
+"            You can now only log in via <a href=\"https://mijn.stadlander.nl/"
+"\">https://mijn.stadlander.nl/</a>.<br/>\n"
+"            Your are now logged in.\n"
+"            </p>\n"
+"            "
+msgstr ""
+"\n"
+"            <h2>Stadlander klantwaardering geactiveerd</h2>\n"
+"            <p>\n"
+"            U ontvangt nu de Stadlander klantwaardering op uw SamenDoen "
+"account.<br/>            U bent nu ingelogd op SamenDoen.\n"
+"            </p>\n"
+"            "
+
+#: icare4u_front/templates/stadlander/confirm_link_refused.html:9
+msgid ""
+"\n"
+"            <h2>You will need to either:</h2>\n"
+"            <p>a) Close your existing Samen Doen account<br/>\n"
+"                b) Change the email address registered with mijn.stadlander."
+"nl<br/>\n"
+"                c) Change the email address registered with your Samen Doen "
+"account</p>\n"
+"                <p>Otherwise you cannot link your Samen Doen and stadlander "
+"accounts.</p>\n"
+"                <p>You have been logged out.</p>\n"
+"            "
+msgstr ""
+"\n"
+"            <h2>Stadlander klantwaardering niet geactiveerd</h2>\n"
+"            <p>a) wijzig uw e-mailadres in 'Mijn Stadlander', of<br/>\n"
+"                b) wijzig uw e-mailadres in 'Mijn SamenDoen'<br/>\n"
+"                <p>Activeer daarna alsnog de klantwaardering via Mijn "
+"Stadlander.</p>\n"
+"            "
+
+#: icare4u_front/templates/stadlander/login.html:17
+msgid "You are logged in"
+msgstr "U bent nu ingelogd"
+
+#: icare4u_front/templates/stadlander/login.html:18
+msgid "Edit my profile"
+msgstr "Bewerk mijn profiel"
+
+#: icare4u_front/templates/stadlander/login.html:30
+msgid "Login on Stadlander"
+msgstr "Login op Stadlander"
+
+#: icare4u_front/templates/stadlander/pay_direct.html:8
+msgid "Make A Stadlander Payment"
+msgstr "Voer een waardering uit"
+
+#: icare4u_front/templates/stadlander/pay_direct.html:49
+#: icare4u_front/templates/stadlander/pay_direct.html:65
+msgid "Aantal minuten besteed aan dienstverlening"
+msgstr "Aantal minuten besteed aan dienstverlening"
+
+#: icare4u_front/templates/stadlander/pay_direct.html:93
+msgid "Process Stadlander Payment"
+msgstr "Waardering verwerken"
+
+#: icare4u_front/templates/stadlander/pay_direct.html:330
+#: icare4u_front/templates/stadlander/pay_direct.html:359
+#: icare4u_front/templates/stadlander/pay_direct.html:389
+msgid "Must be an integer number of Positoos"
+msgstr "Vul een geldig aantal punten in"
+
+#: icare4u_front/urls.py:71
+#, fuzzy
+msgid "^api/rekeningen/contact_name_auto/$"
+msgstr "^rekeningen/profile/$"
+
+#: icare4u_front/urls.py:75
+#, fuzzy
+msgid "^api/rekeningen/contact_name_auto/(?P<community>\\d+)/$"
+msgstr "^rekeningen/profile/$"
+
+#: icare4u_front/urls.py:79
+#, fuzzy
+msgid "^api/rekeningen/card_name_auto/(?P<community>\\d+)/$"
+msgstr "^rekeningen/profile/$"
+
+#: icare4u_front/urls.py:111
+msgid "^rekeningen/profile/$"
+msgstr "^rekeningen/profile/$"
+
+#: icare4u_front/urls.py:117
+#, fuzzy
+msgid "^rekeningen/place-ad/$"
+msgstr "^rekeningen/profile/$"
+
+#: icare4u_front/urls.py:120
+msgid "^rekeningen/edit-ad/(?P<pk>\\d+)/$"
+msgstr ""
+
+#: icare4u_front/urls.py:124
+#, fuzzy
+msgid "^rekeningen/contact_name_auto/$"
+msgstr "^rekeningen/profile/$"
+
+#: icare4u_front/urls.py:127
+msgid "^rekeningen/contact_name_auto/(?P<community>\\d+)/$"
+msgstr ""
+
+#: icare4u_front/urls.py:130
+#, fuzzy
+msgid "^rekeningen/card_name_auto/(?P<community>\\d+)/$"
+msgstr "^rekeningen/profile/$"
+
+#, fuzzy
+#~| msgid "Create business member"
+#~ msgid "Clear Business"
+#~ msgstr "Nieuwe winkelier"
+
+#~ msgid "Add a new terminal"
+#~ msgstr "Voeg terminal toe"
+
+#~ msgid "Agree"
+#~ msgstr "Akkoord"

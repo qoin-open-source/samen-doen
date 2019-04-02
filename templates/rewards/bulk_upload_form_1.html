@@ -1,0 +1,162 @@
+{% extends 'rewards/bulk_upload_form_base.html' %}
+{% load i18n %}
+
+{% block form_body %}
+    <fieldset>
+        {% with wizard.form.uid_type as field %}
+            {% include 'rewards/upload_form_field.html' %}
+        {% endwith %}
+
+        <div style="padding-bottom: 10px; padding-top: 20px">
+            {% trans "Please show which headers or columns of your .CSV file correspond to the Samen-Doen fields" %}
+        </div>
+
+        <table class="upload-form-table">
+            <tr>
+                <th width="50%">
+                    {% trans "Samen-Doen fields" %}
+                </th>
+                <th>
+                    {% trans "Headers or columns in .CSV file" %}
+                </th>
+            </tr>
+        </table>
+
+        {% with wizard.form.uid_column as field %}
+            <div class="form group{% if field.errors %} error{% endif %}{% if field.field.required %} required{% endif %}">
+                <table class="upload-form-table">
+                    <tr>
+                        <td width="50%">
+                            {{ field.label_tag|safe }}
+                            {% if field.field.required %}*{% endif %}
+                            {% if field.help_text %}<a href="#" class="element tp" title="{{ field.help_text }}"></a>{% endif %}
+                        </td>
+                        <td>
+                            <div class="field">
+                                <div class="element{% if 'checkbox' in field.field.widget.attrs.class %} checkbox{% endif %}">
+                                    {{ field }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                {% for error in field.errors %}
+                  <div class="alert alert-danger" role="alert">
+                      {{ error }}
+                  </div>
+                {% endfor %}
+              <div class="clearfix"></div>
+            </div>
+        {% endwith %}
+        {% with wizard.form.amount_column as field %}
+            <div class="form group{% if field.errors %} error{% endif %}{% if field.field.required %} required{% endif %}">
+                <table class="upload-form-table">
+                    <tr>
+                        <td width="50%">
+                            {{ field.label_tag|safe }}
+                            {% if field.field.required %}*{% endif %}
+                            {% if field.help_text %}<a href="#" class="element tp" title="{{ field.help_text }}"></a>{% endif %}
+                        </td>
+                        <td>
+                            <div class="field">
+                                <div class="element{% if 'checkbox' in field.field.widget.attrs.class %} checkbox{% endif %}">
+                                    {{ field }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                {% for error in field.errors %}
+                  <div class="alert alert-danger" role="alert">
+                      {{ error }}
+                  </div>
+                {% endfor %}
+              <div class="clearfix"></div>
+            </div>
+        {% endwith %}
+        {% with wizard.form.description_column as field %}
+            <div class="form group{% if field.errors %} error{% endif %}{% if field.field.required %} required{% endif %}">
+                <table class="upload-form-table">
+                    <tr>
+                        <td width="50%">
+                            {{ field.label_tag|safe }}
+                            {% if field.field.required %}*{% endif %}
+                            {% if field.help_text %}<a href="#" class="element tp" title="{{ field.help_text }}"></a>{% endif %}
+                        </td>
+                        <td>
+                            <div class="field">
+                                <div class="element{% if 'checkbox' in field.field.widget.attrs.class %} checkbox{% endif %}">
+                                    {{ field }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                {% for error in field.errors %}
+                  <div class="alert alert-danger" role="alert">
+                      {{ error }}
+                  </div>
+                {% endfor %}
+              <div class="clearfix"></div>
+            </div>
+        {% endwith %}
+        <br/>
+        {% with wizard.form.threshold_amount as field %}
+            <div class="form group{% if field.errors %} error{% endif %}{% if field.field.required %} required{% endif %}">
+                <table class="upload-form-table">
+                    <tr>
+                        <td width="50%">
+                            {{ field.label_tag|safe }}
+                            {% if field.field.required %}*{% endif %}
+                            {% if field.help_text %}<a href="#" class="element tp" title="{{ field.help_text }}"></a>{% endif %}
+                        </td>
+                        <td>
+                            <div class="field">
+                                <div class="element{% if 'checkbox' in field.field.widget.attrs.class %} checkbox{% endif %}">
+                                    {{ field }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                {% for error in field.errors %}
+                  <div class="alert alert-danger" role="alert">
+                      {{ error }}
+                  </div>
+                {% endfor %}
+              <div class="clearfix"></div>
+            </div>
+        {% endwith %}
+        {% with wizard.form.donation_percent as field %}
+            {% if not wizard.form.can_vary_percent %}
+                {{ field }}
+            {% else %}
+            <div class="form group{% if field.errors %} error{% endif %}{% if field.field.required %} required{% endif %}">
+                <p>{% trans "A percentage of the points you give to  an individual will go to their chosen Good Cause. By default this percentage is chosen by the individual, but you can override that with a fixed percentage if you wish" %}</p>
+                <table class="upload-form-table">
+                    <tr>
+                        <td width="50%">
+                            {{ field.label_tag|safe }}
+                            {% if field.field.required %}*{% endif %}
+                            {% if field.help_text %}<a href="#" class="element tp" title="{{ field.help_text }}"></a>{% endif %}
+                        </td>
+                        <td>
+                            <div class="field">
+                                <div class="element{% if 'checkbox' in field.field.widget.attrs.class %} checkbox{% endif %}">
+                                    {{ field }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                {% for error in field.errors %}
+                  <div class="alert alert-danger" role="alert">
+                      {{ error }}
+                  </div>
+                {% endfor %}
+              <div class="clearfix"></div>
+            </div>
+        {% endif %}
+        {% endwith %}
+    <fieldset>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "registration/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Login' %}{% endblock %}
+
+{% block content %}
+
+{% if not papi %}
+    {%  blocktrans with stadlander_url as stadlander_url  %}
+Please login on the <a href="{{ stadlander_url }}">Stadlander</a> site, and return by clicking the Positoos link in the menu.
+    {% endblocktrans %}
+{% else %}
+    {% if authenticated %}
+        {% trans 'You have been authenticated' %} {# ACTUALLY this should never be shown, and user should be redirected to the accounts view #}
+    {% else %}
+        {%  trans 'You are not authenticated' %}
+    {% endif %}
+{% endif %}
+
+{%  endblock %}

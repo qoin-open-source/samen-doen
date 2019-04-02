@@ -1,0 +1,52 @@
+{% extends "registration/base.html" %}
+{% load i18n staticfiles thumbnail %}
+
+{% block title %}{% trans 'Terms and Conditions' %}{% endblock %}
+
+{% block content %}
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+        <div class="col-md-6 col-lg-10">
+            <h2>{% trans 'Terms and Conditions' %}</h2>
+
+            {% include 'includes/messages.html' %}
+
+            <form action="." method="post">{% csrf_token %}
+                <p>{% trans 'The Samen Doen Terms and Conditions can be downloaded' %} <a id="tandc_a" href="">{% trans 'here' %}</a>.</p>
+
+                <div class="form-group {% if form.terms_and_conditions.errors %}has-error{% endif %}">
+                    <div class="checkbox">
+                        <label class="control-label" for="id_terms_and_conditions">
+                            <input type="checkbox" id="id_terms_and_conditions" name="{{ form.terms_and_conditions.html_name }}">
+                            <span>{% trans 'I agree to the Terms and Conditions' %}{% for error in form.terms_and_conditions.errors %} - {{ error }} {% endfor %}</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group {% if form.wants_newsletter.errors %}has-error{% endif %}">
+                    <div class="checkbox">
+                        <label class="control-label" for="id_wants_newsletter">
+                            <input type="checkbox" id="id_wants_newsletter" name="{{ form.wants_newsletter.html_name }}" value="1"{% if form.wants_newsletter.value %} checked=checked{% endif %}>
+                            <span>{% trans 'I would like to receive the newsletter' %}{% for error in form.wants_newsletter.errors %} - {{ error }} {% endfor %}</span>
+                        </label>
+                    </div>
+                </div>
+
+                <br>
+
+                <input type="submit" class="btn btn-rounded btn-green" value="{% trans 'Agree to Terms and Conditions' %}">
+            </form>
+        </div>
+
+        <div class="col-md-6 col-lg-5"></div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $(function() {
+          $(".checkbox-container").addClass("checkbox");
+        });
+
+        $('#tandc_a').click( function(e) {e.preventDefault(); window.open('{{ tandc_url }}'); return false; } );
+    </script>
+{% endblock %}

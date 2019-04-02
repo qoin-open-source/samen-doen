@@ -1,0 +1,21 @@
+<div class="form-group {% if field.errors %}has-error{% endif %}">
+    <label class="control-label" for="{{ field.id_for_label }}">{{ label }}</label>
+    {% for error in field.errors %}
+        <label class="control-label"> - {{ error }}</label>
+    {% endfor %}
+    {% if field.field.widget.input_type == 'text' %}{% if datepicker == 'true' %}<div class="datepicker col-sm-12">{% endif %}
+        <input type="text" id="{{ field.id_for_label }}" placeholder="{% if field.field.required %}* {% endif %}{{ placeholder }}"
+               name="{{ field.html_name }}"{% if field.value %} value="{{ field.value }}"{% endif %}
+               {% if maxlength %}maxlength="{{ maxlength }}"{% endif %}
+               {% if disabled == "true" %}disabled="disabled"{% endif %}
+               class="form-control">{% if datepicker == 'true' %}</div>{% endif %}
+    {% elif field.field.choices %}
+        <select name="{{ field.html_name }}"{% if disabled == "true" %} class="form-control" disabled{% else %} class="form-control s-selecter"{% endif %}>
+            {% for value,item in field.field.choices %}
+                <option value="{{ value }}"{% if field.value|add:'0' == value %} selected{% endif %}{% if field.value == value %} selected{% endif %}>{{ item }}</option>
+            {% endfor %}
+        </select>{{ disabled }}
+    {% else %}
+        {{ field }}
+    {% endif %}
+</div>

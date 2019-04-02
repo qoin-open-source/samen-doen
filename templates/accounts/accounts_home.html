@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load pagination_tags i18n l10n staticfiles %}
+
+{% block title %}{% trans 'Accounts' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <h2>{% trans 'Transaction history' %}</h2>
+    {% include 'includes/messages.html' %}
+
+    {% if request.user.cc3_profile.is_charity_profile %}
+    <div style="width:100%;margin-top: 20px">
+        <table style="width: 100%;">
+            <tr>
+            <td style="width: 50%;">
+                <span class="cause-stats-label">{% trans 'Total savers' %}:</span> <span class="cause-stats-value">{{ request.user.committed_with.count }}</span>
+            </td>
+            <td>
+                <span class="cause-stats-label">{% trans 'Total saved so far' %}:</span> <span class="samendoen cause-stats-value"><i class="icon-samendoen"></i> {{ request.user.cc3_profile.get_total_donations|floatformat:"0" }}</span>
+            </td>
+            </tr>
+        </table>
+    </div>
+    {% endif %}
+
+    {% if request.user.cc3_profile.is_individual_profile %}
+        {% with euro_totals=request.user.cc3_profile.euros_earned_and_redeemed %}
+        <div style="width:100%; margin-top: 20px">
+            <table style="width: 100%;">
+                <tr>
+                    <td width="20%">
+                        <span class="cause-stats-label">{% trans 'Saved' %}:</span>
+                        <span class="samendoen cause-stats-value">&euro; {{ euro_totals.earned|floatformat:"2" }}</span>
+                    </td>
+                    <td width="20%">
+                        <span class="cause-stats-label">{% trans 'Donated' %}:</span>
+                        <span class="samendoen cause-stats-value">&euro; {{ euro_totals.donated|floatformat:"2" }}</span>
+                    </td>
+                    <td width="20%">
+                        <span class="cause-stats-label">{% trans 'Redeemed' %}:</span>
+                        <span class="samendoen cause-stats-value">&euro; {{ euro_totals.redeemed|floatformat:"2" }}</span>
+                    </td>
+                    <td width="40%" style="text-align: right; font-size: 140%;">
+                        <span class="cause-stats-label">{% trans 'Balance' %}:</span>
+                        <span class="samendoen cause-stats-value">P {% if balance %}{{ balance|floatformat:"0" }}{% else %}0{% endif %}</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        {% endwith %}
+    {% endif %}
+
+    {% if request.user.cc3_profile.is_business_profile  %}
+    <div style="width:100%;margin-top: -35px" class="text-right">
+        <a href="{% url 'cards_x_report' %}" class="btn btn-rounded btn-green">{% trans 'X Rapport' %}</a>
+        <a href="{% url 'cards_z_report' %}" class="btn btn-rounded btn-green">{% trans 'Z Rapport' %}</a>
+    </div>{% endif %}
+    <br clear="all"/>
+    <div class="row">
+        <div class="col-md-6 col-lg-6">
+            {{ paginator.count }} {% trans 'transactions made' %}
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-12">
+            {% if transactions %}
+
+                <table class="table rwd-table transactions-table hidden-xs">
+                    <tbody>
+                        <tr class="table-head">
+                            <th>{% trans 'date' %}</th>
+                            <th>{% trans 'from/to' %}</th>
+                            <th>{% trans 'description' %}</th>
+                            <th>{% trans "points" context 'currency' %}</th>
+                        </tr>
+                        {% for transaction in transactions %}
+                            <tr>
+                                <td style="min-width: 130px;">{{ transaction.created|date:'d/m/Y H:i' }}</td>
+                                <td class="name" style="min-width: 170px;">{% if transaction.amount < 0 %}{% include 'includes/recipient.html' %}{% else %}{% include 'includes/sender.html' %}{% endif %}</td>
+                                <td>{{ transaction.description|striptags|truncatechars:100|safe|default:'' }}</td>
+                                <td><div class="text-right">{{ transaction.amount|floatformat }}</div></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <table class="table rwd-table transactions-table visible-xs">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'from/to' %}</th>
+                            <th rowspan="2"><span class="glyphicon icon-samendoen">&nbsp;</span></th>
+                        </tr>
+                        <tr>
+                            <th colspan="1">{% trans 'date' %}</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for transaction in transactions %}
+                            <tr>
+                                <td>
+                                    {% if transaction.amount < 0 %}
+                                        {% include 'includes/recipient.html' %}
+                                    {% else %}
+                                        {% include 'includes/sender.html' %}
+                                    {% endif %}
+                                </td>
+
+                                <td rowspan="2">{{ transaction.amount|floatformat }}</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="1">{{ transaction.created|date:'d/m/Y H:i' }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+                {% include "includes/paginator.html" %}
+
+            {% else %}
+                <div class="row">
+                    <div class="alert alert-warning" role="alert">
+                        {% trans 'No matching transactions were found' %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'rewards/bulk_upload_form_base.html' %}
+
+{% block form_body %}
+    <fieldset>
+        {% with wizard.form.csv_file as field %}
+            <div class="form group{% if field.errors %} error{% endif %}{% if field.field.required %} required{% endif %}">
+                <table class="upload-form-table">
+                    <tr>
+                        <td width="50%">
+                            {{ field.label_tag|safe }}
+                            <div>{{ field.help_text }}</div>
+                        </td>
+                        <td style="vertical-align: top">
+                            <div class="field">
+                                <div class="element">
+                                  {{ field }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                {% for error in field.errors %}
+                  <div class="alert alert-danger" role="alert">
+                      {{ error }}
+                  </div>
+                {% endfor %}
+                <div class="clearfix"></div>
+            </div>
+        {% endwith %}
+        {% with wizard.form.has_headers as field %}
+            <div class="form group{% if field.errors %} error{% endif %}{% if field.field.required %} required{% endif %}">
+
+                <table class="upload-form-table">
+                    <tr>
+                        <td width="50%">
+                            {{ field.label_tag|safe }}
+                        </td>
+                        <td style="vertical-align: top">
+                            <div class="field">
+                                <div class="element{% if 'checkbox' in field.field.widget.attrs.class %} checkbox{% endif %}">
+                                    {{ field }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                {% for error in field.errors %}
+                  <div class="alert alert-danger" role="alert">
+                      {{ error }}
+                  </div>
+                {% endfor %}
+              <div class="clearfix"></div>
+            </div>
+        {% endwith %}
+    <fieldset>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load i18n l10n staticfiles thumbnail cc3_tags %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+
+            {% include 'includes/messages.html' %}
+
+			<div class="col-sm-12">
+				<section class="content">
+                    <div class="row marketplace-buttons">
+                        <div class="col-sm-6">
+                            {% url 'accounts_my_ads' as my_ads_url %}
+                            {% if my_ads_url in request.META.HTTP_REFERER %}
+                                <a href="{{ my_ads_url }}">&lt; {% trans 'go to my ads' %}</a>
+                            {% else %}
+                                <a href="{% url 'marketplace' %}">&lt; {% trans 'go to all ads' %}</a>
+                            {% endif %}
+                        </div>
+                    </div>
+
+					<div class="row marketplace-detail">
+						<div class="col-sm-6">
+							<div class="marketplace-detail-company">
+                                {% with object.adimage_set.all|last_item as ad_image %}
+                                    {% if ad_image %}
+                                        {% thumbnail ad_image.image "165x165" crop="center" as im %}
+                                        <img class="img-responsive" src="{{ im.url }}" alt="{{ object.title }}"/>
+                                    {% else %}
+                                        <img class="img-responsive" src="https://placehold.it/165x165" alt=""/>
+                                    {% endif %}
+                                {% endwith %}
+
+								<h2>{{ object.title }}</h2>
+                                <p>{% if object.created_by.userprofile.slug %}<a href="{% url 'marketplace-business-profile' object.created_by.userprofile.slug %}">{% endif %}
+                                    {% if object.created_by.userprofile.get_profile_type == 'individual' %}
+                                        {{ object.created_by.userprofile.first_name }} {% if object.created_by.userprofile.tussenvoegsel %}{{ object.created_by.userprofile.tussenvoegsel }} {% endif %}{{ object.created_by.userprofile.last_name }}
+                                    {% else %}
+                                        {{ object.created_by.business_name }}
+                                    {% endif %}
+                                {% if object.created_by.userprofile.slug %}</a>{% endif %}</p>
+								<p>
+									{{ object.created_by.address }} {{ object.created_by.userprofile.num_street }} {{ object.created_by.userprofile.extra_address }}<br/>
+									{{ object.created_by.postal_code }}<br/>
+									{{ object.created_by.website }}
+								</p>
+							</div>
+
+							<div class="clearfix"></div>
+
+							<p>{{ object.description|safe }}</p>
+
+							{% url 'marketplace-enquire' object.id as marketplace_enquire_url %}
+
+                            <div class="col-sm-6">
+                                <p class="text-left">
+                                    <div style="font-size: 25px; color: #904397; font-weight: bold;">
+                                        <span><i class="icon-samendoen"></i>{% if object.price %}{{ object.price|floatformat:"0"|default:'N.O.T.K.' }}{% else %}N.O.T.K.{% endif %}</span>
+                                    </div>
+                                </p>
+                            </div>
+
+                            <div class="col-sm-4" style="vertical-align: middle; float: left;">
+                                <p class="text-right">
+                                    {% if user.is_authenticated %}
+                                        {% if user.get_profile.community == object.created_by.community %}
+                                            <a href="{{ marketplace_enquire_url }}" class="btn btn-rounded btn-green"><i class="icon-mail-alt"></i>{% trans 'enquire' %}</a>
+                                        {% else %}
+                                            {% trans "You can't sign up for an advert posted by a spaarder from a different community" %}
+                                        {% endif %}
+                                    {% else %}
+                                        <a href="{% url 'auth_login' %}" class="">{% trans 'You need to login to enquire for this activity' %}</a>
+                                    {% endif %}
+                                </p>
+                            </div>
+						</div>
+
+						<div class="col-sm-6">
+							<div class="marketplace-detail-map">
+                                {# Place here the maps logic. Actually, this is a static JPEG picture in the designs. #}
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,611 @@
+{% extends "community_admin/change_user.html" %}
+{% load i18n admin_static admin_modify %}
+{% load admin_urls cc3_tags %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'community_admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; <a href="">{% trans 'Users' %}</a>
+        &rsaquo; <a href="{% url 'community_admin:profile_userprofile_changelist' %}">{% trans 'User profiles' %}</a>
+        &rsaquo; {% trans 'Edit profile' %} {{ profile.cyclos_group.name }}
+    </div>
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+
+    {% include 'community_admin/fragments/inline_formset_styles.html' %}
+
+    <script src="{% static 'js/lib/jquery.min.js' %}"></script>
+    <script src="{% static 'js/dynamic_formsets.js' %}"></script>
+
+    <script language="javascript">
+        function disableTextbox(){
+            if($("#{{ form.reward_percentage.0.id_for_label }}").is(":checked")){
+                $("#{{ form.transaction_percentage.id_for_label }}").val("").attr("readonly",true);
+            }
+            else if($("#{{ form.reward_percentage.1.id_for_label }}").is(":checked")){
+                $("#{{ form.transaction_percentage.id_for_label }}").removeAttr("readonly");
+                $("#{{ form.transaction_percentage.id_for_label }}").focus();
+            }
+        }
+
+        $(function() {
+            {% include 'community_admin/fragments/inline_formset_js.html' %}
+
+            disableTextbox();
+            $("#{{ form.reward_percentage.0.id_for_label }}, #{{ form.reward_percentage.1.id_for_label }}").change(function(){
+                disableTextbox();
+            });
+        });</script>
+{% endblock %}
+
+{% block field_sets %}
+    <fieldset class="module aligned">
+        <h2>{% trans 'Key user information' %}</h2>
+
+        <div class="form-row{% if form.user_id.errors %} errors{% endif %}">
+            {{ form.user_id.errors }}
+            <label for="{{ form.user_id.id_for_label }}" class="required">{% trans 'User ID' %}</label>
+            <input type="text" id="id_user_id_dummy" name="user_id_dummy" value="{{ form.user_id.value }}" class="form-control" disabled="disabled">
+            <input type="hidden" id="id_user_id" name="user_id" value="{{ form.user_id.value }}" class="form-control">
+        </div>
+
+        <div class="form-row{% if form.cyclos_group.errors %} errors{% endif %}">
+            {{ form.cyclos_group.errors }}
+            <label for="{{ form.cyclos_group.id_for_label }}" class="required">{% trans "User type" %}</label>
+            {{ form.cyclos_group }}
+            {% if form.cyclos_group.help_text %}
+                <p class="help">{{ form.cyclos_group.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.business_name.errors %} errors{% endif %}">
+            {{ form.business_name.errors }}
+            <label for="{{ form.business_name.id_for_label }}" class="required">{{ form.business_name.label }}</label>
+            {{ form.business_name }}
+            {% if form.business_name.help_text %}
+                <p class="help">{{ form.business_name.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.first_name.errors %} errors{% endif %}">
+            {{ form.first_name.errors }}
+            <label for="{{ form.first_name.id_for_label }}" class="required">{{ form.first_name.label }}</label>
+            {{ form.first_name }}
+            {% if form.first_name.help_text %}
+                <p class="help">{{ form.first_name.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.tussenvoegsel.errors %} errors{% endif %}">
+            {{ form.tussenvoegsel.errors }}
+            {{ form.tussenvoegsel.label_tag }}
+            {{ form.tussenvoegsel }}
+            {% if form.tussenvoegsel.help_text %}
+                <p class="help">{{ form.tussenvoegsel.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.last_name.errors %} errors{% endif %}">
+            {{ form.last_name.errors }}
+            <label for="{{ form.last_name.id_for_label }}" class="required">{{ form.last_name.label }}</label>
+            {{ form.last_name }}
+            {% if form.last_name.help_text %}
+                <p class="help">{{ form.last_name.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.email.errors %} errors{% endif %}">
+            {{ form.email.errors }}
+            <label for="{{ form.email.id_for_label }}" class="required">{{ form.email.label }}</label>
+            {{ form.email }}
+            {% if form.email.help_text %}
+                <p class="help">{{ form.email.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.community.errors %} errors{% endif %}">
+            {{ form.community.errors }}
+            <label for="{{ form.community.id_for_label }}" class="required">{{ form.community.label }}</label>
+            {{ form.community }}
+            {% if form.community.help_text %}
+                <p class="help">{{ form.community.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.is_visible.errors %} errors{% endif %}">
+            {{ form.is_visible.errors }}
+            <div><div style="float: left;">{{ form.is_visible }}</div><label style="margin-left: 20px;" for="{{ form.is_visible.id_for_label }}">{{ form.is_visible.label }}</label></div>
+            {% if form.is_visible.help_text %}
+                <p class="help">{{ form.is_visible.help_text|safe }}</p>
+            {% endif %}
+        </div>
+    </fieldset>
+
+    <fieldset class="module aligned">
+        <h2>{% trans 'Product Assignments' %}</h2>
+
+        <h3>{% trans 'Auto-assigned' %}</h3>
+
+            <div class="form-row">
+                <table>
+                    <tr>
+                        <th>{% trans 'Product' %}</th>
+                        <th>{% trans 'Quantity' %}</th>
+                        <th>{% trans 'Discount (%)' %}</th>
+                        <th>{% trans 'Payment type' %}</th>
+                        <th>{% trans 'Next payment date' %}</th>
+                        {% comment %}<th>{% trans 'Expected amount' %}</th>{% endcomment %}
+                        <th>{% trans 'Start date' %}</th>
+                        <th>{% trans 'End date' %}</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    {% for ap in profile.assigned_products.all %}{% if ap.product.auto_assign_type %}
+                        <tr>
+                            <td>{{ ap.product }}</td>
+                            <td>{{ ap.quantity }}</td>
+                            <td>{{ ap.discount_percent }}</td>
+                            <td>{{ ap.billing_frequency }}</td>
+                            <td>{{ ap.next_invoice_date }}</td>
+                            {% comment %}<td>TODO</td>{% endcomment %}
+                            <td>{{ ap.start_date }}</td>
+                            <td>{{ ap.end_date }}</td>
+                            <td><a class="changelink" href="{% url 'community_admin:billing_assignedproduct_change' ap.pk %}"></a></td>
+                        </tr>
+                    {% endif %}{% endfor %}
+                </table>
+            </div>
+
+        <h3>{% trans 'Manually-assigned' %}</h3>
+            <div class="form-row">
+                <table>
+                    <tr>
+                        <th>{% trans 'Product' %}</th>
+                        <th>{% trans 'Quantity' %}</th>
+                        <th>{% trans 'Discount (%)' %}</th>
+                        <th>{% trans 'Payment type' %}</th>
+                        <th>{% trans 'Next payment date' %}</th>
+                        {% comment %}<th>{% trans 'Expected amount' %}</th>{% endcomment %}
+                        <th>{% trans 'Start date' %}</th>
+                        <th>{% trans 'End date' %}</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    {% for ap in profile.assigned_products.all %}{% if not ap.product.auto_assign_type %}
+                        <tr>
+                            <td>{{ ap.product }}</td>
+                            <td>{{ ap.quantity }}</td>
+                            <td>{{ ap.discount_percent }}</td>
+                            <td>{{ ap.billing_frequency }}</td>
+                            <td>{{ ap.next_invoice_date }}</td>
+                            {% comment %}<td>TODO</td>{% endcomment %}
+                            <td>{{ ap.start_date }}</td>
+                            <td>{{ ap.end_date }}</td>
+                            <td><a class="changelink" href="{% url 'community_admin:billing_assignedproduct_change' ap.pk %}"></a></td>
+                        </tr>
+                    {% endif %}{% endfor %}
+                </table>
+                <a class="addlink" href="{% url 'community_admin:billing_assignedproduct_add' %}?user_profile={{ profile.pk }}">{% trans 'Add' %}</a>
+            </div>
+    </fieldset>
+
+    <fieldset class="module aligned">
+        <h2>{% trans 'Terminals and operators' %}</h2>
+        <h3>{% trans 'Terminals' %}</h3>
+        <div class="form-row">
+            {{ inline_formsets.terminal_inline_formset.management_form }}
+            <table class="comm_admin_inline_formset_table" id="{{ inline_formsets.terminal_inline_formset.formset_element_id }}" style="border: none;">
+            <tr>
+                <th>{% trans 'Terminal number (IMEI)' %}</th>
+                <th>{% trans 'SIM card number (ICCID)' %}</th>
+                <th>{% trans 'Comments' %}</th>
+                <th class="addlink"><span>{% trans "Connect terminal" %}</span></th>
+            </tr>
+            {% for form in inline_formsets.terminal_inline_formset %}
+            <tr class="{% if form.cleaned_data.DELETE == True %}deleted{% endif %}">
+                {{ form.id }}
+                <td class="imei-field" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif !important;">
+                    <div class="{% if form.name.errors %}errors{% endif %}">
+                        <span>{{ form.name }}</span>
+                        {{ form.name.errors }}
+                    </div>
+                </td>
+                <td class="icc_id-field" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif !important;">
+                    <div class="{% if form.icc_id.errors %}errors{% endif %}">
+                        <span>{{ form.icc_id }}</span>
+                        {{ form.icc_id.errors }}
+                    </div>
+                </td>
+                <td class="comments-field" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif !important;">
+                    <div class="{% if form.comments.errors %}errors{% endif %}">
+                        <span>{{ form.comments }}</span>
+                        {{ form.comments.errors }}
+                    </div>
+                </td>
+                <td>
+                    <span class="deletelink">{{ form.DELETE }}</span>
+                </td>
+            </tr>
+            {% endfor %}
+            </table>
+        {% if profile.user.terminal_set.all|length == 0 %}
+            <div id="no_terminals_msg">{% trans "No terminals assigned to this profile" %}</div>
+        {% endif %}
+        </div>
+
+        <h3>{% trans 'Operators' %}</h3>
+        <div class="form-row">
+            {{ inline_formsets.operator_inline_formset.management_form }}
+            <table class="comm_admin_inline_formset_table" id="{{ inline_formsets.operator_inline_formset.formset_element_id }}" style="border: none;">
+            <tr>
+                <th>{% trans 'Name' %}</th>
+                <th>{% trans 'PIN' %}</th>
+                <th class="addlink"><span>{% trans "Add a new operator" %}</span></th>
+            </tr>
+            {% for form in inline_formsets.operator_inline_formset %}
+            <tr class="{% if form.cleaned_data.DELETE == True %}deleted{% endif %}">
+                {{ form.id }}
+                <td class="op-name-field" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif !important;">
+                    <div class="{% if form.name.errors %}errors{% endif %}">
+                        <span>{{ form.name }}</span>
+                        {{ form.name.errors }}
+                    </div>
+                </td>
+                <td class="op-pin-field" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif !important;">
+                    <div class="{% if form.pin.errors %}errors{% endif %}">
+                        <span>{{ form.pin }}</span>
+                        {{ form.pin.errors }}
+                    </div>
+                </td>
+                <td>
+                    <span class="deletelink">{{ form.DELETE }}</span>
+                </td>
+            </tr>
+            {% endfor %}
+            </table>
+        {% if profile.user.operator_set.all|length == 0 %}
+            <div id="no_operators_msg">{% trans "No operator assigned to this profile" %}</div>
+        {% endif %}
+        </div>
+
+        {% if form.reward_percentage != None %}
+            <h3>{% trans 'Business Cause Settings' %}</h3>
+            <div>
+                {% if form.reward_percentage.help_text %}
+                    <p class="help">{{ form.reward_percentage.help_text|safe }}</p>
+                {% endif %}
+            </div><br>
+            <div>
+                <table style="border: none;">
+                    <tr>
+                        <td style="width: 85%; font-family: 'Helvetica Neue', Helvetica,Arial, sans-serif !important;">{{ form.reward_percentage.0 }}</td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-family: 'Helvetica Neue', Helvetica,Arial, sans-serif !important;">{{ form.reward_percentage.1 }}</td>
+                        <td style="white-space: nowrap;">
+                            <div class="form-row {% if form.transaction_percentage.errors %}errors{% endif %}">
+                                {{ form.transaction_percentage.errors }}
+                                {{ form.transaction_percentage }} %
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        {% endif %}
+    </fieldset>
+
+    {% if profile.cyclos_group|is_goededoelen_group %}
+        {% include "community_admin/fragments/_card_info.html" %}
+    {% else %}
+        <fieldset class="module aligned">
+            <h2>{% trans 'Invoices and account status' %}</h2>
+            <div class="form-row">
+                <label>{% trans 'Current balance (this month)' %}</label>
+                <input type="text" value="{{ profile.current_balance|floatformat:'0' }}" disabled="disabled">
+            </div>
+        </fieldset>
+    {% endif %}
+    {% comment %}
+    <!-- #3159 Remove old billing-related fields -->
+    {% else %}
+        <fieldset class="module aligned">
+            <h2>{% trans 'Invoices and account status' %}</h2>
+            <div class="form-row">
+                <label>{% trans 'Total number of invoices' %}</label>
+
+                <input type="text" value="{{ profile.user.invoices_from.count }}" disabled="disabled">
+                <button><a href="">{% trans 'List invoices & credit' %}</a></button>
+
+                <input type="text" value="" disabled="disabled">
+            </div>
+            <div class="form-row">
+                <label>{% trans 'Total number of credit notes' %}</label>
+                <input type="text" value="" disabled="disabled">
+            </div>
+            <div class="form-row">
+                <label>{% trans 'Total amount debited' %}</label>
+                <input type="text" value="" disabled="disabled">
+            </div>
+            <div class="form-row">
+                <label>{% trans 'Total amount credited' %}</label>
+                <input type="text" value="" disabled="disabled">
+            </div>
+            <div class="form-row">
+                <label>{% trans 'Total amount to debit' %}</label>
+                <input type="text" value="" disabled="disabled">
+            </div>
+            <div class="form-row">
+                <label>{% trans 'Total amount to credit' %}</label>
+                <input type="text" value="" disabled="disabled">
+            </div>
+            <div class="form-row">
+                <label>{% trans 'Current balance (this month)' %}</label>
+                <input type="text" value="{{ profile.current_balance|floatformat:'0' }}" disabled="disabled">
+            </div>
+        </fieldset>
+    {% endcomment %}
+
+    <fieldset class="module aligned">
+        <h2>{% trans 'Additional user information' %}</h2>
+
+        <div class="form-row{% if form.gender.errors %} errors{% endif %}">
+            {{ form.gender.errors }}
+            {{ form.gender.label_tag }}
+            {{ form.gender }}
+            {% if form.gender.help_text %}
+                <p class="help">{{ form.gender.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.date_of_birth.errors %} errors{% endif %}">
+            {{ form.date_of_birth.errors }}
+            {{ form.date_of_birth.label_tag }}
+            {{ form.date_of_birth }}
+            {% if form.date_of_birth.help_text %}
+                <p class="help">{{ form.date_of_birth.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.id_type.errors %} errors{% endif %}">
+            {{ form.id_type.errors }}
+            {{ form.id_type.label_tag }}
+            {{ form.id_type }}
+            {% if form.id_type.help_text %}
+                <p class="help">{{ form.id_type.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.document_number.errors %} errors{% endif %}">
+            {{ form.document_number.errors }}
+            {{ form.document_number.label_tag }}
+            {{ form.document_number }}
+            {% if form.document_number.help_text %}
+                <p class="help">{{ form.document_number.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.expiration_date.errors %} errors{% endif %}">
+            {{ form.expiration_date.errors }}
+            {{ form.expiration_date.label_tag }}
+            {{ form.expiration_date }}
+            {% if form.expiration_date.help_text %}
+                <p class="help">{{ form.expiration_date.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.address.errors %} errors{% endif %}">
+            {{ form.address.errors }}
+            {{ form.address.label_tag }}
+            {{ form.address }}
+            {% if form.address.help_text %}
+                <p class="help">{{ form.address.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.num_street.errors %} errors{% endif %}">
+            {{ form.num_street.errors }}
+            {{ form.num_street.label_tag }}
+            {{ form.num_street }}
+            {% if form.num_street.help_text %}
+                <p class="help">{{ form.num_street.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.extra_address.errors %} errors{% endif %}">
+            {{ form.extra_address.errors }}
+            {{ form.extra_address.label_tag }}
+            {{ form.extra_address }}
+            {% if form.extra_address.help_text %}
+                <p class="help">{{ form.extra_address.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.postal_code.errors %} errors{% endif %}">
+            {{ form.postal_code.errors }}
+            {{ form.postal_code.label_tag }}
+            {{ form.postal_code }}
+            {% if form.postal_code.help_text %}
+                <p class="help">{{ form.postal_code.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.city.errors %} errors{% endif %}">
+            {{ form.city.errors }}
+            {{ form.city.label_tag }}
+            {{ form.city }}
+            {% if form.city.help_text %}
+                <p class="help">{{ form.city.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.phone_number.errors %} errors{% endif %}">
+            {{ form.phone_number.errors }}
+            {{ form.phone_number.label_tag }}
+            {{ form.phone_number }}
+            {% if form.phone_number.help_text %}
+                <p class="help">{{ form.phone_number.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.mobile_number.errors %} errors{% endif %}">
+            {{ form.mobile_number.errors }}
+            {{ form.mobile_number.label_tag }}
+            {{ form.mobile_number }}
+            {% if form.mobile_number.help_text %}
+                <p class="help">{{ form.mobile_number.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.registration_number.errors %} errors{% endif %}">
+            {{ form.registration_number.errors }}
+            {{ form.registration_number.label_tag }}
+            {{ form.registration_number }}
+            {% if form.registration_number.help_text %}
+                <p class="help">{{ form.registration_number.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.account_holder.errors %} errors{% endif %}">
+            {{ form.account_holder.errors }}
+            {{ form.account_holder.label_tag }}
+            {{ form.account_holder }}
+            {% if form.account_holder.help_text %}
+                <p class="help">{{ form.account_holder.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.iban.errors %} errors{% endif %}">
+            {{ form.iban.errors }}
+            {{ form.iban.label_tag }}
+            {{ form.iban }}
+            {% if form.iban.help_text %}
+                <p class="help">{{ form.iban.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.bic_code.errors %} errors{% endif %}">
+            {{ form.bic_code.errors }}
+            {{ form.bic_code.label_tag }}
+            {{ form.bic_code }}
+            {% if form.bic_code.help_text %}
+                <p class="help">{{ form.bic_code.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.mandate_id.errors %} errors{% endif %}">
+            {{ form.mandate_id.errors }}
+            {{ form.mandate_id.label_tag }}
+            {{ form.mandate_id }}
+            {% if form.mandate_id.help_text %}
+                <p class="help">{{ form.mandate_id.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.signature_date.errors %} errors{% endif %}">
+            {{ form.signature_date.errors }}
+            {{ form.signature_date.label_tag }}
+            {{ form.signature_date }}
+            {% if form.signature_date.help_text %}
+                <p class="help">{{ form.signature_date.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.company_website.errors %} errors{% endif %}">
+            {{ form.company_website.errors }}
+            {{ form.company_website.label_tag }}
+            {{ form.company_website }}
+            {% if form.company_website.help_text %}
+                <p class="help">{{ form.company_website.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.company_description.errors %} errors{% endif %}">
+            {{ form.company_description.errors }}
+            {{ form.company_description.label_tag }}
+            {{ form.company_description }}
+            {% if form.company_description.help_text %}
+                <p class="help">{{ form.company_description.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+    {% comment %}
+        #3447 Remove BTW number field
+        <div class="form-row{% if form.vat_number.errors %} errors{% endif %}">
+            {{ form.vat_number.errors }}
+            {{ form.vat_number.label_tag }}
+            {{ form.vat_number }}
+            {% if form.vat_number.help_text %}
+                <p class="help">{{ form.vat_number.help_text|safe }}</p>
+            {% endif %}
+        </div>
+    {% endcomment %}
+
+        <div class="form-row{% if form.picture.errors %} errors{% endif %}">
+            {{ form.picture.errors }}
+            {{ form.picture.label_tag }}
+            {{ form.picture }}
+            {% if form.picture.help_text %}
+                <p class="help">{{ form.picture.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.account_first_activated.errors %} errors{% endif %}">
+            {{ form.account_first_activated.errors }}
+            {{ form.account_first_activated.label_tag }}
+            {{ form.account_first_activated }}
+            {% if form.account_first_activated.help_text %}
+                <p class="help">{{ form.account_first_activated.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.account_last_deactivated.errors %} errors{% endif %}">
+            {{ form.account_last_deactivated.errors }}
+            {{ form.account_last_deactivated.label_tag }}
+            {{ form.account_last_deactivated }}
+            {% if form.account_last_deactivated.help_text %}
+                <p class="help">{{ form.account_last_deactivated.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.account_last_login.errors %} errors{% endif %}">
+            {{ form.account_last_login.errors }}
+            {{ form.account_last_login.label_tag }}
+            {{ form.account_last_login }}
+            {% if form.account_last_login.help_text %}
+                <p class="help">{{ form.account_last_login.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        {% comment %}
+        #3447 Remove picture height and width fields
+        <div class="form-row{% if form.picture_height.errors %} errors{% endif %}">
+            {{ form.picture_height.errors }}
+            {{ form.picture_height.label_tag }}
+            {{ form.picture_height }}
+            {% if form.picture_height.help_text %}
+                <p class="help">{{ form.picture_height.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.picture_width.errors %} errors{% endif %}">
+            {{ form.picture_width.errors }}
+            {{ form.picture_width.label_tag }}
+            {{ form.picture_width }}
+            {% if form.picture_width.help_text %}
+                <p class="help">{{ form.picture_width.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        {% endcomment %}
+
+        {% comment %}
+        <!-- #2842 -->
+        <div class="form-row{% if form.groupset.errors %} errors{% endif %}">
+            {{ form.groupset.errors }}
+            <label for="{{ form.groupset.id_for_label }}" class="required">{{ form.groupset.label }}</label>
+            {{ form.groupset }}
+            {% if form.groupset.help_text %}
+                <p class="help">{{ form.groupset.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.web_payments_enabled.errors %} errors{% endif %}">
+            {{ form.web_payments_enabled.errors }}
+            <label for="{{ form.web_payments_enabled.id_for_label }}">{{ form.web_payments_enabled.label }}</label>
+            {{ form.web_payments_enabled }}
+            {% if form.web_payments_enabled.help_text %}
+                <p class="help">{{ form.web_payments_enabled.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        {% endcomment %}
+    </fieldset>
+
+{% endblock %}

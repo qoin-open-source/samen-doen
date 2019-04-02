@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Content List' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'communityadmin/sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <h2>{% trans 'Content' %} - {{ community }}</h2>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-10">
+            {% if community_messages %}
+                <table class="table rwd-table transactions-table">
+                    <tbody>
+                        <tr class="table-head">
+                            <th>{% trans 'page URL' %}</th>
+                            <th>{% trans 'placeholder' %}</th>
+                            <th>{% trans 'language' %}</th>
+                            <th>{% trans 'content' %}</th>
+                            <th></th>
+                        </tr>
+                        {% for message in community_messages %}
+                            <tr>
+                                <td><a href="{{ message.plugin.page.get_absolute_url }}">{{ message.plugin.page.get_absolute_url }}</a></td>
+                                <td>{{ message.plugin.placeholder }}</td>
+                                <td>{{ message.plugin.language }}</td>
+                                <td>{{ message.body|truncatewords_html:10|safe }}</td>
+                                <td>
+                                    <a href="{% url 'communityadmin_ns:edit-content' message.id %}"><i class="icon-edit"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {# Pagination #}
+                {% include "includes/paginator.html" %}
+            {% else %}
+                <div class="row">
+                    <div class="alert alert-warning" role="alert">
+                        {% trans 'No content found' %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

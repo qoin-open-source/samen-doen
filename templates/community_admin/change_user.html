@@ -1,0 +1,74 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static admin_modify %}
+{% load admin_urls %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+    {{ media }}
+    {{ form.media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
+
+{% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
+
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'community_admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; <a href="">{% trans 'Users' %}</a>
+        &rsaquo; <a href="{% url 'community_admin:profile_userprofile_changelist' %}">{% trans 'User profiles' %}</a>
+        &rsaquo; {% trans 'Edit profile' %} {{ profile.cyclos_group.name }}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        {% block object-tools %}
+            <ul class="object-tools">
+                {% block object-tools-items %}
+                    {% comment %}
+                    # #3447 Remove history and view on site buttons
+                    <li><a href="" class="historylink">{% trans "History" %}</a></li>
+                    <li><a href="" class="viewsitelink">{% trans "View on site" %}</a></li>
+                    {% endcomment %}
+                {% endblock %}
+            </ul>
+        {% endblock %}
+
+        <form enctype="multipart/form-data" action="." method="post" id="edit_user_form">
+            {% csrf_token %}
+
+            <div>
+                {% if form.errors %}
+                    <p class="errornote">
+                        {% blocktrans count counter=errors|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+                    </p>
+
+                    {{ form.form.non_field_errors }}
+                {% endif %}
+
+                {% block field_sets %}
+                    {# Overridden in different specific user templates. #}
+                {% endblock %}
+
+                {% block after_field_sets %}{% endblock %}
+
+                {% block after_related_objects %}{% endblock %}
+
+                {% block submit_buttons_bottom %}
+                    <div class="submit-row">
+                        <p class="deletelink-box"><a href="{% url 'community_admin_profile_reset_password' %}?email={{ form.email.value }}" class="changelink">{% trans 'Reset password' %}</a></p>
+                        <input type="submit" value="{% trans 'Save' %}" class="default" name="_save" />
+                {#        {% if show_delete_link %}<p class="deletelink-box"><a href="{% url opts|admin_urlname:'delete' original.pk|admin_urlquote %}" class="deletelink">{% trans "Delete" %}</a></p>{% endif %}#}
+                {#        {% if show_save_as_new %}<input type="submit" value="{% trans 'Save as new' %}" name="_saveasnew" {{ onclick_attrib }}/>{%endif%}#}
+                {#        {% if show_save_and_add_another %}<input type="submit" value="{% trans 'Save and add another' %}" name="_addanother" {{ onclick_attrib }}/>{% endif %}#}
+                {#        {% if show_save_and_continue %}<input type="submit" value="{% trans 'Save and continue editing' %}" name="_continue" {{ onclick_attrib }}/>{% endif %}#}
+                    </div>
+                {% endblock %}
+            </div>
+        </form>
+    </div>
+{% endblock %}

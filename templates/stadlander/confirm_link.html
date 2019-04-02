@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Login' %}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-6 col-lg-10">
+            {% blocktrans %}
+            <h2>You still have a SamenDoen account</h2>
+            <p>We have found an existing account in the Samen Doen system with your registered email address {{ email }}.<br/>
+            Would you like to link your Stadlander account with this account?<br/>
+            After linking the accounts (by clicking 'Yes'), you will be able to get through to your Positoos data in one click from your Mijn Stadlander login.</p>
+            {% endblocktrans %}
+            <form action="" method="post">
+                {% csrf_token %}
+                        {{ form.as_hidden }}
+            <input type="submit" name="link_yes" value="{% trans "Yes" %}" />
+            <input type="submit" name="link_no" value="{% trans "No" %}" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

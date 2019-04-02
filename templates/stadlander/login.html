@@ -1,0 +1,33 @@
+{% extends "registration/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Login' %}{% endblock %}
+
+{% block content %}
+        <div class="five columns">
+            <div class="block sidebar-menu not-mobile">
+                {% include 'includes/accounts_sidemenu.html' %}
+            </div><!-- end sidebar menu -->
+
+        </div><!-- end five columns sidebar -->
+
+        <div class="eleven columns">
+
+    {% if user.is_authenticated %}
+        <p>{% trans 'You are logged in' %}</p><br />
+        <a href="{% url 'accounts-update-profile' %}">{% trans 'Edit my profile' %}</a>
+
+    {% else %}
+
+        <h4>Login</h4>
+
+        {% if form.non_field_errors %}
+        <div class="element form-error">
+            <p>{{ form.non_field_errors }} </p>
+        </div>
+        {% endif %}
+
+        <a class="btn btn-rounded btn-blue" href="{{STADLANDER_LOGIN_URL}}">{% trans "Login on Stadlander" %}</a><br />
+    {% endif %}
+        </div>
+{% endblock %}

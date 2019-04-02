@@ -1,0 +1,23 @@
+{% load i18n %}
+
+{% url 'marketplace' as marketplace_url %}
+
+{% url 'profielen-map' as marketplace_map_url %}
+{% url 'marketplace-ads' as marketplace_ads_url %}
+{% url 'profielen-targetted' as business_targetted_url %}
+{% url 'campaign-list' as campaign_list_url %}
+
+<div class="row marketplace-buttons">
+    <div class="col-sm-5 col-md-4 col-lg-3">
+        <form action="{% if search_on_map %}{{marketplace_map_url}}{% else %}{% if business_list %}{{ business_targetted_url }}{% else %}{% ifequal start_tab 'campaigns' %}{{ campaign_list_url }}{% else %}{{ marketplace_ads_url }}{% endifequal %}{% endif %}{% endif %}" method="get" class="form">
+            <input id="id_search" name="search" type="text" class="form-control marketplace-buttons-search" placeholder="zoeken"{% if search_term %} value="{{ search_term }}"{% endif %} />
+        </form>
+    </div>
+
+    <div class="col-sm-7 col-md-8 col-lg-9">
+        <a class="btn btn-rounded {% if request.path == marketplace_map_url %} btn-green {% endif %}"    href="{{ marketplace_map_url }}"><i class="icon icon-map"></i>{% trans 'map' %}</a>
+        <a class="btn btn-rounded {% if request.path == business_targetted_url or request.path == marketplace_url %} btn-green {% endif %}" href="{{ business_targetted_url }}"><i class="icon icon-company"></i> {% trans 'profiles' %}</a>
+        <a class="btn btn-rounded {% if request.path == marketplace_ads_url %} btn-green {% endif %}"        href="{{ marketplace_ads_url }}"><i class="icon icon-star"></i> {% trans 'ads' %}</a>
+        <a class="btn btn-rounded {% if request.path == campaign_list_url %} btn-green {% endif %}" href="{{ campaign_list_url }}"><i class="icon icon-calendar"></i> {% trans 'activities' %}</a>
+    </div>
+</div>

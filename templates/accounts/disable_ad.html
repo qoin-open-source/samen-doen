@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans 'Enable / Disable Ad' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2>{% trans 'Enable / Disable Ad' %}</h2>
+
+            <hr>
+
+            <form id="place-ad-form" method="post" action="." class="element form" enctype="multipart/form-data">{% csrf_token %}
+                <div class="form-group">
+                    <label>{% trans 'Title' %}</label>
+                    <div>{{ object }}</div>
+                </div>
+
+                <div class="form-group {% if form.status.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_status">{% trans 'status' %}</label>
+                    {% for error in form.status.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <select name="status" class="form-control s-selecter">
+                        {% for value,item in form.status.field.choices %}
+                            <option value="{{ value }}" {% if form.status.value == value %}selected{% endif %}>{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <br>
+                <br>
+
+                <button class="btn btn-rounded btn-blue">{% trans 'Enable / Disable Ad' %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

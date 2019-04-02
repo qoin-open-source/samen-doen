@@ -1,0 +1,65 @@
+{% load i18n staticfiles pagination_tags thumbnail %}
+
+    {# Dropzone.js configuration #}
+    <script type="text/javascript">
+        var csrftoken = $.cookie('csrftoken');
+
+        var mockFile = { name: "Filename", size: 12345 };
+        Dropzone.autoDiscover = false;
+        $(".dropzone").dropzone({ url: "{{ image_endpoint }}",
+            maxFiles: 3, {# TODO: remove 1 for each in ad_images #}
+            parallelUploads: 100,
+            addRemoveLinks: true,
+            headers: {'X-CSRFToken': csrftoken},
+            acceptedFiles: "image/*",
+            paramName: "image",
+            removedfile: function(file) { {# Image removal handler, sends a 'DELETE' to the image endpoint #}
+                var name = file.name;
+                $.ajax({type: 'DELETE', url: "{{ image_endpoint }}",
+                        data: "id="+name, dataType:'html'});
+                var _ref;
+                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            },
+            init: function() {
+                {# Showing currently uploaded images, if any. #}
+                {% for image in ad_images %}
+                    var mockFile = {
+                        name: "{{ image.caption }}",
+                        size: {% if image.image.exists %}{{ image.image.size|force_escape }}{% else %}0{% endif %}
+                    };
+
+                    this.emit("addedfile", mockFile);
+                    {% with t=image.image|thumbnailer %}
+                    this.emit("thumbnail", mockFile, "{{ t.profilepicture.url }}");
+                    {% endwith %}
+                {% endfor %}
+
+                this.on("queuecomplete", function() {
+                    {# Show a message when all images are uploaded successfully. #}
+                    $("#message").append(
+                        '<div style="color: green; font-size: 15px;">{% trans "Images uploaded successfully" %}</div>').fadeTo(
+                            6500, 0, function () {
+                                $(this).delay(600);
+                                $(this).html('<div></div>');
+                                $(this).fadeTo(600, 1);
+                            });
+                });
+            },
+            dictDefaultMessage: "{% trans "Drop files here to upload" %}",
+            dictFallbackMessage: "{% trans "Your browser does not support drag'n'drop file uploads." %}",
+            dictFallbackText: "{% trans "Please use the fallback form below to upload your files like in the olden days." %}",
+            dictFileTooBig: "{% trans "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB." %}",
+            dictInvalidFileType: "{% trans "You can't upload files of this type." %}",
+            dictResponseError: "{% trans "Server responded with {{statusCode}} code." %}",
+            dictCancelUpload: "{% trans "Cancel upload" %}",
+            dictCancelUploadConfirmation: "{% trans "Are you sure you want to cancel this upload?" %}",
+            dictRemoveFile: "{% trans "Remove file" %}",
+            dictRemoveFileConfirmation: null,
+            dictMaxFilesExceeded: "{% trans "You can not upload any more files." %}"
+        });
+
+        // add class for language, which allows for the image based text to be translatable
+        var dropzone_language = "{{ request.LANGUAGE_CODE }}";
+        $('.dropzone').addClass(dropzone_language);
+
+    </script>

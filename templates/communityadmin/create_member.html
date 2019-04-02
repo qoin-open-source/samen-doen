@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+{% load i18n thumbnail staticfiles cc3_tags %}
+
+
+{% block title %}
+    {% if business %}
+        {% trans 'Create business member' %}
+    {% elif cause %}
+        {% trans 'Create good cause member' %}
+    {% elif individual %}
+        {% trans 'Create individual member' %}
+    {% endif %}
+{% endblock %}
+
+{% block sidemenu %}
+    {% include 'communityadmin/sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+        <div class="col-md-6 col-lg-8">
+            {% if business %}
+                <h2>{% trans 'Create business member' %}</h2>
+            {% elif cause %}
+                <h2>{% trans 'Create good cause member' %}</h2>
+            {% elif individual %}
+               <h2>{% trans 'Create individual member' %}</h2>
+            {% endif %}
+
+            {% include 'includes/messages.html' %}
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% trans 'Please, correct the errors below.' %}
+                </div>
+            {% endif %}
+
+            <form id="update_profile_form" method="post" action="." class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group {% if form.picture.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_contact_name">{% trans 'Profile picture' %}</label>
+                    {% for error in form.picture.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+
+                    {% if form.instance.profile.get_picture %}
+                        {% thumbnail form.instance.profile.picture 150x150 upscale as thumb %}
+                        <img class="" alt="{% trans 'Profile picture' %}" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
+                    {% else %}
+                        {%   if form.instance.profile.cyclos_group|is_organisaties_group %} <img src="{% static "img/SD-icoon-winkelier-150.png" %}" class="img-responsive" alt=""/>
+                        {% elif form.instance.profile.cyclos_group|is_instituties_group  %} <img src="{% static "img/SD-icoon-instelling-150.png" %}" class="img-responsive" alt=""/>
+                        {% elif form.instance.profile.cyclos_group|is_goededoelen_group  %} <img src="{% static "img/SD-icoon-spaardoel-150.png" %}" class="img-responsive" alt=""/>
+                        {% elif form.instance.profile.cyclos_group|is_consumenten_group  %} <img src="{% static "img/SD-icoon-spaarder-150.png" %}" class="img-responsive" alt=""/>
+                        {% else                                                         %} <i class="icon icon-star"></i> {% endif %}
+                    {% endif %}
+
+                    <br><br>
+                    <input type="file" id="id_picture" name="picture" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <input type="hidden" id="id_community" placeholder="{{ community }}" name="{{ form.community.html_name }}" value="{{ community.id }}" class="form-control">
+                </div>
+
+                <div class="form-group {% if form.first_name.errors or form.last_name.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_first_name">{% trans 'Name' %}</label>
+                    {% for error in form.first_name.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    {% for error in form.tussenvoegsel.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    {% for error in form.last_name.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <input type="text" id="id_first_name" placeholder="{% trans 'first name' %}" name="first_name"{% if form.first_name.value %} value="{{ form.first_name.value }}"{% endif %} class="form-control">
+                    <input type="text" id="id_tussenvoegsel" placeholder="{% trans 'tussenvoegsel' %}" name="tussenvoegsel" maxlength="255"{% if form.tussenvoegsel.value %} value="{{ form.tussenvoegsel.value }}"{% endif %} class="form-control" />
+                    <input type="text" id="id_last_name" placeholder="{% trans 'last name' %}" name="last_name"{% if form.last_name.value %} value="{{ form.last_name.value }}"{% endif %} class="form-control">
+                </div>
+
+                <div class="form-group {% if form.gender.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_gender">{% trans "Gender" %}</label>
+                    {% for error in form.gender.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <br />
+                    <div class="radio">
+                        {% for radio in form.gender %}
+                            {{ radio }}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group{% if form.date_of_birth.errors %} has-error{% endif %}">
+                    <label class="control-label" for="id_date_of_birth">{% trans "Date of birth" %}</label>
+                    {% for error in form.date_of_birth.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <br />
+                    <div class="datepicker col-sm-12">
+                        <input type="text" id="id_date_of_birth" placeholder="{% trans 'dd-mm-YYYY' %}" name="date_of_birth"{% if form.date_of_birth.value %} value="{{ form.date_of_birth.value }}"{% endif %}  class="form-control">
+                    </div>
+                </div>
+                <hr>
+
+
+                <div class="form-group {% if form.address.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_address">{% trans "Address" %}</label>
+                    {% for error in form.address.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <input type="text" id="id_address" placeholder="{{ form.address.help_text }}" name="address"{% if form.address.value %} value="{{ form.address.value }}"{% endif %}  class="form-control">
+                </div>
+
+                <div class="form-group {% if form.num_street.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_num_street">{% trans "House number" %}</label>
+                    {% for error in form.num_street.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <input type="text" id="id_num_street" placeholder="{{ form.num_street.help_text }}" name="num_street"{% if form.num_street.value %} value="{{ form.num_street.value }}"{% endif %}  class="form-control">
+                </div>
+
+                <div class="form-group {% if form.extra_address.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_extra_address">{% trans "Extra address" %}</label>
+                    {% for error in form.extra_address.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <input type="text" id="id_extra_address" placeholder="{{ form.extra_address.help_text }}" name="extra_address"{% if form.extra_address.value %} value="{{ form.extra_address.value }}"{% endif %}  class="form-control">
+                </div>
+
+                <div class="form-group {% if form.postal_code.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_postal_code">{% trans "Postal code" %}</label>
+                    {% for error in form.postal_code.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <input type="text" id="id_postal_code" placeholder="{{ form.postal_code.help_text }}" name="postal_code"{% if form.postal_code.value %} value="{{ form.postal_code.value }}"{% endif %}  class="form-control">
+                </div>
+
+                <div class="form-group {% if form.city.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_city">{% trans "City" %}</label>
+                    {% for error in form.city.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <input type="text" id="id_city" placeholder="{{ form.city.help_text }}" name="city"{% if form.city.value %} value="{{ form.city.value }}"{% endif %}  class="form-control">
+                </div>
+
+                <div class="form-group {% if form.country.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_country">{% trans "Country" %}</label>
+                    {% for error in form.country.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <select name="country" class="form-control s-selecter">
+                        {% for value,item in form.country.field.choices %}
+                            <option value="{{ value }}" {% if value == 'NL' %}selected="selected"{% endif %}>{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group {% if form.phone_number.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_phone_number">{% trans "Phone number" %}</label>
+                    {% for error in form.phone_number.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <input type="text" id="id_phone_number" placeholder="{{ form.phone_number.help_text }}" name="phone_number"{% if form.phone_number.value %} value="{{ form.phone_number.value }}"{% endif %}  class="form-control">
+                </div>
+
+                <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_email">{% trans "E-mail" %} *</label>
+                    {% for error in form.email.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <input type="text" id="id_email" placeholder="{{ form.email.help_text }}" name="email"{% if form.email.value %} value="{{ form.email.value }}"{% endif %} class="form-control">
+                </div>
+
+                {% if business or cause %}
+                    <div class="form-group {% if form.business_name.errors %}has-error{% endif %}">
+                        <label class="control-label" for="id_business_name">
+                            {% if business %}
+                                {% trans "Business name" %} *
+                            {% elif individual %}
+                                {% trans "Business name" %}
+                            {% elif cause %}
+                                {% trans "Cause name" %}
+                            {% endif %}
+                        </label>
+                        {% for error in form.business_name.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <input type="text" id="id_business_name" placeholder="{{ form.business_name.help_text }}" name="business_name"{% if form.business_name.value %} value="{{ form.business_name.value }}"{% endif %} class="form-control">
+                    </div>
+
+                    <div class="form-group {% if form.company_description.errors %}has-error{% endif %}">
+                        <label class="control-label" for="id_company_description">{% trans "Company description" %}</label>
+                        {% for error in form.company_description.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <textarea id="id_company_description" placeholder="{{ form.company_description.help_text }}" name="company_description" class="form-control" cols="30" rows="10">{% if form.company_description.value %}{{ form.company_description.value }}{% endif %}</textarea>
+                    </div>
+
+                    <div class="form-group {% if form.company_website.errors %}has-error{% endif %}">
+                        <label class="control-label" for="id_company_website">{% trans "Company website" %}</label>
+                        {% for error in form.company_website.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <input type="text" id="id_company_website" placeholder="{{ form.company_website.help_text }}" name="company_website"{% if form.company_website.value %} value="{{ form.company_website.value }}"{% endif %} class="form-control">
+                    </div>
+
+                    <div class="form-group {% if form.iban.errors %}has-error{% endif %}">
+                        <label class="control-label" for="id_iban">{% trans "IBAN number" %}</label>
+                        {% for error in form.iban.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <input type="text" id="id_iban" placeholder="{{ form.iban.help_text }}" name="iban"{% if form.iban.value %} value="{{ form.iban.value }}"{% endif %} class="form-control">
+                    </div>
+
+                    <div class="form-group {% if form.bic_code.errors %}has-error{% endif %}">
+                        <label class="control-label" for="id_bic_code">{% trans "BIC code" %}</label>
+                        {% for error in form.bic_code.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <input type="text" id="id_bic_code" placeholder="{{ form.bic_code.help_text }}" name="bic_code"{% if form.bic_code.value %} value="{{ form.bic_code.value }}"{% endif %} class="form-control">
+                    </div>
+
+                    <div class="form-group {% if form.mandate_id.errors %}has-error{% endif %}">
+                        <label class="control-label" for="id_mandate_id">{% trans "Mandate" %}</label>
+                        {% for error in form.mandate_id.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <input type="text" id="id_mandate_id" placeholder="{{ form.mandate_id.help_text }}" name="mandate_id"{% if form.mandate_id.value %} value="{{ form.mandate_id.value }}"{% endif %} class="form-control">
+                    </div>
+
+                    <div class="form-group {% if form.account_holder.errors %}has-error{% endif %}">
+                        <label class="control-label" for="id_account_holder">{% trans "Account holder" %}</label>
+                        {% for error in form.account_holder.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <input type="text" id="id_account_holder" placeholder="{{ form.account_holder.help_text }}" name="account_holder"{% if form.account_holder.value %} value="{{ form.account_holder.value }}"{% endif %} class="form-control">
+                    </div>
+                    <hr>
+                {% endif %}
+
+                <div class="form-group {% if form.web_payments_enabled.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_web_payments_enabled">{% trans "Web payments enabled" %}</label>
+                    {% for error in form.web_payments_enabled.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <div class="element checkbox-container checkbox">
+                        {{ form.web_payments_enabled }}
+                    </div>
+                </div>
+                <hr>
+
+                <div class="form-group{% if form.signature_date.errors %} has-error{% endif %}">
+                    <label class="control-label" for="id_signature_date">{% trans "Signature date" %}</label>
+                    {% for error in form.signature_date.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <br />
+                    <div class="datepicker col-sm-12">
+                        <input type="text" id="id_signature_date" placeholder="{% trans 'dd-mm-YYYY' %}" name="signature_date"{% if form.signature_date.value %} value="{{ form.signature_date.value }}"{% endif %}  class="form-control">
+                    </div>
+                </div>
+                <hr>{% if form.is_visible %}
+                <div class="form-group{% if form.is_visible.errors %} has-error{% endif %}">
+                    <label class="control-label" for="id_is_visible">{{ form.is_visible.label }}</label>
+                    {% for error in form.is_visible.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <br />
+                    <div class="checkbox">
+                        <input type="checkbox" id="id_is_visible" name="is_visible" value="1"{% if form.is_visible.value %} checked=checked{% endif %}>
+                        {{ form.is_visible.help_text }}
+                    </div>
+                </div>{% endif %}
+
+                <div class="form-group {% if form.categories.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_categories">{% trans "Help categories" %}</label>
+                    {% for error in form.categories.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <br />
+                    {{ form.categories }}
+                </div>
+
+                <br>
+                <button class="btn btn-rounded btn-blue" id="update_profile_form_button">{% trans 'Save new profile' %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

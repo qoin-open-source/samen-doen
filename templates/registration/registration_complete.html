@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Registration complete' %}{% endblock %}
+
+{% block content %}
+    <h2>{% trans 'You are now registered' %}</h2>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-10">
+            <div class="alert alert-success" role="alert">
+                {% blocktrans %}
+                    <p>Within several minutes, you will receive an activation e-mail at the e-mail address you provided.</p>
+                    <p>By clicking on the link in the e-mail, you confirm your registration. This will complete the registration process and you will be able to login to SamenDoen using your user name and password.</p>
+                    <p>If you haven't received the activation e-mail, please check your Spambox!</p>
+                {% endblocktrans %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

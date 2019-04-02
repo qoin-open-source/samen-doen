@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Enquire' %}{% endblock %}
+
+{% block content %}
+    <div id="fb-root"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-5">
+                <section class="content">
+                    <h2>{% trans 'Enquire' %}</h2>
+
+                    {% if ad %}
+                        <div class="row marketplace-buttons">
+                            <div class="col-sm-6">
+                                <a class="btn btn-rounded btn-green" href="{% url 'marketplace-detail' ad.pk %}"><i class="icon icon-star"></i> {% trans 'go back to Ad' %}</a>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {% for error in form.non_field_errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <form action="." method="post" class="form">
+                            {% csrf_token %}
+
+                            {% if form.name.errors %}
+                                <div class="form-group has-error">
+                            {% else %}
+                                <div class="form-group">
+                            {% endif %}
+                                <label class="control-label" for="id_name">{% trans 'Name' %}</label>
+                                {% for error in form.name.errors %}
+                                    <label class="control-label"> - {{ error }}</label>
+                                {% endfor %}
+                                {# The fake 'showing' user name field - non editable by Qoin request in Trac ticket #2174 #}
+                                <input type="text" id="show_name" placeholder="{% trans 'name' %}" name="show_name" value="{{ form.name.value }}" class="form-control" disabled="disabled">
+                                {# The real user name field which will actually pass the user value to the backend. #}
+                                <input type="hidden" id="id_name" placeholder="{% trans 'name' %}" name="name" value="{{ form.name.value }}" class="form-control">
+                            </div>
+
+                            {% if form.body.errors %}
+                                <div class="form-group has-error">
+                            {% else %}
+                                <div class="form-group">
+                            {% endif %}
+                                <label class="control-label" for="id_body">{% trans 'Enquiry' %}</label>
+                                {% for error in form.body.errors %}
+                                    <label class="control-label"> - {{ error }}</label>
+                                {% endfor %}
+                                <div class="modal fade" tabindex="-1" role="dialog" id="empty-msg-modal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                    ×
+                                                </button>
+                                                <h3>{% trans "Invalid Form Data" %}</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                {% trans 'You must provide a message.' %}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-rounded btn-blue" data-dismiss="modal">{% trans "Ok" %}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <textarea id="id_body" name="body" class="form-control" cols="30" rows="10" required="required">{% if form.body.value %}{{ form.body.value }}{% endif %}</textarea>{{ form.ad_id }}
+                                <p id="empty-ta-msg" class='hidden' style="color: #a94442;">{% trans 'This field is required.' %}</p>
+                            </div>
+
+                            <p>{% blocktrans %}The advertiser can following your response to contact you via your e-mail address{% endblocktrans %}.</p>
+
+                            <button id="react-button" class="btn btn-rounded btn-blue">{% trans 'Send enquiry' %}</button>
+                        </form>
+                    {% else %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script src="{% static 'js/bootstrap/modal.js' %}"></script>
+    <script type="text/javascript">
+        $('#empty-ta-msg').hide();
+        $('#react-button').click(
+          function(e) {
+            e.preventDefault();
+            if (!$("#id_body").val()) {
+              $('#id_body').css('border-color', '#a94442');
+              $('#empty-ta-msg').removeClass('hidden').addClass('show');
+              $('#id_body').addClass('has-error');
+              $( "#empty-msg-modal" ).modal('show');
+            }
+            else {
+              $('#id_body').css('border-color', '');
+              $('#empty-ta-msg').removeClass('show').addClass('hidden');
+              $('.form').submit();
+            }
+            return false;
+         });
+    </script>
+{% endblock %}

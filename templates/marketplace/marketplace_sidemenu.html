@@ -1,0 +1,55 @@
+{% load i18n %}
+
+<div class="col-sm-5 col-md-4 col-lg-3">
+    <aside class="sidebar">
+        <div class="box">
+            <div class="box-title"  data-toggle="collapse" data-target="#box-1">
+                {% trans 'Filter options' %}
+                <i class="icon-arrow"></i>
+            </div>
+            <form action="." method="get">
+                {% csrf_token %}
+
+                {% for hidden in marketplace_form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+
+                <div id="box-1" class="box-content collapse in">
+                    <h4 style="color: #FFFFFF;">{% trans 'Community' %}</h4>
+                        {% if user.is_authenticated and user.cc3_profile.is_individual_profile %}
+                        <input type="hidden" name="community" id="id_community" value="{{ user.cc3_profile.community.id }}">
+                            {% for choice in marketplace_form.community.field.choices %}
+                        <div class="form-group"><div class="checkbox"><label for='{{ marketplace_form.community.auto_id }}_{{ forloop.counter0 }}_disabled'><input disabled="true" name='{{ marketplace_form.community.name }}_disabled'
+     id='{{ marketplace_form.community.auto_id }}_{{ forloop.counter0 }}_disabled' type='checkbox' value='{{ choice.0 }}'
+                                {% ifequal user.cc3_profile.community.id choice.0 %} checked='checked' {% endifequal %}/><span> {{ choice.1 }}</span></label></div></div>
+
+                {% endfor %}
+    {% else %}
+                    {{ marketplace_form.community }}
+{% endif %}
+
+{% if start_tab == 'campaigns' %}
+                    <h4 style="color: #FFFFFF;">{% trans 'categories' %}</h4>
+                    {{ marketplace_form.categories }}
+{% endif %}
+
+{% if start_tab == 'products_and_services' %}
+                    <h4 style="color: #FFFFFF;">{% trans 'Type' %}</h4>
+                    {{ marketplace_form.adtype }}
+{% endif %}
+
+{% if start_tab != 'campaigns' %}
+                    <h4 style="color: #FFFFFF;">Gebruikerstype</h4>
+                    {{ marketplace_form.profile_types }}
+{% endif %}
+
+{% if start_tab == 'products_and_services' %}
+                    <h4 style="color: #FFFFFF;">{% trans 'categories' %}</h4>
+                    {{ marketplace_form.categories }}
+{% endif %}
+                    <input type="submit" class="btn btn-rounded btn-white" value="filter"/>
+                </div>
+            </form>
+        </div>
+    </aside>
+</div>

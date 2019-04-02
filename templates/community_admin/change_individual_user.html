@@ -1,0 +1,433 @@
+{% extends "community_admin/change_user.html" %}
+{% load i18n admin_static admin_modify %}
+{% load admin_urls %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'community_admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; <a href="">{% trans 'Users' %}</a>
+        &rsaquo; <a href="{% url 'community_admin:profile_userprofile_changelist' %}">{% trans 'User profiles' %}</a>
+        &rsaquo; {% trans 'Edit profile' %} {{ profile.cyclos_group.name }}
+    </div>
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+    <script src="{% static 'js/lib/jquery.min.js' %}"></script>
+    <script src="{% static 'js/lib/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/dynamic_formsets.js' %}"></script>
+
+    <style>
+      #custom-handle {
+      width: 3em;
+      height: 1.6em;
+      top: 50%;
+      margin-top: -.8em;
+      text-align: center;
+      line-height: 1.6em;
+      }
+
+      #custom-handle.ui-state-default {
+        background: #009CDD;
+        border: 1px solid #1c75bc;
+        color: #ffffff;
+      }
+      #custom-handle.ui-state-active {
+        background: #f6f6f6;
+        border: 1px solid #c5c5c5;
+        color: #454545;
+      }
+    </style>
+
+{% include 'community_admin/fragments/inline_formset_styles.html' with inline_formset_id=card_inline_formset.formset_element_id %}
+
+    <script>
+    function sync_rel_number_field() {
+        if ($("#id_groupset").val() == {{ stadlander_groupset}}) {
+            $("label[for='id_rel_number']").addClass('required');
+            $("#id_rel_number").prop("readonly", false);
+        } else {
+            $("label[for='id_rel_number']").removeClass('required');
+            $("#id_rel_number").val('');
+            $("#id_rel_number").prop("readonly", true);
+        };
+    };
+
+    // slighlty different init for rel_number:
+    // prevent admin from changing if it's already set
+    function init_rel_number_field() {
+        if ($("#id_groupset").val() == {{ stadlander_groupset}}) {
+            $("label[for='id_rel_number']").addClass('required');
+            if ($("#id_rel_number").val() == '') {
+                $("#id_rel_number").prop("readonly", false);
+            } else {
+                $("#id_rel_number").prop("readonly", true);
+            }
+        } else {
+            $("label[for='id_rel_number']").removeClass('required');
+            $("#id_rel_number").val('');
+            $("#id_rel_number").prop("readonly", true);
+        };
+    };
+
+    $(document).ready(function(){
+
+        init_rel_number_field();
+
+        $("#id_groupset").change(function(){
+            sync_rel_number_field();
+        });
+
+        var handle = $( "#custom-handle" );
+
+        {% if form.donation_percent.value != None %}
+        var donation_percent = {{ form.donation_percent.value }};
+        {% else %}
+        var donation_percent = {{ min_donation_percent }};
+        {% endif %}
+
+        //var donation_percent = $('#donation_percent_slider').slider("option", "value");
+
+        $( "#donation_percent_slider" ).slider(
+          {
+            value: donation_percent,
+            step: 10,
+            min: {{ min_donation_percent }},
+            max: {{ max_donation_percent }},
+            animate: "fast",
+            create: function() {
+              $("#{{ form.donation_percent.id_for_label }}").val(donation_percent);
+              $("#donation_percent_text").text(donation_percent + "%");
+              handle.text( $( this ).slider( "value" ) + '%' );
+            },
+            slide: function(event, ui){
+              $("#{{ form.donation_percent.id_for_label }}").val(ui.value);
+              $( this ).find(".ui-slider-handle").text(ui.value + "%");
+              $("#donation_percent_text").text(ui.value + "%");
+            }
+          }
+        );
+
+        $('form').submit(function() {
+            // if the groupset has changed from SL to non-SL,
+            // ask for confirmation
+            var original_groupset = {{ profile.groupset.id }};
+            var conf_text = '{% trans "Moving user out of the Stadlander groupset will delete their Stadlander profile. Are you sure you want to proceed?" %}'
+            if ($("#id_groupset").val() != original_groupset) {
+                if (original_groupset == {{ stadlander_groupset}}) {
+                    var c = confirm(conf_text);
+                    return c; //c will be true or false
+                }
+            }
+            return true;
+        });
+
+        {% include 'community_admin/fragments/inline_formset_js.html' %}
+    });
+
+    </script>
+{% endblock %}
+
+{% block field_sets %}
+
+    <fieldset class="module aligned">
+        <h2>{% trans 'Key user information' %}</h2>
+
+        <div class="form-row{% if form.user_id.errors %} errors{% endif %}">
+            {{ form.user_id.errors }}
+            <label for="{{ form.user_id.id_for_label }}" class="required">{% trans 'User ID' %}</label>
+            <input type="text" id="id_user_id_dummy" name="user_id_dummy" value="{{ form.user_id.value }}" class="form-control" disabled="disabled">
+            <input type="hidden" id="id_user_id" name="user_id" value="{{ form.user_id.value }}" class="form-control">
+        </div>
+
+        <div class="form-row{% if form.cyclos_group.errors %} errors{% endif %}">
+            {{ form.cyclos_group.errors }}
+            <label for="{{ form.cyclos_group.id_for_label }}" class="required">{% trans 'User type' %}</label>
+            {{ form.cyclos_group }}
+        </div>
+
+        <div class="form-row{% if form.first_name.errors %} errors{% endif %}">
+            {{ form.first_name.errors }}
+            <label for="{{ form.first_name.id_for_label }}" class="required">{{ form.first_name.label }}</label>
+            {{ form.first_name }}
+            {% if form.first_name.help_text %}
+                <p class="help">{{ form.first_name.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.tussenvoegsel.errors %} errors{% endif %}">
+            {{ form.tussenvoegsel.errors }}
+            {{ form.tussenvoegsel.label_tag }}
+            {{ form.tussenvoegsel }}
+            {% if form.tussenvoegsel.help_text %}
+                <p class="help">{{ form.tussenvoegsel.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.last_name.errors %} errors{% endif %}">
+            {{ form.last_name.errors }}
+            <label for="{{ form.last_name.id_for_label }}" class="required">{{ form.last_name.label }}</label>
+            {{ form.last_name }}
+            {% if form.last_name.help_text %}
+                <p class="help">{{ form.last_name.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.email.errors %} errors{% endif %}">
+            {{ form.email.errors }}
+            <label for="{{ form.email.id_for_label }}" class="required">{{ form.email.label }}</label>
+            {{ form.email }}
+            {% if form.email.help_text %}
+                <p class="help">{{ form.email.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.community.errors %} errors{% endif %}">
+            {{ form.community.errors }}
+            <label for="{{ form.community.id_for_label }}" class="required">{{ form.community.label }}</label>
+            {{ form.community }}
+            {% if form.community.help_text %}
+                <p class="help">{{ form.community.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.is_visible.errors %} errors{% endif %}">
+            {{ form.is_visible.errors }}
+            <label for="{{ form.is_visible.id_for_label }}">{{ form.is_visible.label }}</label>
+            {{ form.is_visible }}
+            {% if form.is_visible.help_text %}
+                <p class="help">{{ form.is_visible.help_text|safe }}</p>
+            {% endif %}
+        </div>
+    </fieldset>
+
+    {% include "community_admin/fragments/_card_info.html" %}
+
+    <fieldset class="module aligned">
+        <h2>{% trans 'Additional user information' %}</h2>
+
+        <div class="form-row{% if form.gender.errors %} errors{% endif %}">
+            {{ form.gender.errors }}
+            {{ form.gender.label_tag }}
+            {{ form.gender }}
+            {% if form.gender.help_text %}
+                <p class="help">{{ form.gender.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.date_of_birth.errors %} errors{% endif %}">
+            {{ form.date_of_birth.errors }}
+            {{ form.date_of_birth.label_tag }}
+            {{ form.date_of_birth }}
+            {% if form.date_of_birth.help_text %}
+                <p class="help">{{ form.date_of_birth.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.address.errors %} errors{% endif %}">
+            {{ form.address.errors }}
+            {{ form.address.label_tag }}
+            {{ form.address }}
+            {% if form.address.help_text %}
+                <p class="help">{{ form.address.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.num_street.errors %} errors{% endif %}">
+            {{ form.num_street.errors }}
+            {{ form.num_street.label_tag }}
+            {{ form.num_street }}
+            {% if form.num_street.help_text %}
+                <p class="help">{{ form.num_street.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.extra_address.errors %} errors{% endif %}">
+            {{ form.extra_address.errors }}
+            {{ form.extra_address.label_tag }}
+            {{ form.extra_address }}
+            {% if form.extra_address.help_text %}
+                <p class="help">{{ form.extra_address.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.postal_code.errors %} errors{% endif %}">
+            {{ form.postal_code.errors }}
+            {{ form.postal_code.label_tag }}
+            {{ form.postal_code }}
+            {% if form.postal_code.help_text %}
+                <p class="help">{{ form.postal_code.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.city.errors %} errors{% endif %}">
+            {{ form.city.errors }}
+            {{ form.city.label_tag }}
+            {{ form.city }}
+            {% if form.city.help_text %}
+                <p class="help">{{ form.city.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.phone_number.errors %} errors{% endif %}">
+            {{ form.phone_number.errors }}
+            {{ form.phone_number.label_tag }}
+            {{ form.phone_number }}
+            {% if form.phone_number.help_text %}
+                <p class="help">{{ form.phone_number.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.mobile_number.errors %} errors{% endif %}">
+            {{ form.mobile_number.errors }}
+            {{ form.mobile_number.label_tag }}
+            {{ form.mobile_number }}
+            {% if form.mobile_number.help_text %}
+                <p class="help">{{ form.mobile_number.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        {% comment %}
+            <!-- #2842 -->
+        <div class="form-row{% if form.company_website.errors %} errors{% endif %}">
+            {{ form.company_website.errors }}
+            {{ form.company_website.label_tag }}
+            {{ form.company_website }}
+            {% if form.company_website.help_text %}
+                <p class="help">{{ form.company_website.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.company_description.errors %} errors{% endif %}">
+            {{ form.company_description.errors }}
+            {{ form.company_description.label_tag }}
+            {{ form.company_description }}
+            {% if form.company_description.help_text %}
+                <p class="help">{{ form.company_description.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        {% endcomment %}
+
+        <div class="form-row{% if form.picture.errors %} errors{% endif %}">
+            {{ form.picture.errors }}
+            {{ form.picture.label_tag }}
+            {{ form.picture }}
+            {% if form.picture.help_text %}
+                <p class="help">{{ form.picture.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        {% comment %} # #3447 Hide picture height and width fields
+        <div class="form-row{% if form.picture_height.errors %} errors{% endif %}">
+            {{ form.picture_height.errors }}
+            {{ form.picture_height.label_tag }}
+            {{ form.picture_height }}
+            {% if form.picture_height.help_text %}
+                <p class="help">{{ form.picture_height.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.picture_width.errors %} errors{% endif %}">
+            {{ form.picture_width.errors }}
+            {{ form.picture_width.label_tag }}
+            {{ form.picture_width }}
+            {% if form.picture_width.help_text %}
+                <p class="help">{{ form.picture_width.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        {% endcomment %}
+        {% comment %}SEPA details not required for Individuals in Samen Doen{% endcomment %}
+
+        <div class="form-row{% if form.good_cause.errors %} errors{% endif %}">
+            {{ form.good_cause.errors }}
+            <label for="{{ form.good_cause.id_for_label }}" class="required">{{ form.good_cause.label }}</label>
+            {{ form.good_cause }}
+            {% if form.good_cause.help_text %}
+                <p class="help">{{ form.good_cause.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.donation_percent.errors %} errors{% endif %}">
+            {{ form.donation_percent.errors }}
+            <label for="{{ form.donation_percent.id_for_label }}" class="required">{{ form.donation_percent.label }}</label>
+              {{ form.donation_percent.as_hidden }}
+              <div id="slider-container">
+                <div id="donation_percent_slider">
+                  <div id="custom-handle" class="ui-slider-handle"></div>
+                </div>
+                <div class="slider-legend" style="text-align:left;margin-top:10px;">
+                  <span>{%blocktrans%}{{ min_donation_percent }}%, min{%endblocktrans%}</span>
+                  <span id="max-percentage" style="float:right;">{%blocktrans%}{{ max_donation_percent }}%, max{%endblocktrans%}</span>
+                </div>
+              </div>
+        </div>
+
+        <div class="form-row{% if form.groupset.errors %} errors{% endif %}">
+            {{ form.groupset.errors }}
+            <label for="{{ form.groupset.id_for_label }}" class="required">{{ form.groupset.label }}</label>
+            {{ form.groupset }}
+            {% if form.groupset.help_text %}
+                <p class="help">{{ form.groupset.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.rel_number.errors %} errors{% endif %}">
+            {{ form.rel_number.errors }}
+            <label for="{{ form.rel_number.id_for_label }}">{{ form.rel_number.label }}</label>
+            {{ form.rel_number }}
+            {% if form.rel_number.help_text %}
+                <p class="help">{{ form.rel_number.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        {% comment %}
+            <!-- #2842 -->
+        <div class="form-row{% if form.web_payments_enabled.errors %} errors{% endif %}">
+            {{ form.web_payments_enabled.errors }}
+            <label for="{{ form.web_payments_enabled.id_for_label }}">{{ form.web_payments_enabled.label }}</label>
+            {{ form.web_payments_enabled }}
+            {% if form.web_payments_enabled.help_text %}
+                <p class="help">{{ form.web_payments_enabled.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        {% endcomment %}
+
+        <div class="form-row{% if form.wants_newsletter.errors %} errors{% endif %}">
+            {{ form.wants_newsletter.errors }}
+            <label for="{{ form.wants_newsletter.id_for_label }}">{{ form.wants_newsletter.label }}</label>
+            {{ form.wants_newsletter }}
+            {% if form.wants_newsletter.help_text %}
+                <p class="help">{{ form.wants_newsletter.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.account_first_activated.errors %} errors{% endif %}">
+            {{ form.account_first_activated.errors }}
+            {{ form.account_first_activated.label_tag }}
+            {{ form.account_first_activated }}
+            {% if form.account_first_activated.help_text %}
+                <p class="help">{{ form.account_first_activated.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.account_last_deactivated.errors %} errors{% endif %}">
+            {{ form.account_last_deactivated.errors }}
+            {{ form.account_last_deactivated.label_tag }}
+            {{ form.account_last_deactivated }}
+            {% if form.account_last_deactivated.help_text %}
+                <p class="help">{{ form.account_last_deactivated.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.account_last_login.errors %} errors{% endif %}">
+            {{ form.account_last_login.errors }}
+            {{ form.account_last_login.label_tag }}
+            {{ form.account_last_login }}
+            {% if form.account_last_login.help_text %}
+                <p class="help">{{ form.account_last_login.help_text|safe }}</p>
+            {% endif %}
+        </div>
+    </fieldset>
+
+{% endblock %}
+
+
+{% block submit_buttons_bottom %}    {{ block.super }}
+
+
+<script language="javascript">$(function() {
+    $('.submit-row').append('<p class="deletelink-box"><a href="{% url 'community_admin_individualprofile_resend_activation' individual.pk %}" class="changelink">{% trans 'Resend Activation' %}</a></p>');
+    $('.submit-row').append('<p class="deletelink-box"><a href="{% url 'community_admin_individualprofile_close_account' individual.pk %}" class="deletelink">{% trans 'Close The Account' %}</a></p>');
+});</script>
+
+{% endblock %}

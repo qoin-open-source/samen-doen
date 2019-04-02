@@ -1,0 +1,57 @@
+{% load i18n thumbnail staticfiles cc3_tags %}
+
+{% for business in object_list %}
+    {% if forloop.counter0|divisibleby:3 %}<div class="row">{% endif %}
+
+        {%   if business.cc3_profile.cyclos_group|is_organisaties_group %} <a href="{{ business.cc3_profile.get_absolute_url|default:'#' }}" class="col-sm-4 marketplace-list-item marketplace-list-item-purple">
+        {% elif business.cc3_profile.cyclos_group|is_instituties_group  %} <a href="{{ business.cc3_profile.get_absolute_url|default:'#' }}" class="col-sm-4 marketplace-list-item marketplace-list-item-orange">
+        {% elif business.cc3_profile.cyclos_group|is_goededoelen_group  %} <a href="{{ business.cc3_profile.get_absolute_url|default:'#' }}" class="col-sm-4 marketplace-list-item marketplace-list-item-green">
+        {% elif business.cc3_profile.cyclos_group|is_consumenten_group  %} <a href="{{ business.cc3_profile.get_absolute_url|default:'#' }}" class="col-sm-4 marketplace-list-item marketplace-list-item-pink">
+        {% else                                                         %} <a href="{{ business.cc3_profile.get_absolute_url|default:'#' }}" class="col-sm-4 marketplace-list-item marketplace-list-item-blue"> {% endif %}  
+            <div class="marketplace-list-item-wrap">
+                <div class="marketplace-list-item-image">
+                    {% if business.cc3_profile.get_picture %}
+                        {% thumbnail business.cc3_profile.picture "70x70" crop="center" as im %}
+                        <img src="{{ im.url }}" class="img-circle img-responsive" alt=""/>
+                    {% else %}
+                        {%   if business.cc3_profile.cyclos_group|is_organisaties_group %} <img src="{% static "img/SD-icoon-winkelier-70.png" %}" class="img-responsive" alt=""/>
+                        {% elif business.cc3_profile.cyclos_group|is_instituties_group  %} <img src="{% static "img/SD-icoon-instelling-70.png" %}" class="img-responsive" alt=""/>
+                        {% elif business.cc3_profile.cyclos_group|is_goededoelen_group  %} <img src="{% static "img/SD-icoon-spaardoel-70.png" %}" class="img-responsive" alt=""/>
+                        {% elif business.cc3_profile.cyclos_group|is_consumenten_group  %} <img src="{% static "img/SD-icoon-spaarder-70.png" %}" class="img-responsive" alt=""/>
+                        {% else                                                         %} <i class="icon icon-star"></i> {% endif %}
+{#                         <img src="{ % static "img/placeholder_70.png" % }" class="img-responsive" alt=""/> #}
+                    {% endif %}
+                </div>
+
+                <div class="marketplace-list-item-info">
+                    <h3 class="marketplace-list-item-info-title ellipsis"><span>{{ business.business_name }}</span></h3>
+                    <em>{{ business.cc3_profile.city }}</em>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="marketplace-list-item-project">
+                    {% if business.cc3_profile.cyclos_group|is_organisaties_group != True %}{% if business.cc3_profile.active_ad_count %}
+                        <span class="btn btn-rounded">{{ business.cc3_profile.active_ad_count }} {% trans 'ads' %}</span>
+                    {% endif %}                    {% endif %}
+
+                    <div class="marketplace-list-item-project-icon">
+                        {%   if business.cc3_profile.cyclos_group|is_organisaties_group %} <i class="icon icon-shopping"></i>
+                        {% elif business.cc3_profile.cyclos_group|is_instituties_group  %} <i class="icon icon-company"></i>
+                        {% elif business.cc3_profile.cyclos_group|is_goededoelen_group  %} <i class="icon icon-hands"></i>
+                        {% elif business.cc3_profile.cyclos_group|is_consumenten_group  %} <i class="icon icon-user"></i>    
+                        {% else                                                         %} <i class="icon icon-star"></i> {% endif %}  
+                    </div>
+
+                    {%   if business.cc3_profile.cyclos_group|is_organisaties_group and business.cc3_profile.user.businesscausesettings.reward_percentage %}
+                        <div class="marketplace-list-item-project-icon">
+                            {{ business.cc3_profile.user.businesscausesettings.transaction_percentage|floatformat:-2 }}%
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="marketplace-list-item-border"></div>
+        </a>
+
+    {% if forloop.counter|divisibleby:3 %}</div>{% endif %}
+{% endfor %}

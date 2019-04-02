@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load i18n staticfiles cc3_tags %}
+
+{% block title %}{% trans 'Edit My Details' %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/geo/map_field.css' %}">
+{% endblock %}
+
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h2>{% if business_profile %}{% trans 'Business Profile' %}{% else %}{% trans 'My Profile' %}{% endif %}</h2>
+        {% include 'includes/messages.html' %}
+
+        {% if user.is_superuser %}
+            <div class="alert alert-danger" role="alert">
+                {% trans 'Super users cannot have profiles' %}
+            </div>
+        {% else %}
+            {% if cc3_profile %}
+                {% include 'accounts/profile_form_include.html' %}
+            {% else %}
+                <div class="alert alert-danger" role="alert">
+                    {% trans "Cannot find a profile for the logged in user, please contact the site administrators" %}
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-5">
+            {% if cc3_profile and not stadlander_sso_user %}
+                <h2>{% trans 'Change your user profile password' %}</h2>
+                <a href="{% url 'password_change' %}" class="btn btn-rounded btn-blue">{% trans 'Change password' %}</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+{{block.super}}
+    <script type="text/javascript">
+        $(function() {
+          $(".checkbox-container").addClass("checkbox");
+        });
+    </script>
+{% endblock %}
+
+{% block noncompressjavascript %}{{ block.super }}
+    {%  if map_centre_lat and map_centre_lng %}
+    <script type="text/javascript">
+        var return_url = '{% url 'accounts-update-profile' %}';
+        var map_centre_lat = {{ map_centre_lat|floatdot }},
+            map_centre_lng = {{ map_centre_lng|floatdot }};
+    </script>
+    <!-- For geo-location -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+    <script src="{% static 'js/geo/map_field.js' %}"></script>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% load friendly %}
+<div class="row">
+    {% include 'includes/messages.html' %}
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-lg-5">
+        <form name="{{ form_definition.name }}" class="form" action="{{ form_definition.action }}" method="{{ form_definition.method }}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% for field in form %}
+                {% if not field.is_hidden %}
+                    <div class="form-group {% if field.errors %}has-error{% endif %}">
+                        <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {% for error in field.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        {% if field.field.widget.input_type == 'text' %}
+                            <input type="text" id="{{ field.id_for_label }}" placeholder="{{ placeholder }}"
+                                   name="{{ field.html_name }}"{% if field.value %} value="{{ field.value }}"{% endif %}
+                                   {% if maxlength %}maxlength="{{ maxlength }}"{% endif %}
+                                   {% if disabled == "true" %}disabled="disabled"{% endif %}
+                                   class="form-control">
+                        {% elif field.field.choices %}
+                            <select name="{{ field.html_name }}"{% if disabled == "true" %} class="form-control" disabled{% else %} class="form-control s-selecter"{% endif %}>
+                                {% for value,item in field.field.choices %}
+                                    <option value="{{ value }}" {% if field.value|add:'0' == value %}selected{% endif %}>{{ item }}</option>
+                                {% endfor %}
+                            </select>{{ disabled }}
+                        {% else %}
+                            {{ field }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            <p>{% include "html/formdefinition/forms/includes/submit.html" %}</p>
+
+            {% for field in form.hidden_fields %}
+                {{ field }}
+            {% endfor %}
+        </form>
+    </div>
+</div>

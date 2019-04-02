@@ -1,0 +1,127 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static admin_modify %}
+{% load admin_urls %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
+    {{ media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
+
+{% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
+
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'community_admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; <a href="">{% trans 'Users' %}</a>
+        &rsaquo; <a href="{% url 'community_admin:profile_userprofile_changelist' %}">{% trans 'User profiles' %}</a>
+        &rsaquo; {% trans 'Add new user' %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        {% block object-tools %}{% comment %}#3518 No History of View on site button wanted{% endcomment %}{% endblock %}
+
+        <form enctype="multipart/form-data" action="." method="post" id="add_user_form">
+            {% csrf_token %}
+
+            <div>
+                {% if form.errors %}
+                    <p class="errornote">
+                        {% blocktrans count counter=errors|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+                    </p>
+
+                    {{ form.form.non_field_errors }}
+                {% endif %}
+
+                {% block field_sets %}
+                    <fieldset class="module aligned">
+                        <h2>{% trans 'Key user information' %}</h2>
+
+                        <div class="form-row{% if form.cyclos_group.errors %} errors{% endif %}">
+                            {{ form.cyclos_group.errors }}
+                            <label for="{{ form.cyclos_group.id_for_label }}" class="required">{{ form.cyclos_group.label }}</label>
+                            {{ form.cyclos_group }}
+                            {% if form.cyclos_group.help_text %}
+                                <p class="help">{{ form.cyclos_group.help_text|safe }}</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-row{% if form.first_name.errors %} errors{% endif %}">
+                            {{ form.first_name.errors }}
+                            <label for="{{ form.first_name.id_for_label }}" class="required">{{ form.first_name.label }}</label>
+                            {{ form.first_name }}
+                            {% if form.first_name.help_text %}
+                                <p class="help">{{ form.first_name.help_text|safe }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="form-row{% if form.tussenvoegsel.errors %} errors{% endif %}">
+                            {{ form.tussenvoegsel.errors }}
+                            {{ form.tussenvoegsel.label_tag }}
+                            {{ form.tussenvoegsel }}
+                            {% if form.tussenvoegsel.help_text %}
+                                <p class="help">{{ form.tussenvoegsel.help_text|safe }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="form-row{% if form.last_name.errors %} errors{% endif %}">
+                            {{ form.last_name.errors }}
+                            <label for="{{ form.last_name.id_for_label }}" class="required">{{ form.last_name.label }}</label>
+                            {{ form.last_name }}
+                            {% if form.last_name.help_text %}
+                                <p class="help">{{ form.last_name.help_text|safe }}</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-row{% if form.email.errors %} errors{% endif %}">
+                            {{ form.email.errors }}
+                            <label for="{{ form.email.id_for_label }}" class="required">{{ form.email.label }}</label>
+                            {{ form.email }}
+                            {% if form.email.help_text %}
+                                <p class="help">{{ form.email.help_text|safe }}</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-row{% if form.community.errors %} errors{% endif %}">
+                            {{ form.community.errors }}
+                            <label for="{{ form.community.id_for_label }}" class="required">{{ form.community.label }}</label>
+                            {{ form.community }}
+                            {% if form.community.help_text %}
+                                <p class="help">{{ form.community.help_text|safe }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="form-row{% if form.groupset.errors %} errors{% endif %}">
+                            {{ form.groupset.errors }}
+                            <label for="{{ form.groupset.id_for_label }}" class="required">{{ form.groupset.label }}</label>
+                            {{ form.groupset }}
+                            {% if form.groupset.help_text %}
+                                <p class="help">{{ form.groupset.help_text|safe }}</p>
+                            {% endif %}
+                        </div>
+                        <!-- default - is_visible is true. set for individuals when redirecting,
+                        then allow editing on individual profile form -->
+                        <input type="hidden" id="is_visible" name="visible" value="1"/>
+                    </fieldset>
+                {% endblock %}
+
+                {% block after_field_sets %}{% endblock %}
+
+                {% block after_related_objects %}{% endblock %}
+
+                {% block submit_buttons_bottom %}
+                    <div class="submit-row">
+                        <input type="submit" value="{% trans 'Save' %}" class="default" name="_save" />
+                {#        {% if show_delete_link %}<p class="deletelink-box"><a href="{% url opts|admin_urlname:'delete' original.pk|admin_urlquote %}" class="deletelink">{% trans "Delete" %}</a></p>{% endif %}#}
+                {#        {% if show_save_as_new %}<input type="submit" value="{% trans 'Save as new' %}" name="_saveasnew" {{ onclick_attrib }}/>{%endif%}#}
+                {#        {% if show_save_and_add_another %}<input type="submit" value="{% trans 'Save and add another' %}" name="_addanother" {{ onclick_attrib }}/>{% endif %}#}
+                {#        {% if show_save_and_continue %}<input type="submit" value="{% trans 'Save and continue editing' %}" name="_continue" {{ onclick_attrib }}/>{% endif %}#}
+                    </div>
+                {% endblock %}
+            </div>
+        </form>
+    </div>
+{% endblock %}

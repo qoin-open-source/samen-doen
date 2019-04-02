@@ -1,0 +1,17 @@
+{% load i18n %}
+{% trans "Thank you for registering at Samen Doen" %}!
+
+{% trans "Activate your account by clicking on the link below:" %}
+http://{{ site.domain }}{% url 'registration_activate' activation_key %}
+
+({% blocktrans %}Link is valid for {{ expiration_days }} days.{% endblocktrans %})
+
+{% blocktrans %}
+Have much fun Doing Together!
+
+Sincerely,
+The Samen Doen team
+{% endblocktrans %}
+
+E-mail: info@samen-doen.nl
+Website:  https://www.samen-doen.nl

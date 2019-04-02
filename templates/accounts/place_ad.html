@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans 'Place Ad' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-10">
+            <h2>{% if form.instance.pk %}
+            {% trans 'Edit Ad' %}
+            {% else %}
+            {% trans 'Place Ad' %}
+            {% endif %}</h2>
+
+            <hr>
+
+            {% include 'includes/messages.html' %}
+            <div id="place_ad_form_errors" class="hide"></div>
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label class="control-label">{% trans 'Images' %}</label>
+            </div>
+            <div id="actions" class="row">
+                <div class="col-lg-7">
+                    <!-- The fileinput-button span is used to style the file input field as button -->
+                    <span class="btn btn-success fileinput-button">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <span>{% trans 'Add image...' %}</span>
+                    </span>
+                    <!--
+                    <button type="reset" class="btn btn-warning cancel filecancel-button">
+                        <i class="glyphicon glyphicon-ban-circle"></i>
+                        <span>{% trans 'Remove image...' %}</span>
+                    </button>
+                    -->
+                </div>
+                <br />
+                <div class="col-lg-5">
+                    <!-- The global file processing state -->
+                    <span class="fileupload-process">
+                        <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="table table-striped" id="previews">
+                <div id="template" class="file-row">
+                    <!-- This is used as the file preview template -->
+                    <div>
+                        <span class="preview"><img class="img-circle" data-dz-thumbnail /></span>
+                    </div>
+                    <div>
+                        <p class="name" data-dz-name></p>
+                        <strong class="error text-danger" data-dz-errormessage></strong>
+                    </div>
+
+                    <div>
+                        <p class="size" data-dz-size></p>
+                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                            <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="place_ad_form" method="post" action="." class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% block created_by %}{% endblock %}
+
+                <div class="form-group {% if form.title.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_title">{% trans 'Title' %}</label>
+                    {% for error in form.title.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <input type="text" id="id_title" placeholder="{% trans 'Title of the Ad' %}" name="title"{% if form.title.value %} value="{{ form.title.value }}"{% endif %} class="form-control">
+                </div>
+
+                <div class="form-group {% if form.adtype.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_adtype">{% trans 'Type' %}</label>
+                    {% for error in form.adtype.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <select name="adtype" id="id_adtype" class="form-control s-selecter">
+                        {% for value,item in form.adtype.field.choices %}
+                            <option value="{{ value }}" {% if form.adtype.value == value %}selected{% endif %}>{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group {% if form.description.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_description">{% trans 'Description' %} - <span id="max_chars_warning">{% trans 'Number of characters left' %}</span> [<span id="max_chars">max. 900</span>]</label>
+                    {% for error in form.description.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <textarea id="id_description" name="description" class="form-control" cols="30" rows="10" placeholder="{{ form.description.help_text }}" onkeyup="countChar(this)">{% if form.description.value %}{{ form.description.value }}{% endif %}</textarea>
+                </div>
+
+                <div id="price_section" class="form-group {% if form.price.errors %}has-error{% endif %}">                    
+                    <label class="control-label" for="id_price">{% trans 'Amount of Positoos' %}</label>
+                            
+                    {% for error in form.price.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <input type="text" id="id_price" placeholder="{% trans 'Amount of Positoos' %}" name="price" value="{% if form.price.value %}{{ form.price.value }}{% else %}0{% endif %}" maxlength="6" class="form-control">
+                        </div>
+                    
+                        <div class="col-sm-1">
+                            Of
+                        </div>
+
+                        <div class="col-sm-6">
+                            {{ form.price_option }}
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+                {% if form.status.is_hidden %}
+                    {{ form.status }}
+                {% else %}
+                <div class="form-group {% if form.status.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_status">{% trans 'status' %}</label>
+                    {% for error in form.status.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <select name="status" class="form-control s-selecter">
+                        {% for value,item in form.status.field.choices %}
+                            <option value="{{ value }}" {% if form.status.value == value %}selected{% endif %}>{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endif %}
+
+                <hr>
+
+                <div class="form-group {% if form.category.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_category">{% trans "Categories" %}</label>
+                    {% for error in form.category.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <br>
+                    <div class="checkbox">
+                        {{ form.category }}
+                    </div>
+                </div>
+                {% if form.reward_category %}{# STADLANDER #}
+                <div class="form-group {% if form.reward_category.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_reward_category">Stadlander Specifieke Categorieën</label>
+                    {% for error in form.reward_category.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <br>
+                    <div class="checkbox">
+                        {{ form.reward_category }}
+                    </div>
+                {% if not form.instance.pk %}<div class="alert alert-info" role="alert">* De eerste keer dat u een advertentie in deze categorie plaats krijgt u {{ reward_amount }}P waardering van Stadlander.
+                    Als u deze waardering al eens gehad hebt, kunt u deze geen tweede keer ontvangen. Natuurlijk kunt u wel gewoon advertenties plaatsen in deze categorie.</div>
+                </div>{% endif %}
+
+                {% endif %}
+
+                <div class="col-md-4">
+                    <button class="btn btn-rounded btn-blue" id="place_ad_form_button">{% if ad.pk %}{% trans 'Edit Ad' %}{% else %}{% trans 'Place Ad' %}{% endif %}</button>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="alert alert-info" role="alert">
+                        {% trans 'Placing an advertisement will make your profile visible to others' %}
+                    </div>
+                </div>                
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascript %}
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.formset.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.form.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.cookie.js' %}"></script>
+
+
+    <script type="text/javascript">
+        {# Check the maximum characters allowed in the `description` field (75). #}
+        function countChar(description) {
+            var chars = $(description).val().length;
+            var remaining = 900 - chars;
+
+            $('#max_chars').html(remaining.toString());
+
+            {# Warn the user about max number of characters passed. #}
+            if(remaining < 0) {
+                $("form label[for=id_description]").parent().addClass('has-error');
+                $("#max_chars_warning").html('{% trans "Only 900 characters allowed" %}');
+                $('#place_ad_form_button').attr('disabled', 'true');
+            }
+            else {
+                $("form label[for=id_description]").parent().removeClass('has-error');
+                $("#max_chars_warning").html('{% trans "Number of characters left" %}');
+
+                $('#place_ad_form_button').removeAttr('disabled');
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        {# Validate the 'Price' field. #}
+        $('#id_price').keyup(function() {
+            if ($(this).val() && (!$.isNumeric($(this).val()) || (!($(this).val() % 1 === 0)))) {
+                {# Disable the button if it was enabled before. #}
+                $('#place_ad_form_button').attr('disabled', 'true');
+
+                {# Show informative error message. #}
+                $('#price_section').addClass('has-error');
+                if(!$('#integer-error').length) {
+                    $("form label[for=id_price]").after(' <label id="integer-error" class="control-label"> - {% trans "Must be an integer number" %}</label>');
+                }
+            }
+            else if (!($(this).val())) {
+                {# Disable the button if it was enabled before. #}
+                $('#place_ad_form_button').attr('disabled', 'true');
+
+                {# Show informative error message. #}
+                $('#price_section').addClass('has-error');
+                if(!$('#empty-error').length) {
+                    $("form label[for=id_price]").after(' <label id="empty-error" class="control-label"> - {% trans "Specifying a price is required, although you can also enter 0" %}</label>');
+                }
+            }
+            else {
+                {# Validation okay. Remove errors if any and re-activate the submit button. #}
+                $('#price_section').removeClass('has-error');
+                $('#integer-error').remove();
+                $('#empty-error').remove();
+                $('#place_ad_form_button').removeAttr('disabled');
+            }
+        });
+    </script>
+{% endblock %}
+
+
+{% block extrajs %}
+    {% url 'api_marketplace_new_ad_images' as image_endpoint %}
+    {% include 'includes/place_ad_dropzone.html' %}
+{% endblock %}

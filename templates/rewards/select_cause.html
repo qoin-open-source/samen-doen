@@ -1,0 +1,26 @@
+{% extends "rewards/causes_list.html" %}
+{% load i18n static thumbnail cc3_tags %}
+
+{% block title %}{% trans "Select good cause" %}{% endblock %}
+
+{% block content_title %}
+    {{ block.super }}
+    {% get_active_causes_count causes as active_count %}
+    {% if request.user.usercause.cause in causes %}
+      <h2>{{ active_count|add:-1 }} {% trans 'good causes to choose from' %}</h2>
+    {% else %}
+      <h2>{{ active_count }} {% trans 'good causes to choose from' %}</h2>
+    {% endif %}
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{% static 'js/bootstrap/modal.js' %}"></script>
+    <script type="text/javascript">
+        $(".good-cause-select a").click(function() {
+            good_cause_href = $(this).attr('href');
+        });
+        $("button.good-cause-confirm").click(function() {
+            window.location = good_cause_href;
+        });
+    </script>
+{% endblock %}

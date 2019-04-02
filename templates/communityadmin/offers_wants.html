@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load i18n staticfiles thumbnail %}
+
+{% block title %}{% trans 'Wants and offers' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'communityadmin/sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>{% trans 'Community Wants and Offers' %}</h2>
+
+            {% include 'includes/messages.html' %}
+
+            <form method="get" action="" class="form-inline">
+                <div class="element typeahead-div">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input name="q" class="form-control" type="text" placeholder="{% trans 'search' %}" value="{{ request.GET.q }}"/>
+                            <input type="submit" class="btn btn-rounded btn-green" value="{% trans 'submit' %}">
+                            <a href="{% url 'communityadmin_ns:wantsoffers' %}" class="btn btn-rounded btn-danger">{% trans 'reset' %}</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            {% if ads %}
+                <table class="table rwd-table transactions-table">
+                    <tbody>
+                        <tr class="table-head">
+                            <th>{% trans 'Image' %}</th>
+                            <th>{% trans 'Contact' %}<a class="sort" href="#"></a></th>
+                            <th>{% trans 'Title' %}</th>
+                            <th>{% trans 'Price' %}</th>
+                            <th>{% trans 'Type' %}</th>
+                            <th>{% trans 'Views' %}</th>
+                            <th>{% trans 'Status' %}</th>
+                            <th class="not-mobile"></th> {# tools #}
+                        </tr>
+                        {% for ad in ads %}
+                            {% include 'communityadmin/offer_want_row.html' %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {# Pagination #}
+                {% include "includes/paginator.html" %}
+            {% else %}
+                <div class="row">
+                    <div class="alert alert-warning" role="alert">
+                        {% trans 'No ads were found' %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form action="." id="filter-form" method="get" class="form">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="form-group {% if form.adtype.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_adtype">{% trans "Type" %}</label>
+                    {% for error in form.adtype.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <br />
+                    {{ form.adtype }}
+                </div>
+
+                <div class="form-group {% if form.category.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_category">{% trans "Categories" %}</label>
+                    {% for error in form.category.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <br />
+                    {{ form.category }}
+                </div>
+
+                <button type="submit" class="btn btn-rounded btn-blue">{% trans 'Filter' %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

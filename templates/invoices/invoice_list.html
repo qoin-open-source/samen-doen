@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load i18n cc3_tags %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <h2>{% trans 'Your Invoices' %}</h2>
+
+            {% if object_list %}
+                <table class="table rwd-table">
+                    <tbody>
+                        <tr class="table-head">
+                            <th>{% trans 'Date' %}</th>
+                            <th>{% trans 'Description' %}</th>
+                            <th>{% trans 'Sum settlement' %}</th>
+                            <th>{% trans 'Paid?' %}</th>
+                            <th></th>
+                        </tr>
+
+                        {% for invoice in object_list %}
+                            <tr>
+                                <td>{{ invoice.created|date:'d/m/Y H:i' }}</td>
+                                <td>
+                                    {% for line in invoice.lines.all %}
+                                        {{ line.quantity }} x {{ line.description|linebreaksbr }}
+                                        <br>
+                                    {% endfor %}
+                                </td>
+                                <td>{{ invoice.currency.symbol }} {{ invoice.get_total|floatformat:2 }}</td>
+                                <td>
+                                    {% if invoice.payment_status.is_paid %}
+                                        <span class="text-success">{% trans 'Yes' %}</span>
+                                    {% else %}
+                                        <span class="text-danger">{% trans 'No' %}</span>
+                                    {% endif %}
+                                </td>
+                                <td><a href="{% url 'invoice_download_pdf' invoice.pk %}">PDF</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {% include "includes/paginator.html" %}
+            {% else %}
+                <div class="alert alert-warning" role="alert">
+                    {% trans 'No invoices found for this profile.' %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

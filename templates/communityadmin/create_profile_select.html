@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Create member profile' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'communityadmin/sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2>{% trans 'Create member profile' %}</h2>
+
+            <a href="{% url 'community_admin_create_business_profile' %}" class="btn btn-rounded btn-blue">{% trans 'Business profile' %}</a><br><br>
+            <a href="{% url 'community_admin_create_individual_profile' %}" class="btn btn-rounded btn-blue">{% trans 'Individual profile' %}</a><br><br>
+            <a href="{% url 'community_admin_create_charity_profile' %}" class="btn btn-rounded btn-blue">{% trans 'Good Cause profile' %}</a><br><br>
+            <a href="{% url 'community_admin_create_institution_profile' %}" class="btn btn-rounded btn-blue">{% trans 'Institution profile' %}</a><br>
+        </div>
+    </div>
+{% endblock %}

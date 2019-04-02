@@ -1,0 +1,12 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block object-tools-items %}
+    {% if original.user.card_set.all %}
+    <li>
+        <a href="{% url 'admin:cards_card_changelist' %}?owner={{ original.user.pk }}">{% trans 'Manage Cards' %}</a>
+    </li>
+    {% endif %}
+
+    {{ block.super }}
+{% endblock %}

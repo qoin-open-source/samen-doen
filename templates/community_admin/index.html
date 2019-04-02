@@ -1,0 +1,103 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+
+        <div class="module">
+            <table>
+                <caption>
+                    <a href="" class="section" title="{% trans 'Manage users' %}">
+                        {% trans 'Users' %}
+                    </a>
+                </caption>
+                <tr>
+                    <th scope="row"><a href="{% url 'community_admin:profile_userprofile_changelist' %}">{% trans 'User profiles' %}</a></th>
+                    <td><a href="{% url 'community_admin:community_userprofile_add' %}" class="addlink">{% trans 'Add' %}</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="module">
+            <table>
+                <caption>
+                    <a href="" class="section" title="{% trans 'Card fulfillment' %}">
+                        {% trans 'Card fulfillment' %}
+                    </a>
+                </caption>
+                <tr>
+                    <th scope="row"><a href="{% url 'community_admin:cards_card_changelist' %}">{% trans 'User cards' %}</a></th>
+                    <td><a href="{% url 'community_admin:cards_card_add' %}" class="addlink">{% trans 'Add' %}</a></td>
+                </tr>
+                <tr>
+                    <th scope="row"><a href="{% url 'community_admin:cards_fulfillment_changelist' %}">{% trans 'Card applications and statuses' %}</a></th>
+                    <td><a href="{% url 'community_admin:cards_fulfillment_add' %}" class="addlink">{% trans 'Add' %}</a></td>
+                </tr>
+
+            </table>
+        </div>
+
+        <div class="module">
+            <table>
+                <caption>
+                    <a href="" class="section" title="{% trans 'Manage terminals' %}">
+                        {% trans 'Terminals' %}
+                    </a>
+                </caption>
+                <tr>
+                    <th scope="row"><a href="{% url 'community_admin:cards_operator_changelist' %}">{% trans 'Operators' %}</a></th>
+                    <td><a href="{% url 'community_admin:cards_operator_add' %}" class="addlink">{% trans 'Add' %}</a></td>
+                </tr>
+                <tr>
+                    <th scope="row"><a href="{% url 'community_admin:cards_terminal_changelist' %}">{% trans 'All terminals by number (IMEI)' %}</a></th>
+                    <td><a href="{% url 'community_admin:cards_terminal_add' %}" class="addlink">{% trans 'Add' %}</a></td>
+                </tr>
+                <tr>
+                    <th scope="row"><a href="{% url 'community_admin:rewards_businesscausesettings_changelist' %}">{% trans 'Business user reward settings' %}</a></th>
+                    <td><a href="{% url 'community_admin:rewards_businesscausesettings_add' %}" class="addlink">{% trans 'Add' %}</a></td>
+                </tr>
+            </table>
+        </div>
+
+        {% include "community_admin/fragments/billing_index.html" %}
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related">
+    <div class="module" id="recent-actions-module">
+        <h2>{% trans 'Recent Actions' %}</h2>
+        <h3>{% trans 'My Actions' %}</h3>
+            {% load log %}
+            {% get_admin_log 10 as admin_log for_user user %}
+            {% if not admin_log %}
+            <p>{% trans 'None available' %}</p>
+            {% else %}
+            <ul class="actionlist">
+            {% for entry in admin_log %}
+            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                {% if entry.is_deletion or not entry.get_admin_url %}
+                    {{ entry.object_repr }}
+                {% else %}
+                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                {% endif %}
+                <br/>
+                {% if entry.content_type %}
+                    <span class="mini quiet">{% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %}</span>
+                {% else %}
+                    <span class="mini quiet">{% trans 'Unknown content' %}</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+    </div>
+</div>
+{% endblock %}

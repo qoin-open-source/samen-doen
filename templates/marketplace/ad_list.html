@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% load pagination_tags i18n l10n staticfiles thumbnail cc3_tags %}
+
+{% block sidemenu %}
+    {% include 'marketplace/marketplace_sidemenu.html' %}
+{% endblock %}
+
+{% block top_page_widgets %}
+    {% include 'marketplace/top_page_buttons.html' %}
+{% endblock %}
+
+{% block content %}
+    <h2></h2>
+
+    <div class="marketplace-list">
+        {% if start_tab == 'products_and_services' %}  {# Load 'products and services' list. #}
+            {% include 'marketplace/products_and_services_page.html' %}
+        {% elif start_tab == 'businesses' %}  {# Load 'businesses' list. #}
+            {% include 'marketplace/businesses_page.html' %}
+        {% elif start_tab == 'businesses_map' %}
+            {% include 'marketplace/businesses_map_page.html' %}
+        {% elif start_tab == 'campaigns' %}
+            {% include 'marketplace/campaigns_page.html' %}
+        {% endif %}
+    </div>
+
+    {% include 'includes/paginator.html' %}
+
+{% endblock %}
+
+
+{% block extra_css %}{{ block.super }}
+    {% if start_tab == 'businesses_map' %}
+    <style type="text/css">
+        #businesses_map {
+            min-height: 560px;
+            max-width: 840px;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+    </style>
+    {% endif %}
+{% endblock %}
+
+
+{% block noncompressjavascript %}{{ block.super }}
+    {% if start_tab == 'businesses_map' %}
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+    {% endif %}
+{% endblock %}
+
+{% block javascript %}{{ block.super }}
+    {% if start_tab == 'businesses_map' %}
+        <script type="text/javascript">
+
+        $(document).ready(function() {
+            var buildInfoContent = function (name, address, phone, image_url, link) {
+              var buf = [];
+              {# name #}
+              buf.push("<h4>");
+              buf.push(name)
+              buf.push("</h4>")
+              {# profile image #}
+              if (image_url.length > 0) {
+                buf.push('<img height="84" src="' + image_url + '"/>');
+              }
+              {# address #}
+              if (address.length > 0) {
+                buf.push("<p>");
+                for (var i = 0; i < address.length; i++) {
+                  if (address[i].length > 0) {
+                    buf.push(address[i]);
+                    buf.push("<br>");
+                  }
+                }
+                buf.push("</p>");
+              }
+              {# phone #}
+              if (phone.length > 0) {
+                buf.push("<p> {% trans 'Telephone' %}: ");
+                buf.push(phone);
+                buf.push("</p>");
+              }
+              {# link #}
+              if (link.length > 0) {
+                buf.push('<p><a href="' + link + '">{% trans "View" %}</a></p>');
+              }
+              return buf.join("");
+            };
+
+            center = new google.maps.LatLng(51.494576, 4.287162);
+            {# Would be nicer to do this in JSON but this way we can use the existing filtering without too much hassle. #}
+            var locations = [
+              {% for business in business_list %}[
+               {% with group=business.cc3_profile.cyclos_group.name %}
+                buildInfoContent(
+                  "{{ business.business_name }}",
+                  ["{{ business.cc3_profile.userprofile.get_address_with_street_num }}", "{{ business.cc3_profile.city }}", "{{ business.cc3_profile.postal_code }}"],
+                  "{{ business.cc3_profile.phone_number }}",
+                  "{% if business.cc3_profile.get_picture %}{{ business.cc3_profile.picture|thumbnail_url:'profilepicture' }}{% endif %}",
+                  "{% url 'marketplace-business-profile' business.cc3_profile.slug %}"
+                ),
+                {{ business.cc3_profile.latitude|unlocalize }},
+                {{ business.cc3_profile.longitude|unlocalize }},
+               "{{ group }}"
+              ]{% if not forloop.last %},{% endif %}{% endwith %}{% endfor %}
+            ];
+
+            var map = new google.maps.Map(document.getElementById('businesses_map'), {
+              zoom: 11,
+              center: center,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            var marker, i;
+            var infowindow = new google.maps.InfoWindow();
+            var green_marker = "{% static 'img/mapping/marker-icon-green.png' %}";
+            var violet_marker = "{% static 'img/mapping/marker-icon-violet.png' %}";
+            var red_marker = "{% static 'img/mapping/marker-icon-red.png' %}"
+
+
+            for (i = 0; i < locations.length; i++) {
+              var group = locations[i][3];
+              var curr_icon = red_marker;
+              if (group == '{% get_group_name "BUSINESS" %}' || group == '{% get_group_name "INSTITUTION" %}') {
+                curr_icon = violet_marker;
+              }
+              if (group == '{% get_group_name "CHARITY" %}') {
+                curr_icon = green_marker;
+              }
+              marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map,
+                popupContent: locations[i][0],
+                icon: curr_icon
+              });
+
+              google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                  infowindow.setContent(marker.popupContent);
+                  infowindow.open(map, marker);
+                }
+              })(marker, i));
+            }
+        });
+    </script>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% with transaction.sender as sender %}
+
+    {% if sender.business_name %}
+        {{ sender.business_name }}
+    {% elif sender.get_profile.full_name %}
+        {{ sender.get_profile.full_name }}
+    {% else %}
+        {% if sender.first_name %}
+            {{ sender.first_name }} {{ sender.last_name }}
+        {% else %}
+            {{ sender }}
+        {% endif %}
+    {% endif %}
+
+{% endwith %}

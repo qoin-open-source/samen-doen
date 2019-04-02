@@ -1,0 +1,46 @@
+{% load i18n thumbnail static cc3_tags %}
+
+<div class="col-sm-12 col-md-4 good-cause-select">
+      <div class="saving-targets-target">
+        {% if cause.is_active != 1 %}
+          <div class="ribbon-wrapper ribbon-wrapper-disabled"><div class="ribbon ribbon-disabled">{% trans 'Inactive' %}</div></div>
+        {% elif cause == default_cause.cause %}
+          <div class="ribbon-wrapper ribbon-wrapper-default"><div class="ribbon ribbon-default">{% trans 'Default<br>Charity' %}</div></div>
+        {% endif %}
+        <div class="saving-targets-target-title">
+            <h3>{{ cause.cc3_profile.business_name }}</h3>
+        </div>
+
+        <p class="saving-targets-target-image">
+            {% if cause.cc3_profile.get_picture %}
+                {% thumbnail cause.cc3_profile.picture "100x100" crop="center" as im %}
+                <img src="{{ im.url }}" class="img-circle" alt="{{ cause.cc3_profile.business_name }}">
+            {% else %}
+                <img src="{% static 'img/logo_bw.png' %}" class="img-circle" alt="{{ cause.cc3_profile.business_name }}">
+            {% endif %}
+        </p>
+
+        <p class="saving-targets-target-text">{{ cause.cc3_profile.company_description|truncatechars:140 }}</p>
+
+        <div class="savings-target-target-options savings-target-target-options-item">
+            <p>{% trans 'Donated to this savings goal:' %}</p>
+            <p style="text-align: left">{% trans 'Self' %}:
+            {% if cause.username in donations_reference %}
+                <span><i class="icon-samendoen"></i> {{ donations_reference|lookup:cause.username|floatformat:0 }}</span>
+            {% else %}
+                <span><i class="icon-samendoen"></i> 0</span>
+            {% endif %}
+            <br/>
+            {% trans 'All users' %}:
+            {% if cause.username in donations_reference_all_users %}
+                <span><i class="icon-samendoen"></i> {{ donations_reference_all_users|lookup:cause.username|floatformat:0 }}</span>
+            {% else %}NO
+                <span><i class="icon-samendoen"></i> 0</span>
+            {% endif %}
+            </p>
+        {% if cause.is_active %}
+            <a href="{% url 'join_cause' cause.pk %}" class="btn btn-rounded btn-blue" data-toggle="modal" data-target="#causemodal" data-remote="false">{% trans 'Select this cause' %}</a>{% else %}
+            <span class="btn btn-rounded inactive">{% trans 'Cause Inactive' %}</span>{% endif %}
+        </div>
+    </div>
+</div>

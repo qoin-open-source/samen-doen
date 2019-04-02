@@ -1,0 +1,26 @@
+{% load i18n staticfiles thumbnail %}
+
+{# Required: ad #}
+
+<tr>
+    <td>
+        {% ifequal ad.adimage_set.all.count 0 %}
+            <img src="{% static 'images/backgrounds/avatar-placeholder.png' %}" width="44" height="44" alt="logo" />
+        {% else %}
+            <img src="{{ ad.adimage_set.all.0.image|thumbnail_url:'marketplacethumb' }}" alt="" />
+        {% endifequal%}
+    </td>
+    <td>
+        <a href="{% url 'communityadmin_ns:editmember' username=ad.created_by.user.username %}">{{ ad.created_by }}</a>
+    </td>
+    <td><a href="{% url 'communityadmin_ns:edit_ad' ad.id %}{{ via }}">{{ ad.title }}</a></td>
+    <td><span class="icon-samendoen"></span>&nbsp;{{ ad.get_price|floatformat:"0" }}</td>
+    <td>{{ ad.adtype }}</td>
+    <td>{{ ad.views }}</td>
+    <td>
+        <span class="{{ ad.status }}">{{ ad.get_status_display }}</span>
+    </td>
+    <td>
+        <a href="{% url 'communityadmin_ns:edit_ad' ad.id %}{{ via }}"><i class="icon-edit"></i></a>
+    </td>
+</tr>

@@ -1,0 +1,309 @@
+{% extends "base.html" %}
+{% load i18n staticfiles cc3_tags %}
+
+{% block title %}{% trans 'Pay Direct' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+{% with group=user.cc3_profile.get_cyclos_group %}
+    <div class="row">
+        <div class="col-md-6 col-lg-7">
+            <h2>{% trans 'Make A Payment' %}</h2>
+
+            {% include 'includes/messages.html' %}
+
+            {% if form %}
+                <form id="pay_direct_form" method="post" action="." class="form">
+                    {% csrf_token %}
+
+                    {% if form.non_field.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ form.non_field.errors }}
+                        </div>
+                    {% endif %}
+
+                    {# Spit out the hidden profile field used to store the CC3Profile pk. #}
+                    {{ form.profile }}
+
+
+                    <div id="amount_section" class="form-group{% if form.amount.errors %} has-error{% endif %}">
+                        <label class="control-label" for="id_amount">{% trans 'Amount' %}</label>
+                        {% for error in form.amount.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <input type="text" id="id_amount" placeholder="{{ form.amount.help_text }}" name="amount"{% if form.amount.value %} value="{{ form.amount.value }}"{% endif %} class="form-control">
+                    </div>
+
+                    {% if split_payments %}
+                        <div id="total_value_section" class="form-group{% if form.total_value.errors %} has-error{% endif %}">
+                            <label class="control-label" for="id_total_value">{% trans 'Total value' %}</label>
+                            {% for error in form.total_value.errors %}
+                                <label class="control-label"> - {{ error }}</label>
+                            {% endfor %}
+                            <input type="text" id="id_total_value" placeholder="{% trans 'total punten' %}" name="total_value"{% if form.total_value.value %} value="{{ form.total_value.value }}"{% endif %} class="form-control">
+                        </div>
+                    {% endif %}
+
+
+                    <div id="contact_name_section" class="form-group{% if form.contact_name.errors or form.profile.errors %} has-error{% endif %}">
+                        <label class="control-label" for="id_contact_name">{% trans 'Contact name' %}</label>
+                        {% for error in form.contact_name.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        {% if form.profile.errors %}
+                            <label class="control-label"> - {% trans 'Please select a valid business to pay' %}</label>
+                        {% endif %}
+                        <input type="text" id="id_contact_name" placeholder="{{ form.contact_name.help_text }}" name="contact_name"{% if form.contact_name.value %} value="{{ form.contact_name.value }}"{% endif %} class="form-control">
+                    </div>
+
+                    {{ form.email }}
+
+
+                    <div class="form-group{% if form.description.errors %} has-error{% endif %}">
+                        <label class="control-label" for="id_description">{% trans 'Description' %} - <span id="max_chars_warning">{% trans 'Number of characters left' %}</span> [<span id="max_chars">max. 75</span>]</label>
+                        {% for error in form.description.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <textarea id="id_description" name="description" class="form-control" cols="30" rows="10" placeholder="{{ form.description.help_text }}" onkeyup="countChar(this)"></textarea>
+                    </div>
+                </form>
+
+                {# Place this out of the form. Data will be POSTed via Javascript. #}
+                <button class="btn btn-rounded btn-blue" id="pay_direct_form_button" disabled="disabled">{% trans 'Process Payment' %}</button>
+
+
+                {# Modal popup for payment confirmation #}
+                <div class="modal fade" id="modal-payment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans 'Close' %}</span></button>
+                                <h4 class="modal-title" id="myModalLabel">{% trans 'Complete payment' %}</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="highlight" id="pay_highlight">
+                                    {% blocktrans %}
+                                        <p>Pay <span id="pay_receiver"></span> an amount of <span class="samendoen"><i class="icon-samendoen"></i></span><span id="pay_amount"></span> <b>?</b></p>
+                                    {% endblocktrans %}
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-rounded btn-danger" data-dismiss="modal">{% trans 'Cancel' %}</button>
+                                <button type="button" id="confirm_payment" class="btn btn-rounded btn-green">{% trans 'Confirm' %}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-warning" role="alert">
+                    {% trans 'Payments are not enabled for this account.' %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endwith %}
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'js/plugins/jquery.cookie.js' %}"></script>
+    <script src="{% static 'js/lib/typeahead.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap/modal.js' %}"></script>
+
+    {% if form %}
+    <script type="text/javascript">
+        {% if user.cc3_profile.get_cyclos_group|is_instituties_group %}
+            var contact_name_auto_url = '{% url 'contact_name_auto' %}';
+        {% else %}
+            var contact_name_auto_url = '{% url 'contact_name_auto' user.cc3_profile.community.pk %}';
+        {% endif %}
+
+        var correct_amount = true;
+
+        var add_user_does_not_exist_error = function () {
+            $('#id_profile').val('');
+            $('#contact_name_section').addClass('has-error');
+            if ($('#receiver-error')) {
+                $('#receiver-error').remove();
+            }
+            $("form label[for=id_contact_name]").after(' <label id="receiver-error" class="control-label"> - {% trans "This user does not exist" %}</label>');
+            $('#pay_direct_form_button').attr('disabled', 'true');
+        };
+
+        var remove_user_does_not_exist_error = function () {
+            $('#contact_name_section').removeClass('has-error');
+            $('#receiver-error').remove();
+            //$('#pay_direct_form_button').removeAttr('disabled');
+        };
+
+        {# Check the maximum characters allowed in the `description` field (75). #}
+        function countChar(description) {
+            var chars = $(description).val().length;
+            var remaining = 75 - chars;
+
+            $('#max_chars').html(remaining.toString());
+
+            {# Warn the user about max number of characters passed. #}
+            if(remaining < 0) {
+                $("form label[for=id_description]").parent().addClass('has-error');
+                $("#max_chars_warning").html('{% trans "Only 75 characters allowed" %}');
+                $('#pay_direct_form_button').attr('disabled', 'true');
+            }
+            else {
+                $("form label[for=id_description]").parent().removeClass('has-error');
+                $("#max_chars_warning").html('{% trans "Number of characters left" %}');
+
+                if($('#id_contact_name').val() != '' && $('#id_profile').val() != '' && $('#id_amount').val() != '' && correct_amount) {
+                    $('#pay_direct_form_button').removeAttr('disabled');
+                }
+            }
+        }
+
+        {# Check that the inserted amount is a round number before submitting the form. #}
+        $(function() {
+            $('#id_amount').keyup(function() {
+                if(!$.isNumeric($(this).val()) || !($(this).val() % 1 === 0)) {
+                    correct_amount = false;
+
+                    {# Disable the button if it was enabled before. #}
+                    $('#pay_direct_form_button').attr('disabled', 'true');
+
+                    {# Show informative error message. #}
+                    $('#amount_section').addClass('has-error');
+                    if(!$('#integer-error').length) {
+                        $("form label[for=id_amount]").after(' <label id="integer-error" class="control-label"> - {% trans "Must be an integer number" %}</label>');
+                    }
+                }
+                else if($(this).val() === '0') {
+                    $('#amount_section').addClass('has-error');
+                    if(!$('#integer-error').length) {
+                        $("form label[for=id_amount]").after(' <label id="integer-error" class="control-label"> - {% trans "Must be greater than zero" %}</label>');
+                    }
+                }
+                else {
+                    correct_amount = true;
+
+                    {# Correct input. Remove all error messages. #}
+                    $('#amount_section').removeClass('has-error');
+                    $('#integer-error').remove();
+                }
+            });
+        });
+
+        $(function() {
+            {# 'Submit' button initially hidden. Show it when form is ready. #}
+            $(':input').change(function(){
+                if($('#id_contact_name').val() != '' && $('#id_profile').val() != '' && $('#id_amount').val() != '' && correct_amount) {
+                    if($('#id_description').val().length < 75) {
+                        $('#pay_direct_form_button').removeAttr('disabled');
+                    }
+                }
+            });
+        });
+
+        $(function() {
+            {# Autocomplete the name of the receiver. #}
+            $('#id_contact_name').typeahead([
+            {
+                name: 'contact_name',
+                remote: contact_name_auto_url + '?contact_name=%QUERY',
+                minLength: {{ min_contact_auto }}
+            }]);
+
+            {# When a new receiver has been selected insert the profile PK into the #}
+            {# the hidden profile field. #}
+
+            $('#id_contact_name').on('typeahead:selected', function(e, selected) {
+                remove_user_does_not_exist_error();
+                $('#id_profile').val(selected.pk);
+            }).on('typeahead:autocompleted', function($e, selected) {
+                remove_user_does_not_exist_error();
+                $("#id_profile").val(selected.pk);
+            });
+
+            $('#id_contact_name').focusout(function() {
+                var typeahead_span = $('.tt-dropdown-menu');
+
+                {# https://support.community-currency.org/ticket/1351  #}
+                {# https://support.community-currency.org/hg/hgweb.cgi/cc3/rev/f8c9c0d56ad2#}
+                {# //if(typeahead_span.css('display') == 'block')#}
+                {# //    return;#}
+
+                // manually try and find the contact names ID
+                $.ajax({
+                    type: "GET",
+                    url: contact_name_auto_url + '?contact_name=' + $('#id_contact_name').val()
+                })
+                .done(function (msg) {
+                    if (msg.length == 0) {
+                        add_user_does_not_exist_error();
+                    } else {
+                        remove_user_does_not_exist_error();
+                        // only one returned, then use it
+                        if (msg.length == 1) {
+                            $('#id_contact_name').val(msg[0].value);
+                            $('#id_profile').val(msg[0].pk);
+                        } else {
+                            // anything already selected?
+                            var selected_profile_id = $('#id_profile').val();
+                            // nothing selected
+                            if (selected_profile_id == "") {
+                                // use first in list
+                                $('#id_contact_name').val(msg[0].value);
+                                $('#id_profile').val(msg[0].pk);
+                            } else {
+                                // selected - so find in msg (belt and braces
+                                for (var i = 0; i < msg.length; i++) {
+                                    if (selected_profile_id == msg[i].pk) {
+                                        $('#id_contact_name').val(msg[i].value);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+                .fail(function() {
+                    add_user_does_not_exist_error();
+                });
+            });
+
+
+            {# 'Submit' button clicked. #}
+            $('#pay_direct_form_button').on('click', function(){
+                // if the confirmed input #id_confirmed has been added, submit form normally
+                if ($("#id_confirmed").length) {
+                    return true;
+                }
+
+                {# Fill the receiver name and the amount in the modal box. #}
+                $('#pay_receiver').html($('#id_contact_name').val());
+                $('#pay_amount').html($('#id_amount').val());
+
+                {# Show the modal confirmation form. #}
+                $('#modal-payment').modal('show');
+            });
+
+            {# POST the contents of the form. #}
+            $('#confirm_payment').click(function() {
+                // prevent double click double payments
+                if($(this).data('lastClick') + 10000 > new Date().getTime()){
+
+                    e.stopPropagation();
+                    return false;
+                }
+                $(this).data('lastClick', new Date().getTime());
+
+                var confirmed_input = $("<input>").attr("type", "hidden").attr("id", "id_confirmed").attr("name", "confirmed").val(1);
+                var $pay_direct_form = $('#pay_direct_form');
+                $pay_direct_form.append($(confirmed_input)).submit();
+            });
+        });
+
+    </script>
+    {% endif %}
+{% endblock %}

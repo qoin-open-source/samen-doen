@@ -1,0 +1,18 @@
+{% extends 'admin/change_list.html' %}
+{% load i18n admin_static admin_list %}
+{% load admin_urls nvd3_tags %}
+
+{% block extrahead %}{{ block.super }}
+    {% include_chart_jscss %}
+    <script src="{% static 'js/lib/jquery.min.js' %}"></script>
+
+{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+  <div id="content-main">
+    <div class="module" id="changelist">{% for graph in graphs %}{% include 'community_admin/dashboard_graph_include.html' with graph=graph %}{% endfor %}
+    </div>
+  </div>
+{% endblock %}

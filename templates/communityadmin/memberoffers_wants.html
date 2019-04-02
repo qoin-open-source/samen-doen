@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load i18n staticfiles thumbnail %}
+
+{% block title %}{% trans 'Member Wants and offers' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'communityadmin/sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2><a href="{% url 'communityadmin_ns:editmember' username=cc3_profile.user.username %}">{{ cc3_profile }}</a> {% trans 'wants and offers' %}</h2>
+
+            {% include 'includes/messages.html' %}
+
+            <form method="get" action="" class="form-inline">
+                <div class="element typeahead-div">
+                    <input name="q" class="form-control" type="text" placeholder="{% trans 'Search' %}" value="{{ request.GET.q }}"/>
+                    <a href="{% url 'communityadmin_ns:memberwantsoffers' username=cc3_profile.user.username %}" class="btn btn-rounded btn-green">{% trans 'reset' %}</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            {% if ads %}
+                <table class="table rwd-table transactions-table">
+                    <tbody>
+                        <tr class="table-head">
+                            <th>{% trans 'Image' %}</th>
+                            <th>{% trans 'Contact' %}</th>
+                            <th>{% trans 'Title' %}</th>
+                            <th>{% trans 'Price' %}</th>
+                            <th>{% trans 'Type' %}</th>
+                            <th>{% trans 'Views' %}</th>
+                            <th>{% trans 'Status' %}</th>
+                            <th></th> {# tools #}
+                        </tr>
+                        {% for ad in ads %}
+                            {% include 'communityadmin/offer_want_row.html' with via="?via=memberoffers" %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {# Pagination #}
+                {% include "includes/paginator.html" %}
+            {% else %}
+                <div class="row">
+                    <div class="alert alert-warning" role="alert">
+                        {% trans 'No ads were found for' %} {{ cc3_profile }}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

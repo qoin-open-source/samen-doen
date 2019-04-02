@@ -1,0 +1,37 @@
+{% load i18n %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>{% trans "Thank you for registering at Samen Doen" %}!</title>
+</head>
+
+<body>
+<p>
+    {% trans "Thank you for registering at Samen Doen" %}!
+</p>
+<p>
+{% trans "Activate your account by clicking on the link below:" %}
+</p>
+<p>
+    <a href="http://{{ site.domain }}{% url 'registration_activate' activation_key %}">
+        {{ site.domain }}{% url 'registration_activate' activation_key %}
+    </a>
+</p>
+<p>
+    ({% blocktrans %}Link is valid for {{ expiration_days }} days.{% endblocktrans %})
+</p>
+<p>
+    {% trans "Have much fun Doing Together!" %}
+</p>
+<p>
+    {% trans "Sincerely," %}<br/>
+    {% trans "The Samen Doen team" %}
+</p>
+<p>
+    E-mail: info@samen-doen.nl<br/>
+    Website:  https://www.samen-doen.nl
+</p>
+</body>
+
+</html>

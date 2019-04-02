@@ -1,0 +1,55 @@
+{% extends 'admin/change_list.html' %}
+{% load i18n admin_static admin_list %}
+{% load admin_urls nvd3_tags %}
+
+{% block extrahead %}{{ block.super }}
+    {% include_chart_jscss %}
+{% endblock %}
+
+{% block content %}
+  <div id="content-main">
+    <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
+      {% block search %}{#% search_form cl %#}{% endblock %}
+      {% block date_hierarchy %}{#% date_hierarchy cl %#}{% endblock %}
+
+      {% block filters %}
+          <div id="changelist-filter">
+            <h2>{% trans 'Filter' %}</h2>
+            <h3> Op community </h3>
+            <ul>
+              <li{% ifequal community_filter_code "" %} class="selected"{% endifequal %}><a href="{% url "admin:admin_update_filter" %}?ccode=&next={{ request.path }}?{{ request.GET.urlencode }}">All</a></li>
+              {% for comm in communities %}
+                <li{% ifequal community_filter_code comm.code %} class="selected"{% endifequal %}><a href="{% url "admin:admin_update_filter" %}?ccode={{ comm.code }}&next={{ request.path }}?{{ request.GET.urlencode }}">{{ comm.title }}</a></li>
+              {% endfor %}
+            </ul>
+
+            {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
+          </div>
+      {% endblock %}
+
+      {% if cl.formset %}
+      <form id="changelist-form" action="" method="post"{% if cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %}>{% csrf_token %}
+        <div>{{ cl.formset.management_form }}</div>
+      {% endif %}
+
+      {% block result_list %}
+        <table style="table-layout:fixed; width: 600px">
+          <tr>
+            {% for dash in all_dashes %}
+            <td style="background-color: {% ifequal dash.id current_dash %}#D8D8D8{% else %}#EEEEEE{% endifequal %}"><strong><a href="?id={{ dash.id }}">{{ dash.title }}</a></strong></td>
+            {% endfor %}
+          </tr>
+        </table>
+          <ul class="dashboard-nav" style="list-style-type: none">
+          </ul>
+          {% for result in cl.result_list %}
+            <div>
+              <h2>{{ result.title }}</h2>
+              {% for graph in result.annotated_graphs.all %}<div>{% include 'community_admin/dashboard_graph_include.html' with graph=graph %}</div><br clear="all">{% endfor %}
+            </div>
+          {% endfor %}
+      {% endblock %}
+      </form>
+    </div>
+  </div>
+{% endblock %}

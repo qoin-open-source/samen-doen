@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n staticfiles thumbnail cc3_tags %}
+
+{% block title %}{% trans 'My Ads' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-10">
+            <h2>{% trans 'My Ads' %}</h2>
+
+            <hr>
+
+            <div class="marketplace-list">
+                {% for item in object_list %}
+                    {% if forloop.counter0|divisibleby:3 %}<div class="row">{% endif %}
+                        <div class="col-sm-4 marketplace-list-item marketplace-list-item-blue">
+                            <div class="marketplace-list-item-wrap">
+                                <div class="marketplace-list-item-image">
+                                    {% with item.adimage_set.all|last_item as ad_image %}
+                                        {% if ad_image.get_image %}
+                                            {% thumbnail ad_image.image "70x70" crop="center" as im %}
+                                            <img src="{{ im.url }}" class="img-circle img-responsive" alt=""/>
+                                        {% else %}
+                                            <img src="https://placehold.it/70x70" class="img-circle img-responsive" alt=""/>
+                                        {% endif %}
+                                    {% endwith %}
+
+                                    <div>
+                                        <a href="{% url 'accounts_edit_ad' item.pk %}"><i class="icon-edit"></i></a> <br>
+                                        <a href="{% url 'accounts-disable-ad' item.pk %}"><i class="icon-trash"></i></a>
+                                    </div>
+                                </div>
+                                <div class="marketplace-list-item-info">
+                                    <h3 class="marketplace-list-item-info-title ellipsis"><span><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></span></h3>
+                                    <div class="marketplace-list-item-info-creator ellipsis"><em>{{ item.created_by }}</em></div>
+                                    {% ifequal item.status 'active' %}
+                                        <span class="label label-success">{% trans 'Enabled' %}</span>
+                                    {% else %}
+                                    <span class="label label-danger">{% trans 'Disabled' %}</span>
+                                    {% endifequal %}
+                                    <div class="marketplace-list-item-info-description ellipsis">
+                                        <div>{{ item.description|safe }}</div>
+                                    </div>
+                                    <div class="marketplace-list-item-info-price">
+                                        <span><i class="icon-samendoen"></i>{% if item.price %}{{ item.price|floatformat:"0"|default:'N.O.T.K.' }}{% else %}N.O.T.K.{% endif %}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="marketplace-list-item-border"></div>
+                        </div>
+                    {% if forloop.counter|divisibleby:3 %}</div>{% endif %}
+                {% endfor %}
+
+                {% if not object_list %}
+                    <div class="alert alert-warning" role="alert">
+                        {% trans "You don't have any registered Ads yet." %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% include 'includes/paginator.html' %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% load thumbnail %}
+<div class="cycle-slideshow hidden-xs"
+data-cycle-fx="fade"
+data-cycle-slides=".showcase-slide"
+data-cycle-timeout="4000"
+data-cycle-pager=".showcase-pager">
+    {% for slide in instance.sectioncarouselpluginslide_set.all %}
+        {% if slide.get_image %}
+        <div class="showcase-slide">
+            {% thumbnail slide.image 1280x470 upscale as image %}
+            <img class="showcase-slide-bg" src="{{ image.url }}" alt="{{ slide.image_alt }}" width="{{ image.width }}" height="{{ image.height }}">
+            <div class="caption">
+                <span>{{ slide.date|date:"m-d" }}</span>
+                <p>
+                    <strong>{{ slide.title_line_1 }}</strong>
+                    <strong>{{ slide.title_line_2 }}</strong>
+                </p>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+    <div class="showcase-pager">
+        
+    </div>
+</div>

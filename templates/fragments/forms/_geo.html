@@ -1,0 +1,28 @@
+{% extends 'fragments/forms/_field.html' %}{# OVERRIDE core version for Samen Doen #}
+{% load tz i18n staticfiles map_tags cc3_tags %}
+{% block field %}
+<label class="long">{% trans "Set your location by clicking on the map" %}</label>
+
+{% if not lat.value %}
+	<div class="alert alert-warning" role="alert">{% trans "We could not locate your address automatically. Please click on the map to denote your location" %}</div>
+{% endif %}
+
+
+<div id="map_id" class="ui-geopicker gmap">
+
+</div>
+
+{% comment %}Use periods as decimal separator {% endcomment %}
+
+<input type="hidden" value="{% if lat.value %}{{ lat.value|floatdot:14 }}{% endif %}" name="{{ lat.name }}">
+<input type="hidden" value="{% if long.value %}{{ long.value|floatdot:14 }}{% endif %}" name="{{ long.name }}">
+<input type="hidden" value="{% if map_zoom.value %}{{ map_zoom.value }}{% endif %}" name="{{ map_zoom.name }}">
+
+<script type="text/javascript">
+	$(document).ready(function(){
+    	var map = qoinware.geo.FormMap("map_id", "{{ lat.name }}", "{{ long.name }}", "{{ map_zoom.name }}", {zoom: {{map_zoom.value|default_if_none:12}}});
+    	//map.setCenterAddress("{{street}} {{num_street}}, {{ postal_code }} {{city}}, {{country}}");
+    	//map.centralize();
+	})
+</script>
+{% endblock %}

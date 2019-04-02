@@ -1,0 +1,23 @@
+{% load i18n cc3_tags %}
+
+<div class="form-group {% if formfield.errors %}has-error{% endif %}">
+    <label class="control-label" for="id_{{ formfield.name }}">{{ formfield.label }}{% if formfield.field.required %} *{% endif %}</label>
+    {% for error in formfield.errors %}
+        <label class="control-label"> - {{ error }}</label>
+    {% endfor %}
+    {% if sub_info %}<div>{{ sub_info }}</div>{% endif %}
+    {% if is_checkbox %}
+        <div class="checkbox">
+            {{ formfield }}
+        </div>
+    {% else %}
+        {% if is_radio %}
+            <div class="clearfix"></div>
+            <div class="radio">
+                {{ formfield }}
+            </div>
+        {% else %}
+            {{ formfield|add_attributes:"form-control" }}
+        {% endif %}
+    {% endif %}
+</div>

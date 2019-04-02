@@ -1,0 +1,352 @@
+{% load i18n staticfiles thumbnail cache cc3_tags %}
+
+{% if user.is_authenticated %}{% with user.cc3_profile as user_profile %}
+    <div class="col-sm-5 col-md-4 col-lg-3" xmlns="http://www.w3.org/1999/html">
+        <aside class="sidebar">
+            {% url 'accounts_home' as accounts_home_url %}
+            {% url 'accounts_transactions_search' as accounts_transactions_search_url %}
+            <div class="box">
+
+                {% if request.path != accounts_home_url and request.path != accounts_transactions_search_url %}
+
+                    <a href="{{ accounts_home_url }}">
+                        <div class="box-title collapsed">
+                            <i class="icon icon-transactions"></i> {% trans 'Transaction history' %}
+                            <i class="icon-arrow"></i>
+                        </div>
+                    </a>
+
+                {% else %}
+
+                    <a href="#">
+                        <div class="box-title" data-toggle="collapse" data-target="#box-1">
+                            <i class="icon icon-transactions"></i> {% trans 'Transaction history' %}
+                            <i class="icon-arrow"></i>
+                        </div>
+                    </a>
+
+                    <form action="{% url 'accounts_transactions_search' %}" method="get" id="search_transactions_form">
+                        {% csrf_token %}
+                        <div id="box-1" class="box-content sidebar-collapse collapse in">
+
+                            {% if menu_form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {% for error in menu_form.non_field_errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
+                            <div class="form-group row{% if menu_form.from_date.errors %} has-error{% endif %}">
+                                {% for error in menu_form.from_date.errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                                <div class="col-sm-12 datepicker">
+                                    <input type="text" id="id_from_date" placeholder="{% trans 'from date' %}" class="form-control" name="from_date"{% if menu_form.from_date.value %} value="{{ menu_form.from_date.value }}"{% endif %}>
+                                </div>
+                            </div>
+                            <div class="form-group row{% if menu_form.to_date.errors %} has-error{% endif %}">
+                                {% for error in menu_form.to_date.errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                                <div class="col-sm-12 datepicker">
+                                    <input type="text" id="id_to_date" placeholder="{% trans 'to date' %}" class="form-control" name="to_date" {% if menu_form.to_date.value %} value="{{ menu_form.to_date.value }}"{% endif %}>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {# Dummy radiobutton to let the user know that the search will be performed across both 'paid' and 'received' transactions - Django will NOT take this as a form option. #}
+                                <div class="col-sm-12">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="trans_type" value="" {% if menu_form.trans_type.data != 'received' and menu_form.trans_type.data != 'paid' %} checked{% endif %}>
+                                            <span>{% trans 'paid and received' %}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <div class="radio">
+                                        <label for="id_trans_type_0">
+                                            <input type="radio" id="id_trans_type_0" name="trans_type" value="received"{% ifequal menu_form.trans_type.data 'received' %} checked{% endifequal %}>
+                                            <span>{% trans 'received' %}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <div class="radio">
+                                        <label for="id_trans_type_1">
+                                            <input type="radio" id="id_trans_type_1" name="trans_type" value="paid"{% ifequal menu_form.trans_type.data 'paid' %} checked{% endifequal %}>
+                                            <span>{% trans 'paid' %}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <input type="submit" class="btn btn-rounded btn-white" value="{% trans 'search' %}">
+                                    <input type="button" class="btn btn-rounded btn-white" onclick="resetTransactionSearchForm()" value="wis">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                {% endif %}
+
+
+            </div>
+
+            {% if not user.is_superuser %}
+                {% url 'accounts-update-profile' as profile_url %}
+                <div class="box">
+                    <a href="{{ profile_url }}">
+                        <div class="box-title collapsed selected{% ifequal request.path profile_url %} active{% endifequal %}">
+                            <i class="icon icon-user"></i> {% trans 'Profile' %}
+                            <i class="icon-arrow"></i>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+
+            {% if not user.is_superuser and not user_profile.is_individual_profile %}
+                {% url 'accounts_products' as products_url %}
+                {% url 'accounts_products_invoice' as products_invoice_url %}
+                <div class="box">
+                    {% if is_billing_view %}
+                        <a href="#">
+                            <div class="box-title" data-toggle="collapse" data-target="#box-2">
+                                <i class="icon icon-books"></i> {% trans 'My products' %}
+                                <i class="icon-arrow"></i>
+                            </div>
+                        </a>
+
+                        <div id="box-2" class="box-content sidebar-collapse collapse in">
+                            <div class="menu-item">
+                                <a href="{{products_url}}">{% trans 'Current products' %}</a>
+                            </div>
+
+
+                            <form class="">
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <label>{% trans 'Previous invoices' %}</label>
+
+                                        <select class="form-control billing-invoice-quick-menu">
+                                            <option value="-1">--{% trans 'Please choose an invoice' %}--</option>
+
+                                            {% for item in invoice_list %}
+                                                <option value="{% if request.is_secure %}https{% else %}http{% endif %}://{{ request.get_host }}{% url 'accounts_products_invoice' item.id %}">{{ item.invoice_date }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    {% else %}
+                        <a href="{{ products_url }}">
+                            <div class="box-title collapsed selected{% if is_billing_view %} active{% endif %}">
+                                <i class="icon icon-books"></i> {% trans 'My products' %}
+                                <i class="icon-arrow"></i>
+                            </div>
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            {% if user_profile.is_business_profile  %}
+                {% url 'accounts_stats_summary' as stats_url %}
+                <div class="box">
+                    <a href="{{ stats_url }}">
+                        <div class="box-title collapsed selected{% ifequal request.path stats_url %} active{% endifequal %}">
+                            <i class="icon icon-stats"></i> {% trans 'Account statistics' %}
+                            <i class="icon-arrow"></i>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+
+            {% if user.is_community_admin %}
+                {% url 'memberlist' as community_admin_url %}
+                <div class="box">
+                    <a href="{{ community_admin_url }}">
+                        <div class="box-title collapsed selected{% ifequal request.path community_admin_url %} active{% endifequal %}">
+                            <i class="icon icon-user"></i> {% trans 'Community admin' %}
+                            <i class="icon-arrow"></i>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+
+            {% url 'accounts_pay_direct' as accounts_pay_direct_url %}
+            {% url 'stadlander_pay_direct' as stadlander_pay_direct_url %}
+            {% url 'rewards_bulk_upload' as upload_bulk_rewards_url %}
+            {% with group=user_profile.get_cyclos_group %}
+
+                {% if group and group|is_instituties_group or group|is_goededoelen_group %}
+                    <div class="box rewards ">
+                        <a href="{{ upload_bulk_rewards_url }}">
+                            <div class="box-title collapsed selected{% ifequal request.path upload_bulk_rewards_url %} active{% endifequal %}">
+                                <i class="icon icon-hands"></i> {% trans 'Upload bulk rewards' %}
+                                <i class="icon-arrow"></i>
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% if group|is_consumenten_group or group|is_instituties_group or group|is_goededoelen_group %}
+                    <div class="box pay-direct ">
+                        <a href="{% if user_profile.is_stadlander_sso_user %}{{ stadlander_pay_direct_url }}{% else %}{{ accounts_pay_direct_url }}{% endif %}">
+                            <div class="box-title collapsed selected{% ifequal request.path accounts_pay_direct_url %} active{% endifequal %}{% ifequal request.path stadlander_pay_direct_url %} active{% endifequal %}">
+                                <i class="icon icon-samendoen"></i> {% trans 'Pay direct' %}
+                                <i class="icon-arrow"></i>
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+<!--
+                {#% url 'invoice_list' as invoice_list_url %#}
+                {#% if group and group|is_organisaties_group or group|is_instituties_group %#}
+                    <div class="box invoices">
+                        <a href="{# { invoice_list_url } #}">
+                            <div class="box-title collapsed selected{#% ifequal request.path invoice_list_url %#} active{#% endifequal %#}">
+                                <i class="icon icon-books"></i> {#% trans 'Invoices' %#}
+                                <i class="icon-arrow"></i>
+                            </div>
+                        </a>
+                    </div>
+                {#% endif %#}
+-->
+                {% if group and group|is_organisaties_group or group|is_instituties_group or group|is_goededoelen_group %}
+                    {% url 'terminals_list' as terminals_list_url %}
+                    <div class="box terminals">
+                        <a href="{{ terminals_list_url }}">
+                            <div class="box-title collapsed selected{% ifequal request.path terminals_list_url %} active{% endifequal %}">
+                                <i class="icon icon-creditcard"></i> {% trans 'Business Terminals' %}
+                                <i class="icon-arrow"></i>
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% if user_profile.groupset.may_add_ads %}
+                    {% if group and group|is_instituties_group or group|is_consumenten_group or group|is_goededoelen_group %} {# ... #}
+                        {% url 'accounts_place_ad' as accounts_place_ad_url %}
+                        {% url 'stadlander_place_ad' as stadlander_place_ad_url %}
+                        <div class="box place-ad">
+                            <a href="{% if user_profile.is_stadlander_sso_user %}{{ stadlander_place_ad_url }}{% else %}{{ accounts_place_ad_url }}{% endif %}">
+                                <div class="box-title collapsed selected{% ifequal request.path accounts_place_ad_url %} active{% endifequal %}{% ifequal request.path stadlander_place_ad_url %} active{% endifequal %}">
+                                    <i class="icon icon-star"></i> {% trans 'Place ad' %}
+                                    <i class="icon-arrow"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                        {% url 'accounts_my_ads' as accounts_my_ads_url %}
+                        <div class="box place-ad">
+                            <a href="{{ accounts_my_ads_url }}">
+                                <div class="box-title collapsed selected{% ifequal request.path accounts_my_ads_url %} active{% endifequal %}">
+                                    <i class="icon icon-edit"></i> {% trans 'Manage ads' %}
+                                    <i class="icon-arrow"></i>
+                                </div>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if user_profile.is_individual_profile %}
+                    {% url 'accounts_my_campaigns' as my_campaigns_url %}
+                    <div class="box">
+                        <a href="{{ my_campaigns_url }}">
+                            <div class="box-title collapsed selected{% ifequal request.path my_campaigns_url %} active{% endifequal %}">
+                                <i class="icon icon-calendar"></i> {% trans 'My activities' %}
+                                <i class="icon-arrow"></i>
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% if user_profile.is_institution_profile or user_profile.is_charity_profile %}
+                    {% url 'accounts_my_managed_campaigns' as my_campaigns_url %}
+                    {% url 'accounts-new-campaign' as new_campaign_url %}
+                    <div class="box">
+                        <a href="{{ my_campaigns_url }}">
+                            <div class="box-title collapsed selected{% ifequal request.path my_campaigns_url %} active{% endifequal %}">
+                                <i class="icon icon-calendar"></i> {% trans 'Activities summary' %}
+                                <i class="icon-arrow"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box">
+                        <a href="{{ new_campaign_url }}">
+                            <div class="box-title collapsed selected{% ifequal request.path new_campaign_url %} active{% endifequal %}">
+                                <i class="icon icon-calendar"></i> {% trans 'New activity' %}
+                                <i class="icon-arrow"></i>
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% if group and group|is_consumenten_group or group|is_goededoelen_group %}
+                    {% url 'owner_manage_and_register_cards' as manage_card_url %}{% url 'owner_register_card_success' as register_card_success_url %}
+                    <div class="box card">
+                        <a href="{{ manage_card_url }}">
+                            <div class="box-title collapsed selected{% ifequal request.path manage_card_url %} active{% endifequal %}{% ifequal request.path register_card_success_url %} active{% endifequal %}">
+                                <i class="icon icon-creditcard"></i> {% trans 'Cards' %}
+                                <i class="icon-arrow"></i>
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% if group and group|is_consumenten_group %}
+                    {% url 'causes_list' as causes_list_url %}
+                    {% url 'search_cause' as causes_search_url %}
+                    <div class="box causes">
+                        <a href="{{ causes_list_url }}">
+                        <div class="box-title{% if request.path != causes_list_url and request.path != causes_search_url %} collapsed{% endif %}">
+                            <i class="icon icon-hands"></i> {% trans 'Good causes' %}
+                            <i class="icon-arrow"></i>
+                        </div></a>
+                        <div id="box-causes" class="box-content collapse{% if request.path == causes_list_url or causes_search_url in request.get_full_path %} in{% endif %}">
+                            <form action="{% url 'search_cause' %}" method="get" class="form">
+                                {% csrf_token %}
+
+                                <div class="input-group">
+                                    <input name="query" type="text" class="form-control" placeholder="{% trans 'search good causes' %}"{% if query %} value="{{ query }}"{% endif %}>
+                                    <span class="input-group-btn">
+                                        <button class="btn box-search-btn" type="submit">&nbsp;</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    {% url 'accounts_really_close' as close_account_url %}
+                    <div class="box">
+                        <a href="{{ close_account_url }}">
+                            <div class="box-title collapsed selected{% ifequal request.path close_account_url %} active{% endifequal %}">
+                                <i class="icon icon-user"></i> {% trans 'Close My Account' %}
+                                <i class="icon-arrow"></i>
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </aside>
+    </div>
+{% endwith %}{% endif %}
+
+{# Javascript for the "reset" ("wis") button of the transaction search widget. #}
+<script src="{% static 'js/lib/jquery.min.js' %}"></script>
+<script type="text/javascript">
+    function resetTransactionSearchForm() {
+        document.getElementById('search_transactions_form').reset();
+        window.location = "{% url 'accounts_home' %}"
+    }
+</script>

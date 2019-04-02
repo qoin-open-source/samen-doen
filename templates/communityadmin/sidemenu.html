@@ -1,0 +1,89 @@
+{% load i18n staticfiles thumbnail %}
+
+{% if user.is_authenticated %}
+    <div class="col-sm-5 col-md-4 col-lg-3">
+        <aside class="sidebar">
+            {% with user_cc3_profile=user.get_cc3_profile %}
+                {% url 'communityadmin_ns:memberlist' as memberlist_url %}
+                <div class="box">
+                    <a href="{{ memberlist_url }}">
+                        <div class="box-title collapsed selected{% ifequal request.path memberlist_url %} active{% endifequal %}">
+                            <i class="icon icon-user"></i> {% trans 'Members' %}
+                            <i class="icon-arrow"></i>
+                        </div>
+                    </a>
+                </div>
+
+                {% url 'communityadmin_ns:transactions' as transactions_url %}
+                <div class="box">
+                    <a href="{{ transactions_url }}">
+                        <div class="box-title collapsed selected{% ifequal request.path transactions_url %} active{% endifequal %}">
+                            <i class="icon icon-user"></i> {% trans 'Transactions' %}
+                            <i class="icon-arrow"></i>
+                        </div>
+                    </a>
+                </div>
+
+                {% url 'communityadmin_ns:contentlist' as contentlist_url %}
+                <div class="box">
+                    <a href="{{ contentlist_url }}">
+                        <div class="box-title collapsed selected{% ifequal request.path contentlist_url %} active{% endifequal %}">
+                            <i class="icon icon-user"></i> {% trans 'Content' %}
+                            <i class="icon-arrow"></i>
+                        </div>
+                    </a>
+                </div>
+
+                {% url 'cardfulfillment' as fulfillmentlist_url %}
+                <div class="box">
+                    <a href="{{ fulfillmentlist_url }}">
+                        <div class="box-title collapsed selected{% ifequal request.path fulfillmentlist_url %} active{% endifequal %}">
+                            <i class="icon icon-user"></i> {% trans 'Fulfillment' %}
+                            <i class="icon-arrow"></i>
+                        </div>
+                    </a>
+                </div>
+
+                {% if user_cc3_profile %}
+                    {% with user_cc3_profile.groupset as cc3_groupset %}
+                        {% if cc3_groupset %}
+                            {% if cc3_groupset.may_add_ads %}
+                                {% url 'communityadmin_ns:wantsoffers' as wantsoffers_url %}
+                                <div class="box">
+                                    <a href="{{ wantsoffers_url }}">
+                                        <div class="box-title collapsed selected{% ifequal request.path wantsoffers_url %} active{% endifequal %}">
+                                            <i class="icon icon-user"></i> {% trans 'Wants and offers' %}
+                                            <i class="icon-arrow"></i>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                {% url 'communityadmin_ns:place-ad' as place_ad_url %}
+                                {% if ad.id %}
+                                    {% url 'communityadmin_ns:edit_ad' ad.id as edit_ad_url %}
+                                {% endif %}
+                                <div class="box">
+                                    <a href="{{ place_ad_url }}">
+                                        <div class="box-title{% if not edit_ad_url %} collapsed{% endif %}{% ifequal request.path place_ad_url %} active{% endifequal %}">
+                                            <i class="icon icon-user"></i> {% trans 'Place Ad' %}
+                                            <i class="icon-arrow"></i>
+                                        </div>
+                                        {% if edit_ad_url %}
+                                            <div id="box-place-ad" class="box-content in">
+                                                <a href="{{ edit_ad_url }}">{{ ad.title }}</a>
+                                            </div>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <div class="alert alert-warning" role="alert">
+                                {% trans 'Community admin has no Groupset' %}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                {% endif %}
+            {% endwith %}
+        </aside>
+    </div>
+{% endif %}

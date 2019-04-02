@@ -1,0 +1,37 @@
+-e git+https://github.com/qoin-open-source/samen-doen-cc3.git@sd_v2.5.1#egg=cc3
+
+# CC3 Qoinware uses `setup.py` to install core requirements.
+# Some requirements are tricky or impossible to install by this method, so must
+# be installed in child project requirements.
+
+# NB https used as incoming git (ie the port number) is blocked on some server setups.
+
+# SEPA transfers XML document generation library.
+-e hg+https://support.community-currency.org/hg/hgweb.cgi/sepa@0.0.1-dev#egg=sepa
+
+# SEPA requires lxml:
+# sudo apt-get install libxml2-dev
+# sudo apt-get install libxslt1-dev
+
+# not using django-constance (with redis) now
+# redis==2.10.1
+
+# Django pluggable 3rd party modules.
+# -e hg+https://support.community-currency.org/hg/django-form-designer@0.8.0#egg=django-form-designer
+-e hg+https://support.community-currency.org/hg/django-localflavor@1.1#egg=django_localflavor
+-e hg+https://support.community-currency.org/hg/django-maintenancemode@0.10#egg=django-maintenancemode
+#-e hg+https://support.community-currency.org/hg/cmsplugin_vimeo@0.1#egg=cmsplugin_vimeo-0.1
+django-contact-form==0.3.1
+#cmsplugin-twitter==1.0.4
+
+# required for tests to work
+# this breaks latest django-filer, needed by cmsfiler
+# django-mptt==0.6.0
+
+# pin django classy tags as 0.7.2 breaks everything
+django-classy-tags==0.7.2
+
+# Python timezones
+pytz
+
+requests==2.18.4

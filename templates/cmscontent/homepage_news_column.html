@@ -1,0 +1,30 @@
+<div class="col-sm-8"> 
+    <div class="row">
+        <div class="col-sm-6">
+            <ul class="media-list news-list">
+                {% for entry in news_list %}
+                    <li class="media">
+                        <a class="media-date pull-left hidden-sm {% cycle '' 'media-color-pink' 'media-color-green' %}" href="{{ entry.get_absolute_url }}">
+                            <span>{{ entry.creation_date|date:"d-m" }}</span>
+                        </a>
+                            
+                        <div class="media-body">
+                            <h3 class="media-heading">
+                                <a href="{{ entry.get_absolute_url }}">{{ entry.title|truncatechars:150 }}</a>
+                            </h3>
+                        </div>
+                    </li>
+
+                    {% if forloop.counter|divisibleby:3 %}
+                        {% if not forloop.last %}
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="media-list news-list">
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

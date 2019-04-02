@@ -1,0 +1,48 @@
+{% load thumbnail cc3_tags %}
+
+{% for item in object_list %}
+    
+    {% if forloop.counter0|divisibleby:3 %}<div class="row">{% endif %}
+
+        {%   if item.created_by.cyclos_group|is_organisaties_group %} <a href="{{ item.get_absolute_url }}" class="col-sm-4 marketplace-list-item marketplace-list-item-purple">
+        {% elif item.created_by.cyclos_group|is_instituties_group  %} <a href="{{ item.get_absolute_url }}" class="col-sm-4 marketplace-list-item marketplace-list-item-orange">   
+        {% elif item.created_by.cyclos_group|is_goededoelen_group  %} <a href="{{ item.get_absolute_url }}" class="col-sm-4 marketplace-list-item marketplace-list-item-green">   
+        {% elif item.created_by.cyclos_group|is_consumenten_group  %} <a href="{{ item.get_absolute_url }}" class="col-sm-4 marketplace-list-item marketplace-list-item-pink">   
+        {% else                                                    %} <a href="{{ item.get_absolute_url }}" class="col-sm-4 marketplace-list-item marketplace-list-item-blue"> {% endif %}            
+            <div class="marketplace-list-item-wrap">
+                <div class="marketplace-list-item-image">
+                    {% with item.adimage_set.all|last_item as ad_image %}
+                        {% if ad_image.get_image %}
+                            {% thumbnail ad_image.image "70x70" crop="center" as im %}
+                            <img src="{{ im.url }}" class="img-circle img-responsive" alt=""/>
+                        {% else %}
+                            <img src="https://placehold.it/70x70" class="img-circle img-responsive" alt=""/>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div class="marketplace-list-item-info">
+                    <h3 class="marketplace-list-item-info-title ellipsis"><span>{{ item.title }}</span></h3>
+                    <div class="marketplace-list-item-info-creator ellipsis">
+                        {% if item.created_by.cyclos_group|is_consumenten_group %}
+                            <em><i class="icon-user"></i> {{ item.created_by.userprofile.first_name }} {{ item.created_by.userprofile.tussenvoegsel }} {{ item.created_by.userprofile.last_name }}</em>
+                        {% else %}
+                            {% if item.created_by.cyclos_group|is_goededoelen_group %}
+                                <em><i class="icon-hands"></i> {{ item.created_by.business_name }}</em>
+                            {% else %}
+                                <em><i class="icon-company"></i> {{ item.created_by.business_name }}</em>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="marketplace-list-item-info-description ellipsis">
+                        <div>{{ item.description|safe }}</div>
+                    </div>
+                    <div class="marketplace-list-item-info-price">
+                        <span><i class="icon-samendoen"></i>{% if item.price %}{{ item.price|floatformat:"0"|default:'N.O.T.K.' }}{% else %}N.O.T.K.{% endif %}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="marketplace-list-item-border"></div>
+        </a>
+
+    {% if forloop.counter|divisibleby:3 %}</div>{% endif %}
+{% endfor %}

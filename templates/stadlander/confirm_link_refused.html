@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Login' %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-lg-10">
+            {% blocktrans %}
+            <h2>You will need to either:</h2>
+            <p>a) Close your existing Samen Doen account<br/>
+                b) Change the email address registered with mijn.stadlander.nl<br/>
+                c) Change the email address registered with your Samen Doen account</p>
+                <p>Otherwise you cannot link your Samen Doen and stadlander accounts.</p>
+                <p>You have been logged out.</p>
+            {% endblocktrans %}
+        </div>
+    </div>
+{% endblock %}

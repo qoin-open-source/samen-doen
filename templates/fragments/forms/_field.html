@@ -1,0 +1,12 @@
+<div class="form group{% if field.errors %} error{% endif %}{% if field.field.required %} required{% endif %}{% block extra_field_classes %}{% endblock %}">
+  {{ field.label_tag|safe }}
+  <div class="field">
+    {% block field %}
+      <div class="element{% if 'med' in field.field.widget.attrs.class %} med{% endif %}{% if 'large' in field.field.widget.attrs.class %} large{% endif %}">
+        {{ field }}
+        {% include 'fragments/forms/_field_errors.html' %}
+      </div>
+    {% endblock %}
+  </div>
+  <div class="clearfix"></div>
+</div>

@@ -1,0 +1,66 @@
+{% extends "accounts/place_ad.html" %}
+{% load staticfiles i18n %}
+
+{% block extrahead %}
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.formset.min.js' %}"></script>
+    {{ form.media }}
+    {# use jquery.form.js as jquery post not sending file #}
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.form.js' %}"></script>
+
+    <script type="text/javascript">
+        var browse_translation = "{{ browse }}";
+        var return_url = '{% url 'communityadmin_ns:wantsoffers' %}';
+        var created_by_auto_url = '{% url 'communityadmin_ns:created_by_auto' %}';
+
+        $(function() {
+            $('#id_created_by_name').typeahead({
+                name: 'created_by_name',
+                remote: created_by_auto_url + '?created_by_name=%QUERY'
+            }).on('typeahead:selected', function($e, data) {
+                $("#id_created_by").val(data.id);
+                update_categories(data.id);
+            }).on('typeahead:autocompleted', function($e, data) {
+                $("#id_created_by").val(data.id);
+                update_categories(data.id);
+            }).on('typeahead:opened', function($e, data) {
+                $("#id_created_by").val("");
+            });
+
+            function update_categories(profile_id){
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'communityadmin_ns:categories_auto' %}",
+                    data: { profile_id: profile_id }
+                })
+                .done(function( msg ) {
+                    // deselect all category checkboxes
+                    $("input[name='category']").prop("checked", false);
+                    $("i.checkbox-checked").removeClass("checkbox-checked");
+
+                    for (var category_index in msg) {
+                        var category_id = msg[category_index].id;
+                        var $category_checkbox = $("input[value=" + category_id + "]");
+                        $category_checkbox.prop("checked", "checked");
+                        var i_checkbox = $category_checkbox.next();
+                        i_checkbox.addClass("checkbox-checked");
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block sidemenu %}
+    {% include 'communityadmin/sidemenu.html' %}
+{% endblock %}
+
+{% block created_by %}
+    <div class="form-group {% if form.created_by.errors %}has-error{% endif %}">
+        <label class="control-label" for="id_created_by_name">{% trans 'Community member' %}</label>
+        {% for error in form.created_by.errors %}
+            <label class="control-label"> - {{ error }}</label>
+        {% endfor %}
+        <input type="text" id="id_created_by_name" placeholder="{{ form.created_by.help_text }}" name="created_by_name"{% if form.created_by.value %} value="{{ form.created_by.first_name }} {{ form.created_by.last_name }}"{% endif %} class="form-control">
+        <input id="id_created_by" name="created_by" type="hidden" value="{% if form.created_by.value %}{{ form.created_by.value }}{% endif %}">
+    </div>
+{% endblock %}

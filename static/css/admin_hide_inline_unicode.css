@@ -1,0 +1,2 @@
+/*! for use in Community Admin to hide the unicode string a the front of inlines  */
+fieldset.module td.original p { display:none; }

@@ -1,0 +1,33 @@
+
+<SOAP-ENV:Envelope
+   xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <SOAP-ENV:Body>
+
+    <ns:relkenLk02 xmlns:ns="http://www.stichting-vera.nl/StUF/sector/vera/0310" xmlns:stuf="http://www.egem.nl/StUF/StUF0301">
+  <ns:stuurgegevens>
+    <stuf:berichtcode>Lk02</stuf:berichtcode>
+    <stuf:zender>
+      <stuf:organisatie>Stadlander</stuf:organisatie>
+      <stuf:applicatie>Qoin</stuf:applicatie>
+    </stuf:zender>
+    <stuf:ontvanger>
+      <stuf:organisatie>Stadlander</stuf:organisatie>
+      <stuf:applicatie>SgTobias</stuf:applicatie>
+    </stuf:ontvanger>
+    <stuf:entiteittype>RELKEN</stuf:entiteittype>
+  </ns:stuurgegevens>
+  <ns:object stuf:entiteittype="RELKEN">
+    <ns:code>deelname</ns:code>
+    <ns:waarde>{{ active }}</ns:waarde>
+    <ns:relaties stuf:entiteittype="RELKENRELREL">
+      <ns:relatie stuf:entiteittype="RELREL">
+        <ns:identificatie>{{ rel_number }}</ns:identificatie>
+      </ns:relatie>
+    </ns:relaties>
+  </ns:object>
+</ns:relkenLk02>
+
+
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

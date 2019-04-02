@@ -1,0 +1,14 @@
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans with title=ad.title id=ad.id body=body cc3_system_name=cc3_system_name %}
+Dear {{name}},
+
+Thank you for your enquiry to {{title}}.
+
+Your comments: {{body}}
+
+Regards,
+
+{{ cc3_system_name }}
+{% endblocktrans %}
+{% endautoescape %}

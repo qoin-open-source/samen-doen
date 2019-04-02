@@ -1,0 +1,25 @@
+{% extends "accounts/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Account Statistics' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+
+            <h2>{% trans 'Account Statistics' %}</h2>
+            {% include 'includes/messages.html' %}
+
+            {% with currency_name="Positoos" platform_name="Samen-Doen" %}
+                {% include 'accounts/account_stats_table.html'%}
+            {% endwith %}
+
+
+        </div>
+    </div>
+
+{% endblock %}

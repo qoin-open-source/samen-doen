@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load i18n l10n cc3_tags %}
+
+{% block title %}{% trans 'Transactions' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'communityadmin/sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <h2>{% trans 'Transactions' %} - {{ community }}</h2>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-10">
+            {% if transactions %}
+                <table class="table rwd-table transactions-table">
+                    <tbody>
+                        <tr class="table-head">
+                            <th>{% trans 'date' %}</th>
+                            <th>{% trans 'from' %}</th>
+                            <th>{% trans 'to' %}</th>
+                            <th>{% trans 'description' %}</th>
+                            <th>punten</th>
+                        </tr>
+                        {% for transaction in transactions %}
+                            <tr>
+                                <td>{% include 'cyclos/date_created.html' %}</td>
+                                <td>{% include 'cyclos/sender.html' %}</td>
+                                <td>{% include 'cyclos/receiver.html' %}{% include 'cyclos/recipient.html' %}</td>
+                                <td>{% include 'cyclos/description.html' %}</td>
+                                <td>{% currency_icon transaction.amount %}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {# Pagination #}
+                {% include "includes/paginator.html" %}
+            {% else %}
+                <div class="row">
+                    <div class="alert alert-warning" role="alert">
+                        {% trans 'No matching transactions were found' %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <form action="{% url 'communityadmin_ns:transactions' %}" method="post" class="form">
+                {% csrf_token %}
+                <button id="export" name="export" value="export" class="btn btn-rounded btn-blue">{% trans 'Export' %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

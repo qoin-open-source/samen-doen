@@ -1,0 +1,27 @@
+{% extends "accounts/base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans 'Close Account' %}{% endblock %}
+
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+        <div class="col-md-6 col-lg-7">
+            <h2>{% trans 'Account Closed' %}</h2>
+            {% include 'includes/messages.html' %}
+
+
+            <div class="form-group">
+                <p>{% trans 'Thank you. We have now closed your account and logged you out.'%}</p>
+
+                <p>{% trans 'Thank you for using' %} Samen Doen. {% trans 'We hope to see you again in the future.' %}</p>
+
+            </div>
+
+            </form>
+        </div><!-- end eleven columns -->
+
+{% endblock %}

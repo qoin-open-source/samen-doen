@@ -1,0 +1,13 @@
+{% extends 'admin/change_form.html' %}
+{% load icare4u_admin i18n %}
+
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'community_admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; <a href="{% url 'community_admin:index' %}">{% trans 'Business Cause Settings' %}</a>
+        &rsaquo; {% trans 'Add Business Cause Settings' %}
+    </div>
+{% endblock %}
+
+{% block submit_buttons_bottom %}{% submit_row_only_normal_save %}{% endblock %}

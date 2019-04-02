@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n staticfiles thumbnail cc3_tags %}
+
+{% block title %}{% trans 'My Products' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    {% include "accounts/includes/products/list.html" %}
+{% endblock %}

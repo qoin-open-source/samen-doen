@@ -1,0 +1,10 @@
+{% extends "admin/app_index.html" %}
+{% block content %}
+    {% if app_label == 'billing' %}
+        <div id="content-main">
+            {% include "community_admin/fragments/billing_index.html" %}
+        </div>
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}

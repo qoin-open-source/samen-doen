@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load pagination_tags i18n l10n staticfiles %}
+
+{% block title %}{% trans 'Accounts' %}{% endblock %}
+
+{% block content %}
+    <h2>{% trans 'News' %}</h2>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-12">
+            {% if object_list %}
+                {% for entry in object_list %}
+                    <h3>{{ entry.title }}</h3>
+
+                    <p><i>{% trans 'By' %} <strong>{{ entry.created_by.cc3_profile.name }}</strong> {% trans 'at' %} {{ entry.creation_date }}</i></p>
+                    <div>
+                        {{ entry.content|safe }}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    {% trans 'No news to be shown.' %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

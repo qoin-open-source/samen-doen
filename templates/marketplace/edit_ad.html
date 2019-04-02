@@ -1,0 +1,11 @@
+{% extends "accounts/place_ad.html" %}
+{% load i18n staticfiles pagination_tags %}
+
+{% block title %}{% trans 'Edit Ad' %}{% endblock %}
+
+{% block notcommunityadmin %}{% endblock %}
+
+{% block extrajs %}
+    {% url 'api_marketplace_ad_images' object.id as image_endpoint %}
+    {% include 'includes/place_ad_dropzone.html' %}
+{% endblock %}

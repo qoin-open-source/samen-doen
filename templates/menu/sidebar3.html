@@ -1,0 +1,25 @@
+{% load menu_tags %}
+
+{% for child in children %}
+    {% if request.current_page.id == child.id or request.current_page.parent.id == child.id %}
+        <div class="box">
+            <a href="{{ child.get_absolute_url }}">
+                <div class="box-title collapsed selected{% ifequal request.path child.get_absolute_url %} active{% endifequal %}">
+                    <i class="icon icon-hands"></i>{{ child.get_menu_title }}
+                    <i class="icon-arrow"></i>                
+                </div>
+            </a>
+        </div>
+            
+        {% for child2 in child.children %}
+            <div class="box">
+                <a href="{{ child2.get_absolute_url }}">
+                    <div class="box-title collapsed selected{% ifequal request.path child2.get_absolute_url %} active{% endifequal %}">
+                        {{ child2.get_menu_title }}
+                        <i class="icon-arrow"></i>                    
+                    </div>
+                </a>
+            </div>    
+        {% endfor %}
+    {% endif %}
+{% endfor %}

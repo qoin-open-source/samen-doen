@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles menu_tags cms_tags i18n marketplace_tags cyclos_tags %}
+
+{% block title %}{% page_attribute 'page_title' %}{% endblock %}
+{% block description %}{% page_attribute 'meta_description' %}{% endblock %}
+{% block keywords %}{% page_attribute 'meta_keywords' %}{% endblock %}
+
+{% block homepagecontent %}
+    {% placeholder 'main_section' %}
+
+    <div class="container">
+        <div class="row">
+            {% placeholder 'center_section' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{% static 'js/plugins/jquery.easing.1.3.min.js' %}"></script>
+{% endblock %}

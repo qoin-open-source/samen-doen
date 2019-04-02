@@ -1,0 +1,442 @@
+{% extends 'accounts/pay_direct.html' %}
+{% load i18n staticfiles cc3_tags %}
+
+{% block content %}
+{% with group=user.cc3_profile.get_cyclos_group %}
+    <div class="row">
+        <div class="col-md-6 col-lg-7">
+            <h2>{% trans 'Make A Stadlander Payment' %}</h2>
+
+            {% include 'includes/messages.html' %}
+
+            {% if form and group|is_goededoelen_group != True %}
+                <form id="pay_direct_form" method="post" action="." class="form">
+                    {% csrf_token %}
+
+                    {% if form.non_field.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ form.non_field.errors }}
+                        </div>
+                    {% endif %}
+
+                    {# Spit out the hidden profile field used to store the CC3Profile pk. #}
+                    {{ form.profile }}
+
+                    <div id="contact_name_section" class="form-group{% if form.contact_name.errors or form.profile.errors %} has-error{% endif %}">
+                        <label class="control-label" for="id_contact_name">{% trans 'Contact name' %}</label>
+                        {% for error in form.contact_name.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        {% if form.profile.errors %}
+                            <label class="control-label"> - {% trans 'Please select a valid business to pay' %}</label>
+                        {% endif %}
+                        <input type="text" id="id_contact_name" placeholder="{{ form.contact_name.help_text }}" name="contact_name"{% if form.contact_name.value %} value="{{ form.contact_name.value }}"{% endif %} class="form-control">
+                    </div>
+
+                    <div id="reward_category_section" class="form-group form-inline{% if form.reward_category.errors or form.reward_category_quantity.errors %} has-error{% endif %}">
+                        <label class="control-label" for="id_reward_category">Waaderingscategorieën</label>
+                        {% for error in form.reward_category.errors %}
+                            <label class="control-label rc-integer-error"> - {{ error }}</label>
+                        {% endfor %}
+                        {% for error in form.reward_category_quantity.errors %}
+                            <label class="control-label rc-integer-error"> - {{ error }}</label>
+                        {% endfor %}
+                        <select name="reward_category" id="id_reward_category" class="form-control s-selecter">
+                            {% for value,item in form.reward_category.field.choices %}
+                                <option value="{{ value }}" {% ifequal form.reward_category.value|add:"0" value|add:"0" %}selected{% endifequal %}>{{ item }}</option>
+                            {% endfor %}
+                        </select><br />
+                        <input type="text" id="id_reward_category_quantity" style="width:59%" placeholder="{% if form.reward_category_quantity.field.required %}* {% endif %}{% trans 'Aantal minuten besteed aan dienstverlening' %}" name="reward_category_quantity" maxlength="255"{% if form.reward_category_quantity.value %} value="{{ form.reward_category_quantity.value }}"{% endif %} class="form-control" />
+                        <input type="text" id="id_reward_category_punten" style="width:39%" placeholder="Aantal punten (sub-totaal)" name="reward_category_punten" class="form-control disabled" disabled>
+                    </div>
+                    <br />
+
+                    <div id="other_activity_section" class="form-group form-inline{% if form.other_activity.errors or form.other_activity_quantity.errors %} has-error{% endif %}">
+                        <label class="control-label" for="id_other_activity">Overige activiteiten</label>
+                        <p>Geef zelf een categorie op als deze niet in de lijst voorkomt (max 40 karakters)</p>
+                        {% for error in form.other_activity.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        {% for error in form.other_activity_quantity.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <input type="text" id="id_other_activity" style="width:100%" placeholder="{% if form.other_activity.field.required %}* {% endif %}Overige activiteiten" name="other_activity" maxlength="255"{% if form.other_activity.value %} value="{{ form.other_activity.value }}"{% endif %} class="form-control" /><br />
+                    <br />
+                        <input type="text" id="id_other_activity_quantity" style="width:59%" placeholder="{% if form.other_activity_quantity.field.required %}* {% endif %}{% trans 'Aantal minuten besteed aan dienstverlening' %}" name="other_activity_quantity" maxlength="255"{% if form.other_activity_quantity.value %} value="{{ form.reward_category_quantity.value }}"{% endif %} class="form-control" />
+                        <input type="text" id="id_other_activity_punten" style="width:39%" placeholder="Aantal punten (sub-totaal)" name="other_activity_punten" class="form-control disabled" disabled>
+                    </div>
+
+
+                    <div id="bonus_section" class="form-group form-inline{% if form.bonus.errors %} has-error{% endif %}">
+                        <label class="control-label" for="id_bonus">Bonus</label>
+                    <p>U kunt iemand een extra waardering geven als u wilt</p>
+                        {% for error in form.bonus.errors %}
+                            <label class="control-label"> {{ error }}</label>
+                        {% endfor %}
+                        <input type="text" id="{{ form.bonus.id_for_label }}" style="width:100%" placeholder="{% if form.bonus.field.required %}* {% endif %}{{ form.bonus.label }}" name="{{ form.bonus.html_name }}" {% if form.bonus.value %} value="{{ form.bonus.value }}"{% endif %} class="form-control">
+                    </div>
+
+
+                    <div id="amount_section" class="form-group{% if form.amount.errors %} has-error{% endif %}">
+                        <label class="control-label" for="id_amount">Totaal over te maken Positoos:</label>
+                        {% for error in form.amount.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <input type="text" id="id_amount_disabled" disabled name="amount_disabled" value="" class="form-control readonly">
+                        <input type="hidden" id="id_amount" name="amount" value="{% if form.amount.value %}{{ form.amount.value }}{% endif %}" />
+                        <input type="hidden" id="id_description" name="description" value="" />
+                    </div>
+
+                </form>
+
+                {# Place this out of the form. Data will be POSTed via Javascript. #}
+                <button class="btn btn-rounded btn-blue" id="pay_direct_form_button" disabled="disabled">{% trans 'Process Stadlander Payment' %}</button>
+
+
+                {# Modal popup for payment confirmation #}
+                <div class="modal fade" id="modal-payment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans 'Close' %}</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Bevestig waardering</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="highlight" id="pay_highlight">
+                                    <p>Waardeer <span id="pay_receiver"></span> met <span class="samendoen"><i class="icon-samendoen"></i></span><span id="pay_amount"></span> <b>?</b></p>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-rounded btn-danger" data-dismiss="modal">{% trans 'Cancel' %}</button>
+                                <button type="button" id="confirm_payment" class="btn btn-rounded btn-green">{% trans 'Confirm' %}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-warning" role="alert">
+                    {% trans 'Payments are not enabled for this account.' %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endwith %}
+{% endblock %}
+
+
+{% block javascript %}
+{# { block.super } #}
+    <script src="{% static 'js/plugins/jquery.cookie.js' %}"></script>
+    <script src="{% static 'js/lib/typeahead.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap/modal.js' %}"></script>
+
+    {% if form %}
+    <script type="text/javascript">
+        $(function() {
+            var contact_name_auto_url = '{% url "contact_name_auto" user.cc3_profile.community.pk %}';
+            var correct_amount = true;
+
+            var $id_contact_name = $('#id_contact_name');
+            //var $receiver_error = $('#receiver-error');
+            var $id_profile = $('#id_profile');
+
+            var add_user_does_not_exist_error = function () {
+                $('#id_profile').val('');
+                $('#contact_name_section').addClass('has-error');
+                if ($('#receiver-error')) {
+                    $('#receiver-error').remove();
+                }
+                $("form label[for=id_contact_name]").after(' <label id="receiver-error" class="control-label"> - {% trans "This user does not exist" %}</label>');
+                $('#pay_direct_form_button').attr('disabled', 'true');
+            };
+
+            var remove_user_does_not_exist_error = function () {
+                $('#contact_name_section').removeClass('has-error');
+                $('#receiver-error').remove();
+            };
+
+            {# Autocomplete the name of the receiver. #}
+            $id_contact_name.typeahead([
+            {
+                name: 'contact_name',
+                remote: contact_name_auto_url + '?contact_name=%QUERY',
+                minLength: {{ min_contact_auto }}
+            }]);
+
+            {# When a new receiver has been selected insert the profile PK into the #}
+            {# the hidden profile field. #}
+
+            $id_contact_name.on('typeahead:selected', function(e, selected) {
+                remove_user_does_not_exist_error();
+                $id_profile.val(selected.pk);
+            }).on('typeahead:autocompleted', function($e, selected) {
+                remove_user_does_not_exist_error();
+                $id_profile.val(selected.pk);
+            });
+
+
+            $id_contact_name.focusout(function() {
+                var typeahead_span = $('.tt-dropdown-menu');
+
+                {# https://support.community-currency.org/ticket/1351  #}
+                {# https://support.community-currency.org/hg/hgweb.cgi/cc3/rev/f8c9c0d56ad2#}
+                {# //if(typeahead_span.css('display') == 'block')#}
+                {# //    return;#}
+
+                // manually try and find the contact names ID
+                $.ajax({
+                    type: "GET",
+                    url: contact_name_auto_url + '?contact_name=' + $id_contact_name.val()
+                })
+                .done(function (msg) {
+                    if (msg.length == 0) {
+                        add_user_does_not_exist_error();
+                    } else {
+                        remove_user_does_not_exist_error();
+                        // only one returned, then use it
+                        if (msg.length == 1) {
+                            $('#id_contact_name').val(msg[0].value);
+                            $('#id_profile').val(msg[0].pk);
+                        } else {
+                            // anything already selected?
+                            var selected_profile_id = $id_profile.val();
+                            // nothing selected
+                            if (selected_profile_id == "") {
+                                // use first in list
+                                $('#id_contact_name').val(msg[0].value);
+                                $('#id_profile').val(msg[0].pk);
+                            } else {
+                                // selected - so find in msg (belt and braces
+                                for (var i = 0; i < msg.length; i++) {
+                                    if (selected_profile_id == msg[i].pk) {
+                                        $('#id_contact_name').val(msg[i].value);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+                .fail(function() {
+                    add_user_does_not_exist_error();
+                });
+            });
+
+
+            var stadlander_minutes_to_punten = {{ stadlander_minutes_to_punten }};
+            var reward_category_int = 0,
+                other_activity_int = 0,
+                bonus_int = 0;
+
+            {# call on load in case a server side validation is triggered #}
+            update_total_amount();
+
+            function update_total_amount() {
+                var amount_field = $('#id_amount');
+                var amount_field_disabled = $('#id_amount_disabled');
+                reward_category_int = 0;
+                other_activity_int = 0;
+                bonus_int = 0;
+
+                var reward_category_quantity_val = $('#id_reward_category_quantity').val();
+                var $reward_category_punten = $('#id_reward_category_punten');
+                var other_activity_quantity_val = $('#id_other_activity_quantity').val();
+                var $other_activity_punten = $('#id_other_activity_punten');
+                var bonus_val = $('#id_bonus').val();
+
+                if(reward_category_quantity_val != '' && $.isNumeric(reward_category_quantity_val) && (reward_category_quantity_val % 1 === 0)) {
+                    reward_category_int = parseInt(reward_category_quantity_val);
+                    $reward_category_punten.val(stadlander_minutes_to_punten * reward_category_int);
+                } else {
+                    $reward_category_punten.val('');
+                }
+
+                if(other_activity_quantity_val != '' && $.isNumeric(other_activity_quantity_val) && (other_activity_quantity_val % 1 === 0)) {
+                    other_activity_int = parseInt(other_activity_quantity_val);
+                    $other_activity_punten.val(stadlander_minutes_to_punten * other_activity_int);
+                } else {
+                    $other_activity_punten.val('');
+                }
+
+                if(bonus_val != '' && $.isNumeric(bonus_val) && (bonus_val % 1 === 0)) {
+                    bonus_int = parseInt(bonus_val);
+                    //$bonus_punten.val(stadlander_minutes_to_punten * bonus_int);
+                } else {
+                    //$bonus_punten.val('');
+                }
+
+                var punten = (( reward_category_int + other_activity_int) * stadlander_minutes_to_punten) + bonus_int;
+                if (punten != 0) {
+                    amount_field.val(punten);
+                    amount_field_disabled.val(punten);
+                } else {
+                    amount_field.val('');
+                    amount_field_disabled.val('');
+                    $('#pay_direct_form_button').attr('disabled', 'true');
+                }
+                check_submit_button();
+            }
+
+            // unbind accounts/pay_direct handler and replace
+            $(':input').unbind('change').change(function() {
+                check_submit_button();
+            });
+
+            $('#id_reward_category').change(function() {
+                if ($(this).val() != '') {
+                    var rcq=$("#id_reward_category_quantity").val();
+
+                    if(rcq != '' && $.isNumeric(rcq) || (rcq % 1 === 0)) {
+                        $('#reward_category_section').removeClass('has-error');
+                        $('.rc-integer-error').remove();
+                    }
+                }
+                check_submit_button();
+            });
+
+            function check_submit_button(){
+                var contact_name_val = $id_contact_name.val();
+                var profile_val = $id_profile.val();
+                var amount_val = $('#id_amount').val();
+                if(contact_name_val != '' && profile_val != '' && amount_val != '' && correct_amount) {
+                    var enable_submit = true;
+
+                    if(reward_category_int > 0 && $.trim($('#id_reward_category').val()) === '') {
+                        enable_submit = false;
+                    }
+
+                    if(other_activity_int > 0 && $.trim($('#id_other_activity').val()) === '') {
+                        enable_submit = false;
+                    }
+
+                    if(enable_submit) {
+                        $('#pay_direct_form_button').removeAttr('disabled');
+                    }
+                }
+            }
+
+            $('#id_reward_category_quantity').keyup(function() {
+                if($(this).val() != '' && !$.isNumeric($(this).val()) || !($(this).val() % 1 === 0)) {
+                    correct_amount = false;
+
+                    {# Disable the button if it was enabled before. #}
+                    $('#pay_direct_form_button').attr('disabled', 'true');
+
+                    {# Show informative error message. #}
+                    $('#reward_category_section').addClass('has-error');
+                    if(!$('#rc-integer-error').length) {
+                        $("form label[for=id_reward_category]").after(' <label id="rc-integer-error" class="control-label"> - {% trans "Must be an integer number of Positoos" %}</label>');
+                    }
+                }
+                else if($(this).val() != '' && $(this).val() === '0') {
+                    $('#reward_category_section').addClass('has-error');
+                    if(!$('#rc-integer-error').length) {
+                        $("form label[for=id_reward_category]").after(' <label id="rc-integer-error" class="control-label"> - {% trans "Must be greater than zero" %}</label>');
+                    }
+                }
+                else {
+                    correct_amount = true;
+
+                    {# Correct input. Remove all error messages. #}
+                    $('#reward_category_section').removeClass('has-error');
+                    $('#rc-integer-error').remove();
+                }
+                update_total_amount();
+            });
+
+            $('#id_other_activity_quantity').keyup(function() {
+                if($(this).val() != '' && !$.isNumeric($(this).val()) || !($(this).val() % 1 === 0)) {
+                    correct_amount = false;
+
+                    {# Disable the button if it was enabled before. #}
+                    $('#pay_direct_form_button').attr('disabled', 'true');
+
+                    {# Show informative error message. #}
+                    $('#other_activity_section').addClass('has-error');
+                    if(!$('#oa-integer-error').length) {
+                        $("form label[for=id_other_activity]").after(' <label id="oa-integer-error" class="control-label"> - {% trans "Must be an integer number of Positoos" %}</label>');
+                    }
+                }
+                else if($(this).val() != '' && $(this).val() === '0') {
+                    $('#other_activity_section').addClass('has-error');
+                    if(!$('#oa-integer-error').length) {
+                        $("form label[for=id_other_activity]").after(' <label id="oa-integer-error" class="control-label"> - {% trans "Must be greater than zero" %}</label>');
+                    }
+                }
+                else {
+                    correct_amount = true;
+
+                    {# Correct input. Remove all error messages. #}
+                    $('#other_activity_section').removeClass('has-error');
+                    $('#oa-integer-error').remove();
+                }
+                update_total_amount();
+
+            });
+
+            $('#id_bonus').keyup(function() {
+                if($(this).val() != '' && !$.isNumeric($(this).val()) || !($(this).val() % 1 === 0)) {
+                    correct_amount = false;
+
+                    {# Disable the button if it was enabled before. #}
+                    $('#pay_direct_form_button').attr('disabled', 'true');
+
+                    {# Show informative error message. #}
+                    $('#bonus_section').addClass('has-error');
+                    if(!$('#bs-integer-error').length) {
+                        $("form label[for=id_bonus]").after(' <label id="bs-integer-error" class="control-label"> - {% trans "Must be an integer number of Positoos" %}</label>');
+                    }
+                }
+                else if($(this).val() != '' && $(this).val() === '0') {
+                    $('#bonus_section').addClass('has-error');
+                    if(!$('#bs-integer-error').length) {
+                        $("form label[for=id_bonus]").after(' <label id="bs-integer-error" class="control-label"> - {% trans "Must be greater than zero" %}</label>');
+                    }
+                }
+                else {
+                    correct_amount = true;
+
+                    {# Correct input. Remove all error messages. #}
+                    $('#bonus_section').removeClass('has-error');
+                    $('#bs-integer-error').remove();
+                }
+                update_total_amount();
+            });
+
+
+            {# 'Submit' button clicked. #}
+            $('#pay_direct_form_button').on('click', function(){
+                // if the confirmed input #id_confirmed has been added, submit form normally
+                if ($("#id_confirmed").length) {
+                    return true;
+                }
+
+                {# Fill the receiver name and the amount in the modal box. #}
+                $('#pay_receiver').html($('#id_contact_name').val());
+                $('#pay_amount').html($('#id_amount').val());
+
+                {# Show the modal confirmation form. #}
+                $('#modal-payment').modal('show');
+            });
+
+            {# POST the contents of the form. #}
+            $('#confirm_payment').click(function() {
+                // prevent double click double payments
+                if($(this).data('lastClick') + 10000 > new Date().getTime()){
+
+                    e.stopPropagation();
+                    return false;
+                }
+                $(this).data('lastClick', new Date().getTime());
+
+                var confirmed_input = $("<input>").attr("type", "hidden").attr("id", "id_confirmed").attr("name", "confirmed").val(1);
+                var $pay_direct_form = $('#pay_direct_form');
+                $pay_direct_form.append($(confirmed_input)).submit();
+            });
+        });
+        </script>
+    {% endif %}
+
+{% endblock %}

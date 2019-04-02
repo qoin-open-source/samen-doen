@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<div class="module">
+    <table>
+        <caption>
+            <a href="" class="section" title="{% trans 'Manage products and invoices' %}">
+                {% trans 'Products / Invoicing' %}
+            </a>
+        </caption>
+        <tr>
+            <th scope="row"><a href="{% url 'community_admin:billing_assignedproduct_changelist' %}">{% trans 'Assigned Products' %}</a></th>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <th scope="row"><a href="{% url 'community_admin:billing_invoiceset_changelist' %}">{% trans 'Invoice Files and Exports' %}</a></th>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</div>

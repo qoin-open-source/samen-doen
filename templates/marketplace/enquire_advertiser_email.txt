@@ -1,0 +1,17 @@
+{% load i18n %}{% with user.get_profile.full_name as recipient %}
+{% autoescape off %}
+{% blocktrans with name=name amount=form.amount.value user=recipient title=ad.title id=ad.id email=user.email body=body cc3_system_name=cc3_system_name %}
+
+Dear {{name}},
+
+You have an enquiry from {{user}} about {{title}}.
+
+Please contact them at {{email}}
+
+Their additional comments: {{body}}
+
+Regards,
+
+{{ cc3_system_name }}
+{% endblocktrans %}
+{% endautoescape %}{% endwith %}

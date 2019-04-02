@@ -1,0 +1,20 @@
+{% load menu_tags %}
+
+{% for child in children %}
+    {% if request.current_page.id == child.id or request.current_page.parent.id == child.id %}
+        <div class="box">
+            <div class="box-title" data-toggle="collapse" data-target="#box-4">
+                <i class="icon icon-hands"></i>{{ child.get_menu_title }}
+                <i class="icon-arrow"></i>
+            </div>
+            
+            {% if child.children %}
+                <div id="box-4" class="box-content collapse in">
+                    <ul>
+                        {% show_menu from_level to_level extra_inactive extra_active "menu/sidebar.html" "" "" child %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endfor %}

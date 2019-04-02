@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load pagination_tags i18n l10n staticfiles %}
+
+{% block title %}{% trans 'Accounts' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ object.title }}</h2>
+
+    <hr>
+
+    <p><i>{% trans 'By' %} <strong>{{ object.created_by }}</strong> {% trans 'at' %} {{ object.creation_date }}</i></p>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-12">
+            {{ object.content|safe }}
+        </div>
+    </div>
+{% endblock %}

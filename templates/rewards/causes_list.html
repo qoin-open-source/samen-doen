@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% load i18n static thumbnail cmscontent_tags %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block extrajs %}
+{% include "rewards/includes/donation_percentage_slider_form.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 col-md-8">
+            <h2>{% trans 'Good Causes' %}</h2>
+            {% include 'includes/messages.html' %}
+        </div>
+
+    </div>
+
+    <div class="row">
+        {% with cause=request.user.usercause.cause %}
+        <div class="col-sm-12 col-md-7">
+            {% if cause %}
+                <strong>{% trans "Current good cause:" %}</strong> ({% trans 'Your current donations are for this cause' %})
+
+                <div class="saving-targets">
+                    <div class="saving-targets-target saving-targets-target-chosen">
+                        {% if cause.cc3_profile.get_picture %}
+                            {% thumbnail cause.cc3_profile.picture "100x100" crop="center" as im %}
+                            <img src="{{ im.url }}" class="img-circle pull-left" alt="{{ cause.cc3_profile.business_name }}"/>
+                        {% else %}
+                            <img src="{% static 'img/logo_bw.png' %}" class="img-circle pull-left" alt="{{ cause.cc3_profile.business_name }}"/>
+                        {% endif %}
+
+                        <div class="saving-targets-target-info">
+                            {% if cause.is_active != 1 %}
+                              <div class="ribbon-wrapper ribbon-wrapper-disabled ribbon-wrapper-current"><div class="ribbon ribbon-disabled">{% trans 'Inactive' %}</div></div>
+                            {% elif cause == default_cause.cause %}
+                              <div class="ribbon-wrapper ribbon-wrapper-default ribbon-wrapper-current"><div class="ribbon ribbon-default">{% trans 'Default<br>Charity' %}</div></div>
+                            {% endif %}
+                            <h3>{{ cause.cc3_profile.business_name }}</h3>
+                            <p class="saving-targets-target-text">
+                                {{ cause.cc3_profile.company_description|truncatechars:160 }}
+                            </p>
+                        </div>
+
+                        <div class="savings-target-target-options">
+                            <p>{% trans 'Contributed to current Spaardoel to date:' %}<br/>
+                            {% trans 'Self' %}: <span><i class="icon-samendoen"></i></span> {% if cause_donations %}{{ cause_donations|floatformat:'0' }}{% else %}0{% endif %}<br/>
+                            {% trans 'All users' %}: <span><i class="icon-samendoen"></i></span> {% if cause_donations_all_users %}{{ cause_donations_all_users|floatformat:'0' }}{% else %}0{% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+
+                {% if form.width  %}
+
+                    <h3>{% trans "Good Causes donation percentage" %}</h3>
+
+                    <p>{% trans "Some of your points go to the Good Cause you choose. You can choose how much here. The change will take effect the next time you earn points." %}</p>
+                    {% comment %}Not working at the moment{% render_identifier "rewards_choose_donation_percentage" %}{% endcomment %}
+
+                    <form method="post" action="{% url 'update_donation_percentage' %}" class="form">
+                    {% csrf_token %}
+                    <div id="slider-container" class="slider-{{ form.width }}">
+                        <div id="slider">
+                          <div id="custom-handle" class="ui-slider-handle"></div>
+                        </div>
+                        <div class="slider-legend">
+                            <label>{{ form.min_percent }}%, min</label>
+                            <label class="pull-right">{{ form.max_percent }}%, max</label>
+                        </div>
+                    </div>
+                     {{ form.donation_percent.as_hidden }}
+
+                    <button type="submit" class="btn btn-rounded btn-blue" id="submit_button">{% trans 'Save change' %}</button>
+
+                    </form>
+                {% endif %}
+
+            {% endif %}
+        </div>
+        {% endwith %}
+
+        <div class="col-sm-12 col-md-5">
+            <div class="savings-total">
+                <p>{% trans 'Donated to savings goal:' %}</p>
+
+                <div class="savings-total-badge">
+                    <div class="savings-total-badge-wrap">
+                        <span>{% trans 'Self' %}<br/><i class="icon-samendoen"></i> {% if total_donations %}{{ total_donations|floatformat:'0' }}{% else %}0{% endif %}</span>
+                    </div>
+                </div>
+                <div class="savings-total-badge">
+                    <div class="savings-total-badge-wrap">
+                        <span>{% trans 'All users' %}<br/><i class="icon-samendoen"></i> {% if total_donations_all_users %}{{ total_donations_all_users|floatformat:'0' }}{% else %}0{% endif %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    {% block content_title %}
+        {# Modal popup dialog. It is hidden by default and it will be shown only when you click a Good Cause to select it, as a confirmation dialog. #}
+        <div class="modal fade" tabindex="-1" role="dialog" id="causemodal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h3>{% trans "Confirm change of good cause" %}</h3>
+                    </div>
+                    <div class="modal-body">
+                        {% blocktrans %}
+                            <p>
+                                You are attempting to select a new good cause.
+                                Confirm this change and you will start saving Positoos for this new cause.
+                            </p>
+                            <p>
+                                Because you can only save Positoos for one good cause at once this means you will no longer be saving for your current good cause. You can switch good causes at any time.
+                            </p>
+                        {% endblocktrans %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">
+                            {% trans "Cancel" %}
+                        </button>
+                        <button type="button" class="good-cause-confirm btn btn-rounded btn-blue">
+                            {% trans "Confirm" %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    <div class="saving-targets">
+
+        {% if causes %}
+            {% for item in causes %}
+              {% if item != request.user.usercause.cause %}
+                {% if forloop.counter|divisibleby:3 %}<div class="row">{% endif %}
+                    {% include "rewards/good_cause_block.html" with cause=item %}
+                {% if forloop.counter|divisibleby:3 %}</div>{% endif %}
+              {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {# Pagination #}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                {% include 'includes/paginator.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

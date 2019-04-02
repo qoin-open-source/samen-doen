@@ -1,0 +1,32 @@
+{% load i18n %}
+
+{% if is_paginated %}
+    <div class="row">
+        {# Initial/backward buttons #}
+        <div class="col-xs-4 col-md-4 text-left">
+            <a href="?page=1" class="btn btn-rounded">{% trans 'first' %}</a>
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}{{ getvars }}" class="btn btn-rounded">{% trans 'previous' %}</a>
+            {% endif %}
+        </div>
+
+        {# Page selection by number #}
+        <div class="col-xs-4 col-md-4 text-center content-pagination">
+            {% for page in page_obj.paginator.page_range %}
+                {% ifequal page page_obj.number %}
+                    <a class="active">{{ page }}</a>
+                {% else %}
+                    <a href="?page={{ page }}{{ getvars }}">{{ page }}</a>
+                {% endifequal %}
+            {% endfor %}
+        </div>
+
+        {# Final/forward buttons #}
+        <div class="col-xs-4 col-md-4 text-right">
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{{ getvars }}" class="btn btn-rounded">{% trans 'next' %}</a>
+            {% endif %}
+            <a href="?page={{ paginator.num_pages }}{{ getvars }}" class="btn btn-rounded">{% trans 'last' %}</a>
+        </div>
+    </div>
+{% endif %}

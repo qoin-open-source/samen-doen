@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Login' %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-lg-10">
+            {% blocktrans %}
+            <h2>Thank you</h2>
+            <p>
+            Your Stadlander unique reference number has been linked with your existing Samen Doen account.<br/>
+            You can now only log in via <a href="https://mijn.stadlander.nl/">https://mijn.stadlander.nl/</a>.<br/>
+            Your are now logged in.
+            </p>
+            {% endblocktrans %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% load i18n %}
+
+<fieldset class="module aligned">
+    <div class="form-row">
+      {{ inline_formsets.card_inline_formset.management_form }}
+    <h2>{% trans 'Card and account information' %}</h2>
+    <table class="comm_admin_inline_formset_table" id="{{ inline_formsets.card_inline_formset.formset_element_id }}" style="border: none;">
+        <tr>
+            <th>{% trans 'Card number' %}</th>
+            <th>{% trans 'Status' %}</th>
+            <th class="addlink"><span>{% trans "Connect Card" %}</span></th>
+        </tr>
+    {% for form in inline_formsets.card_inline_formset %}
+        <tr class="{% if form.cleaned_data.DELETE == True %}deleted{% endif %}">
+            {{ form.id }}
+            <td class="card-num-field" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif !important;">
+                <div class="{% if form.number.errors %}errors{% endif %}">
+                    <span>{{ form.number }}</span>
+                    {{ form.number.errors }}
+                </div>
+            </td>
+            <td class="card-status-field" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif !important;">
+                <div class="{% if form.status.errors %}errors{% endif %}">
+                    <span>{{ form.status }}</span>
+                    {{ form.status.errors }}
+                </div>
+            </td>
+            <td>
+                <span class="deletelink">{{ form.DELETE }}</span>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% if profile.user.card_set.all|length == 0 %}
+        <div id="no_cards_msg">{% trans 'This user does not have any related cards.' %}</div>
+    {% endif %}
+    </div>
+    <div class="form-row">
+        <label>{% trans 'Current balance' %}</label>
+        <input type="number" value="{{ profile.current_balance|floatformat:'0' }}" disabled="disabled">
+    </div>
+</fieldset>

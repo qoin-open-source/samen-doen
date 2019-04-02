@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans 'NFC Terminals' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-lg-10">
+            <h2>{% trans 'NFC Terminals' %}</h2>
+
+            {% if terminals %}
+                <table class="table rwd-table transactions-table">
+                    <tbody>
+                        <tr class="table-head">
+                            <th>{% trans "IMEI number" %}</th>
+                            <th>{% trans "Creation date" %}</th>
+                            <th>{% trans "Last seen" %}</th>
+                        </tr>
+
+                        {% for terminal in terminals %}
+                            <tr>
+                                <td>{{ terminal.name }}</td>
+                                <td>{{ terminal.creation_date|date:'d/m/Y H:i' }}</td>
+                                {% if terminal.last_seen_date %}
+                                    <td>{{ terminal.last_seen_date|date:'d/m/Y H:i' }}</td>
+                                {% else %}
+                                    <td>---</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-warning" role="alert">
+                    {% trans 'No terminals registered' %}
+                </div>
+            {% endif %}
+
+            <hr />
+            {% if reward_percentage == True %}
+            <p>{% blocktrans %}Consumers receive {{ transaction_percentage }}% of the transaction in points{% endblocktrans %}</p>
+            {% endif %}
+            <hr />
+
+            <h2>{% trans 'NFC Terminal Operators' %}</h2>
+
+            <p>{% trans 'Terminal operators can use all above NFC terminals' %}</p>
+
+            {% if operators %}
+                <table class="table rwd-table transactions-table">
+                    <tbody>
+                        <tr class="table-head">
+                            <th>{% trans "Name" %}</th>
+                            <th>{% trans "Creation date" %}</th>
+                            <th>{% trans "Last login" %}</th>
+                            <th></th>
+                        </tr>
+                        {% for operator in operators %}
+                            <tr>
+                                <td><a href="{% url 'operator_update' operator.pk %}">{{ operator.name }}</a></td>
+                                <td>{{ operator.creation_date|date:'d/m/Y H:i' }}</td>
+                                {% if operator.last_login_date %}
+                                    <td>{{ operator.last_login_date|date:'d/m/Y H:i' }}</td>
+                                {% else %}
+                                    <td>---</td>
+                                {% endif %}
+                                <td><a href="{% url 'operator_delete' operator.pk %}"><i class="icon-trash"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-warning" role="alert">
+                    {% trans 'No operators registered' %}
+                </div>
+            {% endif %}
+
+            <hr />
+
+            <a href="{% url 'operator_create' %}" class="btn btn-rounded btn-blue">{% trans 'Add new Operator' %}</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "rewards/select_cause.html" %}
+{% load i18n static thumbnail %}
+
+{% block title %}{% trans "Search results for" %} "{{ query }}"{% endblock %}
+
+{% block content_title %}
+    {{ block.super }}
+    <h2>{{ page_obj.paginator.count }} {% trans 'causes found for query' %} '{{ query }}'</h2>
+{% endblock %}

@@ -1,0 +1,180 @@
+{% load compress cms_tags sekizai_tags staticfiles menu_tags i18n google_analytics %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"nl" }}">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    {# HINT: Fill this in Django CMS admin. Go to a specific CMS Page and look for the "SEO Settings" menu. #}
+    <meta name="keywords" content="community currency, {% block keywords %}{% endblock %}">
+    <meta name="description" content="{% block description %}{% endblock %}">
+
+	<title>SamenDoen {% block title %}{% endblock %}</title>
+
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'css/samendoen.css' %}">
+        <link rel="stylesheet" href="{% static 'css/samendoen.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.cookiebar.css' %}">
+    {% endcompress %}
+    {% render_block "css" %}
+</head>
+
+<body>
+    <div id="wrap">
+        {% cms_toolbar %}
+
+        <div id="top_area" class="center">
+            <div class="social">
+                <span class='st_twitter_hcount' displayText='Tweet'></span>
+                <span class='st_facebook_hcount' displayText='Facebook'></span>
+            </div>
+
+            {% if user.is_authenticated %} {# Show user profile data menu #}
+                <i class="icon-user"></i>{% trans 'Welcome' %} <a href="{% url 'accounts-update-profile' %}">{{ user.get_profile.name }}</a>
+                {% if not user.is_superuser and not user.is_community_admin %}
+                    <span class="samendoen"><i class="icon-samendoen"></i> {% if balance %}{{ balance|floatformat:"0" }}{% else %}0{% endif %}</span>
+                {% endif %}
+                <a href="{% url 'auth_logout' %}" class="btn btn-rounded btn-green">{% trans 'logout' %}</a>
+            {% else %} {# Show 'login' button #}
+                <a href="{% url 'auth_login' %}" class="btn btn-rounded btn-green">{% trans 'login' %}</a>
+                <a href="{% url 'registration_register' %}" class="btn btn-rounded btn-green">{% trans 'registreren' %}</a>
+            {% endif %}
+        </div>
+
+        <div id="header">
+            <header class="header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 hidden-xs">
+                            <a href="/"><img src="{% static 'img/logo.png' %}" alt="Positoos" class="logo img-responsive"></a>
+                        </div>
+                        <div class="col-xs-6 col-sm-10">
+                            <img src="{% static 'img/logo.png' %}" alt="Positoos" class="logo img-responsive visible-xs">
+                            <nav>
+                                <ul class="navigation">
+                                    {% if user.is_authenticated and not user.is_superuser %}
+                                        {% if not user.is_community_admin  %}
+                                            {% url 'accounts_home' as accounts_home_url %}
+                                            <li{% ifequal request.path accounts_home_url %} class="active"{% endifequal %}><a href="{{ accounts_home_url }}">{% trans 'My Positoos' %}</a></li>
+                                        {% else %}
+                                            {% url 'communityadmin_ns:memberlist' as community_admin_url %}
+                                            <li{% ifequal request.path community_admin_url %} class="active"{% endifequal %}><a href="{{ community_admin_url }}">{% trans 'Community admin' %}</a></li>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    {% show_menu_below_id 'home' 0 0 1 1 'menu/topmenu.html' %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+            <div class="container" style="padding-top:102px;">
+                <div class="row">
+                    {% if user.is_authenticated %}
+                        {% include 'includes/accounts_sidemenu.html' %}
+                    {% endif %}
+
+                    <div class="col-sm-7 col-md-8 col-lg-9">
+                        <section class="content">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-10">
+                                    <h2>{% trans 'Something went wrong' %}.</h2>
+
+                                    <div class="alert alert-danger" role="alert">
+                                    {% blocktrans %}A server error occurred. We are currently working to solve it.{% endblocktrans %}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <footer class="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <nav>
+                        <ul class="navigation">
+                        {% show_menu_below_id 'footer' 0 100 100 100 'menu/footermenu.html' %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="container">
+                <ul class="social">
+                    <li class="follow">{% trans "Follow us" %}</li>
+                    <li><a href="https://www.linkedin.com/company/samen-doen" class="linkedin" target="_blank"></a></li>
+                    <li><a href="https://www.facebook.com/prsamendoen" class="facebook" target="_blank"></a></li>
+                    <li><a href="https://twitter.com/prsamendoen" class="twitter" target="_blank"></a></li>
+                </ul>
+                <img class="eu-flag" src="{% static 'img/eu_flag.png' %}">
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <span class="eu-statement">This project is supported by the European Union Programme<br /> for Employment and Social Solidarity - PROGRESS (2007-2013)</span>
+                </div>
+            </div>
+    </footer>
+
+    {% compress js %}
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="{% static 'js/lib/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap/collapse.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/plugins.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/plugins/jquery.ui.datepicker-nl.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/plugins/jquery.cookiebar.js' %}"></script>
+
+        {# EU cookie policy warning message - check for script options in http://www.primebox.co.uk/projects/jquery-cookiebar/ #}
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.cookieBar({
+                    message: "{% trans 'We use cookies, just to track visits to our website, we store no personal details' %}",
+                    acceptText: "{% trans 'I understand' %}",
+                    domain: "{{ request.META.HTTP_HOST }}",
+                    referrer: "{{ request.META.HTTP_HOST }}"
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            var language = "{{ request.LANGUAGE_CODE }}";
+            jQuery(function($){
+                $.datepicker.setDefaults( $.datepicker.regional[language] );
+            });
+        </script>
+
+        {% block javascript %}{% endblock %}
+    {% endcompress %}
+
+    {% block noncompressjavascript %}
+        <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+        <script type="text/javascript">
+            stLight.options({
+                publisher: "ur-34b2e46d-a883-e8ad-9987-8810aa0215f",
+                doNotHash: false,
+                doNotCopy: false,
+                hashAddressBar: false
+            });
+        </script>
+    {% endblock %}
+
+    {% render_block "js" %}
+</body>
+</html>

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load pagination_tags i18n l10n staticfiles %}
+
+{% block title %}{% trans 'Member Transactions' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'communityadmin/sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ cc3_profile.name }} {% trans 'transactions' %}</h2>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-5">
+            {% trans 'total payments made' %}  <span class="samendoen"><i class="icon-samendoen"></i> {{ number_of_payments_made|floatformat:"0" }}</span>
+        </div>
+        <div class="col-md-6 col-lg-5">
+            {% trans 'total payments received' %} <span class="samendoen"><i class="icon-samendoen"></i> {{ number_of_payments_received|floatformat:"0" }}</span>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-10">
+            {% if transactions %}
+                <table class="table rwd-table transactions-table">
+                    <tbody>
+                        <tr class="table-head">
+                            <th>{% trans 'date' %}</th>
+                            <th>{% trans 'from/to' %}</th>
+                            <th>{% trans 'description' %}</th>
+                            <th>punten</th>
+                        </tr>
+                        {% for transaction in transactions %}
+                            {% with cyclos_url=cyclos_base %}
+                                <tr>
+                                    <td>{{ transaction.created|localize }}</td>
+                                    <td>{% if transaction.amount < 0 %}{% include 'cyclos/recipient.html' %}{% else %}{% include 'cyclos/sender.html' %}{% endif %}</td>
+                                    <td><a target="cyclos" href="{{ cyclos_url }}?transferId={{ transaction.transfer_id }}&typeId=5&memberId={{ cyclos_id }}">{{ transaction.description|striptags|truncatechars:80|safe|default:'' }}</a></td>
+                                    <td>{% include 'cyclos/description.html' %}</td>
+                                    <td>{{ transaction.amount|floatformat:0 }}</td>
+                                </tr>
+                            {% endwith %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {# Pagination #}
+                {% include "includes/paginator.html" %}
+            {% else %}
+                <div class="row">
+                    <div class="alert alert-warning" role="alert">
+                        {% trans 'No matching transactions were found' %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

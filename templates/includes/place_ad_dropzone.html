@@ -1,0 +1,116 @@
+{% load i18n staticfiles pagination_tags thumbnail %}
+
+    <script type="text/javascript" src="{% static 'js/lib/dropzone.js' %}"></script>
+
+    <script type="text/javascript">
+        // do not remove this - important for 'edit_ad.js'
+        var dropzone_ref;
+        var mockFile = { name: "Filename", size: 12345 };
+        var shownMaxFilesMessage = false;
+
+        $(function() {
+            {% if ad_images %}
+               $(".fileinput-button").hide();
+//               $('.filecancel-button').show();
+//               document.querySelector("#actions .cancel").onclick = cancel_click_function;
+               document.querySelector("#total-progress").style.opacity = "0";
+               $(".progress").hide();
+            {% else  %}
+               $('.fileupload-process').hide();
+//               $('.filecancel-button').hide();
+            {% endif %}
+        });
+
+        var csrftoken = $.cookie('csrftoken');
+        // Get the template HTML and remove it from the document
+        var previewNode = document.querySelector("#template");
+        previewNode.id = "";
+        var previewTemplate = previewNode.parentNode.innerHTML;
+        previewNode.parentNode.removeChild(previewNode);
+
+        var myDropzone = new Dropzone('#actions', { // Make the whole body a dropzone
+            url: "{{ image_endpoint }}", // Set the url
+            headers: {'X-CSRFToken': csrftoken},
+            addRemoveLinks: true,
+            acceptedFiles: "image/*",
+            paramName: "image",
+            thumbnailWidth: 80,
+            thumbnailHeight: 80,
+            parallelUploads: 20,
+            maxFiles: 1,
+            uploadMultiple: false,
+            previewTemplate: previewTemplate,
+            autoProcessQueue: true,
+            previewsContainer: "#previews", // Define the container to display the previews
+            clickable: ".fileinput-button", // Define the element that should be used as click trigger to select files.
+            dictRemoveFile: "{% trans 'Remove file' %}",
+            removedfile: function(file) { {# Image removal handler, sends a 'DELETE' to the image endpoint #}
+            var name = file.name;
+                $.ajax({type: 'DELETE', url: "{{ image_endpoint }}",
+                        data: "id="+name, dataType:'html', headers: {'X-CSRFToken': csrftoken}});
+                var _ref;
+
+                var numOriginal = $(".dz-preview").not(".dz-success").not("dz-processing").not("dz-error").not("dz-started").size();
+                var $previewElement = $(file.previewElement);
+                var hasSuccess = $previewElement.hasClass("dz-success");
+                var hasProcessing = $previewElement.hasClass("dz-processing");
+                var hasError = $previewElement.hasClass("dz-error");
+                var hasStarted = $previewElement.hasClass("dz-started");
+                var removingUpload = hasSuccess || hasProcessing || hasError || hasStarted;
+
+                // if removing an original, can be one more maxFile
+                if (!removingUpload) numOriginal--;
+
+                this.options.maxFiles = 3 - numOriginal;
+                $(".fileinput-button").show();
+                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            },
+            init: function() {
+                // create reference to dropzone globally, so we can check file upload status
+                dropzone_ref = this;
+                {# Showing currently uploaded images, if any. #}
+                {% for image in ad_images %}
+                var mockFile = {
+                    name: "{{ image.caption }}",
+                    size: {{ image.image.size|force_escape }}
+                };
+
+                this.emit("addedfile", mockFile);
+                {% with t=image.image|thumbnailer %}
+                this.emit("thumbnail", mockFile, "{{ t.profilepicture.url }}");
+                {% endwith %}
+                {% endfor %}
+            }
+        });
+/*
+        function cancel_click_function() {
+          this.removeAllFiles(true);
+          $(".fileinput-button").show();
+          $('.filecancel-button').hide();
+        }
+*/
+        myDropzone.on("addedfile", function(file) {
+          $(".fileinput-button").hide();
+//          $('.filecancel-button').show();
+//          $("#actions").removeClass('hide');
+//          document.querySelector("#actions .cancel").onclick = cancel_click_function;
+        });
+
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function(progress) {
+          document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
+        });
+
+        myDropzone.on("sending", function(file) {
+          // Show the total progress bar when upload starts
+          document.querySelector("#total-progress").style.opacity = "1";
+          $(".progress").show();
+        });
+
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("queuecomplete", function(progress) {
+          document.querySelector("#total-progress").style.opacity = "0";
+          $(".progress").hide();
+        });
+
+    </script>

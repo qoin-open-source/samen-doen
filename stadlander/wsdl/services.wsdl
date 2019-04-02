@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="https://acceptatie.stadlander.nl/services.html"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             name="MSLServices" targetNamespace="https://acceptatie.stadlander.nl/services.html">
+    <types>
+        <xsd:schema targetNamespace="https://acceptatie.stadlander.nl/services.html"/>
+    </types>
+    <portType name="MSLServicesPort">
+        <operation name="GetEloketData">
+            <input message="tns:GetEloketDataIn"/>
+            <output message="tns:GetEloketDataOut"/>
+        </operation>
+        <operation name="GetPositoosData">
+            <input message="tns:GetPositoosDataIn"/>
+            <output message="tns:GetPositoosDataOut"/>
+        </operation>
+        <operation name="GetQoinData">
+            <input message="tns:GetQoinDataIn"/>
+            <output message="tns:GetQoinDataOut"/>
+        </operation>
+    </portType>
+    <binding name="MSLServicesBinding" type="tns:MSLServicesPort">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="GetEloketData">
+            <soap:operation soapAction="https://acceptatie.stadlander.nl/services.html#GetEloketData"/>
+            <input>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                           namespace="https://acceptatie.stadlander.nl/services.html"/>
+            </input>
+            <output>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                           namespace="https://acceptatie.stadlander.nl/services.html"/>
+            </output>
+        </operation>
+        <operation name="GetPositoosData">
+            <soap:operation soapAction="https://acceptatie.stadlander.nl/services.html#GetPositoosData"/>
+            <input>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                           namespace="https://acceptatie.stadlander.nl/services.html"/>
+            </input>
+            <output>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                           namespace="https://acceptatie.stadlander.nl/services.html"/>
+            </output>
+        </operation>
+        <operation name="GetQoinData">
+            <soap:operation soapAction="https://acceptatie.stadlander.nl/services.html#GetQoinData"/>
+            <input>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                           namespace="https://acceptatie.stadlander.nl/services.html"/>
+            </input>
+            <output>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                           namespace="https://acceptatie.stadlander.nl/services.html"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="MSLServicesService">
+        <port name="MSLServicesPort" binding="tns:MSLServicesBinding">
+            <soap:address location="https://acceptatie.stadlander.nl/services.html"/>
+        </port>
+    </service>
+    <message name="GetEloketDataIn">
+        <part name="PersonalAPIKey" type="xsd:string"/>
+    </message>
+    <message name="GetEloketDataOut">
+        <part name="return" type="soap-enc:Array"/>
+    </message>
+    <message name="GetPositoosDataIn">
+        <part name="PersonalAPIKey" type="xsd:string"/>
+    </message>
+    <message name="GetPositoosDataOut">
+        <part name="return" type="soap-enc:Array"/>
+    </message>
+    <message name="GetQoinDataIn">
+        <part name="PersonalAPIKey" type="xsd:string"/>
+    </message>
+    <message name="GetQoinDataOut">
+        <part name="return" type="soap-enc:Array"/>
+    </message>
+</definitions>

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans 'Close Account' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-10">
+            <h2>{% trans 'Close My Account' %}</h2>
+            {% include 'includes/messages.html' %}
+
+
+            <div class="form-group{% if form.close_confirmation.errors %} has-error{% endif %}">
+                {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %}{{ error }}<br/>{% endfor %}
+                    </div>
+                {% endif %}
+
+                <p>{% trans 'If you no longer wish to use your account, you can close it by clicking the button below. Please note that once your account is closed:'%}
+
+                <ol>
+                {% blocktrans %}
+                <li>You will not be able to log in or make any more transactions;</li>
+                <li>Any positive balance you have remaining will be reset to zero;</li>
+                <li>You can no longer earn or redeem Positoos;</li>
+                <li>Any cards associated with this account will automatically be cancelled;</li>
+                <li>Any adverts will be removed.</li>
+                {% endblocktrans %}
+                </ol>
+                </p>
+                <br/>
+
+                <form action="." name="close_account_form" id="close_account_form" method="post">{% csrf_token %}
+                </form>
+                <button class="btn btn-rounded btn-blue" id="close_account_form_button"><span class="l"></span><span class="c">{% trans 'Close My Account' %}</span><span class="r"></span></button>
+            </div>
+
+            {# modal pop-up for confirmation #}
+            <div class="modal fade" id="modal-close-account" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans 'Close' %}</span></button>
+                            <h4 class="modal-title" id="myModalLabel-first">{% trans 'Close my account' %}</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="highlight" id="close_account_highlight">
+                                {% blocktrans %}Are you sure you want to close your account? This action can not be undone.{% endblocktrans %}
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-rounded btn-danger" data-dismiss="modal">{% trans 'Cancel' %}</button>
+                            <button type="button" id="confirm_close_account" class="btn btn-rounded btn-green">{% trans 'Confirm' %}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% block back-link %}
+            {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{% static 'js/bootstrap/modal.js' %}"></script>
+    <script type="text/javascript">
+        $(function() {
+            {# 'Submit' button clicked. #}
+            $('#close_account_form_button').on('click', function()  {
+                {# Show the modal confirmation form. #}
+                $('#modal-close-account').modal('show');
+            });
+
+            {# POST the contents of the form. #}
+            $('#confirm_close_account').click(function() {
+                $('#close_account_form').submit();
+            });
+        });
+    </script>
+{% endblock %}

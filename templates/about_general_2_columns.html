@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles menu_tags cms_tags %}
+
+{% block title %}{% page_attribute 'page_title' %}{% endblock %}
+{% block description %}{% page_attribute 'meta_description' %}{% endblock %}
+{% block keywords %}{% page_attribute 'meta_keywords' %}{% endblock %}
+
+{% block extrabody %}class="page-with-sidebar main-content about"{% endblock %}
+{% block extramainclasses %} content-page{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/cms_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <h2>{% page_attribute "page_title" %}</h2>
+
+    {% include 'includes/messages.html' %}
+
+    <div class="row">
+        <div class="col-md-6 col-lg-5">
+
+            {% placeholder "column_1_content" %}
+        </div>
+        <div class="col-md-6 col-lg-5">
+
+            {% placeholder "column_2_content" %}
+
+        </div>
+    </div>
+{% endblock %}

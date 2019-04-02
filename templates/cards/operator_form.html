@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans 'New Operator' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    {% url 'operator_create' as url_operator_create %}
+
+    <div class="row">
+        <div class="col-md-6 col-lg-10">
+            {% ifequal request.path url_operator_create %}
+                <h2>{% trans 'Create a new Terminal Operator' %}</h2>
+            {% else %}
+                <h2>{% trans 'Terminal Operator' %} {{ operator.name }}</h2>
+            {% endifequal %}
+
+            <div class="col-md-6 col-lg-5">
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <form id="operator_form" method="post" action="." class="form">
+                    {% csrf_token %}
+
+                    {% if form.name.errors %}
+                        <div class="form-group has-error">
+                    {% else %}
+                        <div class="form-group">
+                    {% endif %}
+                        <label class="control-label" for="id_name">{% trans 'Name' %}</label>
+                        {% for error in form.name.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <input type="text" id="id_name" placeholder="{% trans 'name' %}" name="name"{% if form.name.value %} value="{{ form.name.value }}"{% endif %} class="form-control">
+                    </div>
+
+                    <input id="id_business" name="business" type="hidden" value="{% if form.business.value %}{{ form.business.value }}{% endif %}">
+
+                    {% if form.pin.errors %}
+                        <div class="form-group has-error">
+                    {% else %}
+                        <div class="form-group">
+                    {% endif %}
+                        <label class="control-label" for="id_pin">{% trans 'PIN' %}</label>
+                        {% for error in form.pin.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <input type="text" id="id_pin" placeholder="{% trans 'PIN number' %}" name="pin"{% if form.pin.value %} value="{{ form.pin.value }}"{% endif %} class="form-control">
+                    </div>
+
+                    <input type="submit" class="btn btn-rounded btn-green" id="operator_form_button" value="{% trans 'Save operator' %}">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,74 @@
+<style>
+    .deletelink {
+        cursor: pointer;
+    }
+
+    .addlink {
+        cursor: pointer;
+    }
+
+    .no_items {
+        display: none;
+    }
+
+    {% for key, values in inline_formsets.items %}
+    #{{ values.formset_element_id }} .deletelink input {
+        display: none;
+    }
+
+    #{{ values.formset_element_id }} tr.deleted {
+        display: none;
+    }
+
+    #{{ values.formset_element_id }} tr:last-child {
+        display: none;
+    }
+    {% endfor %}
+
+    .comm_admin_inline_formset_table td.imei-field{
+        min-width: 120px;
+        padding: 8px 0px 8px 0px;
+    }
+
+    .comm_admin_inline_formset_table td.icc_id-field{
+        min-width: 145px;
+        padding: 8px 0px 8px 18px;
+    }
+
+    .comm_admin_inline_formset_table td.comments-field{
+        padding: 8px 0px 8px 18px;
+        width: 50%;
+    }
+
+    .comm_admin_inline_formset_table td.op-name-field{
+        width: 200px;
+        padding: 8px 0px 8px 0px;
+    }
+
+    .comm_admin_inline_formset_table td.op-pin-field{
+        width: 100px;
+        padding: 8px 0px 8px 18px;
+    }
+
+    .comm_admin_inline_formset_table td.card-num-field{
+        width: 120px;
+        padding: 8px 0px 8px 0px;
+    }
+
+    .comm_admin_inline_formset_table td.card-status-field{
+        width: 100px;
+        padding: 8px 0px 8px 18px;
+    }
+
+    table.comm_admin_inline_formset_table th{
+        padding-left: 18px;
+    }
+
+    table.comm_admin_inline_formset_table th:first-child{
+        padding-left: 0px;
+    }
+
+    table.comm_admin_inline_formset_table {
+        width: 100%;
+    }
+</style>

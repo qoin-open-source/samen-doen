@@ -1,0 +1,210 @@
+{% extends "community_admin/change_user.html" %}
+{% load i18n admin_static admin_modify %}
+{% load admin_urls %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'community_admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; <a href="">{% trans 'Users' %}</a>
+        &rsaquo; <a href="{% url 'community_admin:profile_userprofile_changelist' %}">{% trans 'User profiles' %}</a>
+        &rsaquo; {% trans 'Edit profile' %} {{ profile.cyclos_group.name }}
+    </div>
+{% endblock %}
+
+{% block field_sets %}
+    <fieldset class="module aligned">
+        <h2>{% trans 'Key user information' %}</h2>
+
+        <div class="form-row{% if form.cyclos_group.errors %} errors{% endif %}">
+            {{ form.cyclos_group.errors }}
+            <label for="{{ form.cyclos_group.id_for_label }}" class="required">{{ form.cyclos_group.label }}</label>
+            {{ form.cyclos_group }}
+            {% if form.cyclos_group.help_text %}
+                <p class="help">{{ form.cyclos_group.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.first_name.errors %} errors{% endif %}">
+            {{ form.first_name.errors }}
+            <label for="{{ form.first_name.id_for_label }}" class="required">{{ form.first_name.label }}</label>
+            {{ form.first_name }}
+            {% if form.first_name.help_text %}
+                <p class="help">{{ form.first_name.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.tussenvoegsel.errors %} errors{% endif %}">
+            {{ form.tussenvoegsel.errors }}
+            {{ form.tussenvoegsel.label_tag }}
+            {{ form.tussenvoegsel }}
+            {% if form.tussenvoegsel.help_text %}
+                <p class="help">{{ form.tussenvoegsel.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.last_name.errors %} errors{% endif %}">
+            {{ form.last_name.errors }}
+            <label for="{{ form.last_name.id_for_label }}" class="required">{{ form.last_name.label }}</label>
+            {{ form.last_name }}
+            {% if form.last_name.help_text %}
+                <p class="help">{{ form.last_name.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.email.errors %} errors{% endif %}">
+            {{ form.email.errors }}
+            <label for="{{ form.email.id_for_label }}" class="required">{{ form.email.label }}</label>
+            {{ form.email }}
+            {% if form.email.help_text %}
+                <p class="help">{{ form.email.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.community.errors %} errors{% endif %}">
+            {{ form.community.errors }}
+            <label for="{{ form.community.id_for_label }}" class="required">{{ form.community.label }}</label>
+            {{ form.community }}
+            {% if form.community.help_text %}
+                <p class="help">{{ form.community.help_text|safe }}</p>
+            {% endif %}
+        </div>
+    </fieldset>
+
+    <fieldset class="module aligned">
+        <h2>{% trans 'Additional user information' %}</h2>
+
+        <div class="form-row{% if form.gender.errors %} errors{% endif %}">
+            {{ form.gender.errors }}
+            {{ form.gender.label_tag }}
+            {{ form.gender }}
+            {% if form.gender.help_text %}
+                <p class="help">{{ form.gender.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.address.errors %} errors{% endif %}">
+            {{ form.address.errors }}
+            {{ form.address.label_tag }}
+            {{ form.address }}
+            {% if form.address.help_text %}
+                <p class="help">{{ form.address.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.num_street.errors %} errors{% endif %}">
+            {{ form.num_street.errors }}
+            {{ form.num_street.label_tag }}
+            {{ form.num_street }}
+            {% if form.num_street.help_text %}
+                <p class="help">{{ form.num_street.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.extra_address.errors %} errors{% endif %}">
+            {{ form.extra_address.errors }}
+            {{ form.extra_address.label_tag }}
+            {{ form.extra_address }}
+            {% if form.extra_address.help_text %}
+                <p class="help">{{ form.extra_address.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.postal_code.errors %} errors{% endif %}">
+            {{ form.postal_code.errors }}
+            {{ form.postal_code.label_tag }}
+            {{ form.postal_code }}
+            {% if form.postal_code.help_text %}
+                <p class="help">{{ form.postal_code.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.city.errors %} errors{% endif %}">
+            {{ form.city.errors }}
+            {{ form.city.label_tag }}
+            {{ form.city }}
+            {% if form.city.help_text %}
+                <p class="help">{{ form.city.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.phone_number.errors %} errors{% endif %}">
+            {{ form.phone_number.errors }}
+            {{ form.phone_number.label_tag }}
+            {{ form.phone_number }}
+            {% if form.phone_number.help_text %}
+                <p class="help">{{ form.phone_number.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.mobile_number.errors %} errors{% endif %}">
+            {{ form.mobile_number.errors }}
+            {{ form.mobile_number.label_tag }}
+            {{ form.mobile_number }}
+            {% if form.mobile_number.help_text %}
+                <p class="help">{{ form.mobile_number.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        <div class="form-row{% if form.company_website.errors %} errors{% endif %}">
+            {{ form.company_website.errors }}
+            {{ form.company_website.label_tag }}
+            {{ form.company_website }}
+            {% if form.company_website.help_text %}
+                <p class="help">{{ form.company_website.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.company_description.errors %} errors{% endif %}">
+            {{ form.company_description.errors }}
+            {{ form.company_description.label_tag }}
+            {{ form.company_description }}
+            {% if form.company_description.help_text %}
+                <p class="help">{{ form.company_description.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.picture.errors %} errors{% endif %}">
+            {{ form.picture.errors }}
+            {{ form.picture.label_tag }}
+            {{ form.picture }}
+            {% if form.picture.help_text %}
+                <p class="help">{{ form.picture.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.picture_height.errors %} errors{% endif %}">
+            {{ form.picture_height.errors }}
+            {{ form.picture_height.label_tag }}
+            {{ form.picture_height }}
+            {% if form.picture_height.help_text %}
+                <p class="help">{{ form.picture_height.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.picture_width.errors %} errors{% endif %}">
+            {{ form.picture_width.errors }}
+            {{ form.picture_width.label_tag }}
+            {{ form.picture_width }}
+            {% if form.picture_width.help_text %}
+                <p class="help">{{ form.picture_width.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        
+        <div class="form-row{% if form.groupset.errors %} errors{% endif %}">
+            {{ form.groupset.errors }}
+            <label for="{{ form.groupset.id_for_label }}" class="required">{{ form.groupset.label }}</label>
+            {{ form.groupset }}
+            {% if form.groupset.help_text %}
+                <p class="help">{{ form.groupset.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.web_payments_enabled.errors %} errors{% endif %}">
+            {{ form.web_payments_enabled.errors }}
+            <label for="{{ form.web_payments_enabled.id_for_label }}">{{ form.web_payments_enabled.label }}</label>
+            {{ form.web_payments_enabled }}
+            {% if form.web_payments_enabled.help_text %}
+                <p class="help">{{ form.web_payments_enabled.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-row{% if form.is_visible.errors %} has-error{% endif %}">
+            {{ form.is_visible.errors }}
+            <label for="{{ form.is_visible.id_for_label }}">{{ form.is_visible.label }}</label>
+            {{ form.is_visible }}
+            {% if form.is_visible.help_text %}
+                <p class="help">{{ form.is_visible.help_text|safe }}</p>
+            {% endif %}
+        </div>
+    </fieldset>
+{% endblock %}

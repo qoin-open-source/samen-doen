@@ -1,0 +1,5 @@
+-r base.txt
+bpython==0.15
+django-debug-toolbar>=1.5,<1.6a0
+django-extensions==1.6.7
+Werkzeug==0.11.10

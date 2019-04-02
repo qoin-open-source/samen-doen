@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Account activation complete' %}{% endblock %}
+
+{% block content %}
+    <h2>{% trans 'Account successfully activated!' %}</h2>
+
+    <div class="row">
+        <div class="col-md-6 col-lg-10">
+            <div class="alert alert-success" role="alert">
+                {% blocktrans %}
+                    <p>Your Samen Doen account has been successfully activated!</p>
+                    <p>You can now log in to enjoy together with your username and password.</p>
+                    <p>Have much fun with Samen Doen!</p>
+                {% endblocktrans %}
+            </div>
+
+            <p><a href="{% url 'auth_login' %}" class="btn btn-rounded btn-green">{% trans "Log in" %}</a></p>
+        </div>
+    </div>
+
+{% endblock %}

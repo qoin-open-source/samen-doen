@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Login' %}{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h2>{% trans 'You are already logged in' %}, {{ cc3_profile_name }}</h2> {# TODO: This should never happen. Redirect the guy to homepage if he comes here anytime after logging. #}
+    {% endif %}
+
+        <div class="row">
+            <div class="col-md-6 col-lg-5">
+                <h2>{% trans 'log in' %}</h2>
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <form method="post" action="?next={% url 'accounts_home' %}" class="form">
+                    {% csrf_token %}
+
+                    {% if form.username.errors %}
+                        <div class="form-group has-error">
+                    {% else %}
+                        <div class="form-group">
+                    {% endif %}
+                        <label class="control-label" for="id_username">{% trans 'Email' %}</label>
+                        {% for error in form.username.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <input type="text" id="id_username" placeholder="{% trans 'e-mail' %}" name="username"{% if form.username.value %} value="{{ form.username.value }}"{% endif %} class="form-control">
+                    </div>
+
+                    {% if form.password.errors %}
+                        <div class="form-group has-error">
+                    {% else %}
+                        <div class="form-group">
+                    {% endif %}
+                        <label class="control-label" for="id_password">{% trans 'Password' %}</label>
+                        {% for error in form.password.errors %}
+                            <label class="control-label"> - {{ error }}</label>
+                        {% endfor %}
+                        <input type="password" id="id_password" placeholder="{% trans 'password' %}" maxlength="254" name="password"{% if form.password.value %} value="{{ form.password.value }}"{% endif %} class="form-control">
+                    </div>
+
+                    <button class="btn btn-rounded btn-blue">{% trans 'Log in' %}</button>
+                    <input type="hidden" name="next" value="">
+                </form>
+            </div>
+            <div class="col-md-6 col-lg-5">
+                <h2>{% trans 'register with Positoos' %}</h2>
+                <p>{% trans 'Not a member yet?' %} <a href="{% url 'registration_register' %}">{% trans 'Register' %}</a> {% trans 'with Positoos to enjoy awesome deals in your community!' %}</p>
+
+                <h2>{% trans 'forgotten password' %}</h2>
+                <p>{% trans 'Forgot your Positoos member password? Let us help you to' %} <a href="{% url 'auth_password_reset' %}">{% trans 'reset it' %}.</a></p>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,5 @@
+<ul class="footer-social">
+    {% for link in instance.socialmedialink_set.all %}
+        <li><a href="{{ link.link_target }}" target="_blank"><span class="{{ link.css_icon_class }}"></span>{{ link.link_text }}</a></li>
+    {% endfor %}
+</ul>

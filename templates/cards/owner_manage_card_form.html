@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+
+{% block title %}{% trans 'Manage card' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <h2>{% trans 'Cards' %}</h2>
+            <hr>
+
+            {% include 'includes/messages.html' %}
+
+            {% if owners_cards %}
+                {% comment %}
+                <p>{% trans 'Your current active cards are' %}:</p>
+                {% endcomment %}
+                <table class="table rwd-table transactions-table">
+                    <tbody>
+                        <tr class="table-head">
+                            <th>{% trans 'card number' %}</th>
+                            <th>{% trans 'activation date' %}</th>
+                            <th>{% trans 'card status' %}</th>
+                            <th>{% trans 'action' %}</th>
+                        </tr>
+
+                        {% for card in owners_cards %}
+                            <tr>
+                                <td>{{ card.number.number }}</td>
+                                <td>{{ card.activation_date|default:'geen' }}</td>
+                                {% with status=card.status %}
+                                <td>{{ card.get_status_display|lower }}</td>
+                                <td>
+                                    {% include "cards/block_unblock_card_form_snippet.html" %}
+                                </td>
+                                {% endwith %}
+                            </tr>
+                            {% include "cards/block_unblock_card_modals_snippet.html" %}
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    {% trans 'You do not have any cards yet.' %}
+                </div>
+            {% endif %}
+
+            <p>{% trans 'Is one of your cards lost, stolen, or damaged? Block it and request a new one here!' %}</p>
+
+            <h2>{% trans 'Card Requests' %}</h2>
+            <hr>
+
+            {% if fulfillments %}
+                <table class="table rwd-table transactions-table">
+                    <tbody>
+                        <tr class="table-head">
+                            <th>{% trans 'request date' %}</th>
+                            <th>{% trans 'status' %}</th>
+                        </tr>
+
+                        {% for f in fulfillments %}
+                            {% if f.status == CARD_FULLFILLMENT_CHOICE_NEW or f.status == CARD_FULLFILLMENT_CHOICE_ACCOUNT_CLOSED %}
+                            <tr>
+                                <td>{{ f.creation_date }}</td>
+                                <td>{% if f.status == CARD_FULLFILLMENT_CHOICE_NEW %}{% trans 'ordered' %}{% else %}{% trans 'cancelled' %}{% endif %}</td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    {% trans 'You do not have any card requests yet.' %}
+                </div>
+            {% endif %}
+
+            <button class="btn btn-rounded btn-blue" id="register_card_form_button">{% trans 'Request card' %}</button>
+        </div>
+        <div>
+            {% with user.get_profile as profile %}
+                {% if profile.is_individual_profile or profile.is_charity_profile %}
+                    {% if not profile.can_order_card %}
+                        {% url 'accounts-update-profile' as update_profile_url %}
+                        {% blocktrans with update_profile_url=update_profile_url %}You cannot order a card.
+                        Please check you have completed your address in your
+                        <a href="{{ update_profile_url }}">profile</a>{% endblocktrans %}
+                    {% endif %}
+
+                    {% if form %}
+                        <form action="{% url 'owner_manage_and_register_cards' %}" class="form" method="post" id="register_card_form">
+                            {% csrf_token %}
+
+                            {% for field in form.hidden_fields %}{{ field }}{% endfor %}
+                            {% if not form.registration_choice.is_hidden %}
+                                <div class="form-group {% if form.registration_choice.errors %}has-error{% endif %}">
+                                    <label class="control-label" for="id_registration_choice">{% trans "Registration choice" %}</label>
+                                    {% for error in form.registration_choice.errors %}
+                                        <label class="control-label"> - {{ error }}</label>
+                                    {% endfor %}
+                                    <br />
+                                    <div class="radio">
+                                        {{ form.registration_choice }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </form>
+
+                        {# Modal popups for payment confirmation, first one is when its the first card, #}
+                        {# second one is when there is an old pass that needs to be replaced #}
+                        <div class="modal fade" id="modal-register-send-first" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans 'Close' %}</span></button>
+                                        <h4 class="modal-title" id="myModalLabel-first">{% trans 'Order card' %}</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="highlight" id="register_send_highlight-first">
+                                            {% blocktrans %}Door op 'Bestellen' te klikken gaat u ermee akkoord dat Samen-Doen eenmalig €5,95 van uw rekening afschrijft.{% endblocktrans %}
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-rounded btn-danger" data-dismiss="modal">{% trans 'Cancel' %}</button>
+                                        <button type="button" id="confirm_register_send-first" class="btn btn-rounded btn-green">{% trans 'Order' %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="modal-register-send-no-pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans 'Close' %}</span></button>
+                                        <h4 class="modal-title" id="myModalLabel-old">{% trans 'Order card' %}</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="highlight" id="register_send_highlight-old">
+                                            {% blocktrans with address=profile.address num_street=profile.userprofile.num_street extra_address=profile.userprofile.extra_address postal_code=profile.postal_code city=profile.city %}You are about to request a new card. The administrators will deal with your request as soon as possible and send the card to the address in your profile: {{  address }} {{ num_street }} {{ extra_address }} {{ postal_code }} {{ city }}{% endblocktrans %}
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-rounded btn-danger" data-dismiss="modal">{% trans 'Cancel' %}</button>
+                                        <button type="button" id="confirm_register_send-old" class="btn btn-rounded btn-green">{% trans 'Order' %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        {% with user.card_registration_set.all.0 as current_card_choice %}
+                            {% if current_card_choice %}
+                                <div class="alert alert-info" role="alert">
+                                    {% trans 'You have registered your card already' %}.
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                    {% endif %} {# end if form #}
+                {% else %}
+                    <div class="alert alert-danger" role="alert">
+                        {% trans 'Only Individuals can register cards' %}.
+                    </div>
+                {% endif %} {# end if individual profile #}
+            {% endwith %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{% static 'js/bootstrap/modal.js' %}"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            {# 'Submit' button clicked. #}
+            $('#register_card_form_button').on('click', function()  {
+                var reg_choice = $('div.checked input[name=registration_choice]').val();
+                var pays_for_card = '{{cc3_profile_pays_for_card}}';
+                if(reg_choice == 'Send' && pays_for_card == 'True') {
+                    {# Show the modal confirmation form. #}
+                    $('#modal-register-send-first').modal('show');
+                } else {
+                    $('#modal-register-send-no-pay').modal('show');
+                }
+            });
+
+            {# POST the contents of the form. #}
+            $('#confirm_register_send-first, #confirm_register_send-old').click(function() {
+                $('#register_card_form').submit();
+            });
+
+        });
+    </script>
+{% endblock %}

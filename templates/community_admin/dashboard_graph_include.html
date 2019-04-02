@@ -1,0 +1,41 @@
+{% load nvd3_tags %}
+{% if graph.active %}
+    {% with graph.charttype as charttype %}
+        {% if charttype != 'tabulatedData' %}{% load_chart charttype graph.chartdata graph.chartcontainer graph.extra %}{% endif %}
+
+        <h2>{{ graph.title }}</h2>
+        {% if charttype == 'tabulatedData' %}
+            {% with graph.chartdata as tabledata %}
+            {% comment %}<pre>{{ tabledata }}</pre>{% endcomment %}
+            <div style="width:{{ graph.width }}px;margin-left:auto;margin-right:auto;">
+                <table class="table stats-table">
+                    <thead>
+                    <tr>
+
+                    {% for x in tabledata.x %}<th>{{ x }}</th>{% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for datum in tabledata.data %}
+                    <tr>
+                        <td>{% if forloop.last %}{{ datum.name|default_if_none:'TOTAL' }}{% else %}{{ datum.name }}{% endif %}</td>
+                        {% for x in datum.y %}<td>{{ x }}</td>
+                            {% endfor %}
+                    </tr>
+                    {% endfor %}
+                    {% if tabledata.totals %}<tr></tr><td><b>Totals:</b></td>
+                        {% for x in tabledata.totals %}<td><b>{{ x }}</b></td>
+                            {% endfor %}</tr>{% endif %}
+                    </tbody>
+                </table>
+            </div>
+            {% endwith %}
+        {% else %}
+            {% comment %}{% with graph.chartdata as chartdata %}
+                <pre>{{ chartdata.rawdata }}</pre>
+                <pre>{{ chartdata }}</pre>
+            {% endwith %}{% endcomment %}
+            {% include_container graph.chartcontainer graph.height graph.width %}
+        {% endif %}
+    {% endwith %}
+{% endif %}

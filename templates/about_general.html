@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles menu_tags cms_tags %}
+
+{% block title %}{% page_attribute 'page_title' %}{% endblock %}
+{% block description %}{% page_attribute 'meta_description' %}{% endblock %}
+{% block keywords %}{% page_attribute 'meta_keywords' %}{% endblock %}
+
+{% block extrabody %}class="page-with-sidebar main-content about"{% endblock %}
+{% block extramainclasses %} content-page{% endblock %}
+
+{% block sidemenu %}
+    {% include 'includes/cms_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <h2>{% page_attribute "page_title" %}</h2>
+
+    <div class="row">
+        <div class="col-md-12 col-lg-10">
+            {# TODO: This is not working at all. On a form sent, it needs a reload after POST to actually show the message. #}
+            {# So, moved the message snippet into the placeholders HTML. To be fixed... #}
+            {# {% include 'includes/messages.html' %} #}
+
+            {% placeholder "general_content" %}
+        </div>
+    </div>
+{% endblock %}

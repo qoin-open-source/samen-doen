@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Change group' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'communityadmin/sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2>{% trans 'Change group' %} - {{ cc3_profile }}</h2>
+
+            <form method="post" action="" class="form">
+                {% csrf_token %}
+
+                <div class="form-group {% if form.groups.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_groups">{% trans "Groups" %}</label>
+                    {% for error in form.groups.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <br />
+                    <div class="radio">
+                    {{ form.groups }}
+                    </div>
+                </div>
+
+                <div class="form-group{% if form.comments.errors %} has-error{% endif %}">
+                    <label class="control-label" for="id_comments">{% trans 'Comments' %}</label>
+                    {% for error in form.comments.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                    <textarea id="id_comments" name="comments" class="form-control" cols="30" rows="10" placeholder="{{ form.comments.help_text }}"></textarea>
+                </div>
+
+                <button class="btn btn-rounded btn-blue" type="submit">{% trans 'Change Group' %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

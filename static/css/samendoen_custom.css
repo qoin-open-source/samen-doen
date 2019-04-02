@@ -1,0 +1,1102 @@
+/* To be merged into less-compiled samendoen.css */
+
+@media (min-width: 1200px) {
+    .container {
+        width: auto;
+        max-width: 1600px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+
+    }
+}
+
+html, body {
+    height: 100%;
+
+}
+
+/* Pay direct profile page */
+#pay_direct_form .tt-hint {
+    display: none;
+}
+
+#pay_direct_form .tt-dropdown-menu {
+    background: white;
+    border: 1px solid #1dafec;
+}
+
+#pay_direct_form .tt-suggestion {
+    padding: 4px;
+}
+
+/* home page */
+.header .user .btn {
+    margin-right: 2px;
+}
+
+#wrap {
+    min-height: 100%;
+    height: auto;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -228px;
+    padding: 0 0 228px;
+}
+.news-list li .media-date {
+    width: 70px;
+    height: 70px;
+}
+.news-list li .media-body {
+    height: 70px;
+}
+.news-list li .media-heading {
+    display: table;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.news-list li .media-heading a {
+    display: table-cell;
+    vertical-align: middle;
+}
+.notice-column {
+    text-align: center;
+}
+
+.register-btn {
+    display: inline;
+    background: none; 
+}
+.register-btn a {
+    padding: 28px 50px;
+    background-color: #f8ad07;
+    border-radius: 60px;
+}
+
+/* home page footer */
+.footer {
+    padding: 50px 0 25px;
+    color: white;
+    text-align: center;
+}
+.footer .footer-row {
+    margin-bottom: 25px;
+}
+.footer .navigation {
+  list-style-type: none;
+  margin: 30px 0 0 0;
+  padding: 0;
+}
+.footer .navigation li {
+  float: left;
+  margin-right: 30px;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .footer .navigation li {
+    margin-right: 10px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .footer .navigation li {
+    margin-right: 15px;
+  }
+}
+.footer .navigation li:last-child {
+  margin-right: 0;
+}
+.footer .navigation li a {
+  display: block;
+  font-size: 20px;
+  line-height: 20px;
+  color: #333333;
+  text-decoration: none;
+  -webkit-transition: color linear 100ms;
+  -o-transition: color linear 100ms;
+  transition: color linear 100ms;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .footer .navigation li a {
+    font-size: 14px;
+    line-height: 14px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .footer .navigation li a {
+    font-size: 18px;
+    line-height: 18px;
+  }
+}
+.footer .navigation li.active a,
+.footer .navigation li:hover a {
+  color: #ffffff;
+}
+
+.footer .footer-social {
+    text-align: center;
+}
+
+.footer .footer-social li {
+    width: 50px;
+    height: 50px;
+
+}
+
+.footer .footer-social li a {
+    margin-top: 10px;
+    font-size: 30px;
+    line-height: 30px;
+}
+
+@media (min-width: 768px) {
+  .footer .tinynav,
+  .footer .navigation .selecter {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .footer .navigation {
+    display: none;
+  }
+}
+
+.footer .social{ display: inline-block; margin-top:14px; margin-bottom:-14px; padding-left: 0px;}
+.footer .social ul { overflow: hidden; }
+.footer div .social li { float: left; margin-right: 10px; color:#fff; margin-bottom: 0; list-style: none; }
+.footer .social li.follow { margin-top: 4px; }
+
+
+/* Profile form date picker */
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+    color: #000;
+    font-size: 0.8em;
+    width: 90%;
+}
+
+/* Twitter 'Typeahead' plugin style */
+.twitter-typeahead {
+    width: 100%;
+}
+
+
+
+
+/* from Piraat - trying to merge completely different CSS framework for urgent homepage update */
+
+/*------------------------
+		Top Area
+------------------------*/
+.center{
+	width: 1170px;
+	margin: 0 auto;
+}
+#top_area{
+	height: 51px;
+	line-height: 51px;
+	text-align: right;
+}
+#top_area .social{
+	display: inline-block;
+}
+#top_area a.btn{
+	display: inline-block;
+	height: 29px;
+	padding: 0 30px;
+	line-height: 29px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	/*-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;*/
+/*	background-color: #23277d;*/
+	color: #fff;
+	font-size: 17px;
+	font-weight: bold;
+	text-decoration: none;
+	margin-left: 6px;
+}
+/*
+.social span, .social span span, .social span span span,  {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;;
+}*/
+
+/*------------------------
+		Header
+------------------------*/
+#header{
+	position: absolute;
+	width: 100%;
+	left: 0;
+	z-index: 999;
+	background-color: rgba(255,255,255,.7);
+	height: 103px;
+	line-height: 103px;
+}
+#logo{
+	display: block;
+	float: left;
+	padding: 15px 0px;
+	margin-right: 35px;
+}
+#logo img{
+	display: block;
+	width: 100%;
+}
+
+.people_btn{
+	width: 258px;
+	height: 158px;
+	margin: 0 auto;
+	display: block;
+	background: url(../img/people-button.png) no-repeat center center;
+	text-align: center;
+	color: #fff;
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 147px;
+	text-decoration: none;
+}
+
+
+
+/* ==========================================================================
+    Media Queries
+   ========================================================================== */
+
+/* Tablet Landscape */
+@media only screen and (max-width: 1180px) {
+    .clearfix:before,.clearfix:after{content:" ";display:table;}
+    .clearfix:after{clear:both;}
+    .clearfix{*zoom:1;}
+
+    .center{
+        width: 940px;
+    }
+    #logo{
+	    margin-right: 10px;
+    }
+    .main_nav li{
+	    margin-right: 20px;
+    }
+}
+@media only screen and (max-width: 950px) {
+
+    .center{
+        width: 320px;
+    }
+    #showcase{
+		padding-bottom: 170px;
+		height: 317px;
+    }
+    .showcase-slide .caption{
+		width: 320px;
+		margin-left: -160px;
+		bottom: -170px;
+		background: #fff;
+		height: 170px;
+    }
+    .showcase-slide .caption span{
+	    height: 59px;
+	    width: 59px;
+	    line-height: 59px;
+    }
+    .showcase-slide .caption p{
+	    padding: 0;
+    }
+    .showcase-slide .caption strong{
+	    font-size: 18px;
+	    line-height: 100%;
+    }
+    .showcase-control-panel {
+		bottom: -143px;
+		height: 36px;
+		left: 50%;
+		line-height: 36px;
+		margin-left: -150px;
+		width: 300px;
+		z-index: 120;
+	}
+    #showcase-caption{
+	    width: 250px;
+    }
+    .showcase-slide{
+	    height: 317px;
+    }
+    #top_area{
+	    display: none;
+    }
+    #header{
+	    position: relative;
+	    background: #fff;
+	    padding: 0 20px;
+	    -moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		width: 280px;
+		margin: 0 auto;
+    }
+    #header .center{
+	    width: 280px;
+    }
+    .col.one_third{
+	    width: 100%;
+	    padding: 0 10px;
+	    margin-bottom: 30px;
+    }
+    #content{
+	    padding-bottom: 60px;
+    }
+    .feedback_n_support{
+	    right: auto;
+	    left: 50%;
+	    margin-left: -115px;
+	    width: 230px;
+	    -moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+    }
+    #footer .center{
+	    width: 320px;
+    }
+    .footer_nav, .contact_info, .social_nav{
+	    width: 100%;
+	    padding: 0 10px;
+	    -moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		margin-bottom: 25px;
+    }
+    .main_nav{
+	    position: absolute;
+	    background: #fff;
+	    left: -20px;
+	    top: 100%;
+	    width: 320px;
+	    padding: 0 20px 7px;
+	    -moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		display: none;
+    }
+    .main_nav li, .main_nav li a{
+	    font-size: 22px;
+	    line-height: 40px;
+    }
+    .menu-trigger{
+	    display: block;
+    }
+    #top_area {
+		background: #fff;
+		height: auto;
+		overflow: hidden;
+		position: absolute;
+		text-align: center;
+		top: 270px;
+		width: 320px;
+		margin-left: -160px;
+		left: 50%;
+		z-index: 9999;
+		padding-bottom: 150px;
+		display: none;
+	}
+	#top_area a, #top_area .social {
+		clear: both;
+		display: inline-block;
+		float: left;
+		margin:  0 20px 20px;;
+	}
+}
+
+/*------------------------
+		Showcase
+------------------------*/
+.cycle-slideshow {
+    overflow: hidden;
+    height: 375px;
+}
+#showcase{
+	height: 375px;
+	position: relative;
+}
+.showcase-slide{
+	height: 375px;
+	width: 100%;
+	background-position: center center;
+	background-size: cover;
+}
+.showcase-slide .caption{
+    display: none;
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	margin-left: -385px;
+	width: 770px;
+	height: 95px;
+	-moz-border-radius: 25px 25px 0 0;
+	-webkit-border-radius: 25px 25px 0 0;
+	border-radius: 25px 25px 0 0;
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 14px 35px 0 30px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.showcase-slide .caption span{
+	width: 70px;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	-moz-border-radius: 35px;
+	-webkit-border-radius: 35px;
+	border-radius: 35px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	background-color: #00adef;
+	display: block;
+	float: left;
+	margin-right: 15px;
+	color: #fff;
+	font-size: 17px;
+	font-weight: bold;
+}
+.showcase-slide .caption p{
+	padding: 10px 0;
+}
+.showcase-slide .caption strong{
+	display: block;
+	color: #252377;
+	font-size: 22px;
+	font-weight: bold;
+	line-height: 25px;
+}
+.showcase-control-panel{
+	position: absolute;
+	left: 50%;
+	margin-left: 240px;
+	bottom: 27px;
+	z-index: 120;
+	height: 36px;
+	line-height: 36px;
+}
+#showcase-prev{
+	display: inline-block;
+	width: 20px;
+	height: 36px;
+	background: url(../img/left-arrow.png) no-repeat center center;
+	text-indent: -9999px;
+	cursor: pointer;
+}
+#showcase-next{
+	display: inline-block;
+	width: 20px;
+	height: 36px;
+	background: url(../img/right-arrow.png) no-repeat center center;
+	text-indent: -9999px;
+	cursor: pointer;
+}
+#showcase-caption{
+	display: inline-block;
+	font-size: 20px;
+	color: #3d3c3c;
+	width: 60px;
+	text-align: center;
+	height: 36px;
+	line-height: 36px;
+}
+
+.showcase-pager { 
+    text-align: center; width: 100%; z-index: 500; position: absolute; bottom: 10px; overflow: hidden;
+}
+.showcase-pager span { 
+    font-family: arial; font-size: 50px; width: 16px; height: 16px; 
+    display: inline-block; color: #ddd; cursor: pointer; 
+}
+.showcase-pager span.cycle-pager-active { color: #fff;}
+.showcase-pager > * { cursor: pointer;}
+
+/* Good cause styling */
+
+.good-cause-selected {
+    min-height: 90px;
+    min-width: 126px;
+    padding: 8px;
+}
+
+.cause-title {
+    font-size: 20px;
+    line-height: 36px;
+    font-weight: bold;
+}
+
+.cause-description {
+    margin: 8px 0 8px 0;
+    max-height: 100px;
+    overflow: hide;
+}
+
+.cause-stats-label {
+    font-weight: bold;
+}
+
+.cause-stats-value {
+    font-weight: bold;
+    color: #E9168C;
+}
+
+/* Plugins style */
+.news_list li {
+    list-style: none;
+}
+
+.tweet_feed li {
+    list-style: none;
+}
+
+/* Profile widget */
+.profile-widget a {
+    text-decoration: none;
+}
+
+/*
+ *	Although it would be lovely to do this in a less file so we can mix in a bunch of things we will have to make due with the fact
+ *	that the generated css files have been modified and that just replacing them with the generated stuff from the less files will
+ *	break more.... The following section will create a specific set of classes and rules for the header/menu, it is based on the
+ *	navbar-default style.
+ */
+.navbar-samen_doen {
+	margin-bottom: auto; /* Get rid of the 25px bottom margin */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #FFF;
+
+    border: none;
+}
+.navbar-samen_doen .navbar-brand {
+	height: auto; /* Make sure the image will push the bar height */
+    padding: 0;
+    color: #FFF;
+}
+.navbar-samen_doen .navbar-brand:hover,
+.navbar-samen_doen .navbar-brand:focus {
+
+    background-color: transparent;
+}
+.navbar-samen_doen .navbar-text {
+    color: #000;
+}
+
+.navbar-samen_doen .navbar-nav > li > a {
+    color: #000;
+    font-size: 17px;
+    line-height: 17px;
+
+    /* A quick hack to suck-up the elements after the line break */
+    margin-bottom: -15px;
+}
+
+.navbar-samen_doen .navbar-nav > li > a:hover,
+.navbar-samen_doen .navbar-nav > li > a:focus {
+    color: #00AEEF;
+    background-color: transparent;
+}
+.navbar-samen_doen .navbar-nav > .active > a,
+.navbar-samen_doen .navbar-nav > .active > a:hover,
+.navbar-samen_doen .navbar-nav > .active > a:focus {
+    color: #00AEEF;
+}
+.navbar-samen_doen .navbar-nav > .disabled > a,
+.navbar-samen_doen .navbar-nav > .disabled > a:hover,
+.navbar-samen_doen .navbar-nav > .disabled > a:focus {
+    color: #00AEEF;
+    background-color: transparent;
+}
+.navbar-samen_doen .navbar-toggle {
+    border-color: #dddddd;
+    margin-left: 15px;
+}
+.navbar-samen_doen .navbar-toggle:hover,
+.navbar-samen_doen .navbar-toggle:focus {
+    background-color: #dddddd;
+}
+.navbar-samen_doen .navbar-toggle .icon-bar {
+    background-color: #888888;
+}
+.navbar-samen_doen .navbar-collapse,
+.navbar-samen_doen .navbar-form {
+    border-color: #e7e7e7;
+}
+.navbar-samen_doen .navbar-nav > .open > a,
+.navbar-samen_doen .navbar-nav > .open > a:hover,
+.navbar-samen_doen .navbar-nav > .open > a:focus {
+    background-color: #FFF;
+    color: #000;
+}
+
+@media (min-width: 992px) and (max-width: 1170px){
+	.navbar-samen_doen .navbar-nav > li > a {
+		font-size: 15px;
+		line-height: 15px;
+	}
+}
+
+@media (max-width: 992px) and (min-width: 767px){
+	.navbar-samen_doen .navbar-header .navbar-brand {
+		padding: 15px 0px;
+	}
+
+	.navbar-samen_doen .navbar-nav > li > a {
+		font-size: 14px;
+		line-height: 14px;
+	}
+}
+
+@media (max-width: 767px) {
+	/* 2 cols (xs) without gutters */
+	.navbar-samen_doen .navbar-brand {
+		max-width: 80px;
+		padding: 7.5px;
+	}
+
+	/* A quick hack to suck-up the elements after the line break */
+    .navbar-samen_doen .navbar-nav > li a { margin-bottom: auto; }
+
+	.navbar-samen_doen .navbar-nav { float: inherit; }
+
+	/* when we are a part of a fancy drop down, don bother with the extra paddings */
+	/*.navbar-samen_doen .navbar-nav > li { padding-top: inherit;}*/
+	/*.navbar-samen_doen .navbar-nav > li > .navbar-btn > .btn { margin-top: inherit; }*/
+
+	/* The toggle button is in the nav bar which is as high as the image. */
+	.navbar-samen_doen .navbar-header .navbar-btn > .btn-xs { margin-top: 11.5px; }
+
+	/* In a small display we will use the first element for some housekeeping buttons */
+	.navbar-samen_doen .navbar-nav:first-child { padding-right: 15px; }
+
+    .navbar-samen_doen .navbar-nav .open .dropdown-menu > li > a {
+        color: #777777;
+    }
+    .navbar-samen_doen .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-samen_doen .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #333333;
+        background-color: transparent;
+    }
+    .navbar-samen_doen .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-samen_doen .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-samen_doen .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #555555;
+        background-color: #e7e7e7;
+    }
+    .navbar-samen_doen .navbar-nav .open .dropdown-menu > .disabled > a,
+    .navbar-samen_doen .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+    .navbar-samen_doen .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+        color: #cccccc;
+        background-color: transparent;
+    }
+}
+
+@media (min-width: 1200px) {
+    .navbar-samen_doen .nav.navbar-nav { padding-top: 10px; }
+}
+
+@media (min-width: 1200px) {
+    .navbar-samen_doen .nav.navbar-nav  { margin-left: -30px; margin-right: -30px; }
+}
+
+.navbar-samen_doen .navbar-link {
+    color: #777777;
+}
+.navbar-samen_doen .navbar-link:hover {
+    color: #333333;
+}
+.navbar-samen_doen .btn-link {
+    color: #777777;
+}
+.navbar-samen_doen .btn-link:hover,
+.navbar-samen_doen .btn-link:focus {
+    color: #333333;
+}
+.navbar-samen_doen .btn-link[disabled]:hover,
+fieldset[disabled] .navbar-samen_doen .btn-link:hover,
+.navbar-samen_doen .btn-link[disabled]:focus,
+fieldset[disabled] .navbar-samen_doen .btn-link:focus {
+    color: #cccccc;
+}
+
+/*#collapsed-logout { margin-right: 15px; }*/
+
+/* A little styling for our user "widget" */
+.user {
+	padding: 15px 0px 0px;
+}
+
+.user .user__name { }
+.user .user__balance { color: #1DAFEC; }
+
+.user .user__logout { margin-left: 1rem; }
+
+@media (max-width: 767px) {
+	.user { margin-top: 0px; }
+}
+
+
+/*
+ * When the user isn logged in we have buttons!
+ */
+.buttons { padding: 15px 0px 0px; }
+.buttons > li {
+	margin: 0px 0px 2px;
+	padding-left: 2px;
+}
+
+@media (max-width: 992px) and (min-width: 767px){
+
+	.buttons * { width: 100%; }
+
+}
+
+@media (min-width: 1200px){
+	.buttons { padding-top: 45px; }
+}
+
+
+/*
+ * Styling for a tidy transaction table
+ *
+ */
+.table.rwd-table.visible-xs > thead th[colspan="1"],
+.table.rwd-table.visible-xs > tbody td[colspan="1"] {
+
+	width: 100%;
+	border-top-style: dashed !important;
+
+}
+
+.table.rwd-table.visible-xs > thead th[rowspan="2"],
+.table.rwd-table.visible-xs > tbody td[rowspan="2"] {
+
+	text-align: center;
+	vertical-align: middle;
+
+}
+
+.table.rwd-table.visible-xs > thead .icon-samendoen { color: #1DAFEC; }
+
+/* I understand that rwd-table is suppose to make the table nice and responsive but why are the colours hooked on to this table?
+ * And if we are making stuff responsive why isn't the appropiate script loaded as well???
+ *
+ * https://github.com/nadangergeo/RWD-Table-Patterns
+ * Forked from: https://github.com/filamentgroup/RWD-Table-Patterns
+ *
+ * Suggested project: https://github.com/filamentgroup/tablesaw
+ *
+ * For now just butcher it in to submission
+ *
+ */
+.table.rwd-table.visible-xs > tbody td,
+.table.rwd-table.visible-xs > thead th { display: table-cell !important; }
+.table.rwd-table.visible-xs > tbody td:before { content: "" !important; }
+
+/*
+ * Collapsing the active sidemenu items, based on navbar-collapase, basically we are just
+ * pulling the good old switch-a-roe on the styling attributes that matter.
+ *
+ */
+
+.sidebar-collapse { }
+.sidebar-collapse.in { }
+
+@media (max-width: 768px) {
+    .sidebar-collapse { }
+    .sidebar-collapse.collapse {
+    	display: block !important;
+    	height: auto !important;
+    }
+    .sidebar-collapse.in { display: none !important; }
+
+    .sidebar .box .box-title[data-toggle] {
+    	background: #F1F1F1;
+	    color: #212c65;
+	    border-color: transparent;
+    }
+
+	.sidebar .box .box-title.collapsed[data-toggle] {
+		background: #1DAFEC;
+	    color: #FFFFFF;
+	    border-color: 1px solid #FFFFFF;
+	}
+
+	.sidebar .box .box-title[data-toggle] i.icon { color: #939393; }
+	.sidebar .box .box-title[data-toggle].collapsed i.icon { color: #FFFFFF; }
+
+	.sidebar .box .box-title[data-toggle] i.icon-arrow {
+		    -ms-transform: rotate(0deg);
+		   -moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		        transform: rotate(0deg);
+	}
+
+	.sidebar .box .box-title.collapsed[data-toggle] i.icon-arrow {
+		    -ms-transform: rotate(-90deg);
+		   -moz-transform: rotate(-90deg);
+		-webkit-transform: rotate(-90deg);
+		        transform: rotate(-90deg);
+	}
+
+
+}
+
+/*
+ * The ellipse-in-a-box: Create a box which will contain our text on which we can set a height and desired width
+ * if something overflows we will show a little ellipse cutting it off. I doubt that this will work in rtl text.
+ *
+ * And oh boy what would it have been nice to use mixins, functions and the sorts!
+ *
+ * CodePen: http://codepen.io/romanrudenko/pen/ymHFh
+ * Other relevant reading:
+ * 	- http://www.mobify.com/blog/multiline-ellipsis-in-pure-css/
+ *	- http://html5hub.com/ellipse-my-text/
+ *	- http://css-tricks.com/line-clampin/
+ *
+ * Beacuse we can do mixins we will have to set some stuff by hand:
+ *
+ *		.ellipsis, .ellipsis:before { height }
+ *		.ellipsis:after { top : -( line-height ) }
+ */
+.ellipsis {
+	overflow: hidden;
+}
+
+.ellipsis:before {
+	content:"";
+	float: left;
+	width: 1em;
+}
+
+.ellipsis > *:first-child {
+	float: right;
+	width: 100%;
+	margin-left: -1em;
+}
+
+.ellipsis:after {
+	content: "\02026";
+
+	        box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	   -moz-box-sizing: content-box;
+
+	float: right; position: relative;
+
+	left: 100%;
+
+	width: 3em; margin-left: -3em;
+	padding-right: 1em;
+
+	text-align: right;
+
+	background-size: 100% 100%;
+
+	/* 512x1 image, gradient for IE9. Transparent at 0% -> white at 50% -> white at 100%.*/
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAABCAMAAACfZeZEAAAABGdBTUEAALGPC/xhBQAAAwBQTFRF////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AAAA////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wDWRdwAAAP90Uk5TgsRjMZXhS30YrvDUP3Emow1YibnM9+ggOZxrBtpRRo94gxItwLOoX/vsHdA2yGgL8+TdKUK8VFufmHSGgAQWJNc9tk+rb5KMCA8aM0iwpWV6dwP9+fXuFerm3yMs0jDOysY8wr5FTldeoWKabgEJ8RATG+IeIdsn2NUqLjQ3OgBDumC3SbRMsVKsValZplydZpZpbJOQco2KdYeEe36BDAL8/vgHBfr2CvTyDu8R7esU6RcZ5ecc4+Af3iLcJSjZ1ivT0S/PMs3LNck4x8U7wz7Bv0G9RLtHuEq1TbJQr1OtVqqnWqRdoqBhnmSbZ5mXapRtcJGOc4t2eYiFfH9AS7qYlgAAARlJREFUKM9jqK9fEGS7VNrDI2+F/nyB1Z4Fa5UKN4TbbeLY7FW0Tatkp3jp7mj7vXzl+4yrDsYoVx+JYz7mXXNSp/a0RN25JMcLPP8umzRcTZW77tNyk63tdprzXdmO+2ZdD9MFe56Y9z3LUG96mcX02n/CW71JH6Qmf8px/cw77ZvVzB+BCj8D5vxhn/vXZh6D4uzf1rN+Cc347j79q/zUL25TPrJMfG/5LvuNZP8rixeZz/mf+vU+Vut+5NL5gPOeb/sd1dZbTs03hBuvmV5JuaRyMfk849nEM7qnEk6IHI8/qn049hB35QGHiv0yZXuMdkXtYC3ebrglcqvYxoj1muvC1nDlrzJYGbpcdHHIMo2FwYv+j3QAAOBSfkZYITwUAAAAAElFTkSuQmCC);
+
+	background: -webkit-gradient(linear, left top, right top,
+		from(rgba(255, 255, 255, 0)), to(white), color-stop(50%, white));
+	background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+	background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+	background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+	background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+}
+
+/*
+ * full-width info items for campaigns items
+ */
+.marketplace-list-item-info-wide {
+  float: right;
+  width: 97%;
+  color: #8e8e8e;
+}
+.marketplace-list .marketplace-list-item .marketplace-list-item-info-wide .marketplace-list-item-info-price {
+  float: right;
+  font-size: 25px;
+  line-height: 25px;
+  font-weight: bold;
+}
+.marketplace-list .marketplace-list-item.marketplace-list-item-pink .marketplace-list-item-info-wide .marketplace-list-item-info-price {
+  color: #E9168C;
+}
+.marketplace-list .marketplace-list-item.marketplace-list-item-green .marketplace-list-item-info-wide .marketplace-list-item-info-price {
+  color: #B5BC41;
+}
+.marketplace-list .marketplace-list-item.marketplace-list-item-orange .marketplace-list-item-info-wide .marketplace-list-item-info-price {
+  color: #F5A732;
+}
+
+/*
+ * Line cut offs for the different cards in the marketplace overview
+ *
+ */
+.marketplace-list-item-info-description,
+.marketplace-list-item-info-description:before {
+	/* Warning: Needed for oldIE support, but words are broken up letter-by-letter */
+	-ms-word-break: break-all;
+	    word-break: break-all;
+
+    /* Non standard for webkit */
+    word-break: break-word;
+
+	-webkit-hyphens: auto;
+	   -moz-hyphens: auto;
+	    -ms-hyphens: auto;
+	        hyphens: auto;
+
+	height: 100px; /* 5 * line-height */
+}
+
+.marketplace-list-item-info-description:after { top: -20px; }
+
+.marketplace-list-item-info-title,
+.marketplace-list-item-info-title:before {
+	/* Warning: Needed for oldIE support, but words are broken up letter-by-letter */
+	-ms-word-break: break-all;
+	    word-break: break-all;
+
+    /* Non standard for webkit */
+    word-break: break-word;
+
+	-webkit-hyphens: auto;
+	   -moz-hyphens: auto;
+	    -ms-hyphens: auto;
+	        hyphens: auto;
+
+
+	height: 40px;
+}
+
+.marketplace-list-item-info-title:after {
+	top: -20px;
+}
+
+.marketplace-list-item-info-creator,
+.marketplace-list-item-info-creator:before {
+	height: 40px;
+}
+
+.marketplace-list-item-info-creator:after { top: -20px; }
+
+/*
+ * Market place hover
+ */
+a.marketplace-list-item-orange:hover .marketplace-list-item-wrap {
+	background-image:   -o-linear-gradient(top, transparent 97.5%, #F5A732 100%);
+	background-image:  -ms-linear-gradient(top, transparent 97.5%, #F5A732 100%);
+	background-image: -moz-linear-gradient(top, transparent 97.5%, #F5A732 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.975, #FFFFFF), color-stop(1, #F5A732));
+	background-image: -webkit-linear-gradient(top, transparent 97.5%, #F5A732 100%);
+	background-image: linear-gradient(to bottom, transparent 97.5%, #F5A732 100%);
+}
+
+a.marketplace-list-item-blue:hover .marketplace-list-item-wrap {
+	background-image:   -o-linear-gradient(top, transparent 97.5%, #1DAFEC 100%);
+	background-image:  -ms-linear-gradient(top, transparent 97.5%, #1DAFEC 100%);
+	background-image: -moz-linear-gradient(top, transparent 97.5%, #1DAFEC 100%);
+
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.975, #FFFFFF), color-stop(1, #1DAFEC));
+	background-image: -webkit-linear-gradient(top, transparent 97.5%, #1DAFEC 100%);
+
+	background-image: linear-gradient(to bottom, transparent 97.5%, #1DAFEC 100%);
+}
+
+a.marketplace-list-item-purple:hover .marketplace-list-item-wrap {
+	background-image:   -o-linear-gradient(top, transparent 97.5%, #904397 100%);
+	background-image:  -ms-linear-gradient(top, transparent 97.5%, #904397 100%);
+	background-image: -moz-linear-gradient(top, transparent 97.5%, #904397 100%);
+
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.975, #FFFFFF), color-stop(1, #904397));
+	background-image: -webkit-linear-gradient(top, transparent 97.5%, #904397 100%);
+
+	background-image: linear-gradient(to bottom, transparent 97.5%, #904397 100%);
+}
+
+a.marketplace-list-item-green:hover .marketplace-list-item-wrap {
+	background-image:   -o-linear-gradient(top, transparent 97.5%, #B5BC41 100%);
+	background-image:  -ms-linear-gradient(top, transparent 97.5%, #B5BC41 100%);
+	background-image: -moz-linear-gradient(top, transparent 97.5%, #B5BC41 100%);
+
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.975, #FFFFFF), color-stop(1, #B5BC41));
+	background-image: -webkit-linear-gradient(top, transparent 97.5%, #B5BC41 100%);
+
+	background-image: linear-gradient(to bottom, transparent 97.5%, #B5BC41 100%);
+}
+
+a.marketplace-list-item-pink:hover .marketplace-list-item-wrap {
+	background-image:   -o-linear-gradient(top, transparent 97.5%, #E9168C 100%);
+	background-image:  -ms-linear-gradient(top, transparent 97.5%, #E9168C 100%);
+	background-image: -moz-linear-gradient(top, transparent 97.5%, #E9168C 100%);
+
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.975, #FFFFFF), color-stop(1, #E9168C));
+	background-image: -webkit-linear-gradient(top, transparent 97.5%, #E9168C 100%);
+
+	background-image: linear-gradient(to bottom, transparent 97.5%, #E9168C 100%);
+}
+
+/*
+ * Rewards bulk upload
+ */
+ul.wizard-progress-bar {
+    list-style: none;
+    margin: 15px 0 0 0;
+    padding: 0;
+}
+ul.wizard-progress-bar li {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+ul.wizard-progress-bar li.active {
+    color: #00AEEF;
+}
+
+.element.tp{ background: url(../images/backgrounds/tooltip.png) no-repeat 0 0; width: 16px; height: 16px; display: inline-block; }
+.element.tp:hover{ background-position: -25px 0; }
+
+.upload-form-table {
+    width: 100%;
+}
+.upload-form-table td,
+.upload-form-table th {
+    padding: 10px;
+    vertical-align: top;
+}
+
+DIV.icheckbox_square-grey.disabled {
+    background-color: #bbb !important;
+}
+
+/* Sidebar */
+
+.menu-item a {
+    display: block;
+    padding: 10px 0;
+    font-weight: bold;
+}
+
+/* Billing */
+table tr th.number,
+table tr td.number {
+    text-align: right;
+}
+
+table tr.total-line td {
+    border-top: 1px solid black;
+}
+
+table tr.total-line td.no-border {
+    border-top-color: transparent;
+}

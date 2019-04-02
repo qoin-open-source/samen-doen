@@ -1,0 +1,21 @@
+{% with formfield=form.address %}
+    {% include 'marketplace/formfield_snippet.html' %}
+{% endwith %}
+
+{% with formfield=form.num_street %}
+    {% include 'marketplace/formfield_snippet.html' %}
+{% endwith %}
+
+{% with formfield=form.extra_address %}
+    {% include 'marketplace/formfield_snippet.html' %}
+{% endwith %}
+
+{% with formfield=form.postal_code %}
+    {% include 'marketplace/formfield_snippet.html' %}
+{% endwith %}
+
+{% with formfield=form.city %}
+    {% include 'marketplace/formfield_snippet.html' %}
+{% endwith %}
+
+{{ form.country.as_hidden }}

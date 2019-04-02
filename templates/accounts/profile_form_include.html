@@ -1,0 +1,66 @@
+{% load i18n %}
+
+<form id="update_profile_form" method="post" action="." class="form" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% trans 'Please, correct the errors below.' %}
+        </div>
+    {% else %}
+        {% if not form.latitude.value%}
+	<div class="alert alert-warning" role="alert">
+            {% trans "We could not locate your address automatically. Please click on the map to denote your location" %}
+        </div>
+        {% endif %}
+    {% endif %}
+
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for error in form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% with profile_type=cc3_profile.get_profile_type %}
+        {% if profile_type %}
+
+            <div class="row">
+
+                {% if profile_type == "individual" %}
+                    {% include 'accounts/profile_form_individual.html' %}
+
+                {% elif profile_type == 'charity' %}
+                    {% include 'accounts/profile_form_charity.html' %}
+
+                {% else %}  {# elif profile_type == 'business' or profile_type == 'institution' %} #}
+                    {% include 'accounts/profile_form_business.html' %}
+
+                {% endif %}
+            </div>
+
+            <div class="row">
+                {% with lat=form.latitude long=form.longitude map_zoom=form.map_zoom postal_code=form.postal_code.value num_street=form.num_street.value street=form.address.value city=form.city.value country='Netherlands' %}
+                    {% include 'fragments/forms/_geo.html' %}
+                {% endwith %}
+            </div>
+
+            <br />
+            <p><strong>{% trans "Fields marked with a * are required." %}</strong></p>
+            <br>
+            <div class="row">
+                <div class="col-md-6 col-lg-5">
+                    <button class="btn btn-rounded btn-blue" id="update_profile_form_button">{% trans 'Save profile changes' %}</button>
+                </div>
+            </div>
+
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+                {% trans "Profile type to be implemented, only individual and business profiles can be edited at present" %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+
+</form>

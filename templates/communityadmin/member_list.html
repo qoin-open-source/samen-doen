@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load i18n cc3_tags static %}
+{% block title %}{% trans 'Member List' %}{% endblock %}
+
+{% block sidemenu %}
+    {% include 'communityadmin/sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>{% trans 'Members' %}{% if community %} - {{ community }}{% endif %}</h2>
+            <hr>
+
+            {% include 'includes/messages.html' %}
+
+            <div class="col-md-3">
+                <a href="{% url 'community_admin_create_profile_select' %}" class="btn btn-rounded btn-blue">{% trans "Add new member" %}</a>
+            </div>
+
+            <form method="get" action="." class="form-inline">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input name="q" type="text" class="form-control" placeholder="{% trans 'Search contact or business name' %}" value="{{ request.GET.q }}" style="">
+                        <input type="submit" class="btn btn-rounded btn-green">
+                        <a class="btn btn-rounded btn-danger" href="{% url 'communityadmin_ns:memberlist' %}">{% trans "Reset" %}</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            {% if members %}
+                <table class="table rwd-table">
+                    <thead>
+                        <tr class="table-head">
+                            <th>
+                                {% trans 'contact' %}<br/>{% trans 'job title' %}
+                                <a class="sort{% ifequal sort_field 'last_name' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}last_name/{% include 'includes/sort_direction.html' %}/"></a>
+                            </th>
+                            <th>
+                                {% trans 'business name' %}
+                                <a class="sort{% ifequal sort_field 'business_name' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}business_name/{% include 'includes/sort_direction.html' %}/"></a>
+                            </th>
+                            <th>
+                                {% trans 'website' %}
+                                <a class="sort{% ifequal sort_field 'company_website' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}company_website/{% include 'includes/sort_direction.html' %}/"></a>
+                            </th>
+                            <th>
+                                {% trans 'offers' %}
+                                <a class="sort{% ifequal sort_field 'offers' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}offers/{% include 'includes/sort_direction.html' %}/"></a>
+                            </th>
+                            <th>
+                                {% trans 'wants' %}
+                                <a class="sort{% ifequal sort_field 'wants' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}wants/{% include 'includes/sort_direction.html' %}/"></a>
+                            </th>
+                            <th>
+                                {% trans 'status' %}
+                            </th>
+                            <th>
+                                {% trans 'active ads' %}
+                                <a class="sort{% ifequal sort_field 'active_ads' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}active_ads/{% include 'includes/sort_direction.html' %}/"></a>
+                            </th>
+                            <th>
+                                {% trans 'm2m transactions' %}
+                            </th>
+                            <th>
+                                {% trans 'account balance' %}
+                            </th>
+                            <th>
+                                {% trans 'registration date' %}
+                                <a class="sort{% ifequal sort_field 'date_joined' %} selected{% endifequal %}" href="{% url 'communityadmin_ns:memberlist' %}date_joined/{% include 'includes/sort_direction.html' %}/"></a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for member in members %}
+                            <tr>
+                                {% with member.member_username as username %}
+                                    {% with member.member as member_cc3_profile %}
+                                        <td>
+                                            <a href="{% url 'communityadmin_ns:editmember' username=username %}">
+                                                {% if member.first_name %}
+                                                    {{ member.first_name }} {{ member.last_name }}<br/>{{ member.job_title }}
+                                                {% else %}
+                                                    {% trans 'UNCOMPLETED REGISTRATION' %}
+                                                    {% with member.member_email as member_email %}
+                                                        {% if member_email %}({{ member_email}}){% else %}({% trans 'no email given, could be comm admin' %}){% endif %}
+                                                    {% endwith %}
+                                                {% endif %}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'communityadmin_ns:editmember' username=username %}">
+                                                {% if member.business_name %}
+                                                    {{ member.business_name }}
+                                                {% else %}
+                                                    {% trans 'UNCOMPLETED REGISTRATION' %}
+                                                    {% with member.member_email as member_email %}
+                                                        {% if member_email %}({{ member_email}}){% else %}({% trans 'no email given, could be comm admin' %}){% endif %}
+                                                    {% endwith %}
+                                                {% endif %}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {% with member.company_website as website %}
+                                                {% if website %}
+                                                    <a href="{{ member.company_website }}">{{ member.company_website }}</a>
+                                                {% endif %}
+                                            {% endwith %}
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'communityadmin_ns:memberwantsoffers' username=username %}">{{ member.count_offers }}</a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'communityadmin_ns:memberwantsoffers' username=username %}">{{ member.count_wants }}</a>
+                                        </td>
+                                        <td>
+                                            {% if member_cc3_profile.has_full_account %}
+                                                {% trans 'Full' %}
+                                            {% else %}
+                                                {% trans 'New' %}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'communityadmin_ns:memberwantsoffers' username=username %}">{{ member.count_active_ads }}</a>
+                                        </td>
+                                        <td>
+                                            {% with member_cc3_profile.number_member_to_member_transactions as num_transactions %}
+                                                {% if num_transactions %}
+                                                    <a href="{% url 'communityadmin_ns:membertransactions' username=username %}">{{num_transactions}}</a>
+                                                {% endif %}
+                                            {% endwith %}
+                                        </td>
+                                        <td class="number">{% currency_icon member_cc3_profile.current_balance %}</td>
+                                        <td>{{ member.date_joined|date:'d/m/Y H:i' }}</td>
+                                    {% endwith %}
+                                {% endwith %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {% with objects=members %}
+                    {% include 'includes/paginator.html' %}
+                {% endwith %}
+            {% else %}
+                <div class="alert alert-warning" role="alert">
+                    {% trans 'No members were found for this community.' %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

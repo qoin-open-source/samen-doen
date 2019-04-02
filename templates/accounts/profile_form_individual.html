@@ -1,0 +1,204 @@
+{% load i18n staticfiles thumbnail filename cc3_tags %}
+
+<div class="col-md-6 col-lg-5">
+    <div class="form-group {% if form.picture.errors %}has-error{% endif %}">
+        <label class="control-label" for="id_picture">{% trans 'Profile picture' %}</label>
+        {% for error in form.picture.errors %}
+            <label class="control-label"> - {{ error }}</label>
+        {% endfor %}
+
+        {% if cc3_profile.get_picture %}
+            {% thumbnail cc3_profile.picture 150x150 upscale as thumb %}
+            <img class="" alt="{% trans 'Profile picture' %}" src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}">
+        {% else %}
+                        {%   if cc3_profile.cyclos_group|is_organisaties_group %} <img src="{% static "img/SD-icoon-winkelier-150.png" %}" class="img-responsive" alt=""/>
+                        {% elif cc3_profile.cyclos_group|is_instituties_group  %} <img src="{% static "img/SD-icoon-instelling-150.png" %}" class="img-responsive" alt=""/>
+                        {% elif cc3_profile.cyclos_group|is_goededoelen_group  %} <img src="{% static "img/SD-icoon-spaardoel-150.png" %}" class="img-responsive" alt=""/>
+                        {% elif cc3_profile.cyclos_group|is_consumenten_group  %} <img src="{% static "img/SD-icoon-spaarder-150.png" %}" class="img-responsive" alt=""/>
+                        {% else                                                         %} <i class="icon icon-star"></i> {% endif %}
+        {% endif %}
+
+        <br><br>
+        <input type="file" id="id_picture" name="picture" class="form-control"{% if stadlander_sso_user %} disabled="disabled"{% endif %}>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="id_community">{% trans 'Community' %}</label>
+        <input type="text" id="id_community" placeholder="{% if form.community.field.required %}* {% endif %}{{ cc3_profile.community }}" name="community" value="{{ cc3_profile.community }}" class="form-control" disabled="disabled">
+    </div>
+
+    <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+        <label class="control-label" for="id_email">{% trans 'Email' %}</label>
+        {% for error in form.email.errors %}
+            <label class="control-label"> - {{ error }}</label>
+        {% endfor %}
+        <input type="text" id="id_email" placeholder="{% if form.email.field.required %}* {% endif %}{{ form.email.value }}" name="email" value="{{ form.email.value }}" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <div class="{% if form.first_name.errors %}has-error{% endif %}">
+            <label class="control-label" for="id_first_name">{% trans 'Name' %}</label>
+            {% for error in form.first_name.errors %}
+                <br/><label class="control-label"> {{ error }}</label>
+            {% endfor %}
+            <input type="text" id="id_first_name"{% if stadlander_sso_user %} disabled="disabled"{% endif %} placeholder="{% if form.first_name.field.required %}* {% endif %}{% trans 'first name' %}" name="first_name"{% if form.first_name.value %} value="{{ form.first_name.value }}"{% endif %} class="form-control">
+        </div>
+
+        {% for error in form.tussenvoegsel.errors %}
+            <label class="control-label"> {{ error }}</label>
+        {% endfor %}
+        <input type="text" id="id_tussenvoegsel"{% if stadlander_sso_user %} disabled="disabled"{% endif %} placeholder="{% if form.tussenvoegsel.field.required %}* {% endif %}{% trans 'tussenvoegsel' %}" name="tussenvoegsel" maxlength="255"{% if form.tussenvoegsel.value %} value="{{ form.tussenvoegsel.value }}"{% endif %} class="form-control" />
+
+        <div class="{% if form.last_name.errors %}has-error{% endif %}">
+            {% for error in form.last_name.errors %}
+                <label class="control-label"> {{ error }}</label>
+            {% endfor %}
+            <input type="text" id="id_last_name"{% if stadlander_sso_user %} disabled="disabled"{% endif %} placeholder="{% if form.last_name.field.required %}* {% endif %}{% trans 'last name' %}" name="last_name"{% if form.last_name.value %} value="{{ form.last_name.value }}"{% endif %} class="form-control">
+        </div>
+    </div>
+
+
+
+    {# FIXME: DISABLED UNDER REQUIREMENT FROM POSITOOS - Check Track ticket #1844 #}
+    {# {% if not stadlander_sso_user %}#}
+    {#     {% trans 'Nickname' as label %}#}
+    {#     {% include "accounts/profile_form_include_field.html" with field=form.nickname placeholder=label label=label only %}#}
+    {# {% else %}#}
+    {# <div class="form-group">#}
+    {#     <label class="control-label" for="id_nickname">{% trans 'Nickname' %}</label>#}
+    {#     <input type="text" id="id_nickname" disabled="disabled" name="address"{% if form.nickname.value %} value="{{ form.nickname.value }}"{% endif %} class="form-control">#}
+    {# </div>#}
+    {# {% endif %}#}
+
+    <div class="form-group {% if form.gender.errors %}has-error{% endif %}">
+        <label class="control-label" for="id_gender">{% trans "Gender" %}{% if form.gender.field.required %} (*){% endif %}</label>
+        {% for error in form.gender.errors %}
+            <label class="control-label"> - {{ error }}</label>
+        {% endfor %}
+        <br />
+        <div class="radio">
+            {% if stadlander_sso_user %}{{form.gender.value}}
+            {% else %}
+            <ul>
+                {% for value, text in form.gender.field.choices %}
+                <li><label for="id_gender_{{ forloop.counter0 }}">
+                        <input {% if form.gender.value == value %}checked="checked"{% endif %} id="id_gender_{{ forloop.counter0 }}" name="gender" type="radio" value="{{ value }}" /> {{ text }}
+                    </label></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+
+    {% comment %}
+    <div class="form-group{% if form.is_visible.errors %} has-error{% endif %}">
+        <label class="control-label" for="id_is_visible">{{ form.is_visible.label }}</label>
+        {% for error in form.is_visible.errors %}
+            <label class="control-label"> - {{ error }}</label>
+        {% endfor %}
+        <br />
+        <div class="checkbox">
+            <input type="checkbox" id="id_is_visible" name="is_visible" value="1"{% if form.is_visible.value %} checked=checked{% endif %}>
+            {{ form.is_visible.help_text }}
+        </div>
+    </div>
+    {% endcomment %}
+
+    <div class="form-group{% if form.wants_newsletter.errors %} has-error{% endif %}">
+        <label class="control-label" for="id_wants_newsletter">{{ form.wants_newsletter.label }}</label>
+        {% for error in form.wants_newsletter.errors %}
+            <label class="control-label"> - {{ error }}</label>
+        {% endfor %}
+        <br />
+        <div class="checkbox">
+            <input type="checkbox" id="id_wants_newsletter" name="wants_newsletter" value="1"{% if form.wants_newsletter.value %} checked=checked{% endif %}>
+            {{ form.wants_newsletter.help_text }}
+        </div>
+    </div>
+
+    <div class="form-group{% if form.date_of_birth.errors %} has-error{% endif %}">
+        <label class="control-label" for="id_date_of_birth">{% trans "Date of Birth" %}</label>
+        {% for error in form.date_of_birth.errors %}
+            <label class="control-label"> - {{ error }}</label>
+        {% endfor %}
+        <br />
+        <div class="datepicker col-sm-12">
+            <input type="text" id="id_date_of_birth"{% if stadlander_sso_user %} disabled="disabled"{% endif %} placeholder="{% if not stadlander_sso_user %}* {% endif %}{% trans 'dd-mm-YYYY' %}" name="date_of_birth" value="{% if form.date_of_birth.value %}{{ form.date_of_birth.value }}{% endif %}" class="form-control">
+        </div>
+        <br />
+        <br />
+    </div>
+
+</div>
+
+<div class="col-md-6 col-lg-5">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h3>{% trans 'Address details' %}</h3>
+
+    {% if not stadlander_sso_user %}
+        {% trans 'Address' as label %}
+        {% include "accounts/profile_form_include_field.html" with field=form.address placeholder=label label=label only %}
+
+        {% trans 'House Number' as label %}
+        {% include "accounts/profile_form_include_field.html" with field=form.num_street placeholder=label label=label only %}
+
+        {% trans 'Toevoeging' as label %}
+        {% include "accounts/profile_form_include_field.html" with field=form.extra_address placeholder=label label=label only %}
+
+        {% trans 'Postal code' as label %}
+        {% include "accounts/profile_form_include_field.html" with field=form.postal_code placeholder=label label=label only %}
+
+        {% trans 'City' as label %}
+        {% include "accounts/profile_form_include_field.html" with field=form.city placeholder=label label=label only %}
+
+        {% trans 'Phone number' as label %}
+        {% include "accounts/profile_form_include_field.html" with field=form.phone_number placeholder=label label=label only %}
+
+        {% trans 'Mobile number' as label %}
+        {% include "accounts/profile_form_include_field.html" with field=form.mobile_number placeholder=label label=label only %}
+    {% else %}
+        <div class="form-group">
+            <label class="control-label" for="id_address">{% trans 'Address' %}</label>
+            <input type="text" id="id_address" disabled="disabled" name="address"{% if form.address.value %} value="{{ form.address.value }}"{% endif %} class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="id_num_street">{% trans 'House Number' %}</label>
+            <input type="text" id="id_num_street" disabled="disabled" name="num_street"{% if form.num_street.value %} value="{{ form.num_street.value }}"{% endif %} class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="id_extra_address">{% trans 'Toevoeging' %}</label>
+            <input type="text" id="id_extra_address" disabled="disabled" name="extra_address"{% if form.extra_address.value %} value="{{ form.extra_address.value }}"{% endif %} class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="id_postal_code">{% trans 'Postal code' %}</label>
+            <input type="text" id="id_postal_code" disabled="disabled" name="postal_code"{% if form.postal_code.value %} value="{{ form.postal_code.value }}"{% endif %} class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="id_city">{% trans 'City' %}</label>
+            <input type="text" id="id_city" disabled="disabled" name="city"{% if form.city.value %} value="{{ form.city.value }}"{% endif %} class="form-control">
+        </div>
+    {% endif %}
+
+    {% comment %}SEPA details not required for Individuals in Samen Doen{% endcomment %}
+
+    {# FIXME: DISABLED UNDER REQUIREMENT FROM POSITOOS - Check Track ticket #1602 #}
+    {#    <hr>#}
+    {#    <div class="form-group {% if form.categories.errors %}has-error{% endif %}">#}
+    {#        <label class="control-label" for="id_categories">{% trans "Help categories" %}</label>#}
+    {#        {% for error in form.categories.errors %}#}
+    {#            <label class="control-label"> - {{ error }}</label>#}
+    {#        {% endfor %}#}
+    {#        <br>#}
+    {#        {{ form.categories }}#}
+    {#    </div>#}
+
+</div>

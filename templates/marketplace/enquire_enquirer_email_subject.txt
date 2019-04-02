@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans with title=ad.title id=ad.id site=site %}Enquiry about {{title}} sent through {{ site }}{% endblocktrans %}

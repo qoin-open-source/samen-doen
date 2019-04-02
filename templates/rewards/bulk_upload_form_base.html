@@ -1,0 +1,88 @@
+{% extends "accounts/base.html" %}
+{% load i18n static thumbnail %}
+
+{% block sidemenu %}
+    {% include 'includes/accounts_sidemenu.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 col-md-8">
+        <h2>{% ifequal wizard.steps.step1 3 %}{% trans "Confirm bulk rewards upload" %}{% else %}{% trans "Bulk rewards upload" %}{% endifequal %}</h2>
+
+        <div style="padding-bottom: 20px">
+        <ul class="wizard-progress-bar" >
+            <tr>
+            <li {% ifequal wizard.steps.step1 1 %}class="active"{% endifequal %}>{% trans "Select file"%} >></li>
+            <li {% ifequal wizard.steps.step1 2 %}class="active"{% endifequal %}>{% trans "Configure"%} >></li>
+            <li {% ifequal wizard.steps.step1 3 %}class="active"{% endifequal %}>{% trans "Confirm upload" %}</li>
+        </ul>
+        </div>
+
+        {% ifequal wizard.steps.step1 3 %}
+            <div>{% blocktrans %}
+                <p>Found {{ num_rows }} rows in the .CSV file. Click "Make transactions" to pay the rewards.</p>
+                <br/>
+                <strong>
+                <p style="color: green">{{ num_valid_rows }} of these rows can be actioned.</p>
+                <p>Total unique users to be rewarded: {{ num_unique_users }}</p>
+                <p>Total amount to be paid: {{ total_amount }}{% endblocktrans %}</p>
+                {% if threshold_amount != None %}
+                    <p>{% trans "Number of transactions where amount" %} &gt; {{ threshold_amount }}: {{ num_large_amounts }}</p>
+                {% endif %}
+                </strong>
+                {% if invalid_uids %}
+                    <br/>
+                    <br/>
+                    <strong>
+                    <p style="color:red">{{ invalid_uids|length }} {% trans "rows could not be processed because the user could not be found." %}<br/>
+                    {% trans "Affected row(s):" %}</p>
+                    <p>{{ invalid_uids|join:", " }}</p>
+                    </strong>
+
+                    <p>
+                    <em>{% trans "If you continue to make transactions these rows will be ignored." %}</em>
+                    </p>
+                {% endif %}
+            </div>
+        {% endifequal %}
+
+        {% for error in wizard.form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error|linebreaksbr }}
+            </div>
+        {% endfor %}
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ wizard.management_form }}
+            {% block form_body %}
+                <fieldset>
+                    {% for field in  wizard.form.visible_fields %}
+                        {% include 'rewards/upload_form_field.html' %}
+                    {% endfor %}
+                <fieldset>
+            {% endblock %}
+
+            {% if wizard.steps.step1 == 2 %}
+                <div style="color: red;padding-bottom: 20px">
+                    <b>*</b> {% trans "denotes a required field" %}
+                </div>
+            {% endif %}
+
+
+            {% ifequal wizard.steps.step1 3 %}
+                <a href="{% url "accounts_home" %}"><button type="button" class="btn btn-rounded btn-danger">{% trans 'Cancel' %}</button></a>
+            {% endifequal %}
+            {% if wizard.steps.prev %}
+                <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="btn btn-rounded btn-blue">{% trans 'Previous' %}</button>
+            {% endif %}
+            {% ifequal wizard.steps.step1 3 %}
+                <button  type="submit" class="btn btn-rounded btn-blue" id="submit_button">{% trans 'Make transactions' %}</button>
+            {% else %}
+                <button type="submit" class="btn btn-rounded btn-blue" id="submit_button">{% trans 'Next' %}</button>
+            {% endifequal %}
+        </form>
+        </div>
+    </div>
+{% endblock %}

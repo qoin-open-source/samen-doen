@@ -1,0 +1,29 @@
+{% extends 'admin/change_form.html' %}
+{% load icare4u_admin %}
+
+{% block submit_buttons_bottom %}{% submit_row_only_normal_save %}{% endblock %}
+
+{% block admin_change_form_document_ready %}
+    <script type="text/javascript">
+        (function($) {
+            $(document).ready(function() {
+                $('.add-another').click(function(e) {
+                    e.preventDefault();
+                    showAddAnotherPopup(this);
+                });
+
+            {% if adminform and add %}
+                $('form#{{ opts.model_name }}_form :input:visible:enabled:first').focus()
+            {% endif %}
+
+                {% comment %} #3520 Make business field locked {% endcomment %}
+
+                $('#id_business').attr('readonly', "");
+                {% if edit_operator %}
+                    $('#lookup_id_business').hide();
+                    $('#id_business').removeClass('vForeignKeyRawIdAdminField');
+                {% endif %}
+            });
+        })(django.jQuery);
+    </script>
+{% endblock %}

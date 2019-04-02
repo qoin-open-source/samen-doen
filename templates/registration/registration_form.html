@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Register' %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-lg-8">
+            <h2>{% trans "Register to join today!" %}</h2>
+
+            {% url 'auth_login' as loin_url %}
+
+            <p>{% blocktrans %}If you already have a card, please proceed to the <a href="{{loin_url}}">log in page</a>{% endblocktrans %}</p>
+            <p>{% blocktrans with a_open='<a href="https://www.stadlander.nl/over_stadlander/in_de_buurt/samendoen_(positoos).html">'  a_close='</a>' %}Are you a Stadlander tenant? Register via {{ a_open }}My Stadlander{{ a_close }}.{% endblocktrans %}</p>
+            <br>
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% trans 'Please, correct the errors below.' %}
+                </div>
+            {% endif %}
+
+            <form id="registration_register_form" action="{% url 'registration_register' %}" method="post" class="form">
+                {% csrf_token %}
+
+                <div class="form-group form-inline{% if form.first_name.errors or form.last_name.errors %} has-error{% endif %}">
+                    <label class="control-label" for="id_first_name"></label>
+                    {% for error in form.first_name.errors %}
+                        <label class="control-label"> {{ error }}</label>
+                    {% endfor %}
+                    {% for error in form.tussenvoegsel.errors %}
+                        <label class="control-label"> {{ error }}</label>
+                    {% endfor %}
+                    {% for error in form.last_name.errors %}
+                        <label class="control-label"> {{ error }}</label>
+                    {% endfor %}
+                    <input type="text" id="id_first_name" placeholder="{% if form.first_name.field.required %}* {% endif %}{% trans 'First name' %}" name="first_name"{% if form.first_name.value %} value="{{ form.first_name.value }}"{% endif %} class="form-control">
+                    <input type="text" id="id_tussenvoegsel" placeholder="{% if form.tussenvoegsel.field.required %}* {% endif %}{% trans 'Tussenvoegsel' %}" name="tussenvoegsel" maxlength="255"{% if form.tussenvoegsel.value %} value="{{ form.tussenvoegsel.value }}"{% endif %} class="form-control" />
+                    <input type="text" id="id_last_name" placeholder="{% if form.last_name.field.required %}* {% endif %}{% trans 'Last name' %}" name="last_name"{% if form.last_name.value %} value="{{ form.last_name.value }}"{% endif %} class="form-control">
+                </div>
+
+                <div class="form-group {% if form.gender.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_gender"></label>
+                    {% for error in form.gender.errors %}
+                        <label class="control-label"> {{ error }}</label>
+                    {% endfor %}
+                    <br />
+                    <div class="radio">
+                        {% for radio in form.gender %}
+                            {{ radio }}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group{% if form.date_of_birth.errors %} has-error{% endif %}">
+                    <label class="control-label" for="id_date_of_birth"></label>
+                    {% for error in form.date_of_birth.errors %}
+                        <label class="control-label"> {{ error }}</label>
+                    {% endfor %}
+                    <br />
+                    <div class="datepicker col-sm-12">
+                        <input type="text" id="id_date_of_birth"{% if stadlander_sso_user %} disabled="disabled"{% endif %} placeholder="{% if not stadlander_sso_user %}* {% endif %}{% trans 'Date of birth' %}" name="date_of_birth" value="{% if form.date_of_birth.value %}{{ form.date_of_birth.value }}{% endif %}" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+
+                {% include "includes/form_field.html" with field=form.address %}
+
+                {% include "includes/form_field.html" with field=form.num_street %}
+
+                {% include "includes/form_field.html" with field=form.extra_address %}
+
+                {% include "includes/form_field.html" with field=form.postal_code %}
+
+                {% include "includes/form_field.html" with field=form.city %}
+
+                {% include "includes/form_field.html" with field=form.phone_number %}
+
+                {% include "includes/form_field.html" with field=form.mobile_number %}
+
+                {% include "includes/form_field.html" with field=form.email %}
+
+                {% include "includes/form_field.html" with field=form.email_confirmation %}
+
+                <div class="form-group {% if form.community.errors %}has-error{% endif %}">
+                    <label class="control-label" for="id_community"></label>
+                    <br>{% trans 'Choose the municipality in which you reside. Choosing a municipality, Positoos will only earn and redeem in that municipality.' %}
+                    {% for error in form.community.errors %}
+                        <label class="control-label"> {{ error }}</label>
+                    {% endfor %}
+                    <br />
+                    <div class="radio">
+                        {% for radio in form.community %}
+                            {{ radio }}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group{% if form.reg_password.errors %} has-error{% endif %}">
+                    <label class="control-label" for="id_reg_password"></label>
+                    {% for error in form.reg_password.errors %}
+                        <label class="control-label"> {{ error }}</label>
+                    {% endfor %}
+                    <input type="password" id="id_reg_password" placeholder="* {% trans 'Password' %}" name="reg_password"{% if form.reg_password.value %} value="{{ form.reg_password.value }}"{% endif %} class="form-control">
+                </div>
+
+                <div class="form-group{% if form.password_confirmation.errors %} has-error{% endif %}">
+                    <label class="control-label" for="id_password_confirmation"></label>
+                    {% for error in form.password_confirmation.errors %}
+                        <label class="control-label"> {{ error }}</label>
+                    {% endfor %}
+                <input type="password" id="id_password_confirmation" placeholder="* {% trans 'Confirm password' %}" name="password_confirmation"{% if form.password_confirmation.value %} value="{{ form.password_confirmation.value }}"{% endif %} class="form-control">
+                </div>
+
+                {% if form.tandc_confirmation.errors %}
+                    <div class="has-error">
+                {% else %}
+                    <div>
+                {% endif %}
+                    <label class="checkbox" for="id_tandc_confirmation">
+                        <input type="checkbox" id="id_tandc_confirmation" name="tandc_confirmation" value="1"{% if form.tandc_confirmation.value %} checked=checked{% endif %}>
+                        {% trans 'I have read and accept the' %} <a href="" onclick="window.open('{{ tandc_url }}');">{% trans 'terms and conditions' %}</a>
+                    </label>
+                    {% for error in form.tandc_confirmation.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                </div>
+
+                {% if form.wants_newsletter.errors %}
+                    <div class="has-error">
+                {% else %}
+                    <div>
+                {% endif %}
+                    <label class="checkbox" for="id_wants_newsletter">
+                        <input type="checkbox" id="id_wants_newsletter" name="wants_newsletter" value="1"{% if form.wants_newsletter.value %} checked=checked{% endif %}>
+                        <span>{% trans 'I would like to receive the newsletter' %}</span>
+                    </label>
+                    {% for error in form.wants_newsletter.errors %}
+                        <label class="control-label"> - {{ error }}</label>
+                    {% endfor %}
+                </div>
+
+                <br>
+                <br>
+                <p><strong>{% trans "Fields marked with a * are required." %}</strong></p>
+                <br>
+                <br>
+                <button class="btn btn-rounded btn-blue" id="reg_form_button">{% trans 'Register' %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

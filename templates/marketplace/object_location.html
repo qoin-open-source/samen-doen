@@ -1,0 +1,12 @@
+{% comment %}Assume for now that the location is that of the created_by profile{% endcomment %}
+<p>{% if object.created_by.userprofile.slug %}<a href="{% url 'marketplace-business-profile' object.created_by.userprofile.slug %}">{% endif %}
+    {% if object.created_by.userprofile.get_profile_type == 'individual' %}
+        {{ object.created_by.userprofile.first_name }} {% if object.created_by.userprofile.tussenvoegsel %}{{ object.created_by.userprofile.tussenvoegsel }} {% endif %}{{ object.created_by.userprofile.last_name }}
+    {% else %}
+        {{ object.created_by.business_name }}
+    {% endif %}
+{% if object.created_by.userprofile.slug %}</a>{% endif %}</p>
+<p>
+        {{ object.created_by.address }} {{ object.created_by.userprofile.num_street }} {{ object.created_by.userprofile.extra_address }}<br/>
+        {{ object.created_by.postal_code }}<br/>
+</p>
